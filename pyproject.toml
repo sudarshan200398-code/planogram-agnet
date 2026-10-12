@@ -1,0 +1,20 @@
+[project]
+name = "planogram-agent"
+version = "0.1.0"
+description = "Agentic store product finder: availability + shortest path across a multi-floor store"
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.0", "networkx>=3.0", "matplotlib>=3.7", "rapidfuzz>=3.0"]
+
+[project.optional-dependencies]
+dev = ["pytest", "hypothesis", "ruff"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

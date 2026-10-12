@@ -1,0 +1,49 @@
+sku,name,brand,category,size,keywords
+GRO-RIC-001,Basmati Rice,Store Brand,Rice & Grains,1 kg,rice|basmati|grain
+GRO-FLR-001,Whole Wheat Flour,Store Brand,Baking,2 kg,flour|atta|wheat
+GRO-OIL-001,Sunflower Oil,Brand B,Oils,1 L,oil|cooking oil|sunflower
+GRO-PAS-001,Spaghetti,Barilla,Pasta,500 g,pasta|spaghetti
+GRO-PAS-002,Penne,Barilla,Pasta,500 g,pasta|penne
+GRO-PAS-003,Gluten-Free Penne,Barilla,Pasta,400 g,pasta|penne|gluten free|gluten-free
+GRO-SAU-001,Tomato Pasta Sauce,Brand A,Sauces,680 g,sauce|tomato sauce|pasta sauce
+GRO-SAU-002,Tomato Pasta Sauce,Store Brand,Sauces,680 g,sauce|tomato sauce|pasta sauce|store brand
+GRO-CAN-001,Canned Tomatoes,Brand B,Canned Goods,400 g,canned|tomatoes|tin
+GRO-CAN-002,Baked Beans,Brand B,Canned Goods,415 g,beans|canned|baked beans
+GRO-SNK-001,Potato Chips Classic,Crispy,Snacks,150 g,chips|crisps|potato chips
+GRO-BEV-001,Instant Coffee Jar,Nescafe,Beverages,200 g,coffee|instant coffee|nescafe|jar
+PRO-FRU-001,Bananas,Fresh,Fruit,per kg,banana|bananas|fruit
+PRO-FRU-002,Red Apples,Fresh,Fruit,per kg,apple|apples|fruit
+PRO-VEG-001,Carrots,Fresh,Vegetables,per kg,carrot|carrots|vegetable
+PRO-VEG-002,Packaged Salad Mix,Fresh,Vegetables,200 g,salad|greens|lettuce
+BAK-BRD-001,White Sandwich Bread,Bakery,Bread,700 g,bread|white bread|loaf
+BAK-BRD-002,Bagels 6-pack,Bakery,Bread,6 pcs,bagel|bagels
+BAK-PAS-001,Butter Croissants,Bakery,Pastries,4 pcs,croissant|pastry
+BAK-CAK-001,Celebration Cake,Bakery,Cakes,1 kg,cake|birthday cake|party cake
+DEL-MEA-001,Chicken Breast,Fresh,Poultry,per kg,chicken|chicken breast|poultry
+DEL-MEA-002,Bacon,Brand C,Breakfast Meats,250 g,bacon|breakfast
+DEL-DEL-001,Sliced Ham,Brand C,Deli Meats,200 g,ham|deli|cold cuts
+DAI-MLK-001,Whole Milk,Dairy Brand A,Milk,1 L,milk|whole milk|dairy
+DAI-BTR-001,Salted Butter,Dairy Brand A,Butter,250 g,butter|spread
+DAI-YOG-001,Greek Yogurt,Yogurt S,Yogurt,500 g,yogurt|yoghurt|greek
+FRO-ICE-001,Vanilla Ice Cream,Frozen Brand B,Frozen Desserts,1 L,ice cream|dessert|frozen
+FRO-PIZ-001,Frozen Pizza,Frozen Brand B,Frozen Meals,400 g,pizza|frozen pizza
+CHK-BAT-001,AA Batteries 8-pack,Impulse Brand A,Batteries,8 pcs,battery|batteries|aa|aa batteries
+CHK-GUM-001,Mint Chewing Gum,Gum Brand A,Confectionery,14 pcs,gum|mints|chewing gum
+CHK-CHO-001,Chocolate Bar,Candy Brand A,Confectionery,50 g,chocolate|candy|bar
+TOY-BLK-001,Building Blocks Set,Toy Brand A,Toys,300 pcs,lego|blocks|building blocks|toy
+TOY-BRD-001,Family Board Game,Toy Brand A,Toys,,board game|game|monopoly
+STA-CRY-001,Crayons 24-pack,Stationery Brand B,Stationery,24 pcs,crayons|colouring|coloring
+STA-PAP-001,Printer Paper A4,Stationery Brand B,Stationery,500 sheets,paper|printer paper|a4
+APP-TSH-001,Cotton T-Shirt,Fashion Block A,Clothing,M,tshirt|t-shirt|shirt|top
+APP-JEA-001,Denim Jeans,Fashion Block A,Clothing,32,jeans|denim|trousers
+APP-HOO-001,Pullover Hoodie,Fashion Block A,Clothing,L,hoodie|sweatshirt
+HOU-TRP-001,Toilet Paper 12-roll,Home Brand A,Paper Products,12 rolls,toilet paper|tissue|loo roll
+HOU-DET-001,Laundry Detergent,Detergent Brand A,Cleaning,2 L,detergent|laundry|washing liquid
+HOU-BAG-001,Trash Bags,Home Brand A,Household,30 pcs,trash bags|bin bags|garbage bags
+HOM-TST-001,Two-Slice Toaster,Store Brand,Appliances,,toaster|appliance
+HOM-AIR-001,Air Fryer,Store Brand,Appliances,4 L,air fryer|fryer|appliance
+CAF-WAT-001,Bottled Water,Cafe Brand A,Beverages,500 ml,water|bottled water|drink
+CAF-ICE-001,Iced Coffee,Cafe Brand A,Beverages,330 ml,iced coffee|coffee|drink
+PRM-SNK-001,Pumpkin Spice Cookies,Seasonal Block A,Seasonal,300 g,pumpkin|seasonal|cookies
+PRM-WAT-001,Water Multipack 24,Seasonal Brand,Beverages,24 x 500 ml,water|multipack|bulk water
+SVC-GFT-001,Gift Card,Gift Card Center,Gift Cards,,gift card|giftcard|voucher

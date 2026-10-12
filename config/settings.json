@@ -1,0 +1,13 @@
+{
+  "accept_threshold": 0.85,
+  "ask_threshold": 0.5,
+  "margin": 0.1,
+  "top_k": 5,
+  "max_items": 20,
+  "max_query_chars": 500,
+  "max_agent_steps": 20,
+  "max_seconds": 30,
+  "exact_stop_limit": 8,
+  "max_plan_evaluations": 200000,
+  "retries": 1
+}

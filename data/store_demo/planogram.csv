@@ -1,0 +1,975 @@
+sku,floor,zone,bay,shelf_level,position,node_id
+GA1-SPE-001,1,Grocery Aisle 1,A,5,1,L1_A1
+GA1-SPE-002,1,Grocery Aisle 1,B,5,1,L1_A1
+GA1-SPE-003,1,Grocery Aisle 1,C,5,1,L1_A1
+GA1-SPE-004,1,Grocery Aisle 1,A,5,2,L1_A1
+GA1-SPE-005,1,Grocery Aisle 1,B,5,2,L1_A1
+GA1-SPE-006,1,Grocery Aisle 1,C,5,2,L1_A1
+GA1-SPE-007,1,Grocery Aisle 1,A,5,3,L1_A1
+GA1-SPE-008,1,Grocery Aisle 1,B,5,3,L1_A1
+GA1-PAS-001,1,Grocery Aisle 1,A,4,1,L1_A1
+GA1-PAS-002,1,Grocery Aisle 1,B,4,1,L1_A1
+GA1-PAS-003,1,Grocery Aisle 1,C,4,1,L1_A1
+GA1-PAS-004,1,Grocery Aisle 1,A,4,2,L1_A1
+GA1-PAS-005,1,Grocery Aisle 1,B,4,2,L1_A1
+GA1-PAS-006,1,Grocery Aisle 1,C,4,2,L1_A1
+GA1-PAS-007,1,Grocery Aisle 1,A,4,3,L1_A1
+GA1-PAS-008,1,Grocery Aisle 1,B,4,3,L1_A1
+GA1-PAS-009,1,Grocery Aisle 1,A,3,1,L1_A1
+GA1-PAS-010,1,Grocery Aisle 1,B,3,1,L1_A1
+GA1-PAS-011,1,Grocery Aisle 1,C,3,1,L1_A1
+GA1-PAS-012,1,Grocery Aisle 1,A,3,2,L1_A1
+GA1-PAS-013,1,Grocery Aisle 1,B,3,2,L1_A1
+GA1-PAS-014,1,Grocery Aisle 1,C,3,2,L1_A1
+GA1-PAS-015,1,Grocery Aisle 1,A,3,3,L1_A1
+GA1-PAS-016,1,Grocery Aisle 1,B,3,3,L1_A1
+GA1-CAN-001,1,Grocery Aisle 1,A,2,1,L1_A1
+GA1-CAN-002,1,Grocery Aisle 1,B,2,1,L1_A1
+GA1-CAN-003,1,Grocery Aisle 1,C,2,1,L1_A1
+GA1-CAN-004,1,Grocery Aisle 1,A,2,2,L1_A1
+GA1-CAN-005,1,Grocery Aisle 1,B,2,2,L1_A1
+GA1-CAN-006,1,Grocery Aisle 1,C,2,2,L1_A1
+GA1-CAN-007,1,Grocery Aisle 1,A,2,3,L1_A1
+GA1-CAN-008,1,Grocery Aisle 1,B,2,3,L1_A1
+GA1-BUL-001,1,Grocery Aisle 1,A,1,1,L1_A1
+GA1-BUL-002,1,Grocery Aisle 1,B,1,1,L1_A1
+GA1-BUL-003,1,Grocery Aisle 1,C,1,1,L1_A1
+GA1-BUL-004,1,Grocery Aisle 1,A,1,2,L1_A1
+GA1-BUL-005,1,Grocery Aisle 1,B,1,2,L1_A1
+GA1-BUL-006,1,Grocery Aisle 1,C,1,2,L1_A1
+GA2-BAK-001,1,Grocery Aisle 2,A,5,1,L1_A2
+GA2-BAK-002,1,Grocery Aisle 2,B,5,1,L1_A2
+GA2-BAK-003,1,Grocery Aisle 2,C,5,1,L1_A2
+GA2-BAK-004,1,Grocery Aisle 2,D,5,1,L1_A2
+GA2-BAK-005,1,Grocery Aisle 2,A,5,2,L1_A2
+GA2-BAK-006,1,Grocery Aisle 2,B,5,2,L1_A2
+GA2-BAK-007,1,Grocery Aisle 2,C,5,2,L1_A2
+GA2-BAK-008,1,Grocery Aisle 2,D,5,2,L1_A2
+GA2-CER-001,1,Grocery Aisle 2,A,4,1,L1_A2
+GA2-CER-002,1,Grocery Aisle 2,B,4,1,L1_A2
+GA2-CER-003,1,Grocery Aisle 2,C,4,1,L1_A2
+GA2-CER-004,1,Grocery Aisle 2,D,4,1,L1_A2
+GA2-CER-005,1,Grocery Aisle 2,A,4,2,L1_A2
+GA2-CER-006,1,Grocery Aisle 2,B,4,2,L1_A2
+GA2-CER-007,1,Grocery Aisle 2,C,4,2,L1_A2
+GA2-CER-008,1,Grocery Aisle 2,D,4,2,L1_A2
+GA2-RIC-001,1,Grocery Aisle 2,A,3,1,L1_A2
+GA2-RIC-002,1,Grocery Aisle 2,B,3,1,L1_A2
+GA2-RIC-003,1,Grocery Aisle 2,C,3,1,L1_A2
+GA2-RIC-004,1,Grocery Aisle 2,D,3,1,L1_A2
+GA2-RIC-005,1,Grocery Aisle 2,A,3,2,L1_A2
+GA2-RIC-006,1,Grocery Aisle 2,B,3,2,L1_A2
+GA2-RIC-007,1,Grocery Aisle 2,C,3,2,L1_A2
+GA2-RIC-008,1,Grocery Aisle 2,D,3,2,L1_A2
+GA2-COO-001,1,Grocery Aisle 2,A,2,1,L1_A2
+GA2-COO-002,1,Grocery Aisle 2,B,2,1,L1_A2
+GA2-COO-003,1,Grocery Aisle 2,C,2,1,L1_A2
+GA2-COO-004,1,Grocery Aisle 2,D,2,1,L1_A2
+GA2-COO-005,1,Grocery Aisle 2,A,2,2,L1_A2
+GA2-COO-006,1,Grocery Aisle 2,B,2,2,L1_A2
+GA2-COO-007,1,Grocery Aisle 2,C,2,2,L1_A2
+GA2-COO-008,1,Grocery Aisle 2,D,2,2,L1_A2
+GA2-FLO-001,1,Grocery Aisle 2,A,1,1,L1_A2
+GA2-FLO-002,1,Grocery Aisle 2,B,1,1,L1_A2
+GA2-FLO-003,1,Grocery Aisle 2,C,1,1,L1_A2
+GA2-FLO-004,1,Grocery Aisle 2,D,1,1,L1_A2
+GA2-FLO-005,1,Grocery Aisle 2,A,1,2,L1_A2
+GA2-FLO-006,1,Grocery Aisle 2,B,1,2,L1_A2
+GA2-FLO-007,1,Grocery Aisle 2,C,1,2,L1_A2
+GA2-FLO-008,1,Grocery Aisle 2,D,1,2,L1_A2
+GA3-NUT-001,1,Grocery Aisle 3,A,5,1,L1_A3
+GA3-NUT-002,1,Grocery Aisle 3,B,5,1,L1_A3
+GA3-NUT-003,1,Grocery Aisle 3,C,5,1,L1_A3
+GA3-NUT-004,1,Grocery Aisle 3,D,5,1,L1_A3
+GA3-NUT-005,1,Grocery Aisle 3,A,5,2,L1_A3
+GA3-NUT-006,1,Grocery Aisle 3,B,5,2,L1_A3
+GA3-NUT-007,1,Grocery Aisle 3,C,5,2,L1_A3
+GA3-NUT-008,1,Grocery Aisle 3,D,5,2,L1_A3
+GA3-CHI-001,1,Grocery Aisle 3,A,4,1,L1_A3
+GA3-CHI-002,1,Grocery Aisle 3,B,4,1,L1_A3
+GA3-CHI-003,1,Grocery Aisle 3,C,4,1,L1_A3
+GA3-CHI-004,1,Grocery Aisle 3,D,4,1,L1_A3
+GA3-CHI-005,1,Grocery Aisle 3,A,4,2,L1_A3
+GA3-CHI-006,1,Grocery Aisle 3,B,4,2,L1_A3
+GA3-CHI-007,1,Grocery Aisle 3,C,4,2,L1_A3
+GA3-CHI-008,1,Grocery Aisle 3,D,4,2,L1_A3
+GA3-BIS-001,1,Grocery Aisle 3,A,3,1,L1_A3
+GA3-BIS-002,1,Grocery Aisle 3,B,3,1,L1_A3
+GA3-BIS-003,1,Grocery Aisle 3,C,3,1,L1_A3
+GA3-BIS-004,1,Grocery Aisle 3,D,3,1,L1_A3
+GA3-BIS-005,1,Grocery Aisle 3,A,3,2,L1_A3
+GA3-BIS-006,1,Grocery Aisle 3,B,3,2,L1_A3
+GA3-BIS-007,1,Grocery Aisle 3,C,3,2,L1_A3
+GA3-BIS-008,1,Grocery Aisle 3,D,3,2,L1_A3
+GA3-SOF-001,1,Grocery Aisle 3,A,2,1,L1_A3
+GA3-SOF-002,1,Grocery Aisle 3,B,2,1,L1_A3
+GA3-SOF-003,1,Grocery Aisle 3,C,2,1,L1_A3
+GA3-SOF-004,1,Grocery Aisle 3,D,2,1,L1_A3
+GA3-SOF-005,1,Grocery Aisle 3,A,2,2,L1_A3
+GA3-SOF-006,1,Grocery Aisle 3,B,2,2,L1_A3
+GA3-SOF-007,1,Grocery Aisle 3,C,2,2,L1_A3
+GA3-SOF-008,1,Grocery Aisle 3,D,2,2,L1_A3
+GA3-WAT-001,1,Grocery Aisle 3,A,1,1,L1_A3
+GA3-WAT-002,1,Grocery Aisle 3,B,1,1,L1_A3
+GA3-WAT-003,1,Grocery Aisle 3,C,1,1,L1_A3
+GA3-WAT-004,1,Grocery Aisle 3,D,1,1,L1_A3
+GA3-WAT-005,1,Grocery Aisle 3,A,1,2,L1_A3
+GA3-WAT-006,1,Grocery Aisle 3,B,1,2,L1_A3
+GA3-WAT-007,1,Grocery Aisle 3,C,1,2,L1_A3
+GA3-WAT-008,1,Grocery Aisle 3,D,1,2,L1_A3
+GA4-SPI-001,1,Grocery Aisle 4,A,5,1,L1_A4
+GA4-SPI-002,1,Grocery Aisle 4,B,5,1,L1_A4
+GA4-SPI-003,1,Grocery Aisle 4,C,5,1,L1_A4
+GA4-SPI-004,1,Grocery Aisle 4,D,5,1,L1_A4
+GA4-SPI-005,1,Grocery Aisle 4,A,5,2,L1_A4
+GA4-SPI-006,1,Grocery Aisle 4,B,5,2,L1_A4
+GA4-SPI-007,1,Grocery Aisle 4,C,5,2,L1_A4
+GA4-SPI-008,1,Grocery Aisle 4,D,5,2,L1_A4
+GA4-SAU-001,1,Grocery Aisle 4,A,4,1,L1_A4
+GA4-SAU-002,1,Grocery Aisle 4,B,4,1,L1_A4
+GA4-SAU-003,1,Grocery Aisle 4,C,4,1,L1_A4
+GA4-SAU-004,1,Grocery Aisle 4,D,4,1,L1_A4
+GA4-SAU-005,1,Grocery Aisle 4,A,4,2,L1_A4
+GA4-SAU-006,1,Grocery Aisle 4,B,4,2,L1_A4
+GA4-SAU-007,1,Grocery Aisle 4,C,4,2,L1_A4
+GA4-SAU-008,1,Grocery Aisle 4,D,4,2,L1_A4
+GA4-NOO-001,1,Grocery Aisle 4,A,3,1,L1_A4
+GA4-NOO-002,1,Grocery Aisle 4,B,3,1,L1_A4
+GA4-NOO-003,1,Grocery Aisle 4,C,3,1,L1_A4
+GA4-NOO-004,1,Grocery Aisle 4,D,3,1,L1_A4
+GA4-NOO-005,1,Grocery Aisle 4,A,3,2,L1_A4
+GA4-NOO-006,1,Grocery Aisle 4,B,3,2,L1_A4
+GA4-NOO-007,1,Grocery Aisle 4,C,3,2,L1_A4
+GA4-NOO-008,1,Grocery Aisle 4,D,3,2,L1_A4
+GA4-MEX-001,1,Grocery Aisle 4,A,2,1,L1_A4
+GA4-MEX-002,1,Grocery Aisle 4,B,2,1,L1_A4
+GA4-MEX-003,1,Grocery Aisle 4,C,2,1,L1_A4
+GA4-MEX-004,1,Grocery Aisle 4,D,2,1,L1_A4
+GA4-MEX-005,1,Grocery Aisle 4,A,2,2,L1_A4
+GA4-MEX-006,1,Grocery Aisle 4,B,2,2,L1_A4
+GA4-MEX-007,1,Grocery Aisle 4,C,2,2,L1_A4
+GA4-MEX-008,1,Grocery Aisle 4,D,2,2,L1_A4
+GA4-PIC-001,1,Grocery Aisle 4,A,1,1,L1_A4
+GA4-PIC-002,1,Grocery Aisle 4,B,1,1,L1_A4
+GA4-PIC-003,1,Grocery Aisle 4,C,1,1,L1_A4
+GA4-PIC-004,1,Grocery Aisle 4,D,1,1,L1_A4
+GA4-PIC-005,1,Grocery Aisle 4,A,1,2,L1_A4
+GA4-PIC-006,1,Grocery Aisle 4,B,1,2,L1_A4
+GA4-PIC-007,1,Grocery Aisle 4,C,1,2,L1_A4
+GA4-PIC-008,1,Grocery Aisle 4,D,1,2,L1_A4
+PRO-PAC-001,1,Produce,A,4,1,L1_PRODUCE
+PRO-PAC-002,1,Produce,B,4,1,L1_PRODUCE
+PRO-PAC-003,1,Produce,A,4,2,L1_PRODUCE
+PRO-PAC-004,1,Produce,B,4,2,L1_PRODUCE
+PRO-PAC-005,1,Produce,A,4,3,L1_PRODUCE
+PRO-PAC-006,1,Produce,B,4,3,L1_PRODUCE
+PRO-PAC-007,1,Produce,A,4,4,L1_PRODUCE
+PRO-PAC-008,1,Produce,B,4,4,L1_PRODUCE
+PRO-LEA-001,1,Produce,A,3,1,L1_PRODUCE
+PRO-LEA-002,1,Produce,B,3,1,L1_PRODUCE
+PRO-LEA-003,1,Produce,A,3,2,L1_PRODUCE
+PRO-LEA-004,1,Produce,B,3,2,L1_PRODUCE
+PRO-LEA-005,1,Produce,A,3,3,L1_PRODUCE
+PRO-LEA-006,1,Produce,B,3,3,L1_PRODUCE
+PRO-LEA-007,1,Produce,A,3,4,L1_PRODUCE
+PRO-LEA-008,1,Produce,B,3,4,L1_PRODUCE
+PRO-BUN-001,1,Produce,A,2,1,L1_PRODUCE
+PRO-BUN-002,1,Produce,B,2,1,L1_PRODUCE
+PRO-BUN-003,1,Produce,A,2,2,L1_PRODUCE
+PRO-BUN-004,1,Produce,B,2,2,L1_PRODUCE
+PRO-BUN-005,1,Produce,A,2,3,L1_PRODUCE
+PRO-BUN-006,1,Produce,B,2,3,L1_PRODUCE
+PRO-BUN-007,1,Produce,A,2,4,L1_PRODUCE
+PRO-BUN-008,1,Produce,B,2,4,L1_PRODUCE
+PRO-BUL-001,1,Produce,A,1,1,L1_PRODUCE
+PRO-BUL-002,1,Produce,B,1,1,L1_PRODUCE
+PRO-BUL-003,1,Produce,A,1,2,L1_PRODUCE
+PRO-BUL-004,1,Produce,B,1,2,L1_PRODUCE
+PRO-BUL-005,1,Produce,A,1,3,L1_PRODUCE
+PRO-BUL-006,1,Produce,B,1,3,L1_PRODUCE
+PRO-BUL-007,1,Produce,A,1,4,L1_PRODUCE
+PRO-BUL-008,1,Produce,B,1,4,L1_PRODUCE
+PRO-BER-001,1,Produce,C,4,1,L1_PRODUCE
+PRO-BER-002,1,Produce,D,4,1,L1_PRODUCE
+PRO-BER-003,1,Produce,C,4,2,L1_PRODUCE
+PRO-BER-004,1,Produce,D,4,2,L1_PRODUCE
+PRO-BER-005,1,Produce,C,4,3,L1_PRODUCE
+PRO-BER-006,1,Produce,D,4,3,L1_PRODUCE
+PRO-BER-007,1,Produce,C,4,4,L1_PRODUCE
+PRO-BER-008,1,Produce,D,4,4,L1_PRODUCE
+PRO-APP-001,1,Produce,C,3,1,L1_PRODUCE
+PRO-APP-002,1,Produce,D,3,1,L1_PRODUCE
+PRO-APP-003,1,Produce,C,3,2,L1_PRODUCE
+PRO-APP-004,1,Produce,D,3,2,L1_PRODUCE
+PRO-APP-005,1,Produce,C,3,3,L1_PRODUCE
+PRO-APP-006,1,Produce,D,3,3,L1_PRODUCE
+PRO-APP-007,1,Produce,C,3,4,L1_PRODUCE
+PRO-APP-008,1,Produce,D,3,4,L1_PRODUCE
+PRO-CIT-001,1,Produce,C,2,1,L1_PRODUCE
+PRO-CIT-002,1,Produce,D,2,1,L1_PRODUCE
+PRO-CIT-003,1,Produce,C,2,2,L1_PRODUCE
+PRO-CIT-004,1,Produce,D,2,2,L1_PRODUCE
+PRO-CIT-005,1,Produce,C,2,3,L1_PRODUCE
+PRO-CIT-006,1,Produce,D,2,3,L1_PRODUCE
+PRO-CIT-007,1,Produce,C,2,4,L1_PRODUCE
+PRO-CIT-008,1,Produce,D,2,4,L1_PRODUCE
+PRO-MEL-001,1,Produce,C,1,1,L1_PRODUCE
+PRO-MEL-002,1,Produce,D,1,1,L1_PRODUCE
+PRO-MEL-003,1,Produce,C,1,2,L1_PRODUCE
+PRO-MEL-004,1,Produce,D,1,2,L1_PRODUCE
+PRO-MEL-005,1,Produce,C,1,3,L1_PRODUCE
+PRO-MEL-006,1,Produce,D,1,3,L1_PRODUCE
+PRO-MEL-007,1,Produce,C,1,4,L1_PRODUCE
+PRO-MEL-008,1,Produce,D,1,4,L1_PRODUCE
+BAK-TOR-001,1,Bakery,A,4,1,L1_BAKERY
+BAK-TOR-002,1,Bakery,B,4,1,L1_BAKERY
+BAK-TOR-003,1,Bakery,A,4,2,L1_BAKERY
+BAK-TOR-004,1,Bakery,B,4,2,L1_BAKERY
+BAK-TOR-005,1,Bakery,A,4,3,L1_BAKERY
+BAK-TOR-006,1,Bakery,B,4,3,L1_BAKERY
+BAK-TOR-007,1,Bakery,A,4,4,L1_BAKERY
+BAK-TOR-008,1,Bakery,B,4,4,L1_BAKERY
+BAK-BAG-001,1,Bakery,A,3,1,L1_BAKERY
+BAK-BAG-002,1,Bakery,B,3,1,L1_BAKERY
+BAK-BAG-003,1,Bakery,A,3,2,L1_BAKERY
+BAK-BAG-004,1,Bakery,B,3,2,L1_BAKERY
+BAK-BAG-005,1,Bakery,A,3,3,L1_BAKERY
+BAK-BAG-006,1,Bakery,B,3,3,L1_BAKERY
+BAK-BAG-007,1,Bakery,A,3,4,L1_BAKERY
+BAK-BAG-008,1,Bakery,B,3,4,L1_BAKERY
+BAK-BAG-009,1,Bakery,A,2,1,L1_BAKERY
+BAK-BAG-010,1,Bakery,B,2,1,L1_BAKERY
+BAK-BAG-011,1,Bakery,A,2,2,L1_BAKERY
+BAK-BAG-012,1,Bakery,B,2,2,L1_BAKERY
+BAK-BAG-013,1,Bakery,A,2,3,L1_BAKERY
+BAK-BAG-014,1,Bakery,B,2,3,L1_BAKERY
+BAK-BAG-015,1,Bakery,A,2,4,L1_BAKERY
+BAK-BAG-016,1,Bakery,B,2,4,L1_BAKERY
+BAK-ART-001,1,Bakery,A,1,1,L1_BAKERY
+BAK-ART-002,1,Bakery,B,1,1,L1_BAKERY
+BAK-ART-003,1,Bakery,A,1,2,L1_BAKERY
+BAK-ART-004,1,Bakery,B,1,2,L1_BAKERY
+BAK-ART-005,1,Bakery,A,1,3,L1_BAKERY
+BAK-ART-006,1,Bakery,B,1,3,L1_BAKERY
+BAK-ART-007,1,Bakery,A,1,4,L1_BAKERY
+BAK-ART-008,1,Bakery,B,1,4,L1_BAKERY
+BAK-MUF-001,1,Bakery,C,4,1,L1_BAKERY
+BAK-MUF-002,1,Bakery,D,4,1,L1_BAKERY
+BAK-MUF-003,1,Bakery,C,4,2,L1_BAKERY
+BAK-MUF-004,1,Bakery,D,4,2,L1_BAKERY
+BAK-MUF-005,1,Bakery,C,4,3,L1_BAKERY
+BAK-MUF-006,1,Bakery,D,4,3,L1_BAKERY
+BAK-MUF-007,1,Bakery,C,4,4,L1_BAKERY
+BAK-MUF-008,1,Bakery,D,4,4,L1_BAKERY
+BAK-FRE-001,1,Bakery,C,3,1,L1_BAKERY
+BAK-FRE-002,1,Bakery,D,3,1,L1_BAKERY
+BAK-FRE-003,1,Bakery,C,3,2,L1_BAKERY
+BAK-FRE-004,1,Bakery,D,3,2,L1_BAKERY
+BAK-FRE-005,1,Bakery,C,3,3,L1_BAKERY
+BAK-FRE-006,1,Bakery,D,3,3,L1_BAKERY
+BAK-FRE-007,1,Bakery,C,3,4,L1_BAKERY
+BAK-FRE-008,1,Bakery,D,3,4,L1_BAKERY
+BAK-PIE-001,1,Bakery,C,2,1,L1_BAKERY
+BAK-PIE-002,1,Bakery,D,2,1,L1_BAKERY
+BAK-PIE-003,1,Bakery,C,2,2,L1_BAKERY
+BAK-PIE-004,1,Bakery,D,2,2,L1_BAKERY
+BAK-PIE-005,1,Bakery,C,2,3,L1_BAKERY
+BAK-PIE-006,1,Bakery,D,2,3,L1_BAKERY
+BAK-PIE-007,1,Bakery,C,2,4,L1_BAKERY
+BAK-PIE-008,1,Bakery,D,2,4,L1_BAKERY
+BAK-CEL-001,1,Bakery,C,1,1,L1_BAKERY
+BAK-CEL-002,1,Bakery,D,1,1,L1_BAKERY
+BAK-CEL-003,1,Bakery,C,1,2,L1_BAKERY
+BAK-CEL-004,1,Bakery,D,1,2,L1_BAKERY
+BAK-CEL-005,1,Bakery,C,1,3,L1_BAKERY
+BAK-CEL-006,1,Bakery,D,1,3,L1_BAKERY
+BAK-CEL-007,1,Bakery,C,1,4,L1_BAKERY
+BAK-CEL-008,1,Bakery,D,1,4,L1_BAKERY
+DEL-BAC-001,1,Deli & Meat,A,4,1,L1_DELI
+DEL-BAC-002,1,Deli & Meat,B,4,1,L1_DELI
+DEL-BAC-003,1,Deli & Meat,A,4,2,L1_DELI
+DEL-BAC-004,1,Deli & Meat,B,4,2,L1_DELI
+DEL-BAC-005,1,Deli & Meat,A,4,3,L1_DELI
+DEL-BAC-006,1,Deli & Meat,B,4,3,L1_DELI
+DEL-BAC-007,1,Deli & Meat,A,4,4,L1_DELI
+DEL-BAC-008,1,Deli & Meat,B,4,4,L1_DELI
+DEL-FRE-001,1,Deli & Meat,A,3,1,L1_DELI
+DEL-FRE-002,1,Deli & Meat,B,3,1,L1_DELI
+DEL-FRE-003,1,Deli & Meat,A,3,2,L1_DELI
+DEL-FRE-004,1,Deli & Meat,B,3,2,L1_DELI
+DEL-FRE-005,1,Deli & Meat,A,3,3,L1_DELI
+DEL-FRE-006,1,Deli & Meat,B,3,3,L1_DELI
+DEL-FRE-007,1,Deli & Meat,A,3,4,L1_DELI
+DEL-FRE-008,1,Deli & Meat,B,3,4,L1_DELI
+DEL-FRE-009,1,Deli & Meat,A,2,1,L1_DELI
+DEL-FRE-010,1,Deli & Meat,B,2,1,L1_DELI
+DEL-FRE-011,1,Deli & Meat,A,2,2,L1_DELI
+DEL-FRE-012,1,Deli & Meat,B,2,2,L1_DELI
+DEL-FRE-013,1,Deli & Meat,A,2,3,L1_DELI
+DEL-FRE-014,1,Deli & Meat,B,2,3,L1_DELI
+DEL-FRE-015,1,Deli & Meat,A,2,4,L1_DELI
+DEL-FRE-016,1,Deli & Meat,B,2,4,L1_DELI
+DEL-BUL-001,1,Deli & Meat,A,1,1,L1_DELI
+DEL-BUL-002,1,Deli & Meat,B,1,1,L1_DELI
+DEL-BUL-003,1,Deli & Meat,A,1,2,L1_DELI
+DEL-BUL-004,1,Deli & Meat,B,1,2,L1_DELI
+DEL-BUL-005,1,Deli & Meat,A,1,3,L1_DELI
+DEL-BUL-006,1,Deli & Meat,B,1,3,L1_DELI
+DEL-BUL-007,1,Deli & Meat,A,1,4,L1_DELI
+DEL-BUL-008,1,Deli & Meat,B,1,4,L1_DELI
+DEL-PRE-001,1,Deli & Meat,C,4,1,L1_DELI
+DEL-PRE-002,1,Deli & Meat,D,4,1,L1_DELI
+DEL-PRE-003,1,Deli & Meat,C,4,2,L1_DELI
+DEL-PRE-004,1,Deli & Meat,D,4,2,L1_DELI
+DEL-PRE-005,1,Deli & Meat,C,4,3,L1_DELI
+DEL-PRE-006,1,Deli & Meat,D,4,3,L1_DELI
+DEL-PRE-007,1,Deli & Meat,C,4,4,L1_DELI
+DEL-PRE-008,1,Deli & Meat,D,4,4,L1_DELI
+DEL-SER-001,1,Deli & Meat,C,3,1,L1_DELI
+DEL-SER-002,1,Deli & Meat,D,3,1,L1_DELI
+DEL-SER-003,1,Deli & Meat,C,3,2,L1_DELI
+DEL-SER-004,1,Deli & Meat,D,3,2,L1_DELI
+DEL-SER-005,1,Deli & Meat,C,3,3,L1_DELI
+DEL-SER-006,1,Deli & Meat,D,3,3,L1_DELI
+DEL-SER-007,1,Deli & Meat,C,3,4,L1_DELI
+DEL-SER-008,1,Deli & Meat,D,3,4,L1_DELI
+DEL-SER-009,1,Deli & Meat,C,2,1,L1_DELI
+DEL-SER-010,1,Deli & Meat,D,2,1,L1_DELI
+DEL-SER-011,1,Deli & Meat,C,2,2,L1_DELI
+DEL-SER-012,1,Deli & Meat,D,2,2,L1_DELI
+DEL-SER-013,1,Deli & Meat,C,2,3,L1_DELI
+DEL-SER-014,1,Deli & Meat,D,2,3,L1_DELI
+DEL-SER-015,1,Deli & Meat,C,2,4,L1_DELI
+DEL-SER-016,1,Deli & Meat,D,2,4,L1_DELI
+DEL-PRE-009,1,Deli & Meat,C,1,1,L1_DELI
+DEL-PRE-010,1,Deli & Meat,D,1,1,L1_DELI
+DEL-PRE-011,1,Deli & Meat,C,1,2,L1_DELI
+DEL-PRE-012,1,Deli & Meat,D,1,2,L1_DELI
+DEL-PRE-013,1,Deli & Meat,C,1,3,L1_DELI
+DEL-PRE-014,1,Deli & Meat,D,1,3,L1_DELI
+DEL-PRE-015,1,Deli & Meat,C,1,4,L1_DELI
+DEL-PRE-016,1,Deli & Meat,D,1,4,L1_DELI
+DAI-BUT-001,1,Dairy & Frozen,A,5,1,L1_DAIRY
+DAI-BUT-002,1,Dairy & Frozen,B,5,1,L1_DAIRY
+DAI-BUT-003,1,Dairy & Frozen,A,5,2,L1_DAIRY
+DAI-BUT-004,1,Dairy & Frozen,B,5,2,L1_DAIRY
+DAI-BUT-005,1,Dairy & Frozen,A,5,3,L1_DAIRY
+DAI-BUT-006,1,Dairy & Frozen,B,5,3,L1_DAIRY
+DAI-BUT-007,1,Dairy & Frozen,A,5,4,L1_DAIRY
+DAI-BUT-008,1,Dairy & Frozen,B,5,4,L1_DAIRY
+DAI-YOG-001,1,Dairy & Frozen,A,4,1,L1_DAIRY
+DAI-YOG-002,1,Dairy & Frozen,B,4,1,L1_DAIRY
+DAI-YOG-003,1,Dairy & Frozen,A,4,2,L1_DAIRY
+DAI-YOG-004,1,Dairy & Frozen,B,4,2,L1_DAIRY
+DAI-YOG-005,1,Dairy & Frozen,A,4,3,L1_DAIRY
+DAI-YOG-006,1,Dairy & Frozen,B,4,3,L1_DAIRY
+DAI-YOG-007,1,Dairy & Frozen,A,4,4,L1_DAIRY
+DAI-YOG-008,1,Dairy & Frozen,B,4,4,L1_DAIRY
+DAI-PAC-001,1,Dairy & Frozen,A,3,1,L1_DAIRY
+DAI-PAC-002,1,Dairy & Frozen,B,3,1,L1_DAIRY
+DAI-PAC-003,1,Dairy & Frozen,A,3,2,L1_DAIRY
+DAI-PAC-004,1,Dairy & Frozen,B,3,2,L1_DAIRY
+DAI-PAC-005,1,Dairy & Frozen,A,3,3,L1_DAIRY
+DAI-PAC-006,1,Dairy & Frozen,B,3,3,L1_DAIRY
+DAI-PAC-007,1,Dairy & Frozen,A,3,4,L1_DAIRY
+DAI-PAC-008,1,Dairy & Frozen,B,3,4,L1_DAIRY
+DAI-CRE-001,1,Dairy & Frozen,A,2,1,L1_DAIRY
+DAI-CRE-002,1,Dairy & Frozen,B,2,1,L1_DAIRY
+DAI-CRE-003,1,Dairy & Frozen,A,2,2,L1_DAIRY
+DAI-CRE-004,1,Dairy & Frozen,B,2,2,L1_DAIRY
+DAI-CRE-005,1,Dairy & Frozen,A,2,3,L1_DAIRY
+DAI-CRE-006,1,Dairy & Frozen,B,2,3,L1_DAIRY
+DAI-CRE-007,1,Dairy & Frozen,A,2,4,L1_DAIRY
+DAI-CRE-008,1,Dairy & Frozen,B,2,4,L1_DAIRY
+DAI-MIL-001,1,Dairy & Frozen,A,1,1,L1_DAIRY
+DAI-MIL-002,1,Dairy & Frozen,B,1,1,L1_DAIRY
+DAI-MIL-003,1,Dairy & Frozen,A,1,2,L1_DAIRY
+DAI-MIL-004,1,Dairy & Frozen,B,1,2,L1_DAIRY
+DAI-MIL-005,1,Dairy & Frozen,A,1,3,L1_DAIRY
+DAI-MIL-006,1,Dairy & Frozen,B,1,3,L1_DAIRY
+DAI-MIL-007,1,Dairy & Frozen,A,1,4,L1_DAIRY
+DAI-MIL-008,1,Dairy & Frozen,B,1,4,L1_DAIRY
+DAI-ICE-001,1,Dairy & Frozen,C,5,1,L1_DAIRY
+DAI-ICE-002,1,Dairy & Frozen,D,5,1,L1_DAIRY
+DAI-ICE-003,1,Dairy & Frozen,C,5,2,L1_DAIRY
+DAI-ICE-004,1,Dairy & Frozen,D,5,2,L1_DAIRY
+DAI-ICE-005,1,Dairy & Frozen,C,5,3,L1_DAIRY
+DAI-ICE-006,1,Dairy & Frozen,D,5,3,L1_DAIRY
+DAI-ICE-007,1,Dairy & Frozen,C,5,4,L1_DAIRY
+DAI-ICE-008,1,Dairy & Frozen,D,5,4,L1_DAIRY
+DAI-FRO-001,1,Dairy & Frozen,C,4,1,L1_DAIRY
+DAI-FRO-002,1,Dairy & Frozen,D,4,1,L1_DAIRY
+DAI-FRO-003,1,Dairy & Frozen,C,4,2,L1_DAIRY
+DAI-FRO-004,1,Dairy & Frozen,D,4,2,L1_DAIRY
+DAI-FRO-005,1,Dairy & Frozen,C,4,3,L1_DAIRY
+DAI-FRO-006,1,Dairy & Frozen,D,4,3,L1_DAIRY
+DAI-FRO-007,1,Dairy & Frozen,C,4,4,L1_DAIRY
+DAI-FRO-008,1,Dairy & Frozen,D,4,4,L1_DAIRY
+DAI-FRO-009,1,Dairy & Frozen,C,3,1,L1_DAIRY
+DAI-FRO-010,1,Dairy & Frozen,D,3,1,L1_DAIRY
+DAI-FRO-011,1,Dairy & Frozen,C,3,2,L1_DAIRY
+DAI-FRO-012,1,Dairy & Frozen,D,3,2,L1_DAIRY
+DAI-FRO-013,1,Dairy & Frozen,C,3,3,L1_DAIRY
+DAI-FRO-014,1,Dairy & Frozen,D,3,3,L1_DAIRY
+DAI-FRO-015,1,Dairy & Frozen,C,3,4,L1_DAIRY
+DAI-FRO-016,1,Dairy & Frozen,D,3,4,L1_DAIRY
+DAI-FRO-017,1,Dairy & Frozen,C,2,1,L1_DAIRY
+DAI-FRO-018,1,Dairy & Frozen,D,2,1,L1_DAIRY
+DAI-FRO-019,1,Dairy & Frozen,C,2,2,L1_DAIRY
+DAI-FRO-020,1,Dairy & Frozen,D,2,2,L1_DAIRY
+DAI-FRO-021,1,Dairy & Frozen,C,2,3,L1_DAIRY
+DAI-FRO-022,1,Dairy & Frozen,D,2,3,L1_DAIRY
+DAI-FRO-023,1,Dairy & Frozen,C,2,4,L1_DAIRY
+DAI-FRO-024,1,Dairy & Frozen,D,2,4,L1_DAIRY
+DAI-FRO-025,1,Dairy & Frozen,C,1,1,L1_DAIRY
+DAI-FRO-026,1,Dairy & Frozen,D,1,1,L1_DAIRY
+DAI-FRO-027,1,Dairy & Frozen,C,1,2,L1_DAIRY
+DAI-FRO-028,1,Dairy & Frozen,D,1,2,L1_DAIRY
+DAI-FRO-029,1,Dairy & Frozen,C,1,3,L1_DAIRY
+DAI-FRO-030,1,Dairy & Frozen,D,1,3,L1_DAIRY
+DAI-FRO-031,1,Dairy & Frozen,C,1,4,L1_DAIRY
+DAI-FRO-032,1,Dairy & Frozen,D,1,4,L1_DAIRY
+CHK-BAT-001,1,Checkout Zone,A,5,1,L1_CHECKOUT
+CHK-BAT-002,1,Checkout Zone,B,5,1,L1_CHECKOUT
+CHK-BAT-003,1,Checkout Zone,A,5,2,L1_CHECKOUT
+CHK-BAT-004,1,Checkout Zone,B,5,2,L1_CHECKOUT
+CHK-BAT-005,1,Checkout Zone,A,5,3,L1_CHECKOUT
+CHK-BAT-006,1,Checkout Zone,B,5,3,L1_CHECKOUT
+CHK-BAT-007,1,Checkout Zone,A,5,4,L1_CHECKOUT
+CHK-BAT-008,1,Checkout Zone,B,5,4,L1_CHECKOUT
+CHK-HAN-001,1,Checkout Zone,A,4,1,L1_CHECKOUT
+CHK-HAN-002,1,Checkout Zone,B,4,1,L1_CHECKOUT
+CHK-HAN-003,1,Checkout Zone,A,4,2,L1_CHECKOUT
+CHK-HAN-004,1,Checkout Zone,B,4,2,L1_CHECKOUT
+CHK-HAN-005,1,Checkout Zone,A,4,3,L1_CHECKOUT
+CHK-HAN-006,1,Checkout Zone,B,4,3,L1_CHECKOUT
+CHK-HAN-007,1,Checkout Zone,A,4,4,L1_CHECKOUT
+CHK-HAN-008,1,Checkout Zone,B,4,4,L1_CHECKOUT
+CHK-GUM-001,1,Checkout Zone,A,3,1,L1_CHECKOUT
+CHK-GUM-002,1,Checkout Zone,B,3,1,L1_CHECKOUT
+CHK-GUM-003,1,Checkout Zone,A,3,2,L1_CHECKOUT
+CHK-GUM-004,1,Checkout Zone,B,3,2,L1_CHECKOUT
+CHK-GUM-005,1,Checkout Zone,A,3,3,L1_CHECKOUT
+CHK-GUM-006,1,Checkout Zone,B,3,3,L1_CHECKOUT
+CHK-GUM-007,1,Checkout Zone,A,3,4,L1_CHECKOUT
+CHK-GUM-008,1,Checkout Zone,B,3,4,L1_CHECKOUT
+CHK-SWE-001,1,Checkout Zone,A,2,1,L1_CHECKOUT
+CHK-SWE-002,1,Checkout Zone,B,2,1,L1_CHECKOUT
+CHK-SWE-003,1,Checkout Zone,A,2,2,L1_CHECKOUT
+CHK-SWE-004,1,Checkout Zone,B,2,2,L1_CHECKOUT
+CHK-SWE-005,1,Checkout Zone,A,2,3,L1_CHECKOUT
+CHK-SWE-006,1,Checkout Zone,B,2,3,L1_CHECKOUT
+CHK-SWE-007,1,Checkout Zone,A,2,4,L1_CHECKOUT
+CHK-SWE-008,1,Checkout Zone,B,2,4,L1_CHECKOUT
+CHK-GRA-001,1,Checkout Zone,A,1,1,L1_CHECKOUT
+CHK-GRA-002,1,Checkout Zone,B,1,1,L1_CHECKOUT
+CHK-GRA-003,1,Checkout Zone,A,1,2,L1_CHECKOUT
+CHK-GRA-004,1,Checkout Zone,B,1,2,L1_CHECKOUT
+CHK-GRA-005,1,Checkout Zone,A,1,3,L1_CHECKOUT
+CHK-GRA-006,1,Checkout Zone,B,1,3,L1_CHECKOUT
+CHK-GRA-007,1,Checkout Zone,A,1,4,L1_CHECKOUT
+CHK-GRA-008,1,Checkout Zone,B,1,4,L1_CHECKOUT
+CHK-MAG-001,1,Checkout Zone,C,5,1,L1_CHECKOUT
+CHK-MAG-002,1,Checkout Zone,D,5,1,L1_CHECKOUT
+CHK-MAG-003,1,Checkout Zone,C,5,2,L1_CHECKOUT
+CHK-MAG-004,1,Checkout Zone,D,5,2,L1_CHECKOUT
+CHK-MAG-005,1,Checkout Zone,C,5,3,L1_CHECKOUT
+CHK-MAG-006,1,Checkout Zone,D,5,3,L1_CHECKOUT
+CHK-MAG-007,1,Checkout Zone,C,5,4,L1_CHECKOUT
+CHK-MAG-008,1,Checkout Zone,D,5,4,L1_CHECKOUT
+CHK-CHO-001,1,Checkout Zone,C,4,1,L1_CHECKOUT
+CHK-CHO-002,1,Checkout Zone,D,4,1,L1_CHECKOUT
+CHK-CHO-003,1,Checkout Zone,C,4,2,L1_CHECKOUT
+CHK-CHO-004,1,Checkout Zone,D,4,2,L1_CHECKOUT
+CHK-CHO-005,1,Checkout Zone,C,4,3,L1_CHECKOUT
+CHK-CHO-006,1,Checkout Zone,D,4,3,L1_CHECKOUT
+CHK-CHO-007,1,Checkout Zone,C,4,4,L1_CHECKOUT
+CHK-CHO-008,1,Checkout Zone,D,4,4,L1_CHECKOUT
+CHK-SNA-001,1,Checkout Zone,C,3,1,L1_CHECKOUT
+CHK-SNA-002,1,Checkout Zone,D,3,1,L1_CHECKOUT
+CHK-SNA-003,1,Checkout Zone,C,3,2,L1_CHECKOUT
+CHK-SNA-004,1,Checkout Zone,D,3,2,L1_CHECKOUT
+CHK-SNA-005,1,Checkout Zone,C,3,3,L1_CHECKOUT
+CHK-SNA-006,1,Checkout Zone,D,3,3,L1_CHECKOUT
+CHK-SNA-007,1,Checkout Zone,C,3,4,L1_CHECKOUT
+CHK-SNA-008,1,Checkout Zone,D,3,4,L1_CHECKOUT
+CHK-TRA-001,1,Checkout Zone,C,2,1,L1_CHECKOUT
+CHK-TRA-002,1,Checkout Zone,D,2,1,L1_CHECKOUT
+CHK-TRA-003,1,Checkout Zone,C,2,2,L1_CHECKOUT
+CHK-TRA-004,1,Checkout Zone,D,2,2,L1_CHECKOUT
+CHK-TRA-005,1,Checkout Zone,C,2,3,L1_CHECKOUT
+CHK-TRA-006,1,Checkout Zone,D,2,3,L1_CHECKOUT
+CHK-TRA-007,1,Checkout Zone,C,2,4,L1_CHECKOUT
+CHK-TRA-008,1,Checkout Zone,D,2,4,L1_CHECKOUT
+CHK-UMB-001,1,Checkout Zone,C,1,1,L1_CHECKOUT
+CHK-UMB-002,1,Checkout Zone,D,1,1,L1_CHECKOUT
+CHK-UMB-003,1,Checkout Zone,C,1,2,L1_CHECKOUT
+CHK-UMB-004,1,Checkout Zone,D,1,2,L1_CHECKOUT
+CHK-UMB-005,1,Checkout Zone,C,1,3,L1_CHECKOUT
+CHK-UMB-006,1,Checkout Zone,D,1,3,L1_CHECKOUT
+CHK-UMB-007,1,Checkout Zone,C,1,4,L1_CHECKOUT
+CHK-UMB-008,1,Checkout Zone,D,1,4,L1_CHECKOUT
+HOU-TRA-001,2,Household & Appliances,A,5,1,L2_HOUSEHOLD
+HOU-TRA-002,2,Household & Appliances,B,5,1,L2_HOUSEHOLD
+HOU-TRA-003,2,Household & Appliances,A,5,2,L2_HOUSEHOLD
+HOU-TRA-004,2,Household & Appliances,B,5,2,L2_HOUSEHOLD
+HOU-TRA-005,2,Household & Appliances,A,5,3,L2_HOUSEHOLD
+HOU-TRA-006,2,Household & Appliances,B,5,3,L2_HOUSEHOLD
+HOU-TRA-007,2,Household & Appliances,A,5,4,L2_HOUSEHOLD
+HOU-TRA-008,2,Household & Appliances,B,5,4,L2_HOUSEHOLD
+HOU-LAU-001,2,Household & Appliances,A,4,1,L2_HOUSEHOLD
+HOU-LAU-002,2,Household & Appliances,B,4,1,L2_HOUSEHOLD
+HOU-LAU-003,2,Household & Appliances,A,4,2,L2_HOUSEHOLD
+HOU-LAU-004,2,Household & Appliances,B,4,2,L2_HOUSEHOLD
+HOU-LAU-005,2,Household & Appliances,A,4,3,L2_HOUSEHOLD
+HOU-LAU-006,2,Household & Appliances,B,4,3,L2_HOUSEHOLD
+HOU-LAU-007,2,Household & Appliances,A,4,4,L2_HOUSEHOLD
+HOU-LAU-008,2,Household & Appliances,B,4,4,L2_HOUSEHOLD
+HOU-HOU-001,2,Household & Appliances,A,3,1,L2_HOUSEHOLD
+HOU-HOU-002,2,Household & Appliances,B,3,1,L2_HOUSEHOLD
+HOU-HOU-003,2,Household & Appliances,A,3,2,L2_HOUSEHOLD
+HOU-HOU-004,2,Household & Appliances,B,3,2,L2_HOUSEHOLD
+HOU-HOU-005,2,Household & Appliances,A,3,3,L2_HOUSEHOLD
+HOU-HOU-006,2,Household & Appliances,B,3,3,L2_HOUSEHOLD
+HOU-HOU-007,2,Household & Appliances,A,3,4,L2_HOUSEHOLD
+HOU-HOU-008,2,Household & Appliances,B,3,4,L2_HOUSEHOLD
+HOU-DIS-001,2,Household & Appliances,A,2,1,L2_HOUSEHOLD
+HOU-DIS-002,2,Household & Appliances,B,2,1,L2_HOUSEHOLD
+HOU-DIS-003,2,Household & Appliances,A,2,2,L2_HOUSEHOLD
+HOU-DIS-004,2,Household & Appliances,B,2,2,L2_HOUSEHOLD
+HOU-DIS-005,2,Household & Appliances,A,2,3,L2_HOUSEHOLD
+HOU-DIS-006,2,Household & Appliances,B,2,3,L2_HOUSEHOLD
+HOU-DIS-007,2,Household & Appliances,A,2,4,L2_HOUSEHOLD
+HOU-DIS-008,2,Household & Appliances,B,2,4,L2_HOUSEHOLD
+HOU-PAP-001,2,Household & Appliances,A,1,1,L2_HOUSEHOLD
+HOU-PAP-002,2,Household & Appliances,B,1,1,L2_HOUSEHOLD
+HOU-PAP-003,2,Household & Appliances,A,1,2,L2_HOUSEHOLD
+HOU-PAP-004,2,Household & Appliances,B,1,2,L2_HOUSEHOLD
+HOU-PAP-005,2,Household & Appliances,A,1,3,L2_HOUSEHOLD
+HOU-PAP-006,2,Household & Appliances,B,1,3,L2_HOUSEHOLD
+HOU-PAP-007,2,Household & Appliances,A,1,4,L2_HOUSEHOLD
+HOU-PAP-008,2,Household & Appliances,B,1,4,L2_HOUSEHOLD
+HOU-SMA-001,2,Household & Appliances,C,5,1,L2_HOUSEHOLD
+HOU-SMA-002,2,Household & Appliances,D,5,1,L2_HOUSEHOLD
+HOU-SMA-003,2,Household & Appliances,C,5,2,L2_HOUSEHOLD
+HOU-SMA-004,2,Household & Appliances,D,5,2,L2_HOUSEHOLD
+HOU-SMA-005,2,Household & Appliances,C,5,3,L2_HOUSEHOLD
+HOU-SMA-006,2,Household & Appliances,D,5,3,L2_HOUSEHOLD
+HOU-SMA-007,2,Household & Appliances,C,5,4,L2_HOUSEHOLD
+HOU-SMA-008,2,Household & Appliances,D,5,4,L2_HOUSEHOLD
+HOU-STO-001,2,Household & Appliances,C,4,1,L2_HOUSEHOLD
+HOU-STO-002,2,Household & Appliances,D,4,1,L2_HOUSEHOLD
+HOU-STO-003,2,Household & Appliances,C,4,2,L2_HOUSEHOLD
+HOU-STO-004,2,Household & Appliances,D,4,2,L2_HOUSEHOLD
+HOU-STO-005,2,Household & Appliances,C,4,3,L2_HOUSEHOLD
+HOU-STO-006,2,Household & Appliances,D,4,3,L2_HOUSEHOLD
+HOU-STO-007,2,Household & Appliances,C,4,4,L2_HOUSEHOLD
+HOU-STO-008,2,Household & Appliances,D,4,4,L2_HOUSEHOLD
+HOU-AIR-001,2,Household & Appliances,C,3,1,L2_HOUSEHOLD
+HOU-AIR-002,2,Household & Appliances,D,3,1,L2_HOUSEHOLD
+HOU-AIR-003,2,Household & Appliances,C,3,2,L2_HOUSEHOLD
+HOU-AIR-004,2,Household & Appliances,D,3,2,L2_HOUSEHOLD
+HOU-AIR-005,2,Household & Appliances,C,3,3,L2_HOUSEHOLD
+HOU-AIR-006,2,Household & Appliances,D,3,3,L2_HOUSEHOLD
+HOU-AIR-007,2,Household & Appliances,C,3,4,L2_HOUSEHOLD
+HOU-AIR-008,2,Household & Appliances,D,3,4,L2_HOUSEHOLD
+HOU-VAC-001,2,Household & Appliances,C,2,1,L2_HOUSEHOLD
+HOU-VAC-002,2,Household & Appliances,D,2,1,L2_HOUSEHOLD
+HOU-VAC-003,2,Household & Appliances,C,2,2,L2_HOUSEHOLD
+HOU-VAC-004,2,Household & Appliances,D,2,2,L2_HOUSEHOLD
+HOU-VAC-005,2,Household & Appliances,C,2,3,L2_HOUSEHOLD
+HOU-VAC-006,2,Household & Appliances,D,2,3,L2_HOUSEHOLD
+HOU-VAC-007,2,Household & Appliances,C,2,4,L2_HOUSEHOLD
+HOU-VAC-008,2,Household & Appliances,D,2,4,L2_HOUSEHOLD
+HOU-BUL-001,2,Household & Appliances,C,1,1,L2_HOUSEHOLD
+HOU-BUL-002,2,Household & Appliances,D,1,1,L2_HOUSEHOLD
+HOU-BUL-003,2,Household & Appliances,C,1,2,L2_HOUSEHOLD
+HOU-BUL-004,2,Household & Appliances,D,1,2,L2_HOUSEHOLD
+HOU-BUL-005,2,Household & Appliances,C,1,3,L2_HOUSEHOLD
+HOU-BUL-006,2,Household & Appliances,D,1,3,L2_HOUSEHOLD
+HOU-BUL-007,2,Household & Appliances,C,1,4,L2_HOUSEHOLD
+HOU-BUL-008,2,Household & Appliances,D,1,4,L2_HOUSEHOLD
+TOY-BOA-001,2,Toys & Stationery,A,5,1,L2_TOYS
+TOY-BOA-002,2,Toys & Stationery,B,5,1,L2_TOYS
+TOY-BOA-003,2,Toys & Stationery,A,5,2,L2_TOYS
+TOY-BOA-004,2,Toys & Stationery,B,5,2,L2_TOYS
+TOY-BOA-005,2,Toys & Stationery,A,5,3,L2_TOYS
+TOY-BOA-006,2,Toys & Stationery,B,5,3,L2_TOYS
+TOY-BOA-007,2,Toys & Stationery,A,5,4,L2_TOYS
+TOY-BOA-008,2,Toys & Stationery,B,5,4,L2_TOYS
+TOY-ACT-001,2,Toys & Stationery,A,4,1,L2_TOYS
+TOY-ACT-002,2,Toys & Stationery,B,4,1,L2_TOYS
+TOY-ACT-003,2,Toys & Stationery,A,4,2,L2_TOYS
+TOY-ACT-004,2,Toys & Stationery,B,4,2,L2_TOYS
+TOY-ACT-005,2,Toys & Stationery,A,4,3,L2_TOYS
+TOY-ACT-006,2,Toys & Stationery,B,4,3,L2_TOYS
+TOY-ACT-007,2,Toys & Stationery,A,4,4,L2_TOYS
+TOY-ACT-008,2,Toys & Stationery,B,4,4,L2_TOYS
+TOY-HAN-001,2,Toys & Stationery,A,3,1,L2_TOYS
+TOY-HAN-002,2,Toys & Stationery,B,3,1,L2_TOYS
+TOY-HAN-003,2,Toys & Stationery,A,3,2,L2_TOYS
+TOY-HAN-004,2,Toys & Stationery,B,3,2,L2_TOYS
+TOY-HAN-005,2,Toys & Stationery,A,3,3,L2_TOYS
+TOY-HAN-006,2,Toys & Stationery,B,3,3,L2_TOYS
+TOY-HAN-007,2,Toys & Stationery,A,3,4,L2_TOYS
+TOY-HAN-008,2,Toys & Stationery,B,3,4,L2_TOYS
+TOY-BUI-001,2,Toys & Stationery,A,2,1,L2_TOYS
+TOY-BUI-002,2,Toys & Stationery,B,2,1,L2_TOYS
+TOY-BUI-003,2,Toys & Stationery,A,2,2,L2_TOYS
+TOY-BUI-004,2,Toys & Stationery,B,2,2,L2_TOYS
+TOY-BUI-005,2,Toys & Stationery,A,2,3,L2_TOYS
+TOY-BUI-006,2,Toys & Stationery,B,2,3,L2_TOYS
+TOY-BUI-007,2,Toys & Stationery,A,2,4,L2_TOYS
+TOY-BUI-008,2,Toys & Stationery,B,2,4,L2_TOYS
+TOY-BUL-001,2,Toys & Stationery,A,1,1,L2_TOYS
+TOY-BUL-002,2,Toys & Stationery,B,1,1,L2_TOYS
+TOY-BUL-003,2,Toys & Stationery,A,1,2,L2_TOYS
+TOY-BUL-004,2,Toys & Stationery,B,1,2,L2_TOYS
+TOY-BUL-005,2,Toys & Stationery,A,1,3,L2_TOYS
+TOY-BUL-006,2,Toys & Stationery,B,1,3,L2_TOYS
+TOY-BUL-007,2,Toys & Stationery,A,1,4,L2_TOYS
+TOY-BUL-008,2,Toys & Stationery,B,1,4,L2_TOYS
+TOY-OFF-001,2,Toys & Stationery,C,5,1,L2_TOYS
+TOY-OFF-002,2,Toys & Stationery,D,5,1,L2_TOYS
+TOY-OFF-003,2,Toys & Stationery,C,5,2,L2_TOYS
+TOY-OFF-004,2,Toys & Stationery,D,5,2,L2_TOYS
+TOY-OFF-005,2,Toys & Stationery,C,5,3,L2_TOYS
+TOY-OFF-006,2,Toys & Stationery,D,5,3,L2_TOYS
+TOY-OFF-007,2,Toys & Stationery,C,5,4,L2_TOYS
+TOY-OFF-008,2,Toys & Stationery,D,5,4,L2_TOYS
+TOY-NOT-001,2,Toys & Stationery,C,4,1,L2_TOYS
+TOY-NOT-002,2,Toys & Stationery,D,4,1,L2_TOYS
+TOY-NOT-003,2,Toys & Stationery,C,4,2,L2_TOYS
+TOY-NOT-004,2,Toys & Stationery,D,4,2,L2_TOYS
+TOY-NOT-005,2,Toys & Stationery,C,4,3,L2_TOYS
+TOY-NOT-006,2,Toys & Stationery,D,4,3,L2_TOYS
+TOY-NOT-007,2,Toys & Stationery,C,4,4,L2_TOYS
+TOY-NOT-008,2,Toys & Stationery,D,4,4,L2_TOYS
+TOY-PEN-001,2,Toys & Stationery,C,3,1,L2_TOYS
+TOY-PEN-002,2,Toys & Stationery,D,3,1,L2_TOYS
+TOY-PEN-003,2,Toys & Stationery,C,3,2,L2_TOYS
+TOY-PEN-004,2,Toys & Stationery,D,3,2,L2_TOYS
+TOY-PEN-005,2,Toys & Stationery,C,3,3,L2_TOYS
+TOY-PEN-006,2,Toys & Stationery,D,3,3,L2_TOYS
+TOY-PEN-007,2,Toys & Stationery,C,3,4,L2_TOYS
+TOY-PEN-008,2,Toys & Stationery,D,3,4,L2_TOYS
+TOY-ART-001,2,Toys & Stationery,C,2,1,L2_TOYS
+TOY-ART-002,2,Toys & Stationery,D,2,1,L2_TOYS
+TOY-ART-003,2,Toys & Stationery,C,2,2,L2_TOYS
+TOY-ART-004,2,Toys & Stationery,D,2,2,L2_TOYS
+TOY-ART-005,2,Toys & Stationery,C,2,3,L2_TOYS
+TOY-ART-006,2,Toys & Stationery,D,2,3,L2_TOYS
+TOY-ART-007,2,Toys & Stationery,C,2,4,L2_TOYS
+TOY-ART-008,2,Toys & Stationery,D,2,4,L2_TOYS
+TOY-BUL-009,2,Toys & Stationery,C,1,1,L2_TOYS
+TOY-BUL-010,2,Toys & Stationery,D,1,1,L2_TOYS
+TOY-BUL-011,2,Toys & Stationery,C,1,2,L2_TOYS
+TOY-BUL-012,2,Toys & Stationery,D,1,2,L2_TOYS
+TOY-BUL-013,2,Toys & Stationery,C,1,3,L2_TOYS
+TOY-BUL-014,2,Toys & Stationery,D,1,3,L2_TOYS
+TOY-BUL-015,2,Toys & Stationery,C,1,4,L2_TOYS
+TOY-BUL-016,2,Toys & Stationery,D,1,4,L2_TOYS
+APP-SEA-001,2,Apparel & Clothing,A,5,1,L2_APPAREL_W
+APP-SEA-002,2,Apparel & Clothing,B,5,1,L2_APPAREL_W
+APP-SEA-003,2,Apparel & Clothing,A,5,2,L2_APPAREL_W
+APP-SEA-004,2,Apparel & Clothing,B,5,2,L2_APPAREL_W
+APP-SEA-005,2,Apparel & Clothing,A,5,3,L2_APPAREL_W
+APP-SEA-006,2,Apparel & Clothing,B,5,3,L2_APPAREL_W
+APP-SEA-007,2,Apparel & Clothing,A,5,4,L2_APPAREL_W
+APP-SEA-008,2,Apparel & Clothing,B,5,4,L2_APPAREL_W
+APP-TOP-001,2,Apparel & Clothing,A,4,1,L2_APPAREL_W
+APP-TOP-002,2,Apparel & Clothing,B,4,1,L2_APPAREL_W
+APP-TOP-003,2,Apparel & Clothing,A,4,2,L2_APPAREL_W
+APP-TOP-004,2,Apparel & Clothing,B,4,2,L2_APPAREL_W
+APP-TOP-005,2,Apparel & Clothing,A,4,3,L2_APPAREL_W
+APP-TOP-006,2,Apparel & Clothing,B,4,3,L2_APPAREL_W
+APP-TOP-007,2,Apparel & Clothing,A,4,4,L2_APPAREL_W
+APP-TOP-008,2,Apparel & Clothing,B,4,4,L2_APPAREL_W
+APP-FOL-001,2,Apparel & Clothing,A,3,1,L2_APPAREL_W
+APP-FOL-002,2,Apparel & Clothing,B,3,1,L2_APPAREL_W
+APP-FOL-003,2,Apparel & Clothing,A,3,2,L2_APPAREL_W
+APP-FOL-004,2,Apparel & Clothing,B,3,2,L2_APPAREL_W
+APP-FOL-005,2,Apparel & Clothing,A,3,3,L2_APPAREL_W
+APP-FOL-006,2,Apparel & Clothing,B,3,3,L2_APPAREL_W
+APP-FOL-007,2,Apparel & Clothing,A,3,4,L2_APPAREL_W
+APP-FOL-008,2,Apparel & Clothing,B,3,4,L2_APPAREL_W
+APP-BOT-001,2,Apparel & Clothing,A,2,1,L2_APPAREL_W
+APP-BOT-002,2,Apparel & Clothing,B,2,1,L2_APPAREL_W
+APP-BOT-003,2,Apparel & Clothing,A,2,2,L2_APPAREL_W
+APP-BOT-004,2,Apparel & Clothing,B,2,2,L2_APPAREL_W
+APP-BOT-005,2,Apparel & Clothing,A,2,3,L2_APPAREL_W
+APP-BOT-006,2,Apparel & Clothing,B,2,3,L2_APPAREL_W
+APP-BOT-007,2,Apparel & Clothing,A,2,4,L2_APPAREL_W
+APP-BOT-008,2,Apparel & Clothing,B,2,4,L2_APPAREL_W
+APP-FOO-001,2,Apparel & Clothing,A,1,1,L2_APPAREL_W
+APP-FOO-002,2,Apparel & Clothing,B,1,1,L2_APPAREL_W
+APP-FOO-003,2,Apparel & Clothing,A,1,2,L2_APPAREL_W
+APP-FOO-004,2,Apparel & Clothing,B,1,2,L2_APPAREL_W
+APP-FOO-005,2,Apparel & Clothing,A,1,3,L2_APPAREL_W
+APP-FOO-006,2,Apparel & Clothing,B,1,3,L2_APPAREL_W
+APP-FOO-007,2,Apparel & Clothing,A,1,4,L2_APPAREL_W
+APP-FOO-008,2,Apparel & Clothing,B,1,4,L2_APPAREL_W
+APP-TOP-009,2,Apparel & Clothing,C,5,1,L2_APPAREL_E
+APP-TOP-010,2,Apparel & Clothing,D,5,1,L2_APPAREL_E
+APP-TOP-011,2,Apparel & Clothing,C,5,2,L2_APPAREL_E
+APP-TOP-012,2,Apparel & Clothing,D,5,2,L2_APPAREL_E
+APP-TOP-013,2,Apparel & Clothing,C,5,3,L2_APPAREL_E
+APP-TOP-014,2,Apparel & Clothing,D,5,3,L2_APPAREL_E
+APP-TOP-015,2,Apparel & Clothing,C,5,4,L2_APPAREL_E
+APP-TOP-016,2,Apparel & Clothing,D,5,4,L2_APPAREL_E
+APP-ACC-001,2,Apparel & Clothing,C,4,1,L2_APPAREL_E
+APP-ACC-002,2,Apparel & Clothing,D,4,1,L2_APPAREL_E
+APP-ACC-003,2,Apparel & Clothing,C,4,2,L2_APPAREL_E
+APP-ACC-004,2,Apparel & Clothing,D,4,2,L2_APPAREL_E
+APP-ACC-005,2,Apparel & Clothing,C,4,3,L2_APPAREL_E
+APP-ACC-006,2,Apparel & Clothing,D,4,3,L2_APPAREL_E
+APP-ACC-007,2,Apparel & Clothing,C,4,4,L2_APPAREL_E
+APP-ACC-008,2,Apparel & Clothing,D,4,4,L2_APPAREL_E
+APP-HOO-001,2,Apparel & Clothing,C,3,1,L2_APPAREL_E
+APP-HOO-002,2,Apparel & Clothing,D,3,1,L2_APPAREL_E
+APP-HOO-003,2,Apparel & Clothing,C,3,2,L2_APPAREL_E
+APP-HOO-004,2,Apparel & Clothing,D,3,2,L2_APPAREL_E
+APP-HOO-005,2,Apparel & Clothing,C,3,3,L2_APPAREL_E
+APP-HOO-006,2,Apparel & Clothing,D,3,3,L2_APPAREL_E
+APP-HOO-007,2,Apparel & Clothing,C,3,4,L2_APPAREL_E
+APP-HOO-008,2,Apparel & Clothing,D,3,4,L2_APPAREL_E
+APP-CAS-001,2,Apparel & Clothing,C,2,1,L2_APPAREL_E
+APP-CAS-002,2,Apparel & Clothing,D,2,1,L2_APPAREL_E
+APP-CAS-003,2,Apparel & Clothing,C,2,2,L2_APPAREL_E
+APP-CAS-004,2,Apparel & Clothing,D,2,2,L2_APPAREL_E
+APP-CAS-005,2,Apparel & Clothing,C,2,3,L2_APPAREL_E
+APP-CAS-006,2,Apparel & Clothing,D,2,3,L2_APPAREL_E
+APP-CAS-007,2,Apparel & Clothing,C,2,4,L2_APPAREL_E
+APP-CAS-008,2,Apparel & Clothing,D,2,4,L2_APPAREL_E
+APP-FLO-001,2,Apparel & Clothing,C,1,1,L2_APPAREL_E
+APP-FLO-002,2,Apparel & Clothing,D,1,1,L2_APPAREL_E
+APP-FLO-003,2,Apparel & Clothing,C,1,2,L2_APPAREL_E
+APP-FLO-004,2,Apparel & Clothing,D,1,2,L2_APPAREL_E
+APP-FLO-005,2,Apparel & Clothing,C,1,3,L2_APPAREL_E
+APP-FLO-006,2,Apparel & Clothing,D,1,3,L2_APPAREL_E
+APP-FLO-007,2,Apparel & Clothing,C,1,4,L2_APPAREL_E
+APP-FLO-008,2,Apparel & Clothing,D,1,4,L2_APPAREL_E
+SEA-SEA-001,2,Seasonal Promo,A,4,1,L2_SEASONAL
+SEA-SEA-002,2,Seasonal Promo,B,4,1,L2_SEASONAL
+SEA-SEA-003,2,Seasonal Promo,A,4,2,L2_SEASONAL
+SEA-SEA-004,2,Seasonal Promo,B,4,2,L2_SEASONAL
+SEA-SEA-005,2,Seasonal Promo,A,4,3,L2_SEASONAL
+SEA-SEA-006,2,Seasonal Promo,B,4,3,L2_SEASONAL
+SEA-SEA-007,2,Seasonal Promo,A,4,4,L2_SEASONAL
+SEA-SEA-008,2,Seasonal Promo,B,4,4,L2_SEASONAL
+SEA-MUL-001,2,Seasonal Promo,A,3,1,L2_SEASONAL
+SEA-MUL-002,2,Seasonal Promo,B,3,1,L2_SEASONAL
+SEA-MUL-003,2,Seasonal Promo,A,3,2,L2_SEASONAL
+SEA-MUL-004,2,Seasonal Promo,B,3,2,L2_SEASONAL
+SEA-MUL-005,2,Seasonal Promo,A,3,3,L2_SEASONAL
+SEA-MUL-006,2,Seasonal Promo,B,3,3,L2_SEASONAL
+SEA-MUL-007,2,Seasonal Promo,A,3,4,L2_SEASONAL
+SEA-MUL-008,2,Seasonal Promo,B,3,4,L2_SEASONAL
+SEA-DUM-001,2,Seasonal Promo,A,2,1,L2_SEASONAL
+SEA-DUM-002,2,Seasonal Promo,B,2,1,L2_SEASONAL
+SEA-DUM-003,2,Seasonal Promo,A,2,2,L2_SEASONAL
+SEA-DUM-004,2,Seasonal Promo,B,2,2,L2_SEASONAL
+SEA-DUM-005,2,Seasonal Promo,A,2,3,L2_SEASONAL
+SEA-DUM-006,2,Seasonal Promo,B,2,3,L2_SEASONAL
+SEA-DUM-007,2,Seasonal Promo,A,2,4,L2_SEASONAL
+SEA-DUM-008,2,Seasonal Promo,B,2,4,L2_SEASONAL
+SEA-BUL-001,2,Seasonal Promo,A,1,1,L2_SEASONAL
+SEA-BUL-002,2,Seasonal Promo,B,1,1,L2_SEASONAL
+SEA-BUL-003,2,Seasonal Promo,A,1,2,L2_SEASONAL
+SEA-BUL-004,2,Seasonal Promo,B,1,2,L2_SEASONAL
+SEA-BUL-005,2,Seasonal Promo,A,1,3,L2_SEASONAL
+SEA-BUL-006,2,Seasonal Promo,B,1,3,L2_SEASONAL
+SEA-BUL-007,2,Seasonal Promo,A,1,4,L2_SEASONAL
+SEA-BUL-008,2,Seasonal Promo,B,1,4,L2_SEASONAL
+SEA-SEA-009,2,Seasonal Promo,C,4,1,L2_SEASONAL
+SEA-SEA-010,2,Seasonal Promo,D,4,1,L2_SEASONAL
+SEA-SEA-011,2,Seasonal Promo,C,4,2,L2_SEASONAL
+SEA-SEA-012,2,Seasonal Promo,D,4,2,L2_SEASONAL
+SEA-SEA-013,2,Seasonal Promo,C,4,3,L2_SEASONAL
+SEA-SEA-014,2,Seasonal Promo,D,4,3,L2_SEASONAL
+SEA-SEA-015,2,Seasonal Promo,C,4,4,L2_SEASONAL
+SEA-SEA-016,2,Seasonal Promo,D,4,4,L2_SEASONAL
+SEA-STA-001,2,Seasonal Promo,C,3,1,L2_SEASONAL
+SEA-STA-002,2,Seasonal Promo,D,3,1,L2_SEASONAL
+SEA-STA-003,2,Seasonal Promo,C,3,2,L2_SEASONAL
+SEA-STA-004,2,Seasonal Promo,D,3,2,L2_SEASONAL
+SEA-STA-005,2,Seasonal Promo,C,3,3,L2_SEASONAL
+SEA-STA-006,2,Seasonal Promo,D,3,3,L2_SEASONAL
+SEA-STA-007,2,Seasonal Promo,C,3,4,L2_SEASONAL
+SEA-STA-008,2,Seasonal Promo,D,3,4,L2_SEASONAL
+SEA-GRA-001,2,Seasonal Promo,C,2,1,L2_SEASONAL
+CHK-UMB-002,2,Seasonal Promo,D,2,1,L2_SEASONAL
+SEA-GRA-002,2,Seasonal Promo,C,2,2,L2_SEASONAL
+SEA-GRA-003,2,Seasonal Promo,D,2,2,L2_SEASONAL
+SEA-GRA-004,2,Seasonal Promo,C,2,3,L2_SEASONAL
+SEA-GRA-005,2,Seasonal Promo,D,2,3,L2_SEASONAL
+SEA-GRA-006,2,Seasonal Promo,C,2,4,L2_SEASONAL
+SEA-GRA-007,2,Seasonal Promo,D,2,4,L2_SEASONAL
+SEA-HIG-001,2,Seasonal Promo,C,1,1,L2_SEASONAL
+SEA-HIG-002,2,Seasonal Promo,D,1,1,L2_SEASONAL
+SEA-HIG-003,2,Seasonal Promo,C,1,2,L2_SEASONAL
+SEA-HIG-004,2,Seasonal Promo,D,1,2,L2_SEASONAL
+SEA-HIG-005,2,Seasonal Promo,C,1,3,L2_SEASONAL
+SEA-HIG-006,2,Seasonal Promo,D,1,3,L2_SEASONAL
+SEA-HIG-007,2,Seasonal Promo,C,1,4,L2_SEASONAL
+SEA-HIG-008,2,Seasonal Promo,D,1,4,L2_SEASONAL
+CAF-JUI-001,2,Café,A,5,1,L2_CAFE
+CAF-JUI-002,2,Café,B,5,1,L2_CAFE
+CAF-JUI-003,2,Café,A,5,2,L2_CAFE
+CAF-JUI-004,2,Café,B,5,2,L2_CAFE
+CAF-JUI-005,2,Café,A,5,3,L2_CAFE
+CAF-JUI-006,2,Café,B,5,3,L2_CAFE
+CAF-JUI-007,2,Café,A,5,4,L2_CAFE
+CAF-JUI-008,2,Café,B,5,4,L2_CAFE
+CAF-ENE-001,2,Café,A,4,1,L2_CAFE
+CAF-ENE-002,2,Café,B,4,1,L2_CAFE
+CAF-ENE-003,2,Café,A,4,2,L2_CAFE
+CAF-ENE-004,2,Café,B,4,2,L2_CAFE
+CAF-ENE-005,2,Café,A,4,3,L2_CAFE
+CAF-ENE-006,2,Café,B,4,3,L2_CAFE
+CAF-ENE-007,2,Café,A,4,4,L2_CAFE
+CAF-ENE-008,2,Café,B,4,4,L2_CAFE
+CAF-CAR-001,2,Café,A,3,1,L2_CAFE
+CAF-CAR-002,2,Café,B,3,1,L2_CAFE
+CAF-CAR-003,2,Café,A,3,2,L2_CAFE
+CAF-CAR-004,2,Café,B,3,2,L2_CAFE
+CAF-CAR-005,2,Café,A,3,3,L2_CAFE
+CAF-CAR-006,2,Café,B,3,3,L2_CAFE
+CAF-CAR-007,2,Café,A,3,4,L2_CAFE
+CAF-CAR-008,2,Café,B,3,4,L2_CAFE
+CAF-PRE-001,2,Café,A,2,1,L2_CAFE
+CAF-PRE-002,2,Café,B,2,1,L2_CAFE
+CAF-PRE-003,2,Café,A,2,2,L2_CAFE
+CAF-PRE-004,2,Café,B,2,2,L2_CAFE
+CAF-PRE-005,2,Café,A,2,3,L2_CAFE
+CAF-PRE-006,2,Café,B,2,3,L2_CAFE
+CAF-PRE-007,2,Café,A,2,4,L2_CAFE
+CAF-PRE-008,2,Café,B,2,4,L2_CAFE
+CAF-BUL-001,2,Café,A,1,1,L2_CAFE
+DAI-MIL-002,2,Café,B,1,1,L2_CAFE
+CAF-BUL-002,2,Café,A,1,2,L2_CAFE
+CAF-BUL-003,2,Café,B,1,2,L2_CAFE
+CAF-BUL-004,2,Café,A,1,3,L2_CAFE
+CAF-BUL-005,2,Café,B,1,3,L2_CAFE
+CAF-BUL-006,2,Café,A,1,4,L2_CAFE
+CAF-BUL-007,2,Café,B,1,4,L2_CAFE
+CAF-GOU-001,2,Café,C,5,1,L2_CAFE
+CAF-GOU-002,2,Café,D,5,1,L2_CAFE
+CAF-GOU-003,2,Café,C,5,2,L2_CAFE
+CAF-GOU-004,2,Café,D,5,2,L2_CAFE
+CAF-GOU-005,2,Café,C,5,3,L2_CAFE
+CAF-GOU-006,2,Café,D,5,3,L2_CAFE
+CAF-GOU-007,2,Café,C,5,4,L2_CAFE
+CAF-GOU-008,2,Café,D,5,4,L2_CAFE
+CAF-DAN-001,2,Café,C,4,1,L2_CAFE
+BAK-FRE-004,2,Café,D,4,1,L2_CAFE
+CAF-DAN-002,2,Café,C,4,2,L2_CAFE
+CAF-DAN-003,2,Café,D,4,2,L2_CAFE
+CAF-DAN-004,2,Café,C,4,3,L2_CAFE
+CAF-DAN-005,2,Café,D,4,3,L2_CAFE
+CAF-DAN-006,2,Café,C,4,4,L2_CAFE
+CAF-DAN-007,2,Café,D,4,4,L2_CAFE
+CAF-BAG-001,2,Café,C,3,1,L2_CAFE
+CAF-BAG-002,2,Café,D,3,1,L2_CAFE
+CAF-BAG-003,2,Café,C,3,2,L2_CAFE
+CAF-BAG-004,2,Café,D,3,2,L2_CAFE
+CAF-BAG-005,2,Café,C,3,3,L2_CAFE
+CAF-BAG-006,2,Café,D,3,3,L2_CAFE
+CAF-BAG-007,2,Café,C,3,4,L2_CAFE
+CAF-BAG-008,2,Café,D,3,4,L2_CAFE
+CAF-CON-001,2,Café,C,2,1,L2_CAFE
+CAF-CON-002,2,Café,D,2,1,L2_CAFE
+CAF-CON-003,2,Café,C,2,2,L2_CAFE
+CAF-CON-004,2,Café,D,2,2,L2_CAFE
+CAF-CON-005,2,Café,C,2,3,L2_CAFE
+CAF-CON-006,2,Café,D,2,3,L2_CAFE
+CAF-CON-007,2,Café,C,2,4,L2_CAFE
+CAF-CON-008,2,Café,D,2,4,L2_CAFE
+CAF-BUL-008,2,Café,C,1,1,L2_CAFE
+CAF-BUL-009,2,Café,D,1,1,L2_CAFE
+CAF-BUL-010,2,Café,C,1,2,L2_CAFE
+CAF-BUL-011,2,Café,D,1,2,L2_CAFE
+CAF-BUL-012,2,Café,C,1,3,L2_CAFE
+CAF-BUL-013,2,Café,D,1,3,L2_CAFE
+CAF-BUL-014,2,Café,C,1,4,L2_CAFE
+CAF-BUL-015,2,Café,D,1,4,L2_CAFE
+CUS-GIF-001,2,Customer Service & Payment Hub,A,5,1,L2_SERVICE
+CUS-GIF-002,2,Customer Service & Payment Hub,B,5,1,L2_SERVICE
+CUS-GIF-003,2,Customer Service & Payment Hub,A,5,2,L2_SERVICE
+CUS-GIF-004,2,Customer Service & Payment Hub,B,5,2,L2_SERVICE
+CUS-GIF-005,2,Customer Service & Payment Hub,A,5,3,L2_SERVICE
+CUS-GIF-006,2,Customer Service & Payment Hub,B,5,3,L2_SERVICE
+CUS-GIF-007,2,Customer Service & Payment Hub,A,5,4,L2_SERVICE
+CUS-GIF-008,2,Customer Service & Payment Hub,B,5,4,L2_SERVICE
+CUS-UPP-001,2,Customer Service & Payment Hub,A,4,1,L2_SERVICE
+CUS-UPP-002,2,Customer Service & Payment Hub,B,4,1,L2_SERVICE
+CUS-UPP-003,2,Customer Service & Payment Hub,A,4,2,L2_SERVICE
+CUS-UPP-004,2,Customer Service & Payment Hub,B,4,2,L2_SERVICE
+CUS-UPP-005,2,Customer Service & Payment Hub,A,4,3,L2_SERVICE
+CUS-UPP-006,2,Customer Service & Payment Hub,B,4,3,L2_SERVICE
+CUS-UPP-007,2,Customer Service & Payment Hub,A,4,4,L2_SERVICE
+CUS-UPP-008,2,Customer Service & Payment Hub,B,4,4,L2_SERVICE
+CUS-POS-001,2,Customer Service & Payment Hub,A,3,1,L2_SERVICE
+CUS-POS-002,2,Customer Service & Payment Hub,B,3,1,L2_SERVICE
+CUS-POS-003,2,Customer Service & Payment Hub,A,3,2,L2_SERVICE
+CUS-POS-004,2,Customer Service & Payment Hub,B,3,2,L2_SERVICE
+CUS-POS-005,2,Customer Service & Payment Hub,A,3,3,L2_SERVICE
+CUS-POS-006,2,Customer Service & Payment Hub,B,3,3,L2_SERVICE
+CUS-POS-007,2,Customer Service & Payment Hub,A,3,4,L2_SERVICE
+CUS-POS-008,2,Customer Service & Payment Hub,B,3,4,L2_SERVICE
+CUS-BRO-001,2,Customer Service & Payment Hub,A,2,1,L2_SERVICE
+CUS-BRO-002,2,Customer Service & Payment Hub,B,2,1,L2_SERVICE
+CUS-BRO-003,2,Customer Service & Payment Hub,A,2,2,L2_SERVICE
+CUS-BRO-004,2,Customer Service & Payment Hub,B,2,2,L2_SERVICE
+CUS-BRO-005,2,Customer Service & Payment Hub,A,2,3,L2_SERVICE
+CUS-BRO-006,2,Customer Service & Payment Hub,B,2,3,L2_SERVICE
+CUS-BRO-007,2,Customer Service & Payment Hub,A,2,4,L2_SERVICE
+CUS-BRO-008,2,Customer Service & Payment Hub,B,2,4,L2_SERVICE
+CUS-SHO-001,2,Customer Service & Payment Hub,A,1,1,L2_SERVICE
+CUS-SHO-002,2,Customer Service & Payment Hub,B,1,1,L2_SERVICE
+CUS-SHO-003,2,Customer Service & Payment Hub,A,1,2,L2_SERVICE
+CUS-SHO-004,2,Customer Service & Payment Hub,B,1,2,L2_SERVICE
+CUS-SHO-005,2,Customer Service & Payment Hub,A,1,3,L2_SERVICE
+CUS-SHO-006,2,Customer Service & Payment Hub,B,1,3,L2_SERVICE
+CUS-SHO-007,2,Customer Service & Payment Hub,A,1,4,L2_SERVICE
+CUS-SHO-008,2,Customer Service & Payment Hub,B,1,4,L2_SERVICE
+CUS-HIG-001,2,Customer Service & Payment Hub,C,5,1,L2_SERVICE
+CUS-HIG-002,2,Customer Service & Payment Hub,D,5,1,L2_SERVICE
+CUS-HIG-003,2,Customer Service & Payment Hub,C,5,2,L2_SERVICE
+CUS-HIG-004,2,Customer Service & Payment Hub,D,5,2,L2_SERVICE
+CUS-HIG-005,2,Customer Service & Payment Hub,C,5,3,L2_SERVICE
+CUS-HIG-006,2,Customer Service & Payment Hub,D,5,3,L2_SERVICE
+CUS-HIG-007,2,Customer Service & Payment Hub,C,5,4,L2_SERVICE
+CUS-HIG-008,2,Customer Service & Payment Hub,D,5,4,L2_SERVICE
+CUS-MOB-001,2,Customer Service & Payment Hub,C,4,1,L2_SERVICE
+CUS-MOB-002,2,Customer Service & Payment Hub,D,4,1,L2_SERVICE
+CUS-MOB-003,2,Customer Service & Payment Hub,C,4,2,L2_SERVICE
+CUS-MOB-004,2,Customer Service & Payment Hub,D,4,2,L2_SERVICE
+CUS-MOB-005,2,Customer Service & Payment Hub,C,4,3,L2_SERVICE
+CUS-MOB-006,2,Customer Service & Payment Hub,D,4,3,L2_SERVICE
+CUS-MOB-007,2,Customer Service & Payment Hub,C,4,4,L2_SERVICE
+CUS-MOB-008,2,Customer Service & Payment Hub,D,4,4,L2_SERVICE
+CUS-COU-001,2,Customer Service & Payment Hub,C,3,1,L2_SERVICE
+CUS-COU-002,2,Customer Service & Payment Hub,D,3,1,L2_SERVICE
+CUS-COU-003,2,Customer Service & Payment Hub,C,3,2,L2_SERVICE
+CUS-COU-004,2,Customer Service & Payment Hub,D,3,2,L2_SERVICE
+CUS-COU-005,2,Customer Service & Payment Hub,C,3,3,L2_SERVICE
+CUS-COU-006,2,Customer Service & Payment Hub,D,3,3,L2_SERVICE
+CUS-COU-007,2,Customer Service & Payment Hub,C,3,4,L2_SERVICE
+CUS-COU-008,2,Customer Service & Payment Hub,D,3,4,L2_SERVICE
+CUS-CUS-001,2,Customer Service & Payment Hub,C,2,1,L2_SERVICE
+CUS-CUS-002,2,Customer Service & Payment Hub,D,2,1,L2_SERVICE
+CUS-CUS-003,2,Customer Service & Payment Hub,C,2,2,L2_SERVICE
+CUS-CUS-004,2,Customer Service & Payment Hub,D,2,2,L2_SERVICE
+CUS-CUS-005,2,Customer Service & Payment Hub,C,2,3,L2_SERVICE
+CUS-CUS-006,2,Customer Service & Payment Hub,D,2,3,L2_SERVICE
+CUS-CUS-007,2,Customer Service & Payment Hub,C,2,4,L2_SERVICE
+CUS-CUS-008,2,Customer Service & Payment Hub,D,2,4,L2_SERVICE
+CUS-SEC-001,2,Customer Service & Payment Hub,C,1,1,L2_SERVICE
+CUS-SEC-002,2,Customer Service & Payment Hub,D,1,1,L2_SERVICE
+CUS-SEC-003,2,Customer Service & Payment Hub,C,1,2,L2_SERVICE
+CUS-SEC-004,2,Customer Service & Payment Hub,D,1,2,L2_SERVICE
+CUS-SEC-005,2,Customer Service & Payment Hub,C,1,3,L2_SERVICE
+CUS-SEC-006,2,Customer Service & Payment Hub,D,1,3,L2_SERVICE
+CUS-SEC-007,2,Customer Service & Payment Hub,C,1,4,L2_SERVICE
+CUS-SEC-008,2,Customer Service & Payment Hub,D,1,4,L2_SERVICE

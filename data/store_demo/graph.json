@@ -1,0 +1,758 @@
+{
+  "store_id": "demo_supermarket",
+  "floors": [
+    1,
+    2
+  ],
+  "bounds": {
+    "width": 60,
+    "height": 36
+  },
+  "nodes": [
+    {
+      "id": "L1_ENTRANCE",
+      "floor": 1,
+      "x": 3,
+      "y": 33,
+      "type": "entrance",
+      "label": "Entrance"
+    },
+    {
+      "id": "L1_CHECKOUT",
+      "floor": 1,
+      "x": 12,
+      "y": 33,
+      "type": "checkout",
+      "label": "Checkout zone"
+    },
+    {
+      "id": "L1_J_SW",
+      "floor": 1,
+      "x": 6,
+      "y": 28,
+      "type": "junction",
+      "label": "Junction near entrance"
+    },
+    {
+      "id": "L1_J_S1",
+      "floor": 1,
+      "x": 18,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 1"
+    },
+    {
+      "id": "L1_J_S2",
+      "floor": 1,
+      "x": 28,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 2"
+    },
+    {
+      "id": "L1_J_S3",
+      "floor": 1,
+      "x": 38,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 3"
+    },
+    {
+      "id": "L1_J_S4",
+      "floor": 1,
+      "x": 46,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 4"
+    },
+    {
+      "id": "L1_J_SE",
+      "floor": 1,
+      "x": 54,
+      "y": 28,
+      "type": "junction",
+      "label": "South-east corner"
+    },
+    {
+      "id": "L1_J_W",
+      "floor": 1,
+      "x": 6,
+      "y": 18,
+      "type": "junction",
+      "label": "West corridor"
+    },
+    {
+      "id": "L1_J_E",
+      "floor": 1,
+      "x": 54,
+      "y": 18,
+      "type": "junction",
+      "label": "East corridor"
+    },
+    {
+      "id": "L1_J_NW",
+      "floor": 1,
+      "x": 6,
+      "y": 8,
+      "type": "junction",
+      "label": "North-west corner"
+    },
+    {
+      "id": "L1_J_N1",
+      "floor": 1,
+      "x": 18,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 1"
+    },
+    {
+      "id": "L1_J_N2",
+      "floor": 1,
+      "x": 28,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 2"
+    },
+    {
+      "id": "L1_J_N3",
+      "floor": 1,
+      "x": 38,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 3"
+    },
+    {
+      "id": "L1_J_N4",
+      "floor": 1,
+      "x": 46,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 4"
+    },
+    {
+      "id": "L1_J_NE",
+      "floor": 1,
+      "x": 54,
+      "y": 8,
+      "type": "junction",
+      "label": "Junction near escalators"
+    },
+    {
+      "id": "L1_A1",
+      "floor": 1,
+      "x": 18,
+      "y": 18,
+      "type": "aisle",
+      "label": "Grocery Aisle 1"
+    },
+    {
+      "id": "L1_A2",
+      "floor": 1,
+      "x": 28,
+      "y": 18,
+      "type": "aisle",
+      "label": "Grocery Aisle 2"
+    },
+    {
+      "id": "L1_A3",
+      "floor": 1,
+      "x": 38,
+      "y": 18,
+      "type": "aisle",
+      "label": "Grocery Aisle 3"
+    },
+    {
+      "id": "L1_A4",
+      "floor": 1,
+      "x": 46,
+      "y": 18,
+      "type": "aisle",
+      "label": "Grocery Aisle 4"
+    },
+    {
+      "id": "L1_PRODUCE",
+      "floor": 1,
+      "x": 10,
+      "y": 18,
+      "type": "zone_front",
+      "label": "Produce"
+    },
+    {
+      "id": "L1_BAKERY",
+      "floor": 1,
+      "x": 12,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Bakery"
+    },
+    {
+      "id": "L1_DELI",
+      "floor": 1,
+      "x": 28,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Deli & Meat"
+    },
+    {
+      "id": "L1_DAIRY",
+      "floor": 1,
+      "x": 46,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Dairy & Frozen"
+    },
+    {
+      "id": "L1_ESC",
+      "floor": 1,
+      "x": 57,
+      "y": 5,
+      "type": "escalator",
+      "label": "Escalators"
+    },
+    {
+      "id": "L1_ELV",
+      "floor": 1,
+      "x": 57,
+      "y": 10,
+      "type": "elevator",
+      "label": "Elevator"
+    },
+    {
+      "id": "L1_STR",
+      "floor": 1,
+      "x": 57,
+      "y": 15,
+      "type": "stairs",
+      "label": "Stairs"
+    },
+    {
+      "id": "L2_J_SW",
+      "floor": 2,
+      "x": 6,
+      "y": 28,
+      "type": "junction",
+      "label": "South-west corner"
+    },
+    {
+      "id": "L2_J_S1",
+      "floor": 2,
+      "x": 18,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 1"
+    },
+    {
+      "id": "L2_J_S2",
+      "floor": 2,
+      "x": 30,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 2"
+    },
+    {
+      "id": "L2_J_S3",
+      "floor": 2,
+      "x": 42,
+      "y": 28,
+      "type": "junction",
+      "label": "South corridor 3"
+    },
+    {
+      "id": "L2_J_SE",
+      "floor": 2,
+      "x": 54,
+      "y": 28,
+      "type": "junction",
+      "label": "South-east corner"
+    },
+    {
+      "id": "L2_J_W",
+      "floor": 2,
+      "x": 6,
+      "y": 18,
+      "type": "junction",
+      "label": "West corridor"
+    },
+    {
+      "id": "L2_J_E",
+      "floor": 2,
+      "x": 54,
+      "y": 18,
+      "type": "junction",
+      "label": "East corridor"
+    },
+    {
+      "id": "L2_J_NW",
+      "floor": 2,
+      "x": 6,
+      "y": 8,
+      "type": "junction",
+      "label": "North-west corner"
+    },
+    {
+      "id": "L2_J_N1",
+      "floor": 2,
+      "x": 18,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 1"
+    },
+    {
+      "id": "L2_J_N2",
+      "floor": 2,
+      "x": 30,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 2"
+    },
+    {
+      "id": "L2_J_N3",
+      "floor": 2,
+      "x": 42,
+      "y": 8,
+      "type": "junction",
+      "label": "North corridor 3"
+    },
+    {
+      "id": "L2_J_NE",
+      "floor": 2,
+      "x": 54,
+      "y": 8,
+      "type": "junction",
+      "label": "Junction near escalators"
+    },
+    {
+      "id": "L2_J_C1",
+      "floor": 2,
+      "x": 18,
+      "y": 18,
+      "type": "junction",
+      "label": "Centre 1"
+    },
+    {
+      "id": "L2_J_C2",
+      "floor": 2,
+      "x": 30,
+      "y": 18,
+      "type": "junction",
+      "label": "Centre 2"
+    },
+    {
+      "id": "L2_J_C3",
+      "floor": 2,
+      "x": 42,
+      "y": 18,
+      "type": "junction",
+      "label": "Centre 3"
+    },
+    {
+      "id": "L2_CAFE",
+      "floor": 2,
+      "x": 10,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Café"
+    },
+    {
+      "id": "L2_TOYS",
+      "floor": 2,
+      "x": 24,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Toys & Stationery"
+    },
+    {
+      "id": "L2_HOUSEHOLD",
+      "floor": 2,
+      "x": 48,
+      "y": 4,
+      "type": "zone_front",
+      "label": "Household & Appliances"
+    },
+    {
+      "id": "L2_SEASONAL",
+      "floor": 2,
+      "x": 50,
+      "y": 12,
+      "type": "zone_front",
+      "label": "Seasonal Promo (escalator landing)"
+    },
+    {
+      "id": "L2_APPAREL_W",
+      "floor": 2,
+      "x": 10,
+      "y": 20,
+      "type": "zone_front",
+      "label": "Apparel west"
+    },
+    {
+      "id": "L2_APPAREL_E",
+      "floor": 2,
+      "x": 30,
+      "y": 23,
+      "type": "zone_front",
+      "label": "Apparel centre"
+    },
+    {
+      "id": "L2_SERVICE",
+      "floor": 2,
+      "x": 12,
+      "y": 33,
+      "type": "zone_front",
+      "label": "Customer Service & Payment Hub"
+    },
+    {
+      "id": "L2_RESTROOMS",
+      "floor": 2,
+      "x": 46,
+      "y": 33,
+      "type": "zone_front",
+      "label": "Restrooms"
+    },
+    {
+      "id": "L2_ESC",
+      "floor": 2,
+      "x": 57,
+      "y": 5,
+      "type": "escalator",
+      "label": "Escalators"
+    },
+    {
+      "id": "L2_ELV",
+      "floor": 2,
+      "x": 57,
+      "y": 10,
+      "type": "elevator",
+      "label": "Elevator"
+    },
+    {
+      "id": "L2_STR",
+      "floor": 2,
+      "x": 57,
+      "y": 15,
+      "type": "stairs",
+      "label": "Stairs"
+    }
+  ],
+  "edges": [
+    {
+      "a": "L1_J_SW",
+      "b": "L1_J_S1"
+    },
+    {
+      "a": "L1_J_S1",
+      "b": "L1_J_S2"
+    },
+    {
+      "a": "L1_J_S2",
+      "b": "L1_J_S3"
+    },
+    {
+      "a": "L1_J_S3",
+      "b": "L1_J_S4"
+    },
+    {
+      "a": "L1_J_S4",
+      "b": "L1_J_SE"
+    },
+    {
+      "a": "L1_J_NW",
+      "b": "L1_J_N1"
+    },
+    {
+      "a": "L1_J_N1",
+      "b": "L1_J_N2"
+    },
+    {
+      "a": "L1_J_N2",
+      "b": "L1_J_N3"
+    },
+    {
+      "a": "L1_J_N3",
+      "b": "L1_J_N4"
+    },
+    {
+      "a": "L1_J_N4",
+      "b": "L1_J_NE"
+    },
+    {
+      "a": "L1_J_SW",
+      "b": "L1_J_W"
+    },
+    {
+      "a": "L1_J_W",
+      "b": "L1_J_NW"
+    },
+    {
+      "a": "L1_J_SE",
+      "b": "L1_J_E"
+    },
+    {
+      "a": "L1_J_E",
+      "b": "L1_J_NE"
+    },
+    {
+      "a": "L1_A1",
+      "b": "L1_J_S1"
+    },
+    {
+      "a": "L1_A1",
+      "b": "L1_J_N1"
+    },
+    {
+      "a": "L1_A2",
+      "b": "L1_J_S2"
+    },
+    {
+      "a": "L1_A2",
+      "b": "L1_J_N2"
+    },
+    {
+      "a": "L1_A3",
+      "b": "L1_J_S3"
+    },
+    {
+      "a": "L1_A3",
+      "b": "L1_J_N3"
+    },
+    {
+      "a": "L1_A4",
+      "b": "L1_J_S4"
+    },
+    {
+      "a": "L1_A4",
+      "b": "L1_J_N4"
+    },
+    {
+      "a": "L1_ENTRANCE",
+      "b": "L1_J_SW"
+    },
+    {
+      "a": "L1_ENTRANCE",
+      "b": "L1_CHECKOUT"
+    },
+    {
+      "a": "L1_CHECKOUT",
+      "b": "L1_J_SW"
+    },
+    {
+      "a": "L1_CHECKOUT",
+      "b": "L1_J_S1"
+    },
+    {
+      "a": "L1_PRODUCE",
+      "b": "L1_J_W"
+    },
+    {
+      "a": "L1_BAKERY",
+      "b": "L1_J_NW"
+    },
+    {
+      "a": "L1_BAKERY",
+      "b": "L1_J_N1"
+    },
+    {
+      "a": "L1_DELI",
+      "b": "L1_J_N2"
+    },
+    {
+      "a": "L1_DAIRY",
+      "b": "L1_J_N4"
+    },
+    {
+      "a": "L1_ESC",
+      "b": "L1_J_NE"
+    },
+    {
+      "a": "L1_ELV",
+      "b": "L1_J_NE"
+    },
+    {
+      "a": "L1_STR",
+      "b": "L1_J_E"
+    },
+    {
+      "a": "L2_J_SW",
+      "b": "L2_J_S1"
+    },
+    {
+      "a": "L2_J_S1",
+      "b": "L2_J_S2"
+    },
+    {
+      "a": "L2_J_S2",
+      "b": "L2_J_S3"
+    },
+    {
+      "a": "L2_J_S3",
+      "b": "L2_J_SE"
+    },
+    {
+      "a": "L2_J_NW",
+      "b": "L2_J_N1"
+    },
+    {
+      "a": "L2_J_N1",
+      "b": "L2_J_N2"
+    },
+    {
+      "a": "L2_J_N2",
+      "b": "L2_J_N3"
+    },
+    {
+      "a": "L2_J_N3",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_J_SW",
+      "b": "L2_J_W"
+    },
+    {
+      "a": "L2_J_W",
+      "b": "L2_J_NW"
+    },
+    {
+      "a": "L2_J_SE",
+      "b": "L2_J_E"
+    },
+    {
+      "a": "L2_J_E",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_J_W",
+      "b": "L2_J_C1"
+    },
+    {
+      "a": "L2_J_C1",
+      "b": "L2_J_C2"
+    },
+    {
+      "a": "L2_J_C2",
+      "b": "L2_J_C3"
+    },
+    {
+      "a": "L2_J_C3",
+      "b": "L2_J_E"
+    },
+    {
+      "a": "L2_J_C1",
+      "b": "L2_J_S1"
+    },
+    {
+      "a": "L2_J_C1",
+      "b": "L2_J_N1"
+    },
+    {
+      "a": "L2_J_C2",
+      "b": "L2_J_S2"
+    },
+    {
+      "a": "L2_J_C2",
+      "b": "L2_J_N2"
+    },
+    {
+      "a": "L2_J_C3",
+      "b": "L2_J_S3"
+    },
+    {
+      "a": "L2_J_C3",
+      "b": "L2_J_N3"
+    },
+    {
+      "a": "L2_CAFE",
+      "b": "L2_J_NW"
+    },
+    {
+      "a": "L2_CAFE",
+      "b": "L2_J_N1"
+    },
+    {
+      "a": "L2_TOYS",
+      "b": "L2_J_N1"
+    },
+    {
+      "a": "L2_TOYS",
+      "b": "L2_J_N2"
+    },
+    {
+      "a": "L2_HOUSEHOLD",
+      "b": "L2_J_N3"
+    },
+    {
+      "a": "L2_HOUSEHOLD",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_SEASONAL",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_SEASONAL",
+      "b": "L2_J_E"
+    },
+    {
+      "a": "L2_APPAREL_W",
+      "b": "L2_J_W"
+    },
+    {
+      "a": "L2_APPAREL_E",
+      "b": "L2_J_C2"
+    },
+    {
+      "a": "L2_APPAREL_E",
+      "b": "L2_J_S2"
+    },
+    {
+      "a": "L2_SERVICE",
+      "b": "L2_J_SW"
+    },
+    {
+      "a": "L2_SERVICE",
+      "b": "L2_J_S1"
+    },
+    {
+      "a": "L2_RESTROOMS",
+      "b": "L2_J_S3"
+    },
+    {
+      "a": "L2_RESTROOMS",
+      "b": "L2_J_SE"
+    },
+    {
+      "a": "L2_ESC",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_ELV",
+      "b": "L2_J_NE"
+    },
+    {
+      "a": "L2_STR",
+      "b": "L2_J_E"
+    }
+  ],
+  "connectors": [
+    {
+      "a": "L1_ESC",
+      "b": "L2_ESC",
+      "type": "escalator",
+      "cost": 15,
+      "accessible": false
+    },
+    {
+      "a": "L1_ELV",
+      "b": "L2_ELV",
+      "type": "elevator",
+      "cost": 30,
+      "accessible": true
+    },
+    {
+      "a": "L1_STR",
+      "b": "L2_STR",
+      "type": "stairs",
+      "cost": 25,
+      "accessible": false
+    }
+  ]
+}

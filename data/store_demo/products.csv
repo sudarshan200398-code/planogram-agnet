@@ -1,0 +1,972 @@
+sku,name,brand,category,size,keywords
+GA1-SPE-001,Bella Pasta Instant Soup Mix 100 g,Bella Pasta,Specialty & lightweight,100 g,instant soup mix|soup|specialty & lightweight
+GA1-SPE-002,Store Brand Instant Soup Mix 250 g,Store Brand,Specialty & lightweight,250 g,instant soup mix|soup|specialty & lightweight
+GA1-SPE-003,Store Brand Gravy Granules 250 g,Store Brand,Specialty & lightweight,250 g,gravy|gravy granules|specialty & lightweight
+GA1-SPE-004,Golden Harvest Gravy Granules 100 g,Golden Harvest,Specialty & lightweight,100 g,gravy|gravy granules|specialty & lightweight
+GA1-SPE-005,Golden Harvest Couscous Mix 100 g,Golden Harvest,Specialty & lightweight,100 g,couscous|couscous mix|specialty & lightweight
+GA1-SPE-006,Bella Pasta Couscous Mix 250 g,Bella Pasta,Specialty & lightweight,250 g,couscous|couscous mix|specialty & lightweight
+GA1-SPE-007,Bella Pasta Instant Noodles 250 g,Bella Pasta,Specialty & lightweight,250 g,instant noodles|ramen|specialty & lightweight
+GA1-SPE-008,Store Brand Instant Noodles 100 g,Store Brand,Specialty & lightweight,100 g,instant noodles|ramen|specialty & lightweight
+GA1-PAS-001,Bella Pasta Tomato & Basil Sauce 350 g,Bella Pasta,Pasta sauces,350 g,marinara|pasta sauce|pasta sauces|tomato & basil sauce
+GA1-PAS-002,Store Brand Tomato & Basil Sauce 500 g,Store Brand,Pasta sauces,500 g,marinara|pasta sauce|pasta sauces|tomato & basil sauce
+GA1-PAS-003,Store Brand Arrabbiata Sauce 500 g,Store Brand,Pasta sauces,500 g,arrabbiata sauce|pasta sauces
+GA1-PAS-004,Golden Harvest Arrabbiata Sauce 350 g,Golden Harvest,Pasta sauces,350 g,arrabbiata sauce|pasta sauces
+GA1-PAS-005,Golden Harvest Alfredo Sauce 350 g,Golden Harvest,Pasta sauces,350 g,alfredo sauce|pasta sauces
+GA1-PAS-006,Bella Pasta Alfredo Sauce 500 g,Bella Pasta,Pasta sauces,500 g,alfredo sauce|pasta sauces
+GA1-PAS-007,Bella Pasta Pesto Sauce 500 g,Bella Pasta,Pasta sauces,500 g,pasta sauces|pesto sauce
+GA1-PAS-008,Store Brand Pesto Sauce 350 g,Store Brand,Pasta sauces,350 g,pasta sauces|pesto sauce
+GA1-PAS-009,Bella Pasta Spaghetti 250 g,Bella Pasta,Pasta,250 g,pasta|spaghetti
+GA1-PAS-010,Store Brand Spaghetti 500 g,Store Brand,Pasta,500 g,pasta|spaghetti
+GA1-PAS-011,Store Brand Penne 500 g,Store Brand,Pasta,500 g,pasta|penne
+GA1-PAS-012,Golden Harvest Penne 250 g,Golden Harvest,Pasta,250 g,pasta|penne
+GA1-PAS-013,Golden Harvest Gluten Free Penne 250 g,Golden Harvest,Pasta,250 g,gf|gluten free|gluten free penne|pasta
+GA1-PAS-014,Bella Pasta Gluten Free Penne 500 g,Bella Pasta,Pasta,500 g,gf|gluten free|gluten free penne|pasta
+GA1-PAS-015,Bella Pasta Fusilli 500 g,Bella Pasta,Pasta,500 g,fusilli|pasta
+GA1-PAS-016,Store Brand Fusilli 250 g,Store Brand,Pasta,250 g,fusilli|pasta
+GA1-CAN-001,Bella Pasta Chopped Tomatoes 400 g,Bella Pasta,Canned goods,400 g,canned goods|canned tomatoes|chopped tomatoes
+GA1-CAN-002,Store Brand Chopped Tomatoes 800 g,Store Brand,Canned goods,800 g,canned goods|canned tomatoes|chopped tomatoes
+GA1-CAN-003,Store Brand Kidney Beans 800 g,Store Brand,Canned goods,800 g,beans|canned goods|kidney beans
+GA1-CAN-004,Golden Harvest Kidney Beans 400 g,Golden Harvest,Canned goods,400 g,beans|canned goods|kidney beans
+GA1-CAN-005,Golden Harvest Chickpeas 400 g,Golden Harvest,Canned goods,400 g,canned goods|chickpeas|garbanzo
+GA1-CAN-006,Bella Pasta Chickpeas 800 g,Bella Pasta,Canned goods,800 g,canned goods|chickpeas|garbanzo
+GA1-CAN-007,Bella Pasta Sweet Corn 800 g,Bella Pasta,Canned goods,800 g,canned goods|corn|sweet corn
+GA1-CAN-008,Store Brand Sweet Corn 400 g,Store Brand,Canned goods,400 g,canned goods|corn|sweet corn
+GA1-BUL-001,Bella Pasta Bulk Spaghetti 1 kg,Bella Pasta,Bulk & heavy items,1 kg,bulk & heavy items|bulk spaghetti|pasta
+GA1-BUL-002,Store Brand Bulk Spaghetti 2 kg,Store Brand,Bulk & heavy items,2 kg,bulk & heavy items|bulk spaghetti|pasta
+GA1-BUL-003,Store Brand Family Pack Penne 2 kg,Store Brand,Bulk & heavy items,2 kg,bulk & heavy items|family pack penne|pasta
+GA1-BUL-004,Golden Harvest Family Pack Penne 1 kg,Golden Harvest,Bulk & heavy items,1 kg,bulk & heavy items|family pack penne|pasta
+GA1-BUL-005,Golden Harvest Large Pasta Sauce Jar 1 kg,Golden Harvest,Bulk & heavy items,1 kg,bulk & heavy items|large pasta sauce jar|sauce
+GA1-BUL-006,Bella Pasta Large Pasta Sauce Jar 2 kg,Bella Pasta,Bulk & heavy items,2 kg,bulk & heavy items|large pasta sauce jar|sauce
+GA2-BAK-001,Golden Harvest Pancake Mix 250 g,Golden Harvest,Baking mixes & sugar,250 g,baking mixes & sugar|pancake|pancake mix
+GA2-BAK-002,Store Brand Pancake Mix 500 g,Store Brand,Baking mixes & sugar,500 g,baking mixes & sugar|pancake|pancake mix
+GA2-BAK-003,Store Brand Brownie Mix 500 g,Store Brand,Baking mixes & sugar,500 g,baking mixes & sugar|brownie|brownie mix
+GA2-BAK-004,Sunfield Brownie Mix 250 g,Sunfield,Baking mixes & sugar,250 g,baking mixes & sugar|brownie|brownie mix
+GA2-BAK-005,Sunfield Caster Sugar 250 g,Sunfield,Baking mixes & sugar,250 g,baking mixes & sugar|caster sugar|sugar
+GA2-BAK-006,Golden Harvest Caster Sugar 500 g,Golden Harvest,Baking mixes & sugar,500 g,baking mixes & sugar|caster sugar|sugar
+GA2-BAK-007,Golden Harvest Baking Powder 500 g,Golden Harvest,Baking mixes & sugar,500 g,baking mixes & sugar|baking powder
+GA2-BAK-008,Store Brand Baking Powder 250 g,Store Brand,Baking mixes & sugar,250 g,baking mixes & sugar|baking powder
+GA2-CER-001,Golden Harvest Corn Flakes 375 g,Golden Harvest,Cereal & oats,375 g,cereal|cereal & oats|corn flakes
+GA2-CER-002,Store Brand Corn Flakes 750 g,Store Brand,Cereal & oats,750 g,cereal|cereal & oats|corn flakes
+GA2-CER-003,Store Brand Rolled Oats 750 g,Store Brand,Cereal & oats,750 g,cereal & oats|oatmeal|porridge|rolled oats
+GA2-CER-004,Sunfield Rolled Oats 375 g,Sunfield,Cereal & oats,375 g,cereal & oats|oatmeal|porridge|rolled oats
+GA2-CER-005,Sunfield Muesli 375 g,Sunfield,Cereal & oats,375 g,cereal & oats|granola|muesli
+GA2-CER-006,Golden Harvest Muesli 750 g,Golden Harvest,Cereal & oats,750 g,cereal & oats|granola|muesli
+GA2-CER-007,Golden Harvest Chocolate Cereal 750 g,Golden Harvest,Cereal & oats,750 g,cereal|cereal & oats|chocolate cereal
+GA2-CER-008,Store Brand Chocolate Cereal 375 g,Store Brand,Cereal & oats,375 g,cereal|cereal & oats|chocolate cereal
+GA2-RIC-001,Golden Harvest Basmati Rice 500 g,Golden Harvest,Rice & grains,500 g,basmati|basmati rice|rice|rice & grains
+GA2-RIC-002,Store Brand Basmati Rice 1 kg,Store Brand,Rice & grains,1 kg,basmati|basmati rice|rice|rice & grains
+GA2-RIC-003,Store Brand Brown Rice 1 kg,Store Brand,Rice & grains,1 kg,brown rice|rice|rice & grains
+GA2-RIC-004,Sunfield Brown Rice 500 g,Sunfield,Rice & grains,500 g,brown rice|rice|rice & grains
+GA2-RIC-005,Sunfield Quinoa 500 g,Sunfield,Rice & grains,500 g,grain|quinoa|rice & grains
+GA2-RIC-006,Golden Harvest Quinoa 1 kg,Golden Harvest,Rice & grains,1 kg,grain|quinoa|rice & grains
+GA2-RIC-007,Golden Harvest Couscous 1 kg,Golden Harvest,Rice & grains,1 kg,couscous|grain|rice & grains
+GA2-RIC-008,Store Brand Couscous 500 g,Store Brand,Rice & grains,500 g,couscous|grain|rice & grains
+GA2-COO-001,Golden Harvest Sunflower Oil 500 ml,Golden Harvest,Cooking oils & vinegars,500 ml,cooking oil|cooking oils & vinegars|oil|sunflower oil
+GA2-COO-002,Store Brand Sunflower Oil 1 L,Store Brand,Cooking oils & vinegars,1 L,cooking oil|cooking oils & vinegars|oil|sunflower oil
+GA2-COO-003,Store Brand Olive Oil 1 L,Store Brand,Cooking oils & vinegars,1 L,cooking oils & vinegars|oil|olive oil
+GA2-COO-004,Sunfield Olive Oil 500 ml,Sunfield,Cooking oils & vinegars,500 ml,cooking oils & vinegars|oil|olive oil
+GA2-COO-005,Sunfield Rapeseed Oil 500 ml,Sunfield,Cooking oils & vinegars,500 ml,canola|cooking oils & vinegars|oil|rapeseed oil
+GA2-COO-006,Golden Harvest Rapeseed Oil 1 L,Golden Harvest,Cooking oils & vinegars,1 L,canola|cooking oils & vinegars|oil|rapeseed oil
+GA2-COO-007,Golden Harvest White Vinegar 1 L,Golden Harvest,Cooking oils & vinegars,1 L,cooking oils & vinegars|vinegar|white vinegar
+GA2-COO-008,Store Brand White Vinegar 500 ml,Store Brand,Cooking oils & vinegars,500 ml,cooking oils & vinegars|vinegar|white vinegar
+GA2-FLO-001,Golden Harvest Plain Flour 1 kg,Golden Harvest,Flour & bulk grains,1 kg,atta|flour|flour & bulk grains|plain flour
+GA2-FLO-002,Store Brand Plain Flour 2 kg,Store Brand,Flour & bulk grains,2 kg,atta|flour|flour & bulk grains|plain flour
+GA2-FLO-003,Store Brand Whole Wheat Flour 2 kg,Store Brand,Flour & bulk grains,2 kg,atta|flour|flour & bulk grains|wheat|whole wheat flour
+GA2-FLO-004,Sunfield Whole Wheat Flour 1 kg,Sunfield,Flour & bulk grains,1 kg,atta|flour|flour & bulk grains|wheat|whole wheat flour
+GA2-FLO-005,Sunfield Lentils 1 kg,Sunfield,Flour & bulk grains,1 kg,dal|flour & bulk grains|lentils|pulses
+GA2-FLO-006,Golden Harvest Lentils 2 kg,Golden Harvest,Flour & bulk grains,2 kg,dal|flour & bulk grains|lentils|pulses
+GA2-FLO-007,Golden Harvest Split Peas 2 kg,Golden Harvest,Flour & bulk grains,2 kg,dal|flour & bulk grains|pulses|split peas
+GA2-FLO-008,Store Brand Split Peas 1 kg,Store Brand,Flour & bulk grains,1 kg,dal|flour & bulk grains|pulses|split peas
+GA3-NUT-001,Crunchy Co Salted Peanuts 150 g,Crunchy Co,Nuts & dried fruit,150 g,nuts|nuts & dried fruit|salted peanuts
+GA3-NUT-002,Store Brand Salted Peanuts 300 g,Store Brand,Nuts & dried fruit,300 g,nuts|nuts & dried fruit|salted peanuts
+GA3-NUT-003,Store Brand Almonds 300 g,Store Brand,Nuts & dried fruit,300 g,almonds|nuts|nuts & dried fruit
+GA3-NUT-004,Fizz Up Almonds 150 g,Fizz Up,Nuts & dried fruit,150 g,almonds|nuts|nuts & dried fruit
+GA3-NUT-005,Fizz Up Raisins 150 g,Fizz Up,Nuts & dried fruit,150 g,dried fruit|nuts & dried fruit|raisins
+GA3-NUT-006,Crunchy Co Raisins 300 g,Crunchy Co,Nuts & dried fruit,300 g,dried fruit|nuts & dried fruit|raisins
+GA3-NUT-007,Crunchy Co Cashews 300 g,Crunchy Co,Nuts & dried fruit,300 g,cashews|nuts|nuts & dried fruit
+GA3-NUT-008,Store Brand Cashews 150 g,Store Brand,Nuts & dried fruit,150 g,cashews|nuts|nuts & dried fruit
+GA3-CHI-001,Crunchy Co Salted Potato Chips 90 g,Crunchy Co,Chips & crisps,90 g,chips|chips & crisps|crisps|salted potato chips
+GA3-CHI-002,Store Brand Salted Potato Chips 180 g,Store Brand,Chips & crisps,180 g,chips|chips & crisps|crisps|salted potato chips
+GA3-CHI-003,Store Brand Tortilla Chips 180 g,Store Brand,Chips & crisps,180 g,chips|chips & crisps|tortilla chips
+GA3-CHI-004,Fizz Up Tortilla Chips 90 g,Fizz Up,Chips & crisps,90 g,chips|chips & crisps|tortilla chips
+GA3-CHI-005,Fizz Up Cheese Puffs 90 g,Fizz Up,Chips & crisps,90 g,cheese puffs|chips & crisps|snack
+GA3-CHI-006,Crunchy Co Cheese Puffs 180 g,Crunchy Co,Chips & crisps,180 g,cheese puffs|chips & crisps|snack
+GA3-CHI-007,Crunchy Co Ready Salted Crisps 180 g,Crunchy Co,Chips & crisps,180 g,chips|chips & crisps|crisps|ready salted crisps
+GA3-CHI-008,Store Brand Ready Salted Crisps 90 g,Store Brand,Chips & crisps,90 g,chips|chips & crisps|crisps|ready salted crisps
+GA3-BIS-001,Crunchy Co Chocolate Chip Cookies 200 g,Crunchy Co,Biscuits & cookies,200 g,biscuits|biscuits & cookies|chocolate chip cookies|cookies
+GA3-BIS-002,Store Brand Chocolate Chip Cookies 400 g,Store Brand,Biscuits & cookies,400 g,biscuits|biscuits & cookies|chocolate chip cookies|cookies
+GA3-BIS-003,Store Brand Digestive Biscuits 400 g,Store Brand,Biscuits & cookies,400 g,biscuits|biscuits & cookies|digestive biscuits
+GA3-BIS-004,Fizz Up Digestive Biscuits 200 g,Fizz Up,Biscuits & cookies,200 g,biscuits|biscuits & cookies|digestive biscuits
+GA3-BIS-005,Fizz Up Cream Crackers 200 g,Fizz Up,Biscuits & cookies,200 g,biscuits & cookies|crackers|cream crackers
+GA3-BIS-006,Crunchy Co Cream Crackers 400 g,Crunchy Co,Biscuits & cookies,400 g,biscuits & cookies|crackers|cream crackers
+GA3-BIS-007,Crunchy Co Oat Cookies 400 g,Crunchy Co,Biscuits & cookies,400 g,biscuits & cookies|cookies|oat cookies
+GA3-BIS-008,Store Brand Oat Cookies 200 g,Store Brand,Biscuits & cookies,200 g,biscuits & cookies|cookies|oat cookies
+GA3-SOF-001,Crunchy Co Cola 1 L,Crunchy Co,Soft drinks & juices,1 L,cola|pop|soda|soft drink|soft drinks & juices
+GA3-SOF-002,Store Brand Cola 2 L,Store Brand,Soft drinks & juices,2 L,cola|pop|soda|soft drink|soft drinks & juices
+GA3-SOF-003,Store Brand Lemon Lime Soda 2 L,Store Brand,Soft drinks & juices,2 L,lemon lime soda|soda|soft drink|soft drinks & juices
+GA3-SOF-004,Fizz Up Lemon Lime Soda 1 L,Fizz Up,Soft drinks & juices,1 L,lemon lime soda|soda|soft drink|soft drinks & juices
+GA3-SOF-005,Fizz Up Orange Juice 1 L,Fizz Up,Soft drinks & juices,1 L,juice|orange juice|soft drinks & juices
+GA3-SOF-006,Crunchy Co Orange Juice 2 L,Crunchy Co,Soft drinks & juices,2 L,juice|orange juice|soft drinks & juices
+GA3-SOF-007,Crunchy Co Apple Juice 2 L,Crunchy Co,Soft drinks & juices,2 L,apple juice|juice|soft drinks & juices
+GA3-SOF-008,Store Brand Apple Juice 1 L,Store Brand,Soft drinks & juices,1 L,apple juice|juice|soft drinks & juices
+GA3-WAT-001,Crunchy Co Still Water 500 ml,Crunchy Co,Water & bulk beverages,500 ml,still water|water|water & bulk beverages
+GA3-WAT-002,Store Brand Still Water 1.5 L,Store Brand,Water & bulk beverages,1.5 L,still water|water|water & bulk beverages
+GA3-WAT-003,Store Brand Sparkling Water 1.5 L,Store Brand,Water & bulk beverages,1.5 L,soda water|sparkling water|water|water & bulk beverages
+GA3-WAT-004,Fizz Up Sparkling Water 500 ml,Fizz Up,Water & bulk beverages,500 ml,soda water|sparkling water|water|water & bulk beverages
+GA3-WAT-005,Fizz Up Energy Drink 500 ml,Fizz Up,Water & bulk beverages,500 ml,energy|energy drink|water & bulk beverages
+GA3-WAT-006,Crunchy Co Energy Drink 1.5 L,Crunchy Co,Water & bulk beverages,1.5 L,energy|energy drink|water & bulk beverages
+GA3-WAT-007,Crunchy Co Iced Tea 1.5 L,Crunchy Co,Water & bulk beverages,1.5 L,iced tea|tea|water & bulk beverages
+GA3-WAT-008,Store Brand Iced Tea 500 ml,Store Brand,Water & bulk beverages,500 ml,iced tea|tea|water & bulk beverages
+GA4-SPI-001,Spice Route Black Pepper 50 g,Spice Route,Spices & seasonings,50 g,black pepper|spice|spices & seasonings
+GA4-SPI-002,Store Brand Black Pepper 100 g,Store Brand,Spices & seasonings,100 g,black pepper|spice|spices & seasonings
+GA4-SPI-003,Store Brand Paprika 100 g,Store Brand,Spices & seasonings,100 g,paprika|spice|spices & seasonings
+GA4-SPI-004,Golden Harvest Paprika 50 g,Golden Harvest,Spices & seasonings,50 g,paprika|spice|spices & seasonings
+GA4-SPI-005,Golden Harvest Cumin Seeds 50 g,Golden Harvest,Spices & seasonings,50 g,cumin seeds|jeera|spice|spices & seasonings
+GA4-SPI-006,Spice Route Cumin Seeds 100 g,Spice Route,Spices & seasonings,100 g,cumin seeds|jeera|spice|spices & seasonings
+GA4-SPI-007,Spice Route Mixed Herbs 100 g,Spice Route,Spices & seasonings,100 g,herbs|mixed herbs|spices & seasonings
+GA4-SPI-008,Store Brand Mixed Herbs 50 g,Store Brand,Spices & seasonings,50 g,herbs|mixed herbs|spices & seasonings
+GA4-SAU-001,Spice Route Tomato Ketchup 250 g,Spice Route,Sauces & condiments,250 g,ketchup|sauce|sauces & condiments|tomato ketchup
+GA4-SAU-002,Store Brand Tomato Ketchup 500 g,Store Brand,Sauces & condiments,500 g,ketchup|sauce|sauces & condiments|tomato ketchup
+GA4-SAU-003,Store Brand Mayonnaise 500 g,Store Brand,Sauces & condiments,500 g,mayo|mayonnaise|sauces & condiments
+GA4-SAU-004,Golden Harvest Mayonnaise 250 g,Golden Harvest,Sauces & condiments,250 g,mayo|mayonnaise|sauces & condiments
+GA4-SAU-005,Golden Harvest Mustard 250 g,Golden Harvest,Sauces & condiments,250 g,mustard|sauces & condiments
+GA4-SAU-006,Spice Route Mustard 500 g,Spice Route,Sauces & condiments,500 g,mustard|sauces & condiments
+GA4-SAU-007,Spice Route Soy Sauce 500 g,Spice Route,Sauces & condiments,500 g,sauces & condiments|soy|soy sauce
+GA4-SAU-008,Store Brand Soy Sauce 250 g,Store Brand,Sauces & condiments,250 g,sauces & condiments|soy|soy sauce
+GA4-NOO-001,Spice Route Egg Noodles 200 g,Spice Route,Noodles & Asian foods,200 g,egg noodles|noodles|noodles & asian foods
+GA4-NOO-002,Store Brand Egg Noodles 400 g,Store Brand,Noodles & Asian foods,400 g,egg noodles|noodles|noodles & asian foods
+GA4-NOO-003,Store Brand Rice Noodles 400 g,Store Brand,Noodles & Asian foods,400 g,noodles|noodles & asian foods|rice noodles
+GA4-NOO-004,Golden Harvest Rice Noodles 200 g,Golden Harvest,Noodles & Asian foods,200 g,noodles|noodles & asian foods|rice noodles
+GA4-NOO-005,Golden Harvest Coconut Milk 200 g,Golden Harvest,Noodles & Asian foods,200 g,coconut|coconut milk|noodles & asian foods
+GA4-NOO-006,Spice Route Coconut Milk 400 g,Spice Route,Noodles & Asian foods,400 g,coconut|coconut milk|noodles & asian foods
+GA4-NOO-007,Spice Route Curry Paste 400 g,Spice Route,Noodles & Asian foods,400 g,curry|curry paste|noodles & asian foods
+GA4-NOO-008,Store Brand Curry Paste 200 g,Store Brand,Noodles & Asian foods,200 g,curry|curry paste|noodles & asian foods
+GA4-MEX-001,Spice Route Taco Shells 200 g,Spice Route,Mexican & world foods,200 g,mexican & world foods|taco shells|tacos
+GA4-MEX-002,Store Brand Taco Shells 400 g,Store Brand,Mexican & world foods,400 g,mexican & world foods|taco shells|tacos
+GA4-MEX-003,Store Brand Salsa 400 g,Store Brand,Mexican & world foods,400 g,mexican & world foods|salsa
+GA4-MEX-004,Golden Harvest Salsa 200 g,Golden Harvest,Mexican & world foods,200 g,mexican & world foods|salsa
+GA4-MEX-005,Golden Harvest Refried Beans 200 g,Golden Harvest,Mexican & world foods,200 g,beans|mexican & world foods|refried beans
+GA4-MEX-006,Spice Route Refried Beans 400 g,Spice Route,Mexican & world foods,400 g,beans|mexican & world foods|refried beans
+GA4-MEX-007,Spice Route Tortilla Wraps 400 g,Spice Route,Mexican & world foods,400 g,mexican & world foods|tortilla wraps|wraps
+GA4-MEX-008,Store Brand Tortilla Wraps 200 g,Store Brand,Mexican & world foods,200 g,mexican & world foods|tortilla wraps|wraps
+GA4-PIC-001,Spice Route Mango Pickle 340 g,Spice Route,Pickles & preserves,340 g,achar|mango pickle|pickle|pickles & preserves
+GA4-PIC-002,Store Brand Mango Pickle 680 g,Store Brand,Pickles & preserves,680 g,achar|mango pickle|pickle|pickles & preserves
+GA4-PIC-003,Store Brand Strawberry Jam 680 g,Store Brand,Pickles & preserves,680 g,jam|pickles & preserves|strawberry jam
+GA4-PIC-004,Golden Harvest Strawberry Jam 340 g,Golden Harvest,Pickles & preserves,340 g,jam|pickles & preserves|strawberry jam
+GA4-PIC-005,Golden Harvest Peanut Butter 340 g,Golden Harvest,Pickles & preserves,340 g,peanut butter|pickles & preserves
+GA4-PIC-006,Spice Route Peanut Butter 680 g,Spice Route,Pickles & preserves,680 g,peanut butter|pickles & preserves
+GA4-PIC-007,Spice Route Honey 680 g,Spice Route,Pickles & preserves,680 g,honey|pickles & preserves
+GA4-PIC-008,Store Brand Honey 340 g,Store Brand,Pickles & preserves,340 g,honey|pickles & preserves
+PRO-PAC-001,Fresh Farms Baby Spinach 150 g,Fresh Farms,"Packaged salads, herbs & mushrooms",150 g,"baby spinach|packaged salads, herbs & mushrooms|spinach"
+PRO-PAC-002,Organic Roots Baby Spinach 300 g,Organic Roots,"Packaged salads, herbs & mushrooms",300 g,"baby spinach|packaged salads, herbs & mushrooms|spinach"
+PRO-PAC-003,Organic Roots Mixed Salad Leaves 300 g,Organic Roots,"Packaged salads, herbs & mushrooms",300 g,"greens|mixed salad leaves|packaged salads, herbs & mushrooms|salad"
+PRO-PAC-004,Harvest Mixed Salad Leaves 150 g,Harvest,"Packaged salads, herbs & mushrooms",150 g,"greens|mixed salad leaves|packaged salads, herbs & mushrooms|salad"
+PRO-PAC-005,Harvest Fresh Basil 150 g,Harvest,"Packaged salads, herbs & mushrooms",150 g,"fresh basil|herb|packaged salads, herbs & mushrooms"
+PRO-PAC-006,Fresh Farms Fresh Basil 300 g,Fresh Farms,"Packaged salads, herbs & mushrooms",300 g,"fresh basil|herb|packaged salads, herbs & mushrooms"
+PRO-PAC-007,Fresh Farms Button Mushrooms 300 g,Fresh Farms,"Packaged salads, herbs & mushrooms",300 g,"button mushrooms|mushroom|packaged salads, herbs & mushrooms"
+PRO-PAC-008,Organic Roots Button Mushrooms 150 g,Organic Roots,"Packaged salads, herbs & mushrooms",150 g,"button mushrooms|mushroom|packaged salads, herbs & mushrooms"
+PRO-LEA-001,Fresh Farms Romaine Lettuce 1 head,Fresh Farms,"Leafy greens, broccoli & cauliflower",1 head,"leafy greens, broccoli & cauliflower|lettuce|romaine lettuce"
+PRO-LEA-002,Organic Roots Romaine Lettuce 500 g,Organic Roots,"Leafy greens, broccoli & cauliflower",500 g,"leafy greens, broccoli & cauliflower|lettuce|romaine lettuce"
+PRO-LEA-003,Organic Roots Kale 500 g,Organic Roots,"Leafy greens, broccoli & cauliflower",500 g,"greens|kale|leafy greens, broccoli & cauliflower"
+PRO-LEA-004,Harvest Kale 1 head,Harvest,"Leafy greens, broccoli & cauliflower",1 head,"greens|kale|leafy greens, broccoli & cauliflower"
+PRO-LEA-005,Harvest Broccoli 1 head,Harvest,"Leafy greens, broccoli & cauliflower",1 head,"broccoli|leafy greens, broccoli & cauliflower"
+PRO-LEA-006,Fresh Farms Broccoli 500 g,Fresh Farms,"Leafy greens, broccoli & cauliflower",500 g,"broccoli|leafy greens, broccoli & cauliflower"
+PRO-LEA-007,Fresh Farms Cauliflower 500 g,Fresh Farms,"Leafy greens, broccoli & cauliflower",500 g,"cauliflower|leafy greens, broccoli & cauliflower"
+PRO-LEA-008,Organic Roots Cauliflower 1 head,Organic Roots,"Leafy greens, broccoli & cauliflower",1 head,"cauliflower|leafy greens, broccoli & cauliflower"
+PRO-BUN-001,Fresh Farms Carrots 1 bunch,Fresh Farms,Bunched vegetables & celery,1 bunch,bunched vegetables & celery|carrot|carrots
+PRO-BUN-002,Organic Roots Carrots 500 g,Organic Roots,Bunched vegetables & celery,500 g,bunched vegetables & celery|carrot|carrots
+PRO-BUN-003,Organic Roots Celery 500 g,Organic Roots,Bunched vegetables & celery,500 g,bunched vegetables & celery|celery
+PRO-BUN-004,Harvest Celery 1 bunch,Harvest,Bunched vegetables & celery,1 bunch,bunched vegetables & celery|celery
+PRO-BUN-005,Harvest Radishes 1 bunch,Harvest,Bunched vegetables & celery,1 bunch,bunched vegetables & celery|radish|radishes
+PRO-BUN-006,Fresh Farms Radishes 500 g,Fresh Farms,Bunched vegetables & celery,500 g,bunched vegetables & celery|radish|radishes
+PRO-BUN-007,Fresh Farms Spring Onions 500 g,Fresh Farms,Bunched vegetables & celery,500 g,bunched vegetables & celery|green onion|scallions|spring onions
+PRO-BUN-008,Organic Roots Spring Onions 1 bunch,Organic Roots,Bunched vegetables & celery,1 bunch,bunched vegetables & celery|green onion|scallions|spring onions
+PRO-BUL-001,Fresh Farms Potatoes 1 kg,Fresh Farms,Bulk root vegetables & bags,1 kg,bulk root vegetables & bags|potato|potatoes
+PRO-BUL-002,Organic Roots Potatoes 2 kg,Organic Roots,Bulk root vegetables & bags,2 kg,bulk root vegetables & bags|potato|potatoes
+PRO-BUL-003,Organic Roots Onions 2 kg,Organic Roots,Bulk root vegetables & bags,2 kg,bulk root vegetables & bags|onion|onions
+PRO-BUL-004,Harvest Onions 1 kg,Harvest,Bulk root vegetables & bags,1 kg,bulk root vegetables & bags|onion|onions
+PRO-BUL-005,Harvest Garlic 1 kg,Harvest,Bulk root vegetables & bags,1 kg,bulk root vegetables & bags|garlic
+PRO-BUL-006,Fresh Farms Garlic 2 kg,Fresh Farms,Bulk root vegetables & bags,2 kg,bulk root vegetables & bags|garlic
+PRO-BUL-007,Fresh Farms Sweet Potatoes 2 kg,Fresh Farms,Bulk root vegetables & bags,2 kg,bulk root vegetables & bags|sweet potato|sweet potatoes
+PRO-BUL-008,Organic Roots Sweet Potatoes 1 kg,Organic Roots,Bulk root vegetables & bags,1 kg,bulk root vegetables & bags|sweet potato|sweet potatoes
+PRO-BER-001,Fresh Farms Strawberries 250 g,Fresh Farms,Berries & specialty fruits,250 g,berries|berries & specialty fruits|strawberries
+PRO-BER-002,Organic Roots Strawberries 500 g,Organic Roots,Berries & specialty fruits,500 g,berries|berries & specialty fruits|strawberries
+PRO-BER-003,Organic Roots Blueberries 500 g,Organic Roots,Berries & specialty fruits,500 g,berries|berries & specialty fruits|blueberries
+PRO-BER-004,Harvest Blueberries 250 g,Harvest,Berries & specialty fruits,250 g,berries|berries & specialty fruits|blueberries
+PRO-BER-005,Harvest Grapes 250 g,Harvest,Berries & specialty fruits,250 g,berries & specialty fruits|grapes
+PRO-BER-006,Fresh Farms Grapes 500 g,Fresh Farms,Berries & specialty fruits,500 g,berries & specialty fruits|grapes
+PRO-BER-007,Fresh Farms Cherries 500 g,Fresh Farms,Berries & specialty fruits,500 g,berries & specialty fruits|cherries
+PRO-BER-008,Organic Roots Cherries 250 g,Organic Roots,Berries & specialty fruits,250 g,berries & specialty fruits|cherries
+PRO-APP-001,Fresh Farms Red Apples 1 kg,Fresh Farms,"Apples, pears & stone fruits",1 kg,"apple|apples, pears & stone fruits|red apples"
+PRO-APP-002,Organic Roots Red Apples 2 kg,Organic Roots,"Apples, pears & stone fruits",2 kg,"apple|apples, pears & stone fruits|red apples"
+PRO-APP-003,Organic Roots Green Apples 2 kg,Organic Roots,"Apples, pears & stone fruits",2 kg,"apple|apples, pears & stone fruits|green apples"
+PRO-APP-004,Harvest Green Apples 1 kg,Harvest,"Apples, pears & stone fruits",1 kg,"apple|apples, pears & stone fruits|green apples"
+PRO-APP-005,Harvest Pears 1 kg,Harvest,"Apples, pears & stone fruits",1 kg,"apples, pears & stone fruits|pear|pears"
+PRO-APP-006,Fresh Farms Pears 2 kg,Fresh Farms,"Apples, pears & stone fruits",2 kg,"apples, pears & stone fruits|pear|pears"
+PRO-APP-007,Fresh Farms Peaches 2 kg,Fresh Farms,"Apples, pears & stone fruits",2 kg,"apples, pears & stone fruits|peach|peaches"
+PRO-APP-008,Organic Roots Peaches 1 kg,Organic Roots,"Apples, pears & stone fruits",1 kg,"apples, pears & stone fruits|peach|peaches"
+PRO-CIT-001,Fresh Farms Oranges 500 g,Fresh Farms,"Citrus, bananas & tropical fruits",500 g,"citrus|citrus, bananas & tropical fruits|orange|oranges"
+PRO-CIT-002,Organic Roots Oranges 1 kg,Organic Roots,"Citrus, bananas & tropical fruits",1 kg,"citrus|citrus, bananas & tropical fruits|orange|oranges"
+PRO-CIT-003,Organic Roots Lemons 1 kg,Organic Roots,"Citrus, bananas & tropical fruits",1 kg,"citrus, bananas & tropical fruits|lemon|lemons"
+PRO-CIT-004,Harvest Lemons 500 g,Harvest,"Citrus, bananas & tropical fruits",500 g,"citrus, bananas & tropical fruits|lemon|lemons"
+PRO-CIT-005,Harvest Bananas 500 g,Harvest,"Citrus, bananas & tropical fruits",500 g,"banana|bananas|citrus, bananas & tropical fruits"
+PRO-CIT-006,Fresh Farms Bananas 1 kg,Fresh Farms,"Citrus, bananas & tropical fruits",1 kg,"banana|bananas|citrus, bananas & tropical fruits"
+PRO-CIT-007,Fresh Farms Limes 1 kg,Fresh Farms,"Citrus, bananas & tropical fruits",1 kg,"citrus, bananas & tropical fruits|lime|limes"
+PRO-CIT-008,Organic Roots Limes 500 g,Organic Roots,"Citrus, bananas & tropical fruits",500 g,"citrus, bananas & tropical fruits|lime|limes"
+PRO-MEL-001,Fresh Farms Watermelon 1 piece,Fresh Farms,"Melons, squash & bulk produce",1 piece,"melon|melons, squash & bulk produce|watermelon"
+PRO-MEL-002,Organic Roots Watermelon 2 kg,Organic Roots,"Melons, squash & bulk produce",2 kg,"melon|melons, squash & bulk produce|watermelon"
+PRO-MEL-003,Organic Roots Butternut Squash 2 kg,Organic Roots,"Melons, squash & bulk produce",2 kg,"butternut squash|melons, squash & bulk produce|squash"
+PRO-MEL-004,Harvest Butternut Squash 1 piece,Harvest,"Melons, squash & bulk produce",1 piece,"butternut squash|melons, squash & bulk produce|squash"
+PRO-MEL-005,Harvest Cantaloupe 1 piece,Harvest,"Melons, squash & bulk produce",1 piece,"cantaloupe|melon|melons, squash & bulk produce"
+PRO-MEL-006,Fresh Farms Cantaloupe 2 kg,Fresh Farms,"Melons, squash & bulk produce",2 kg,"cantaloupe|melon|melons, squash & bulk produce"
+PRO-MEL-007,Fresh Farms Pumpkin 2 kg,Fresh Farms,"Melons, squash & bulk produce",2 kg,"melons, squash & bulk produce|pumpkin"
+PRO-MEL-008,Organic Roots Pumpkin 1 piece,Organic Roots,"Melons, squash & bulk produce",1 piece,"melons, squash & bulk produce|pumpkin"
+BAK-TOR-001,Daily Bake Flour Tortillas 6 pack,Daily Bake,"Tortillas, flatbreads & naan",6 pack,"flour tortillas|tortillas, flatbreads & naan|wraps"
+BAK-TOR-002,Golden Crust Flour Tortillas 10 pack,Golden Crust,"Tortillas, flatbreads & naan",10 pack,"flour tortillas|tortillas, flatbreads & naan|wraps"
+BAK-TOR-003,Golden Crust Garlic Naan 10 pack,Golden Crust,"Tortillas, flatbreads & naan",10 pack,"garlic naan|naan|tortillas, flatbreads & naan"
+BAK-TOR-004,Store Brand Garlic Naan 6 pack,Store Brand,"Tortillas, flatbreads & naan",6 pack,"garlic naan|naan|tortillas, flatbreads & naan"
+BAK-TOR-005,Store Brand Pita Bread 6 pack,Store Brand,"Tortillas, flatbreads & naan",6 pack,"flatbread|pita|pita bread|tortillas, flatbreads & naan"
+BAK-TOR-006,Daily Bake Pita Bread 10 pack,Daily Bake,"Tortillas, flatbreads & naan",10 pack,"flatbread|pita|pita bread|tortillas, flatbreads & naan"
+BAK-TOR-007,Daily Bake Whole Wheat Wraps 10 pack,Daily Bake,"Tortillas, flatbreads & naan",10 pack,"tortillas, flatbreads & naan|whole wheat wraps|wraps"
+BAK-TOR-008,Golden Crust Whole Wheat Wraps 6 pack,Golden Crust,"Tortillas, flatbreads & naan",6 pack,"tortillas, flatbreads & naan|whole wheat wraps|wraps"
+BAK-BAG-001,Daily Bake White Sandwich Bread 400 g,Daily Bake,Bagged loaves & sandwich bread,400 g,bagged loaves & sandwich bread|bread|white sandwich bread
+BAK-BAG-002,Golden Crust White Sandwich Bread 800 g,Golden Crust,Bagged loaves & sandwich bread,800 g,bagged loaves & sandwich bread|bread|white sandwich bread
+BAK-BAG-003,Golden Crust Whole Wheat Bread 800 g,Golden Crust,Bagged loaves & sandwich bread,800 g,bagged loaves & sandwich bread|bread|brown bread|whole wheat bread
+BAK-BAG-004,Store Brand Whole Wheat Bread 400 g,Store Brand,Bagged loaves & sandwich bread,400 g,bagged loaves & sandwich bread|bread|brown bread|whole wheat bread
+BAK-BAG-005,Store Brand Multigrain Bread 400 g,Store Brand,Bagged loaves & sandwich bread,400 g,bagged loaves & sandwich bread|bread|multigrain bread
+BAK-BAG-006,Daily Bake Multigrain Bread 800 g,Daily Bake,Bagged loaves & sandwich bread,800 g,bagged loaves & sandwich bread|bread|multigrain bread
+BAK-BAG-007,Daily Bake Sourdough Loaf 800 g,Daily Bake,Bagged loaves & sandwich bread,800 g,bagged loaves & sandwich bread|bread|sourdough loaf
+BAK-BAG-008,Golden Crust Sourdough Loaf 400 g,Golden Crust,Bagged loaves & sandwich bread,400 g,bagged loaves & sandwich bread|bread|sourdough loaf
+BAK-BAG-009,Daily Bake Plain Bagels 4 pack,Daily Bake,"Bagels, buns & croissants",4 pack,"bagel|bagels, buns & croissants|plain bagels"
+BAK-BAG-010,Golden Crust Plain Bagels 6 pack,Golden Crust,"Bagels, buns & croissants",6 pack,"bagel|bagels, buns & croissants|plain bagels"
+BAK-BAG-011,Golden Crust Hamburger Buns 6 pack,Golden Crust,"Bagels, buns & croissants",6 pack,"bagels, buns & croissants|buns|hamburger buns"
+BAK-BAG-012,Store Brand Hamburger Buns 4 pack,Store Brand,"Bagels, buns & croissants",4 pack,"bagels, buns & croissants|buns|hamburger buns"
+BAK-BAG-013,Store Brand Hot Dog Rolls 4 pack,Store Brand,"Bagels, buns & croissants",4 pack,"bagels, buns & croissants|buns|hot dog rolls|rolls"
+BAK-BAG-014,Daily Bake Hot Dog Rolls 6 pack,Daily Bake,"Bagels, buns & croissants",6 pack,"bagels, buns & croissants|buns|hot dog rolls|rolls"
+BAK-BAG-015,Daily Bake Butter Croissants 6 pack,Daily Bake,"Bagels, buns & croissants",6 pack,"bagels, buns & croissants|butter croissants|croissant"
+BAK-BAG-016,Golden Crust Butter Croissants 4 pack,Golden Crust,"Bagels, buns & croissants",4 pack,"bagels, buns & croissants|butter croissants|croissant"
+BAK-ART-001,Daily Bake French Baguette 1 piece,Daily Bake,"Artisan breads, baguettes & rolls",1 piece,"artisan breads, baguettes & rolls|baguette|french baguette"
+BAK-ART-002,Golden Crust French Baguette 6 pack,Golden Crust,"Artisan breads, baguettes & rolls",6 pack,"artisan breads, baguettes & rolls|baguette|french baguette"
+BAK-ART-003,Golden Crust Ciabatta Rolls 6 pack,Golden Crust,"Artisan breads, baguettes & rolls",6 pack,"artisan breads, baguettes & rolls|ciabatta rolls|rolls"
+BAK-ART-004,Store Brand Ciabatta Rolls 1 piece,Store Brand,"Artisan breads, baguettes & rolls",1 piece,"artisan breads, baguettes & rolls|ciabatta rolls|rolls"
+BAK-ART-005,Store Brand Rye Loaf 1 piece,Store Brand,"Artisan breads, baguettes & rolls",1 piece,"artisan breads, baguettes & rolls|bread|rye loaf"
+BAK-ART-006,Daily Bake Rye Loaf 6 pack,Daily Bake,"Artisan breads, baguettes & rolls",6 pack,"artisan breads, baguettes & rolls|bread|rye loaf"
+BAK-ART-007,Daily Bake Dinner Rolls 6 pack,Daily Bake,"Artisan breads, baguettes & rolls",6 pack,"artisan breads, baguettes & rolls|dinner rolls|rolls"
+BAK-ART-008,Golden Crust Dinner Rolls 1 piece,Golden Crust,"Artisan breads, baguettes & rolls",1 piece,"artisan breads, baguettes & rolls|dinner rolls|rolls"
+BAK-MUF-001,Daily Bake Blueberry Muffins 4 pack,Daily Bake,"Muffins, donuts & cookies",4 pack,"blueberry muffins|muffin|muffins, donuts & cookies"
+BAK-MUF-002,Golden Crust Blueberry Muffins 6 pack,Golden Crust,"Muffins, donuts & cookies",6 pack,"blueberry muffins|muffin|muffins, donuts & cookies"
+BAK-MUF-003,Golden Crust Glazed Donuts 6 pack,Golden Crust,"Muffins, donuts & cookies",6 pack,"donut|doughnut|glazed donuts|muffins, donuts & cookies"
+BAK-MUF-004,Store Brand Glazed Donuts 4 pack,Store Brand,"Muffins, donuts & cookies",4 pack,"donut|doughnut|glazed donuts|muffins, donuts & cookies"
+BAK-MUF-005,Store Brand Chocolate Chip Cookies 4 pack,Store Brand,"Muffins, donuts & cookies",4 pack,"chocolate chip cookies|cookies|muffins, donuts & cookies"
+BAK-MUF-006,Daily Bake Chocolate Chip Cookies 6 pack,Daily Bake,"Muffins, donuts & cookies",6 pack,"chocolate chip cookies|cookies|muffins, donuts & cookies"
+BAK-MUF-007,Daily Bake Banana Muffins 6 pack,Daily Bake,"Muffins, donuts & cookies",6 pack,"banana muffins|muffin|muffins, donuts & cookies"
+BAK-MUF-008,Golden Crust Banana Muffins 4 pack,Golden Crust,"Muffins, donuts & cookies",4 pack,"banana muffins|muffin|muffins, donuts & cookies"
+BAK-FRE-001,Daily Bake Cinnamon Rolls 2 pack,Daily Bake,"Fresh pastries, danishes & croissants",2 pack,"cinnamon rolls|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-002,Golden Crust Cinnamon Rolls 4 pack,Golden Crust,"Fresh pastries, danishes & croissants",4 pack,"cinnamon rolls|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-003,Golden Crust Almond Danish 4 pack,Golden Crust,"Fresh pastries, danishes & croissants",4 pack,"almond danish|danish|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-004,Store Brand Almond Danish 2 pack,Store Brand,"Fresh pastries, danishes & croissants",2 pack,"almond danish|danish|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-005,Store Brand Apple Turnovers 2 pack,Store Brand,"Fresh pastries, danishes & croissants",2 pack,"apple turnovers|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-006,Daily Bake Apple Turnovers 4 pack,Daily Bake,"Fresh pastries, danishes & croissants",4 pack,"apple turnovers|fresh pastries, danishes & croissants|pastry"
+BAK-FRE-007,Daily Bake Pain au Chocolat 4 pack,Daily Bake,"Fresh pastries, danishes & croissants",4 pack,"fresh pastries, danishes & croissants|pain au chocolat|pastry"
+BAK-FRE-008,Golden Crust Pain au Chocolat 2 pack,Golden Crust,"Fresh pastries, danishes & croissants",2 pack,"fresh pastries, danishes & croissants|pain au chocolat|pastry"
+BAK-PIE-001,Daily Bake Apple Pie 1 slice,Daily Bake,"Pies, tarts & sliced cakes",1 slice,"apple pie|pie|pies, tarts & sliced cakes"
+BAK-PIE-002,Golden Crust Apple Pie 1 whole,Golden Crust,"Pies, tarts & sliced cakes",1 whole,"apple pie|pie|pies, tarts & sliced cakes"
+BAK-PIE-003,Golden Crust Fruit Tart 1 whole,Golden Crust,"Pies, tarts & sliced cakes",1 whole,"fruit tart|pies, tarts & sliced cakes|tart"
+BAK-PIE-004,Store Brand Fruit Tart 1 slice,Store Brand,"Pies, tarts & sliced cakes",1 slice,"fruit tart|pies, tarts & sliced cakes|tart"
+BAK-PIE-005,Store Brand Carrot Cake Slice 1 slice,Store Brand,"Pies, tarts & sliced cakes",1 slice,"cake|carrot cake slice|pies, tarts & sliced cakes"
+BAK-PIE-006,Daily Bake Carrot Cake Slice 1 whole,Daily Bake,"Pies, tarts & sliced cakes",1 whole,"cake|carrot cake slice|pies, tarts & sliced cakes"
+BAK-PIE-007,Daily Bake Cheesecake Slice 1 whole,Daily Bake,"Pies, tarts & sliced cakes",1 whole,"cake|cheesecake slice|pies, tarts & sliced cakes"
+BAK-PIE-008,Golden Crust Cheesecake Slice 1 slice,Golden Crust,"Pies, tarts & sliced cakes",1 slice,"cake|cheesecake slice|pies, tarts & sliced cakes"
+BAK-CEL-001,Daily Bake Chocolate Birthday Cake 8 inch,Daily Bake,Celebration cakes & large pastries,8 inch,birthday cake|cake|celebration cakes & large pastries|chocolate birthday cake
+BAK-CEL-002,Golden Crust Chocolate Birthday Cake 10 inch,Golden Crust,Celebration cakes & large pastries,10 inch,birthday cake|cake|celebration cakes & large pastries|chocolate birthday cake
+BAK-CEL-003,Golden Crust Vanilla Celebration Cake 10 inch,Golden Crust,Celebration cakes & large pastries,10 inch,cake|celebration cakes & large pastries|vanilla celebration cake
+BAK-CEL-004,Store Brand Vanilla Celebration Cake 8 inch,Store Brand,Celebration cakes & large pastries,8 inch,cake|celebration cakes & large pastries|vanilla celebration cake
+BAK-CEL-005,Store Brand Fruit Cake 8 inch,Store Brand,Celebration cakes & large pastries,8 inch,cake|celebration cakes & large pastries|fruit cake
+BAK-CEL-006,Daily Bake Fruit Cake 10 inch,Daily Bake,Celebration cakes & large pastries,10 inch,cake|celebration cakes & large pastries|fruit cake
+BAK-CEL-007,Daily Bake Large Danish Ring 10 inch,Daily Bake,Celebration cakes & large pastries,10 inch,celebration cakes & large pastries|large danish ring|pastry
+BAK-CEL-008,Golden Crust Large Danish Ring 8 inch,Golden Crust,Celebration cakes & large pastries,8 inch,celebration cakes & large pastries|large danish ring|pastry
+DEL-BAC-001,Prime Cuts Smoked Bacon 250 g,Prime Cuts,"Bacon, sausage & breakfast meats",250 g,"bacon|bacon, sausage & breakfast meats|smoked bacon"
+DEL-BAC-002,Farm Fresh Smoked Bacon 500 g,Farm Fresh,"Bacon, sausage & breakfast meats",500 g,"bacon|bacon, sausage & breakfast meats|smoked bacon"
+DEL-BAC-003,Farm Fresh Pork Sausages 500 g,Farm Fresh,"Bacon, sausage & breakfast meats",500 g,"bacon, sausage & breakfast meats|pork sausages|sausage"
+DEL-BAC-004,Store Brand Pork Sausages 250 g,Store Brand,"Bacon, sausage & breakfast meats",250 g,"bacon, sausage & breakfast meats|pork sausages|sausage"
+DEL-BAC-005,Store Brand Chicken Sausages 250 g,Store Brand,"Bacon, sausage & breakfast meats",250 g,"bacon, sausage & breakfast meats|chicken sausages|sausage"
+DEL-BAC-006,Prime Cuts Chicken Sausages 500 g,Prime Cuts,"Bacon, sausage & breakfast meats",500 g,"bacon, sausage & breakfast meats|chicken sausages|sausage"
+DEL-BAC-007,Prime Cuts Breakfast Ham 500 g,Prime Cuts,"Bacon, sausage & breakfast meats",500 g,"bacon, sausage & breakfast meats|breakfast ham|ham"
+DEL-BAC-008,Farm Fresh Breakfast Ham 250 g,Farm Fresh,"Bacon, sausage & breakfast meats",250 g,"bacon, sausage & breakfast meats|breakfast ham|ham"
+DEL-FRE-001,Prime Cuts Chicken Breast 500 g,Prime Cuts,Fresh poultry,500 g,chicken|chicken breast|fresh poultry
+DEL-FRE-002,Farm Fresh Chicken Breast 1 kg,Farm Fresh,Fresh poultry,1 kg,chicken|chicken breast|fresh poultry
+DEL-FRE-003,Farm Fresh Chicken Thighs 1 kg,Farm Fresh,Fresh poultry,1 kg,chicken|chicken thighs|fresh poultry
+DEL-FRE-004,Store Brand Chicken Thighs 500 g,Store Brand,Fresh poultry,500 g,chicken|chicken thighs|fresh poultry
+DEL-FRE-005,Store Brand Whole Chicken 500 g,Store Brand,Fresh poultry,500 g,chicken|fresh poultry|whole chicken
+DEL-FRE-006,Prime Cuts Whole Chicken 1 kg,Prime Cuts,Fresh poultry,1 kg,chicken|fresh poultry|whole chicken
+DEL-FRE-007,Prime Cuts Turkey Mince 1 kg,Prime Cuts,Fresh poultry,1 kg,fresh poultry|turkey|turkey mince
+DEL-FRE-008,Farm Fresh Turkey Mince 500 g,Farm Fresh,Fresh poultry,500 g,fresh poultry|turkey|turkey mince
+DEL-FRE-009,Prime Cuts Beef Steak 500 g,Prime Cuts,Fresh beef & pork,500 g,beef|beef steak|fresh beef & pork|steak
+DEL-FRE-010,Farm Fresh Beef Steak 1 kg,Farm Fresh,Fresh beef & pork,1 kg,beef|beef steak|fresh beef & pork|steak
+DEL-FRE-011,Farm Fresh Minced Beef 1 kg,Farm Fresh,Fresh beef & pork,1 kg,beef|fresh beef & pork|mince|minced beef
+DEL-FRE-012,Store Brand Minced Beef 500 g,Store Brand,Fresh beef & pork,500 g,beef|fresh beef & pork|mince|minced beef
+DEL-FRE-013,Store Brand Pork Chops 500 g,Store Brand,Fresh beef & pork,500 g,fresh beef & pork|pork|pork chops
+DEL-FRE-014,Prime Cuts Pork Chops 1 kg,Prime Cuts,Fresh beef & pork,1 kg,fresh beef & pork|pork|pork chops
+DEL-FRE-015,Prime Cuts Pork Roast 1 kg,Prime Cuts,Fresh beef & pork,1 kg,fresh beef & pork|pork|pork roast
+DEL-FRE-016,Farm Fresh Pork Roast 500 g,Farm Fresh,Fresh beef & pork,500 g,fresh beef & pork|pork|pork roast
+DEL-BUL-001,Prime Cuts Smoked Ham 1 kg,Prime Cuts,Bulk & smoked meats,1 kg,bulk & smoked meats|ham|smoked ham
+DEL-BUL-002,Farm Fresh Smoked Ham 2 kg,Farm Fresh,Bulk & smoked meats,2 kg,bulk & smoked meats|ham|smoked ham
+DEL-BUL-003,Farm Fresh Family Value Pack Mince 2 kg,Farm Fresh,Bulk & smoked meats,2 kg,bulk & smoked meats|family value pack mince|mince
+DEL-BUL-004,Store Brand Family Value Pack Mince 1 kg,Store Brand,Bulk & smoked meats,1 kg,bulk & smoked meats|family value pack mince|mince
+DEL-BUL-005,Store Brand Roast Gammon 1 kg,Store Brand,Bulk & smoked meats,1 kg,bulk & smoked meats|ham|roast gammon
+DEL-BUL-006,Prime Cuts Roast Gammon 2 kg,Prime Cuts,Bulk & smoked meats,2 kg,bulk & smoked meats|ham|roast gammon
+DEL-BUL-007,Prime Cuts Beef Brisket 2 kg,Prime Cuts,Bulk & smoked meats,2 kg,beef brisket|brisket|bulk & smoked meats
+DEL-BUL-008,Farm Fresh Beef Brisket 1 kg,Farm Fresh,Bulk & smoked meats,1 kg,beef brisket|brisket|bulk & smoked meats
+DEL-PRE-001,Prime Cuts Sliced Turkey 100 g,Prime Cuts,Pre-packaged deli meats & snack packs,100 g,cold cut|deli|pre-packaged deli meats & snack packs|sliced turkey
+DEL-PRE-002,Farm Fresh Sliced Turkey 200 g,Farm Fresh,Pre-packaged deli meats & snack packs,200 g,cold cut|deli|pre-packaged deli meats & snack packs|sliced turkey
+DEL-PRE-003,Farm Fresh Sliced Salami 200 g,Farm Fresh,Pre-packaged deli meats & snack packs,200 g,pre-packaged deli meats & snack packs|salami|sliced salami
+DEL-PRE-004,Store Brand Sliced Salami 100 g,Store Brand,Pre-packaged deli meats & snack packs,100 g,pre-packaged deli meats & snack packs|salami|sliced salami
+DEL-PRE-005,Store Brand Ham Snack Pack 100 g,Store Brand,Pre-packaged deli meats & snack packs,100 g,ham snack pack|pre-packaged deli meats & snack packs|snack
+DEL-PRE-006,Prime Cuts Ham Snack Pack 200 g,Prime Cuts,Pre-packaged deli meats & snack packs,200 g,ham snack pack|pre-packaged deli meats & snack packs|snack
+DEL-PRE-007,Prime Cuts Chicken Roll 200 g,Prime Cuts,Pre-packaged deli meats & snack packs,200 g,chicken roll|deli|pre-packaged deli meats & snack packs
+DEL-PRE-008,Farm Fresh Chicken Roll 100 g,Farm Fresh,Pre-packaged deli meats & snack packs,100 g,chicken roll|deli|pre-packaged deli meats & snack packs
+DEL-SER-001,Prime Cuts Cheddar Wedge 200 g,Prime Cuts,Service cheeses & charcuterie,200 g,cheddar wedge|cheese|service cheeses & charcuterie
+DEL-SER-002,Farm Fresh Cheddar Wedge 400 g,Farm Fresh,Service cheeses & charcuterie,400 g,cheddar wedge|cheese|service cheeses & charcuterie
+DEL-SER-003,Farm Fresh Gouda Wheel 400 g,Farm Fresh,Service cheeses & charcuterie,400 g,cheese|gouda wheel|service cheeses & charcuterie
+DEL-SER-004,Store Brand Gouda Wheel 200 g,Store Brand,Service cheeses & charcuterie,200 g,cheese|gouda wheel|service cheeses & charcuterie
+DEL-SER-005,Store Brand Prosciutto 200 g,Store Brand,Service cheeses & charcuterie,200 g,ham|prosciutto|service cheeses & charcuterie
+DEL-SER-006,Prime Cuts Prosciutto 400 g,Prime Cuts,Service cheeses & charcuterie,400 g,ham|prosciutto|service cheeses & charcuterie
+DEL-SER-007,Prime Cuts Chorizo Sausage 400 g,Prime Cuts,Service cheeses & charcuterie,400 g,chorizo|chorizo sausage|service cheeses & charcuterie
+DEL-SER-008,Farm Fresh Chorizo Sausage 200 g,Farm Fresh,Service cheeses & charcuterie,200 g,chorizo|chorizo sausage|service cheeses & charcuterie
+DEL-SER-009,Prime Cuts Honey Ham 200 g,Prime Cuts,Service deli meats,200 g,ham|honey ham|service deli meats
+DEL-SER-010,Farm Fresh Honey Ham 400 g,Farm Fresh,Service deli meats,400 g,ham|honey ham|service deli meats
+DEL-SER-011,Farm Fresh Roast Turkey Breast 400 g,Farm Fresh,Service deli meats,400 g,roast turkey breast|service deli meats|turkey
+DEL-SER-012,Store Brand Roast Turkey Breast 200 g,Store Brand,Service deli meats,200 g,roast turkey breast|service deli meats|turkey
+DEL-SER-013,Store Brand Roast Beef 200 g,Store Brand,Service deli meats,200 g,beef|roast beef|service deli meats
+DEL-SER-014,Prime Cuts Roast Beef 400 g,Prime Cuts,Service deli meats,400 g,beef|roast beef|service deli meats
+DEL-SER-015,Prime Cuts Pastrami 400 g,Prime Cuts,Service deli meats,400 g,pastrami|service deli meats
+DEL-SER-016,Farm Fresh Pastrami 200 g,Farm Fresh,Service deli meats,200 g,pastrami|service deli meats
+DEL-PRE-009,Prime Cuts Coleslaw 250 g,Prime Cuts,Prepared salads & sides,250 g,coleslaw|prepared salads & sides|slaw
+DEL-PRE-010,Farm Fresh Coleslaw 500 g,Farm Fresh,Prepared salads & sides,500 g,coleslaw|prepared salads & sides|slaw
+DEL-PRE-011,Farm Fresh Potato Salad 500 g,Farm Fresh,Prepared salads & sides,500 g,potato salad|prepared salads & sides|salad
+DEL-PRE-012,Store Brand Potato Salad 250 g,Store Brand,Prepared salads & sides,250 g,potato salad|prepared salads & sides|salad
+DEL-PRE-013,Store Brand Pasta Salad 250 g,Store Brand,Prepared salads & sides,250 g,pasta salad|prepared salads & sides|salad
+DEL-PRE-014,Prime Cuts Pasta Salad 500 g,Prime Cuts,Prepared salads & sides,500 g,pasta salad|prepared salads & sides|salad
+DEL-PRE-015,Prime Cuts Hummus 500 g,Prime Cuts,Prepared salads & sides,500 g,chickpea|dip|hummus|prepared salads & sides
+DEL-PRE-016,Farm Fresh Hummus 250 g,Farm Fresh,Prepared salads & sides,250 g,chickpea|dip|hummus|prepared salads & sides
+DAI-BUT-001,Meadow Fresh Salted Butter 250 g,Meadow Fresh,"Butter, spreads & cream cheese",250 g,"butter|butter, spreads & cream cheese|salted butter"
+DAI-BUT-002,Store Brand Salted Butter 500 g,Store Brand,"Butter, spreads & cream cheese",500 g,"butter|butter, spreads & cream cheese|salted butter"
+DAI-BUT-003,Store Brand Margarine Spread 500 g,Store Brand,"Butter, spreads & cream cheese",500 g,"butter, spreads & cream cheese|margarine|margarine spread"
+DAI-BUT-004,Arctic Treat Margarine Spread 250 g,Arctic Treat,"Butter, spreads & cream cheese",250 g,"butter, spreads & cream cheese|margarine|margarine spread"
+DAI-BUT-005,Arctic Treat Cream Cheese 250 g,Arctic Treat,"Butter, spreads & cream cheese",250 g,"butter, spreads & cream cheese|cream cheese"
+DAI-BUT-006,Meadow Fresh Cream Cheese 500 g,Meadow Fresh,"Butter, spreads & cream cheese",500 g,"butter, spreads & cream cheese|cream cheese"
+DAI-BUT-007,Meadow Fresh Garlic Butter 500 g,Meadow Fresh,"Butter, spreads & cream cheese",500 g,"butter|butter, spreads & cream cheese|garlic butter"
+DAI-BUT-008,Store Brand Garlic Butter 250 g,Store Brand,"Butter, spreads & cream cheese",250 g,"butter|butter, spreads & cream cheese|garlic butter"
+DAI-YOG-001,Meadow Fresh Greek Yogurt 150 g,Meadow Fresh,Yogurt & desserts,150 g,greek yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-002,Store Brand Greek Yogurt 500 g,Store Brand,Yogurt & desserts,500 g,greek yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-003,Store Brand Strawberry Yogurt 500 g,Store Brand,Yogurt & desserts,500 g,strawberry yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-004,Arctic Treat Strawberry Yogurt 150 g,Arctic Treat,Yogurt & desserts,150 g,strawberry yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-005,Arctic Treat Vanilla Yogurt 150 g,Arctic Treat,Yogurt & desserts,150 g,vanilla yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-006,Meadow Fresh Vanilla Yogurt 500 g,Meadow Fresh,Yogurt & desserts,500 g,vanilla yogurt|yoghurt|yogurt|yogurt & desserts
+DAI-YOG-007,Meadow Fresh Chocolate Pudding 500 g,Meadow Fresh,Yogurt & desserts,500 g,chocolate pudding|dessert|yogurt & desserts
+DAI-YOG-008,Store Brand Chocolate Pudding 150 g,Store Brand,Yogurt & desserts,150 g,chocolate pudding|dessert|yogurt & desserts
+DAI-PAC-001,Meadow Fresh Shredded Cheddar 200 g,Meadow Fresh,Packaged cheese & slices,200 g,cheese|packaged cheese & slices|shredded cheddar
+DAI-PAC-002,Store Brand Shredded Cheddar 400 g,Store Brand,Packaged cheese & slices,400 g,cheese|packaged cheese & slices|shredded cheddar
+DAI-PAC-003,Store Brand Cheese Slices 400 g,Store Brand,Packaged cheese & slices,400 g,cheese|cheese slices|packaged cheese & slices
+DAI-PAC-004,Arctic Treat Cheese Slices 200 g,Arctic Treat,Packaged cheese & slices,200 g,cheese|cheese slices|packaged cheese & slices
+DAI-PAC-005,Arctic Treat Mozzarella 200 g,Arctic Treat,Packaged cheese & slices,200 g,cheese|mozzarella|packaged cheese & slices
+DAI-PAC-006,Meadow Fresh Mozzarella 400 g,Meadow Fresh,Packaged cheese & slices,400 g,cheese|mozzarella|packaged cheese & slices
+DAI-PAC-007,Meadow Fresh Parmesan Wedge 400 g,Meadow Fresh,Packaged cheese & slices,400 g,cheese|packaged cheese & slices|parmesan wedge
+DAI-PAC-008,Store Brand Parmesan Wedge 200 g,Store Brand,Packaged cheese & slices,200 g,cheese|packaged cheese & slices|parmesan wedge
+DAI-CRE-001,Meadow Fresh Coffee Creamer 500 ml,Meadow Fresh,Creamers & juices,500 ml,coffee creamer|creamer|creamers & juices
+DAI-CRE-002,Store Brand Coffee Creamer 1 L,Store Brand,Creamers & juices,1 L,coffee creamer|creamer|creamers & juices
+DAI-CRE-003,Store Brand Orange Juice Chilled 1 L,Store Brand,Creamers & juices,1 L,creamers & juices|juice|orange juice chilled
+DAI-CRE-004,Arctic Treat Orange Juice Chilled 500 ml,Arctic Treat,Creamers & juices,500 ml,creamers & juices|juice|orange juice chilled
+DAI-CRE-005,Arctic Treat Apple Juice Chilled 500 ml,Arctic Treat,Creamers & juices,500 ml,apple juice chilled|creamers & juices|juice
+DAI-CRE-006,Meadow Fresh Apple Juice Chilled 1 L,Meadow Fresh,Creamers & juices,1 L,apple juice chilled|creamers & juices|juice
+DAI-CRE-007,Meadow Fresh Single Cream 1 L,Meadow Fresh,Creamers & juices,1 L,cream|creamers & juices|single cream
+DAI-CRE-008,Store Brand Single Cream 500 ml,Store Brand,Creamers & juices,500 ml,cream|creamers & juices|single cream
+DAI-MIL-001,Meadow Fresh Whole Milk 1 L,Meadow Fresh,Milk & plant-based beverages,1 L,milk|milk & plant-based beverages|whole milk
+DAI-MIL-002,Store Brand Whole Milk 2 L,Store Brand,Milk & plant-based beverages,2 L,milk|milk & plant-based beverages|whole milk
+DAI-MIL-003,Store Brand Semi Skimmed Milk 2 L,Store Brand,Milk & plant-based beverages,2 L,milk|milk & plant-based beverages|semi skimmed milk
+DAI-MIL-004,Arctic Treat Semi Skimmed Milk 1 L,Arctic Treat,Milk & plant-based beverages,1 L,milk|milk & plant-based beverages|semi skimmed milk
+DAI-MIL-005,Arctic Treat Oat Milk 1 L,Arctic Treat,Milk & plant-based beverages,1 L,milk & plant-based beverages|oat drink|oat milk|plant milk
+DAI-MIL-006,Meadow Fresh Oat Milk 2 L,Meadow Fresh,Milk & plant-based beverages,2 L,milk & plant-based beverages|oat drink|oat milk|plant milk
+DAI-MIL-007,Meadow Fresh Almond Milk 2 L,Meadow Fresh,Milk & plant-based beverages,2 L,almond milk|milk & plant-based beverages|plant milk
+DAI-MIL-008,Store Brand Almond Milk 1 L,Store Brand,Milk & plant-based beverages,1 L,almond milk|milk & plant-based beverages|plant milk
+DAI-ICE-001,Meadow Fresh Vanilla Ice Cream 500 ml,Meadow Fresh,Ice cream & frozen desserts,500 ml,ice cream|ice cream & frozen desserts|vanilla ice cream
+DAI-ICE-002,Store Brand Vanilla Ice Cream 1 L,Store Brand,Ice cream & frozen desserts,1 L,ice cream|ice cream & frozen desserts|vanilla ice cream
+DAI-ICE-003,Store Brand Chocolate Ice Cream 1 L,Store Brand,Ice cream & frozen desserts,1 L,chocolate ice cream|ice cream|ice cream & frozen desserts
+DAI-ICE-004,Arctic Treat Chocolate Ice Cream 500 ml,Arctic Treat,Ice cream & frozen desserts,500 ml,chocolate ice cream|ice cream|ice cream & frozen desserts
+DAI-ICE-005,Arctic Treat Strawberry Ice Cream 500 ml,Arctic Treat,Ice cream & frozen desserts,500 ml,ice cream|ice cream & frozen desserts|strawberry ice cream
+DAI-ICE-006,Meadow Fresh Strawberry Ice Cream 1 L,Meadow Fresh,Ice cream & frozen desserts,1 L,ice cream|ice cream & frozen desserts|strawberry ice cream
+DAI-ICE-007,Meadow Fresh Ice Lollies 1 L,Meadow Fresh,Ice cream & frozen desserts,1 L,ice cream & frozen desserts|ice lollies|popsicle
+DAI-ICE-008,Store Brand Ice Lollies 500 ml,Store Brand,Ice cream & frozen desserts,500 ml,ice cream & frozen desserts|ice lollies|popsicle
+DAI-FRO-001,Meadow Fresh Waffles 300 g,Meadow Fresh,Frozen breakfast & snacks,300 g,frozen breakfast & snacks|waffle|waffles
+DAI-FRO-002,Store Brand Waffles 600 g,Store Brand,Frozen breakfast & snacks,600 g,frozen breakfast & snacks|waffle|waffles
+DAI-FRO-003,Store Brand Hash Browns 600 g,Store Brand,Frozen breakfast & snacks,600 g,frozen breakfast & snacks|hash brown|hash browns
+DAI-FRO-004,Arctic Treat Hash Browns 300 g,Arctic Treat,Frozen breakfast & snacks,300 g,frozen breakfast & snacks|hash brown|hash browns
+DAI-FRO-005,Arctic Treat Breakfast Sandwiches 300 g,Arctic Treat,Frozen breakfast & snacks,300 g,breakfast sandwiches|frozen breakfast & snacks|sandwich
+DAI-FRO-006,Meadow Fresh Breakfast Sandwiches 600 g,Meadow Fresh,Frozen breakfast & snacks,600 g,breakfast sandwiches|frozen breakfast & snacks|sandwich
+DAI-FRO-007,Meadow Fresh Chicken Nuggets 600 g,Meadow Fresh,Frozen breakfast & snacks,600 g,chicken nuggets|frozen breakfast & snacks|nuggets
+DAI-FRO-008,Store Brand Chicken Nuggets 300 g,Store Brand,Frozen breakfast & snacks,300 g,chicken nuggets|frozen breakfast & snacks|nuggets
+DAI-FRO-009,Meadow Fresh Lasagne 400 g,Meadow Fresh,Frozen entrées & meals,400 g,frozen entrées & meals|lasagne|ready meal
+DAI-FRO-010,Store Brand Lasagne 800 g,Store Brand,Frozen entrées & meals,800 g,frozen entrées & meals|lasagne|ready meal
+DAI-FRO-011,Store Brand Chicken Curry 800 g,Store Brand,Frozen entrées & meals,800 g,chicken curry|frozen entrées & meals|ready meal
+DAI-FRO-012,Arctic Treat Chicken Curry 400 g,Arctic Treat,Frozen entrées & meals,400 g,chicken curry|frozen entrées & meals|ready meal
+DAI-FRO-013,Arctic Treat Veggie Burritos 400 g,Arctic Treat,Frozen entrées & meals,400 g,burrito|frozen entrées & meals|veggie burritos
+DAI-FRO-014,Meadow Fresh Veggie Burritos 800 g,Meadow Fresh,Frozen entrées & meals,800 g,burrito|frozen entrées & meals|veggie burritos
+DAI-FRO-015,Meadow Fresh Fish Pie 800 g,Meadow Fresh,Frozen entrées & meals,800 g,fish pie|frozen entrées & meals|ready meal
+DAI-FRO-016,Store Brand Fish Pie 400 g,Store Brand,Frozen entrées & meals,400 g,fish pie|frozen entrées & meals|ready meal
+DAI-FRO-017,Meadow Fresh Frozen Peas 500 g,Meadow Fresh,Frozen vegetables & fruits,500 g,frozen peas|frozen vegetables & fruits|peas
+DAI-FRO-018,Store Brand Frozen Peas 1 kg,Store Brand,Frozen vegetables & fruits,1 kg,frozen peas|frozen vegetables & fruits|peas
+DAI-FRO-019,Store Brand Mixed Vegetables 1 kg,Store Brand,Frozen vegetables & fruits,1 kg,frozen vegetables & fruits|mixed vegetables|veg
+DAI-FRO-020,Arctic Treat Mixed Vegetables 500 g,Arctic Treat,Frozen vegetables & fruits,500 g,frozen vegetables & fruits|mixed vegetables|veg
+DAI-FRO-021,Arctic Treat Frozen Berries 500 g,Arctic Treat,Frozen vegetables & fruits,500 g,berries|frozen berries|frozen vegetables & fruits
+DAI-FRO-022,Meadow Fresh Frozen Berries 1 kg,Meadow Fresh,Frozen vegetables & fruits,1 kg,berries|frozen berries|frozen vegetables & fruits
+DAI-FRO-023,Meadow Fresh Sweetcorn 1 kg,Meadow Fresh,Frozen vegetables & fruits,1 kg,corn|frozen vegetables & fruits|sweetcorn
+DAI-FRO-024,Store Brand Sweetcorn 500 g,Store Brand,Frozen vegetables & fruits,500 g,corn|frozen vegetables & fruits|sweetcorn
+DAI-FRO-025,Meadow Fresh Margherita Pizza 500 g,Meadow Fresh,Frozen pizza & bulk bags,500 g,frozen pizza & bulk bags|margherita pizza|pizza
+DAI-FRO-026,Store Brand Margherita Pizza 1 kg,Store Brand,Frozen pizza & bulk bags,1 kg,frozen pizza & bulk bags|margherita pizza|pizza
+DAI-FRO-027,Store Brand Pepperoni Pizza 1 kg,Store Brand,Frozen pizza & bulk bags,1 kg,frozen pizza & bulk bags|pepperoni pizza|pizza
+DAI-FRO-028,Arctic Treat Pepperoni Pizza 500 g,Arctic Treat,Frozen pizza & bulk bags,500 g,frozen pizza & bulk bags|pepperoni pizza|pizza
+DAI-FRO-029,Arctic Treat French Fries 500 g,Arctic Treat,Frozen pizza & bulk bags,500 g,chips|french fries|fries|frozen pizza & bulk bags
+DAI-FRO-030,Meadow Fresh French Fries 1 kg,Meadow Fresh,Frozen pizza & bulk bags,1 kg,chips|french fries|fries|frozen pizza & bulk bags
+DAI-FRO-031,Meadow Fresh Potato Wedges 1 kg,Meadow Fresh,Frozen pizza & bulk bags,1 kg,frozen pizza & bulk bags|potato wedges|wedges
+DAI-FRO-032,Store Brand Potato Wedges 500 g,Store Brand,Frozen pizza & bulk bags,500 g,frozen pizza & bulk bags|potato wedges|wedges
+CHK-BAT-001,Quick Pick AA Batteries 4 pack,Quick Pick,"Batteries, chargers & gift cards",4 pack,"aa batteries|batteries, chargers & gift cards|battery"
+CHK-BAT-002,Store Brand AA Batteries 8 pack,Store Brand,"Batteries, chargers & gift cards",8 pack,"aa batteries|batteries, chargers & gift cards|battery"
+CHK-BAT-003,Store Brand AAA Batteries 8 pack,Store Brand,"Batteries, chargers & gift cards",8 pack,"aaa batteries|batteries, chargers & gift cards|battery"
+CHK-BAT-004,Sweet Spot AAA Batteries 4 pack,Sweet Spot,"Batteries, chargers & gift cards",4 pack,"aaa batteries|batteries, chargers & gift cards|battery"
+CHK-BAT-005,Sweet Spot Phone Charging Cable 4 pack,Sweet Spot,"Batteries, chargers & gift cards",4 pack,"batteries, chargers & gift cards|charger|phone charging cable|usb"
+CHK-BAT-006,Quick Pick Phone Charging Cable 8 pack,Quick Pick,"Batteries, chargers & gift cards",8 pack,"batteries, chargers & gift cards|charger|phone charging cable|usb"
+CHK-BAT-007,Quick Pick Gift Card 8 pack,Quick Pick,"Batteries, chargers & gift cards",8 pack,"batteries, chargers & gift cards|gift card"
+CHK-BAT-008,Store Brand Gift Card 4 pack,Store Brand,"Batteries, chargers & gift cards",4 pack,"batteries, chargers & gift cards|gift card"
+CHK-HAN-001,Quick Pick Hand Sanitizer small,Quick Pick,"Hand sanitizers, medicines & lip balms",small,"hand sanitizer|hand sanitizers, medicines & lip balms|sanitiser"
+CHK-HAN-002,Store Brand Hand Sanitizer large,Store Brand,"Hand sanitizers, medicines & lip balms",large,"hand sanitizer|hand sanitizers, medicines & lip balms|sanitiser"
+CHK-HAN-003,Store Brand Pain Relief Tablets large,Store Brand,"Hand sanitizers, medicines & lip balms",large,"hand sanitizers, medicines & lip balms|pain relief tablets|painkiller|paracetamol"
+CHK-HAN-004,Sweet Spot Pain Relief Tablets small,Sweet Spot,"Hand sanitizers, medicines & lip balms",small,"hand sanitizers, medicines & lip balms|pain relief tablets|painkiller|paracetamol"
+CHK-HAN-005,Sweet Spot Lip Balm small,Sweet Spot,"Hand sanitizers, medicines & lip balms",small,"hand sanitizers, medicines & lip balms|lip balm|lip care"
+CHK-HAN-006,Quick Pick Lip Balm large,Quick Pick,"Hand sanitizers, medicines & lip balms",large,"hand sanitizers, medicines & lip balms|lip balm|lip care"
+CHK-HAN-007,Quick Pick Cough Sweets large,Quick Pick,"Hand sanitizers, medicines & lip balms",large,"cough sweets|hand sanitizers, medicines & lip balms|lozenge"
+CHK-HAN-008,Store Brand Cough Sweets small,Store Brand,"Hand sanitizers, medicines & lip balms",small,"cough sweets|hand sanitizers, medicines & lip balms|lozenge"
+CHK-GUM-001,Quick Pick Spearmint Gum 12 pack,Quick Pick,"Gum, mints & breath fresheners",12 pack,"gum|gum, mints & breath fresheners|spearmint gum"
+CHK-GUM-002,Store Brand Spearmint Gum 24 pack,Store Brand,"Gum, mints & breath fresheners",24 pack,"gum|gum, mints & breath fresheners|spearmint gum"
+CHK-GUM-003,Store Brand Peppermint Mints 24 pack,Store Brand,"Gum, mints & breath fresheners",24 pack,"gum, mints & breath fresheners|mints|peppermint mints"
+CHK-GUM-004,Sweet Spot Peppermint Mints 12 pack,Sweet Spot,"Gum, mints & breath fresheners",12 pack,"gum, mints & breath fresheners|mints|peppermint mints"
+CHK-GUM-005,Sweet Spot Fruit Gum 12 pack,Sweet Spot,"Gum, mints & breath fresheners",12 pack,"fruit gum|gum|gum, mints & breath fresheners"
+CHK-GUM-006,Quick Pick Fruit Gum 24 pack,Quick Pick,"Gum, mints & breath fresheners",24 pack,"fruit gum|gum|gum, mints & breath fresheners"
+CHK-GUM-007,Quick Pick Breath Strips 24 pack,Quick Pick,"Gum, mints & breath fresheners",24 pack,"breath strips|gum, mints & breath fresheners"
+CHK-GUM-008,Store Brand Breath Strips 12 pack,Store Brand,"Gum, mints & breath fresheners",12 pack,"breath strips|gum, mints & breath fresheners"
+CHK-SWE-001,Quick Pick Gummy Bears 100 g,Quick Pick,Sweet treats & novelties,100 g,candy|gummy bears|sweet treats & novelties
+CHK-SWE-002,Store Brand Gummy Bears 200 g,Store Brand,Sweet treats & novelties,200 g,candy|gummy bears|sweet treats & novelties
+CHK-SWE-003,Store Brand Licorice Twists 200 g,Store Brand,Sweet treats & novelties,200 g,licorice|licorice twists|sweet treats & novelties
+CHK-SWE-004,Sweet Spot Licorice Twists 100 g,Sweet Spot,Sweet treats & novelties,100 g,licorice|licorice twists|sweet treats & novelties
+CHK-SWE-005,Sweet Spot Hard Candies 100 g,Sweet Spot,Sweet treats & novelties,100 g,hard candies|sweet treats & novelties|sweets
+CHK-SWE-006,Quick Pick Hard Candies 200 g,Quick Pick,Sweet treats & novelties,200 g,hard candies|sweet treats & novelties|sweets
+CHK-SWE-007,Quick Pick Chewy Caramels 200 g,Quick Pick,Sweet treats & novelties,200 g,chewy caramels|sweet treats & novelties|sweets
+CHK-SWE-008,Store Brand Chewy Caramels 100 g,Store Brand,Sweet treats & novelties,100 g,chewy caramels|sweet treats & novelties|sweets
+CHK-GRA-001,Quick Pick Cola Bottle 500 ml,Quick Pick,Grab-and-go beverages,500 ml,cola bottle|grab-and-go beverages|soda|soft drink
+CHK-GRA-002,Store Brand Cola Bottle 1 L,Store Brand,Grab-and-go beverages,1 L,cola bottle|grab-and-go beverages|soda|soft drink
+CHK-GRA-003,Store Brand Still Water Bottle 1 L,Store Brand,Grab-and-go beverages,1 L,grab-and-go beverages|still water bottle|water
+CHK-GRA-004,Sweet Spot Still Water Bottle 500 ml,Sweet Spot,Grab-and-go beverages,500 ml,grab-and-go beverages|still water bottle|water
+CHK-GRA-005,Sweet Spot Energy Can 500 ml,Sweet Spot,Grab-and-go beverages,500 ml,energy can|energy drink|grab-and-go beverages
+CHK-GRA-006,Quick Pick Energy Can 1 L,Quick Pick,Grab-and-go beverages,1 L,energy can|energy drink|grab-and-go beverages
+CHK-GRA-007,Quick Pick Green Tea Bottle 1 L,Quick Pick,Grab-and-go beverages,1 L,grab-and-go beverages|green tea bottle|tea
+CHK-GRA-008,Store Brand Green Tea Bottle 500 ml,Store Brand,Grab-and-go beverages,500 ml,grab-and-go beverages|green tea bottle|tea
+CHK-MAG-001,Quick Pick Celebrity Magazine standard,Quick Pick,Magazines & reads,standard,celebrity magazine|magazine|magazines & reads
+CHK-MAG-002,Store Brand Celebrity Magazine special,Store Brand,Magazines & reads,special,celebrity magazine|magazine|magazines & reads
+CHK-MAG-003,Store Brand News Weekly special,Store Brand,Magazines & reads,special,magazine|magazines & reads|news weekly|newspaper
+CHK-MAG-004,Sweet Spot News Weekly standard,Sweet Spot,Magazines & reads,standard,magazine|magazines & reads|news weekly|newspaper
+CHK-MAG-005,Sweet Spot Cooking Magazine standard,Sweet Spot,Magazines & reads,standard,cooking magazine|magazine|magazines & reads
+CHK-MAG-006,Quick Pick Cooking Magazine special,Quick Pick,Magazines & reads,special,cooking magazine|magazine|magazines & reads
+CHK-MAG-007,Quick Pick Puzzle Book special,Quick Pick,Magazines & reads,special,magazines & reads|puzzle|puzzle book
+CHK-MAG-008,Store Brand Puzzle Book standard,Store Brand,Magazines & reads,standard,magazines & reads|puzzle|puzzle book
+CHK-CHO-001,Quick Pick Milk Chocolate Bar 45 g,Quick Pick,Chocolate & candy bars,45 g,chocolate|chocolate & candy bars|milk chocolate bar
+CHK-CHO-002,Store Brand Milk Chocolate Bar 90 g,Store Brand,Chocolate & candy bars,90 g,chocolate|chocolate & candy bars|milk chocolate bar
+CHK-CHO-003,Store Brand Dark Chocolate Bar 90 g,Store Brand,Chocolate & candy bars,90 g,chocolate|chocolate & candy bars|dark chocolate bar
+CHK-CHO-004,Sweet Spot Dark Chocolate Bar 45 g,Sweet Spot,Chocolate & candy bars,45 g,chocolate|chocolate & candy bars|dark chocolate bar
+CHK-CHO-005,Sweet Spot Caramel Bar 45 g,Sweet Spot,Chocolate & candy bars,45 g,caramel bar|chocolate|chocolate & candy bars
+CHK-CHO-006,Quick Pick Caramel Bar 90 g,Quick Pick,Chocolate & candy bars,90 g,caramel bar|chocolate|chocolate & candy bars
+CHK-CHO-007,Quick Pick Peanut Chocolate Bar 90 g,Quick Pick,Chocolate & candy bars,90 g,chocolate|chocolate & candy bars|peanut chocolate bar
+CHK-CHO-008,Store Brand Peanut Chocolate Bar 45 g,Store Brand,Chocolate & candy bars,45 g,chocolate|chocolate & candy bars|peanut chocolate bar
+CHK-SNA-001,Quick Pick Mixed Nuts 50 g,Quick Pick,"Snacks, chips & nuts",50 g,"mixed nuts|nuts|snacks, chips & nuts"
+CHK-SNA-002,Store Brand Mixed Nuts 100 g,Store Brand,"Snacks, chips & nuts",100 g,"mixed nuts|nuts|snacks, chips & nuts"
+CHK-SNA-003,Store Brand Pretzels 100 g,Store Brand,"Snacks, chips & nuts",100 g,"pretzels|snack|snacks, chips & nuts"
+CHK-SNA-004,Sweet Spot Pretzels 50 g,Sweet Spot,"Snacks, chips & nuts",50 g,"pretzels|snack|snacks, chips & nuts"
+CHK-SNA-005,Sweet Spot Salted Crisps 50 g,Sweet Spot,"Snacks, chips & nuts",50 g,"chips|crisps|salted crisps|snacks, chips & nuts"
+CHK-SNA-006,Quick Pick Salted Crisps 100 g,Quick Pick,"Snacks, chips & nuts",100 g,"chips|crisps|salted crisps|snacks, chips & nuts"
+CHK-SNA-007,Quick Pick Cheese Crackers 100 g,Quick Pick,"Snacks, chips & nuts",100 g,"cheese crackers|crackers|snacks, chips & nuts"
+CHK-SNA-008,Store Brand Cheese Crackers 50 g,Store Brand,"Snacks, chips & nuts",50 g,"cheese crackers|crackers|snacks, chips & nuts"
+CHK-TRA-001,Quick Pick Trail Mix 60 g,Quick Pick,Trail mix & jerky,60 g,trail mix|trail mix & jerky
+CHK-TRA-002,Store Brand Trail Mix 120 g,Store Brand,Trail mix & jerky,120 g,trail mix|trail mix & jerky
+CHK-TRA-003,Store Brand Beef Jerky 120 g,Store Brand,Trail mix & jerky,120 g,beef jerky|jerky|trail mix & jerky
+CHK-TRA-004,Sweet Spot Beef Jerky 60 g,Sweet Spot,Trail mix & jerky,60 g,beef jerky|jerky|trail mix & jerky
+CHK-TRA-005,Sweet Spot Fruit and Nut Mix 60 g,Sweet Spot,Trail mix & jerky,60 g,fruit and nut mix|trail mix|trail mix & jerky
+CHK-TRA-006,Quick Pick Fruit and Nut Mix 120 g,Quick Pick,Trail mix & jerky,120 g,fruit and nut mix|trail mix|trail mix & jerky
+CHK-TRA-007,Quick Pick Turkey Jerky 120 g,Quick Pick,Trail mix & jerky,120 g,jerky|trail mix & jerky|turkey jerky
+CHK-TRA-008,Store Brand Turkey Jerky 60 g,Store Brand,Trail mix & jerky,60 g,jerky|trail mix & jerky|turkey jerky
+CHK-UMB-001,Quick Pick Compact Umbrella standard,Quick Pick,Umbrellas & bulk snacks,standard,compact umbrella|umbrella|umbrellas & bulk snacks
+CHK-UMB-002,Store Brand Compact Umbrella large,Store Brand,Umbrellas & bulk snacks,large,compact umbrella|umbrella|umbrellas & bulk snacks
+CHK-UMB-003,Store Brand Golf Umbrella large,Store Brand,Umbrellas & bulk snacks,large,golf umbrella|umbrella|umbrellas & bulk snacks
+CHK-UMB-004,Sweet Spot Golf Umbrella standard,Sweet Spot,Umbrellas & bulk snacks,standard,golf umbrella|umbrella|umbrellas & bulk snacks
+CHK-UMB-005,Sweet Spot Bulk Crisps Box standard,Sweet Spot,Umbrellas & bulk snacks,standard,bulk crisps box|snack|umbrellas & bulk snacks
+CHK-UMB-006,Quick Pick Bulk Crisps Box large,Quick Pick,Umbrellas & bulk snacks,large,bulk crisps box|snack|umbrellas & bulk snacks
+CHK-UMB-007,Quick Pick Bulk Candy Box large,Quick Pick,Umbrellas & bulk snacks,large,bulk candy box|sweets|umbrellas & bulk snacks
+CHK-UMB-008,Store Brand Bulk Candy Box standard,Store Brand,Umbrellas & bulk snacks,standard,bulk candy box|sweets|umbrellas & bulk snacks
+HOU-TRA-001,CleanHome Trash Bags 20 pack,CleanHome,Trash bags & food storage,20 pack,bin bags|garbage bags|trash bags|trash bags & food storage
+HOU-TRA-002,Store Brand Trash Bags 50 pack,Store Brand,Trash bags & food storage,50 pack,bin bags|garbage bags|trash bags|trash bags & food storage
+HOU-TRA-003,Store Brand Food Storage Bags 50 pack,Store Brand,Trash bags & food storage,50 pack,food storage bags|trash bags & food storage|zip bags
+HOU-TRA-004,BrightHome Food Storage Bags 20 pack,BrightHome,Trash bags & food storage,20 pack,food storage bags|trash bags & food storage|zip bags
+HOU-TRA-005,BrightHome Aluminium Foil 20 pack,BrightHome,Trash bags & food storage,20 pack,aluminium foil|foil|trash bags & food storage
+HOU-TRA-006,CleanHome Aluminium Foil 50 pack,CleanHome,Trash bags & food storage,50 pack,aluminium foil|foil|trash bags & food storage
+HOU-TRA-007,CleanHome Cling Film 50 pack,CleanHome,Trash bags & food storage,50 pack,cling film|trash bags & food storage|wrap
+HOU-TRA-008,Store Brand Cling Film 20 pack,Store Brand,Trash bags & food storage,20 pack,cling film|trash bags & food storage|wrap
+HOU-LAU-001,CleanHome Laundry Liquid 1 L,CleanHome,Laundry detergents & fabric softeners,1 L,detergent|laundry detergents & fabric softeners|laundry liquid|washing liquid
+HOU-LAU-002,Store Brand Laundry Liquid 2 L,Store Brand,Laundry detergents & fabric softeners,2 L,detergent|laundry detergents & fabric softeners|laundry liquid|washing liquid
+HOU-LAU-003,Store Brand Laundry Powder 2 L,Store Brand,Laundry detergents & fabric softeners,2 L,detergent|laundry detergents & fabric softeners|laundry powder
+HOU-LAU-004,BrightHome Laundry Powder 1 L,BrightHome,Laundry detergents & fabric softeners,1 L,detergent|laundry detergents & fabric softeners|laundry powder
+HOU-LAU-005,BrightHome Fabric Softener 1 L,BrightHome,Laundry detergents & fabric softeners,1 L,fabric softener|laundry detergents & fabric softeners|softener
+HOU-LAU-006,CleanHome Fabric Softener 2 L,CleanHome,Laundry detergents & fabric softeners,2 L,fabric softener|laundry detergents & fabric softeners|softener
+HOU-LAU-007,CleanHome Stain Remover 2 L,CleanHome,Laundry detergents & fabric softeners,2 L,laundry detergents & fabric softeners|stain|stain remover
+HOU-LAU-008,Store Brand Stain Remover 1 L,Store Brand,Laundry detergents & fabric softeners,1 L,laundry detergents & fabric softeners|stain|stain remover
+HOU-HOU-001,CleanHome Bathroom Cleaner 500 ml,CleanHome,Household cleaners & sprays,500 ml,bathroom cleaner|cleaner|household cleaners & sprays
+HOU-HOU-002,Store Brand Bathroom Cleaner 1 L,Store Brand,Household cleaners & sprays,1 L,bathroom cleaner|cleaner|household cleaners & sprays
+HOU-HOU-003,Store Brand Kitchen Spray 1 L,Store Brand,Household cleaners & sprays,1 L,cleaner|household cleaners & sprays|kitchen spray
+HOU-HOU-004,BrightHome Kitchen Spray 500 ml,BrightHome,Household cleaners & sprays,500 ml,cleaner|household cleaners & sprays|kitchen spray
+HOU-HOU-005,BrightHome Glass Cleaner 500 ml,BrightHome,Household cleaners & sprays,500 ml,cleaner|glass cleaner|household cleaners & sprays
+HOU-HOU-006,CleanHome Glass Cleaner 1 L,CleanHome,Household cleaners & sprays,1 L,cleaner|glass cleaner|household cleaners & sprays
+HOU-HOU-007,CleanHome Disinfectant Wipes 1 L,CleanHome,Household cleaners & sprays,1 L,disinfectant wipes|household cleaners & sprays|wipes
+HOU-HOU-008,Store Brand Disinfectant Wipes 500 ml,Store Brand,Household cleaners & sprays,500 ml,disinfectant wipes|household cleaners & sprays|wipes
+HOU-DIS-001,CleanHome Bleach 1 L,CleanHome,Disinfection & bulk liquids,1 L,bleach|disinfection & bulk liquids
+HOU-DIS-002,Store Brand Bleach 2 L,Store Brand,Disinfection & bulk liquids,2 L,bleach|disinfection & bulk liquids
+HOU-DIS-003,Store Brand Dish Soap 2 L,Store Brand,Disinfection & bulk liquids,2 L,dish soap|disinfection & bulk liquids|washing up liquid
+HOU-DIS-004,BrightHome Dish Soap 1 L,BrightHome,Disinfection & bulk liquids,1 L,dish soap|disinfection & bulk liquids|washing up liquid
+HOU-DIS-005,BrightHome Floor Cleaner 1 L,BrightHome,Disinfection & bulk liquids,1 L,cleaner|disinfection & bulk liquids|floor cleaner
+HOU-DIS-006,CleanHome Floor Cleaner 2 L,CleanHome,Disinfection & bulk liquids,2 L,cleaner|disinfection & bulk liquids|floor cleaner
+HOU-DIS-007,CleanHome Drain Cleaner 2 L,CleanHome,Disinfection & bulk liquids,2 L,disinfection & bulk liquids|drain|drain cleaner
+HOU-DIS-008,Store Brand Drain Cleaner 1 L,Store Brand,Disinfection & bulk liquids,1 L,disinfection & bulk liquids|drain|drain cleaner
+HOU-PAP-001,CleanHome Toilet Paper 4 pack,CleanHome,Paper products & bulk supplies,4 pack,loo roll|paper products & bulk supplies|tissue|toilet paper
+HOU-PAP-002,Store Brand Toilet Paper 12 pack,Store Brand,Paper products & bulk supplies,12 pack,loo roll|paper products & bulk supplies|tissue|toilet paper
+HOU-PAP-003,Store Brand Paper Towels 12 pack,Store Brand,Paper products & bulk supplies,12 pack,kitchen roll|paper products & bulk supplies|paper towels
+HOU-PAP-004,BrightHome Paper Towels 4 pack,BrightHome,Paper products & bulk supplies,4 pack,kitchen roll|paper products & bulk supplies|paper towels
+HOU-PAP-005,BrightHome Facial Tissues 4 pack,BrightHome,Paper products & bulk supplies,4 pack,facial tissues|paper products & bulk supplies|tissues
+HOU-PAP-006,CleanHome Facial Tissues 12 pack,CleanHome,Paper products & bulk supplies,12 pack,facial tissues|paper products & bulk supplies|tissues
+HOU-PAP-007,CleanHome Mop Bucket Set 12 pack,CleanHome,Paper products & bulk supplies,12 pack,mop|mop bucket set|paper products & bulk supplies
+HOU-PAP-008,Store Brand Mop Bucket Set 4 pack,Store Brand,Paper products & bulk supplies,4 pack,mop|mop bucket set|paper products & bulk supplies
+HOU-SMA-001,CleanHome Coffee Maker standard,CleanHome,Small appliances,standard,coffee machine|coffee maker|small appliances
+HOU-SMA-002,Store Brand Coffee Maker premium,Store Brand,Small appliances,premium,coffee machine|coffee maker|small appliances
+HOU-SMA-003,Store Brand Toaster premium,Store Brand,Small appliances,premium,small appliances|toaster
+HOU-SMA-004,BrightHome Toaster standard,BrightHome,Small appliances,standard,small appliances|toaster
+HOU-SMA-005,BrightHome Blender standard,BrightHome,Small appliances,standard,blender|small appliances
+HOU-SMA-006,CleanHome Blender premium,CleanHome,Small appliances,premium,blender|small appliances
+HOU-SMA-007,CleanHome Steam Iron premium,CleanHome,Small appliances,premium,iron|small appliances|steam iron
+HOU-SMA-008,Store Brand Steam Iron standard,Store Brand,Small appliances,standard,iron|small appliances|steam iron
+HOU-STO-001,CleanHome Electric Kettle standard,CleanHome,Store-brand small appliances,standard,electric kettle|kettle|store-brand small appliances
+HOU-STO-002,Store Brand Electric Kettle compact,Store Brand,Store-brand small appliances,compact,electric kettle|kettle|store-brand small appliances
+HOU-STO-003,Store Brand Hand Mixer compact,Store Brand,Store-brand small appliances,compact,hand mixer|mixer|store-brand small appliances
+HOU-STO-004,BrightHome Hand Mixer standard,BrightHome,Store-brand small appliances,standard,hand mixer|mixer|store-brand small appliances
+HOU-STO-005,BrightHome Sandwich Toaster standard,BrightHome,Store-brand small appliances,standard,sandwich toaster|store-brand small appliances|toastie
+HOU-STO-006,CleanHome Sandwich Toaster compact,CleanHome,Store-brand small appliances,compact,sandwich toaster|store-brand small appliances|toastie
+HOU-STO-007,CleanHome Rice Cooker compact,CleanHome,Store-brand small appliances,compact,rice|rice cooker|store-brand small appliances
+HOU-STO-008,Store Brand Rice Cooker standard,Store Brand,Store-brand small appliances,standard,rice|rice cooker|store-brand small appliances
+HOU-AIR-001,CleanHome Air Fryer 4 L,CleanHome,"Air fryers, multi-cookers & microwaves",4 L,"air fryer|air fryers, multi-cookers & microwaves"
+HOU-AIR-002,Store Brand Air Fryer 6 L,Store Brand,"Air fryers, multi-cookers & microwaves",6 L,"air fryer|air fryers, multi-cookers & microwaves"
+HOU-AIR-003,Store Brand Multi Cooker 6 L,Store Brand,"Air fryers, multi-cookers & microwaves",6 L,"air fryers, multi-cookers & microwaves|instant pot|multi cooker"
+HOU-AIR-004,BrightHome Multi Cooker 4 L,BrightHome,"Air fryers, multi-cookers & microwaves",4 L,"air fryers, multi-cookers & microwaves|instant pot|multi cooker"
+HOU-AIR-005,BrightHome Microwave Oven 4 L,BrightHome,"Air fryers, multi-cookers & microwaves",4 L,"air fryers, multi-cookers & microwaves|microwave|microwave oven"
+HOU-AIR-006,CleanHome Microwave Oven 6 L,CleanHome,"Air fryers, multi-cookers & microwaves",6 L,"air fryers, multi-cookers & microwaves|microwave|microwave oven"
+HOU-AIR-007,CleanHome Slow Cooker 6 L,CleanHome,"Air fryers, multi-cookers & microwaves",6 L,"air fryers, multi-cookers & microwaves|crockpot|slow cooker"
+HOU-AIR-008,Store Brand Slow Cooker 4 L,Store Brand,"Air fryers, multi-cookers & microwaves",4 L,"air fryers, multi-cookers & microwaves|crockpot|slow cooker"
+HOU-VAC-001,CleanHome Upright Vacuum standard,CleanHome,Vacuums & carpet cleaners,standard,hoover|upright vacuum|vacuum|vacuums & carpet cleaners
+HOU-VAC-002,Store Brand Upright Vacuum premium,Store Brand,Vacuums & carpet cleaners,premium,hoover|upright vacuum|vacuum|vacuums & carpet cleaners
+HOU-VAC-003,Store Brand Cordless Vacuum premium,Store Brand,Vacuums & carpet cleaners,premium,cordless vacuum|vacuum|vacuums & carpet cleaners
+HOU-VAC-004,BrightHome Cordless Vacuum standard,BrightHome,Vacuums & carpet cleaners,standard,cordless vacuum|vacuum|vacuums & carpet cleaners
+HOU-VAC-005,BrightHome Carpet Shampooer standard,BrightHome,Vacuums & carpet cleaners,standard,carpet cleaner|carpet shampooer|vacuums & carpet cleaners
+HOU-VAC-006,CleanHome Carpet Shampooer premium,CleanHome,Vacuums & carpet cleaners,premium,carpet cleaner|carpet shampooer|vacuums & carpet cleaners
+HOU-VAC-007,CleanHome Handheld Vacuum premium,CleanHome,Vacuums & carpet cleaners,premium,handheld vacuum|vacuum|vacuums & carpet cleaners
+HOU-VAC-008,Store Brand Handheld Vacuum standard,Store Brand,Vacuums & carpet cleaners,standard,handheld vacuum|vacuum|vacuums & carpet cleaners
+HOU-BUL-001,CleanHome Mini Fridge standard,CleanHome,Bulky appliances & storage,standard,bulky appliances & storage|fridge|mini fridge
+HOU-BUL-002,Store Brand Mini Fridge large,Store Brand,Bulky appliances & storage,large,bulky appliances & storage|fridge|mini fridge
+HOU-BUL-003,Store Brand Air Conditioner large,Store Brand,Bulky appliances & storage,large,AC|air conditioner|bulky appliances & storage|cooler
+HOU-BUL-004,BrightHome Air Conditioner standard,BrightHome,Bulky appliances & storage,standard,AC|air conditioner|bulky appliances & storage|cooler
+HOU-BUL-005,BrightHome Storage Crate standard,BrightHome,Bulky appliances & storage,standard,bulky appliances & storage|storage box|storage crate
+HOU-BUL-006,CleanHome Storage Crate large,CleanHome,Bulky appliances & storage,large,bulky appliances & storage|storage box|storage crate
+HOU-BUL-007,CleanHome Laundry Basket large,CleanHome,Bulky appliances & storage,large,basket|bulky appliances & storage|laundry basket
+HOU-BUL-008,Store Brand Laundry Basket standard,Store Brand,Bulky appliances & storage,standard,basket|bulky appliances & storage|laundry basket
+TOY-BOA-001,PlayTime Family Board Game standard,PlayTime,Board games & large playsets,standard,board game|board games & large playsets|family board game
+TOY-BOA-002,Store Brand Family Board Game large,Store Brand,Board games & large playsets,large,board game|board games & large playsets|family board game
+TOY-BOA-003,Store Brand Word Game large,Store Brand,Board games & large playsets,large,board game|board games & large playsets|word game
+TOY-BOA-004,ArtBox Word Game standard,ArtBox,Board games & large playsets,standard,board game|board games & large playsets|word game
+TOY-BOA-005,ArtBox Toy Playhouse standard,ArtBox,Board games & large playsets,standard,board games & large playsets|playset|toy playhouse
+TOY-BOA-006,PlayTime Toy Playhouse large,PlayTime,Board games & large playsets,large,board games & large playsets|playset|toy playhouse
+TOY-BOA-007,PlayTime Jigsaw Puzzle large,PlayTime,Board games & large playsets,large,board games & large playsets|jigsaw puzzle|puzzle
+TOY-BOA-008,Store Brand Jigsaw Puzzle standard,Store Brand,Board games & large playsets,standard,board games & large playsets|jigsaw puzzle|puzzle
+TOY-ACT-001,PlayTime Fashion Doll standard,PlayTime,"Action figures, dolls & playsets",standard,"action figures, dolls & playsets|doll|fashion doll"
+TOY-ACT-002,Store Brand Fashion Doll deluxe,Store Brand,"Action figures, dolls & playsets",deluxe,"action figures, dolls & playsets|doll|fashion doll"
+TOY-ACT-003,Store Brand Action Figure deluxe,Store Brand,"Action figures, dolls & playsets",deluxe,"action figure|action figures, dolls & playsets|figure"
+TOY-ACT-004,ArtBox Action Figure standard,ArtBox,"Action figures, dolls & playsets",standard,"action figure|action figures, dolls & playsets|figure"
+TOY-ACT-005,ArtBox Superhero Playset standard,ArtBox,"Action figures, dolls & playsets",standard,"action figures, dolls & playsets|playset|superhero playset"
+TOY-ACT-006,PlayTime Superhero Playset deluxe,PlayTime,"Action figures, dolls & playsets",deluxe,"action figures, dolls & playsets|playset|superhero playset"
+TOY-ACT-007,PlayTime Doll House deluxe,PlayTime,"Action figures, dolls & playsets",deluxe,"action figures, dolls & playsets|doll|doll house"
+TOY-ACT-008,Store Brand Doll House standard,Store Brand,"Action figures, dolls & playsets",standard,"action figures, dolls & playsets|doll|doll house"
+TOY-HAN-001,PlayTime Toy Car Pack 3 pack,PlayTime,"Hanging toys, cars & novelties",3 pack,"cars|hanging toys, cars & novelties|toy car pack"
+TOY-HAN-002,Store Brand Toy Car Pack 6 pack,Store Brand,"Hanging toys, cars & novelties",6 pack,"cars|hanging toys, cars & novelties|toy car pack"
+TOY-HAN-003,Store Brand Bouncy Ball 6 pack,Store Brand,"Hanging toys, cars & novelties",6 pack,"ball|bouncy ball|hanging toys, cars & novelties"
+TOY-HAN-004,ArtBox Bouncy Ball 3 pack,ArtBox,"Hanging toys, cars & novelties",3 pack,"ball|bouncy ball|hanging toys, cars & novelties"
+TOY-HAN-005,ArtBox Card Game 3 pack,ArtBox,"Hanging toys, cars & novelties",3 pack,"card game|cards|hanging toys, cars & novelties"
+TOY-HAN-006,PlayTime Card Game 6 pack,PlayTime,"Hanging toys, cars & novelties",6 pack,"card game|cards|hanging toys, cars & novelties"
+TOY-HAN-007,PlayTime Yo-Yo 6 pack,PlayTime,"Hanging toys, cars & novelties",6 pack,"hanging toys, cars & novelties|yo-yo|yoyo"
+TOY-HAN-008,Store Brand Yo-Yo 3 pack,Store Brand,"Hanging toys, cars & novelties",3 pack,"hanging toys, cars & novelties|yo-yo|yoyo"
+TOY-BUI-001,PlayTime Building Blocks Set small,PlayTime,Building blocks & creative kits,small,bricks|building blocks & creative kits|building blocks set|lego
+TOY-BUI-002,Store Brand Building Blocks Set large,Store Brand,Building blocks & creative kits,large,bricks|building blocks & creative kits|building blocks set|lego
+TOY-BUI-003,Store Brand Craft Kit large,Store Brand,Building blocks & creative kits,large,building blocks & creative kits|craft|craft kit
+TOY-BUI-004,ArtBox Craft Kit small,ArtBox,Building blocks & creative kits,small,building blocks & creative kits|craft|craft kit
+TOY-BUI-005,ArtBox Modelling Dough small,ArtBox,Building blocks & creative kits,small,building blocks & creative kits|modelling dough|playdough
+TOY-BUI-006,PlayTime Modelling Dough large,PlayTime,Building blocks & creative kits,large,building blocks & creative kits|modelling dough|playdough
+TOY-BUI-007,PlayTime Creative Painting Kit large,PlayTime,Building blocks & creative kits,large,building blocks & creative kits|creative painting kit|paint
+TOY-BUI-008,Store Brand Creative Painting Kit small,Store Brand,Building blocks & creative kits,small,building blocks & creative kits|creative painting kit|paint
+TOY-BUL-001,PlayTime Teddy Bear small,PlayTime,"Bulk toys, plushies & outdoor gear",small,"bulk toys, plushies & outdoor gear|plush|teddy bear"
+TOY-BUL-002,Store Brand Teddy Bear large,Store Brand,"Bulk toys, plushies & outdoor gear",large,"bulk toys, plushies & outdoor gear|plush|teddy bear"
+TOY-BUL-003,Store Brand Soft Plush Bunny large,Store Brand,"Bulk toys, plushies & outdoor gear",large,"bulk toys, plushies & outdoor gear|plush|soft plush bunny"
+TOY-BUL-004,ArtBox Soft Plush Bunny small,ArtBox,"Bulk toys, plushies & outdoor gear",small,"bulk toys, plushies & outdoor gear|plush|soft plush bunny"
+TOY-BUL-005,ArtBox Garden Slide small,ArtBox,"Bulk toys, plushies & outdoor gear",small,"bulk toys, plushies & outdoor gear|garden slide|outdoor"
+TOY-BUL-006,PlayTime Garden Slide large,PlayTime,"Bulk toys, plushies & outdoor gear",large,"bulk toys, plushies & outdoor gear|garden slide|outdoor"
+TOY-BUL-007,PlayTime Skipping Rope large,PlayTime,"Bulk toys, plushies & outdoor gear",large,"bulk toys, plushies & outdoor gear|jump rope|skipping rope"
+TOY-BUL-008,Store Brand Skipping Rope small,Store Brand,"Bulk toys, plushies & outdoor gear",small,"bulk toys, plushies & outdoor gear|jump rope|skipping rope"
+TOY-OFF-001,PlayTime Ring Binder standard,PlayTime,Office organizers & binders,standard,binder|office organizers & binders|ring binder
+TOY-OFF-002,Store Brand Ring Binder large,Store Brand,Office organizers & binders,large,binder|office organizers & binders|ring binder
+TOY-OFF-003,Store Brand Document Box large,Store Brand,Office organizers & binders,large,document box|office organizers & binders|storage
+TOY-OFF-004,ArtBox Document Box standard,ArtBox,Office organizers & binders,standard,document box|office organizers & binders|storage
+TOY-OFF-005,ArtBox Clipboard standard,ArtBox,Office organizers & binders,standard,clip board|clipboard|office organizers & binders
+TOY-OFF-006,PlayTime Clipboard large,PlayTime,Office organizers & binders,large,clip board|clipboard|office organizers & binders
+TOY-OFF-007,PlayTime Desk Organizer large,PlayTime,Office organizers & binders,large,desk organizer|office organizers & binders|organiser
+TOY-OFF-008,Store Brand Desk Organizer standard,Store Brand,Office organizers & binders,standard,desk organizer|office organizers & binders|organiser
+TOY-NOT-001,PlayTime A4 Notebook 80 sheets,PlayTime,"Notebooks, paper & pad stacks",80 sheets,"a4 notebook|notebook|notebooks, paper & pad stacks"
+TOY-NOT-002,Store Brand A4 Notebook 160 sheets,Store Brand,"Notebooks, paper & pad stacks",160 sheets,"a4 notebook|notebook|notebooks, paper & pad stacks"
+TOY-NOT-003,Store Brand Spiral Notepad 160 sheets,Store Brand,"Notebooks, paper & pad stacks",160 sheets,"notebooks, paper & pad stacks|notepad|spiral notepad"
+TOY-NOT-004,ArtBox Spiral Notepad 80 sheets,ArtBox,"Notebooks, paper & pad stacks",80 sheets,"notebooks, paper & pad stacks|notepad|spiral notepad"
+TOY-NOT-005,ArtBox Sticky Notes 80 sheets,ArtBox,"Notebooks, paper & pad stacks",80 sheets,"notebooks, paper & pad stacks|post-it|sticky notes"
+TOY-NOT-006,PlayTime Sticky Notes 160 sheets,PlayTime,"Notebooks, paper & pad stacks",160 sheets,"notebooks, paper & pad stacks|post-it|sticky notes"
+TOY-NOT-007,PlayTime Drawing Pad 160 sheets,PlayTime,"Notebooks, paper & pad stacks",160 sheets,"drawing pad|notebooks, paper & pad stacks|sketchbook"
+TOY-NOT-008,Store Brand Drawing Pad 80 sheets,Store Brand,"Notebooks, paper & pad stacks",80 sheets,"drawing pad|notebooks, paper & pad stacks|sketchbook"
+TOY-PEN-001,PlayTime Ballpoint Pens 6 pack,PlayTime,"Pens, markers & hanging supplies",6 pack,"ballpoint pens|pen|pens, markers & hanging supplies"
+TOY-PEN-002,Store Brand Ballpoint Pens 12 pack,Store Brand,"Pens, markers & hanging supplies",12 pack,"ballpoint pens|pen|pens, markers & hanging supplies"
+TOY-PEN-003,Store Brand Permanent Markers 12 pack,Store Brand,"Pens, markers & hanging supplies",12 pack,"marker|pens, markers & hanging supplies|permanent markers"
+TOY-PEN-004,ArtBox Permanent Markers 6 pack,ArtBox,"Pens, markers & hanging supplies",6 pack,"marker|pens, markers & hanging supplies|permanent markers"
+TOY-PEN-005,ArtBox Highlighters 6 pack,ArtBox,"Pens, markers & hanging supplies",6 pack,"highlighter|highlighters|pens, markers & hanging supplies"
+TOY-PEN-006,PlayTime Highlighters 12 pack,PlayTime,"Pens, markers & hanging supplies",12 pack,"highlighter|highlighters|pens, markers & hanging supplies"
+TOY-PEN-007,PlayTime Pencils 12 pack,PlayTime,"Pens, markers & hanging supplies",12 pack,"pencil|pencils|pens, markers & hanging supplies"
+TOY-PEN-008,Store Brand Pencils 6 pack,Store Brand,"Pens, markers & hanging supplies",6 pack,"pencil|pencils|pens, markers & hanging supplies"
+TOY-ART-001,PlayTime Wax Crayons 12 pack,PlayTime,"Art supplies, crayons & coloring books",12 pack,"art supplies, crayons & coloring books|crayon|wax crayons"
+TOY-ART-002,Store Brand Wax Crayons 24 pack,Store Brand,"Art supplies, crayons & coloring books",24 pack,"art supplies, crayons & coloring books|crayon|wax crayons"
+TOY-ART-003,Store Brand Coloring Book 24 pack,Store Brand,"Art supplies, crayons & coloring books",24 pack,"art supplies, crayons & coloring books|coloring book|colouring book"
+TOY-ART-004,ArtBox Coloring Book 12 pack,ArtBox,"Art supplies, crayons & coloring books",12 pack,"art supplies, crayons & coloring books|coloring book|colouring book"
+TOY-ART-005,ArtBox Watercolour Paints 12 pack,ArtBox,"Art supplies, crayons & coloring books",12 pack,"art supplies, crayons & coloring books|paint|watercolour paints"
+TOY-ART-006,PlayTime Watercolour Paints 24 pack,PlayTime,"Art supplies, crayons & coloring books",24 pack,"art supplies, crayons & coloring books|paint|watercolour paints"
+TOY-ART-007,PlayTime Coloured Pencils 24 pack,PlayTime,"Art supplies, crayons & coloring books",24 pack,"art supplies, crayons & coloring books|coloured pencils|pencil"
+TOY-ART-008,Store Brand Coloured Pencils 12 pack,Store Brand,"Art supplies, crayons & coloring books",12 pack,"art supplies, crayons & coloring books|coloured pencils|pencil"
+TOY-BUL-009,PlayTime Printer Paper standard,PlayTime,"Bulk paper, backpacks & desk organizers",standard,"bulk paper, backpacks & desk organizers|paper|printer paper"
+TOY-BUL-010,Store Brand Printer Paper large,Store Brand,"Bulk paper, backpacks & desk organizers",large,"bulk paper, backpacks & desk organizers|paper|printer paper"
+TOY-BUL-011,Store Brand School Backpack large,Store Brand,"Bulk paper, backpacks & desk organizers",large,"bag|bulk paper, backpacks & desk organizers|school backpack"
+TOY-BUL-012,ArtBox School Backpack standard,ArtBox,"Bulk paper, backpacks & desk organizers",standard,"bag|bulk paper, backpacks & desk organizers|school backpack"
+TOY-BUL-013,ArtBox Desk File Tray standard,ArtBox,"Bulk paper, backpacks & desk organizers",standard,"bulk paper, backpacks & desk organizers|desk file tray|organiser"
+TOY-BUL-014,PlayTime Desk File Tray large,PlayTime,"Bulk paper, backpacks & desk organizers",large,"bulk paper, backpacks & desk organizers|desk file tray|organiser"
+TOY-BUL-015,PlayTime Pencil Case large,PlayTime,"Bulk paper, backpacks & desk organizers",large,"bulk paper, backpacks & desk organizers|pencil case"
+TOY-BUL-016,Store Brand Pencil Case standard,Store Brand,"Bulk paper, backpacks & desk organizers",standard,"bulk paper, backpacks & desk organizers|pencil case"
+APP-SEA-001,Urban Thread Folded Jumper S,Urban Thread,Seasonal folded overstock,S,folded jumper|jumper|seasonal folded overstock|sweater
+APP-SEA-002,Basic Co Folded Jumper M,Basic Co,Seasonal folded overstock,M,folded jumper|jumper|seasonal folded overstock|sweater
+APP-SEA-003,Basic Co Folded Cardigan M,Basic Co,Seasonal folded overstock,M,cardigan|folded cardigan|seasonal folded overstock
+APP-SEA-004,Store Brand Folded Cardigan L,Store Brand,Seasonal folded overstock,L,cardigan|folded cardigan|seasonal folded overstock
+APP-SEA-005,Store Brand Seasonal Scarf Set L,Store Brand,Seasonal folded overstock,L,scarf|seasonal folded overstock|seasonal scarf set
+APP-SEA-006,Urban Thread Seasonal Scarf Set S,Urban Thread,Seasonal folded overstock,S,scarf|seasonal folded overstock|seasonal scarf set
+APP-SEA-007,Urban Thread Thermal Top S,Urban Thread,Seasonal folded overstock,S,seasonal folded overstock|thermal|thermal top
+APP-SEA-008,Basic Co Thermal Top M,Basic Co,Seasonal folded overstock,M,seasonal folded overstock|thermal|thermal top
+APP-TOP-001,Urban Thread Cotton T-Shirt S,Urban Thread,Tops,S,cotton t-shirt|tee|tops
+APP-TOP-002,Basic Co Cotton T-Shirt M,Basic Co,Tops,M,cotton t-shirt|tee|tops
+APP-TOP-003,Basic Co Linen Shirt M,Basic Co,Tops,M,linen shirt|shirt|tops
+APP-TOP-004,Store Brand Linen Shirt L,Store Brand,Tops,L,linen shirt|shirt|tops
+APP-TOP-005,Store Brand Blouse L,Store Brand,Tops,L,blouse|top|tops
+APP-TOP-006,Urban Thread Blouse S,Urban Thread,Tops,S,blouse|top|tops
+APP-TOP-007,Urban Thread Polo Shirt S,Urban Thread,Tops,S,polo|polo shirt|tops
+APP-TOP-008,Basic Co Polo Shirt M,Basic Co,Tops,M,polo|polo shirt|tops
+APP-FOL-001,Urban Thread Graphic T-Shirt S,Urban Thread,Folded merchandise & graphics,S,folded merchandise & graphics|graphic t-shirt|tee
+APP-FOL-002,Basic Co Graphic T-Shirt M,Basic Co,Folded merchandise & graphics,M,folded merchandise & graphics|graphic t-shirt|tee
+APP-FOL-003,Basic Co Sweatshirt M,Basic Co,Folded merchandise & graphics,M,folded merchandise & graphics|sweater|sweatshirt
+APP-FOL-004,Store Brand Sweatshirt L,Store Brand,Folded merchandise & graphics,L,folded merchandise & graphics|sweater|sweatshirt
+APP-FOL-005,Store Brand Long Sleeve Tee L,Store Brand,Folded merchandise & graphics,L,folded merchandise & graphics|long sleeve tee|tee
+APP-FOL-006,Urban Thread Long Sleeve Tee S,Urban Thread,Folded merchandise & graphics,S,folded merchandise & graphics|long sleeve tee|tee
+APP-FOL-007,Urban Thread Tank Top S,Urban Thread,Folded merchandise & graphics,S,folded merchandise & graphics|tank top|vest
+APP-FOL-008,Basic Co Tank Top M,Basic Co,Folded merchandise & graphics,M,folded merchandise & graphics|tank top|vest
+APP-BOT-001,Urban Thread Slim Jeans S,Urban Thread,Bottoms & denim,S,bottoms & denim|denim|slim jeans
+APP-BOT-002,Basic Co Slim Jeans M,Basic Co,Bottoms & denim,M,bottoms & denim|denim|slim jeans
+APP-BOT-003,Basic Co Chinos M,Basic Co,Bottoms & denim,M,bottoms & denim|chinos|trousers
+APP-BOT-004,Store Brand Chinos L,Store Brand,Bottoms & denim,L,bottoms & denim|chinos|trousers
+APP-BOT-005,Store Brand Pleated Skirt L,Store Brand,Bottoms & denim,L,bottoms & denim|pleated skirt|skirt
+APP-BOT-006,Urban Thread Pleated Skirt S,Urban Thread,Bottoms & denim,S,bottoms & denim|pleated skirt|skirt
+APP-BOT-007,Urban Thread Denim Shorts S,Urban Thread,Bottoms & denim,S,bottoms & denim|denim shorts|shorts
+APP-BOT-008,Basic Co Denim Shorts M,Basic Co,Bottoms & denim,M,bottoms & denim|denim shorts|shorts
+APP-FOO-001,Urban Thread Canvas Sneakers UK 6,Urban Thread,Footwear & folded essentials,UK 6,canvas sneakers|footwear & folded essentials|shoes|trainers
+APP-FOO-002,Basic Co Canvas Sneakers UK 8,Basic Co,Footwear & folded essentials,UK 8,canvas sneakers|footwear & folded essentials|shoes|trainers
+APP-FOO-003,Basic Co Ankle Boots UK 8,Basic Co,Footwear & folded essentials,UK 8,ankle boots|boots|footwear & folded essentials
+APP-FOO-004,Store Brand Ankle Boots UK 10,Store Brand,Footwear & folded essentials,UK 10,ankle boots|boots|footwear & folded essentials
+APP-FOO-005,Store Brand Sandals UK 10,Store Brand,Footwear & folded essentials,UK 10,flip flops|footwear & folded essentials|sandals
+APP-FOO-006,Urban Thread Sandals UK 6,Urban Thread,Footwear & folded essentials,UK 6,flip flops|footwear & folded essentials|sandals
+APP-FOO-007,Urban Thread Cotton Socks UK 6,Urban Thread,Footwear & folded essentials,UK 6,cotton socks|footwear & folded essentials|socks
+APP-FOO-008,Basic Co Cotton Socks UK 8,Basic Co,Footwear & folded essentials,UK 8,cotton socks|footwear & folded essentials|socks
+APP-TOP-009,Urban Thread Tote Bag standard,Urban Thread,Top-shelf bags,standard,bag|top-shelf bags|tote bag
+APP-TOP-010,Basic Co Tote Bag large,Basic Co,Top-shelf bags,large,bag|top-shelf bags|tote bag
+APP-TOP-011,Basic Co Shoulder Bag large,Basic Co,Top-shelf bags,large,handbag|shoulder bag|top-shelf bags
+APP-TOP-012,Store Brand Shoulder Bag standard,Store Brand,Top-shelf bags,standard,handbag|shoulder bag|top-shelf bags
+APP-TOP-013,Store Brand Crossbody Bag standard,Store Brand,Top-shelf bags,standard,bag|crossbody bag|top-shelf bags
+APP-TOP-014,Urban Thread Crossbody Bag large,Urban Thread,Top-shelf bags,large,bag|crossbody bag|top-shelf bags
+APP-TOP-015,Urban Thread Weekender Bag large,Urban Thread,Top-shelf bags,large,holdall|top-shelf bags|weekender bag
+APP-TOP-016,Basic Co Weekender Bag standard,Basic Co,Top-shelf bags,standard,holdall|top-shelf bags|weekender bag
+APP-ACC-001,Urban Thread Wool Scarf one size,Urban Thread,"Accessories, scarves & caps",one size,"accessories, scarves & caps|scarf|wool scarf"
+APP-ACC-002,Basic Co Wool Scarf one size,Basic Co,"Accessories, scarves & caps",one size,"accessories, scarves & caps|scarf|wool scarf"
+APP-ACC-003,Basic Co Baseball Cap one size,Basic Co,"Accessories, scarves & caps",one size,"accessories, scarves & caps|baseball cap|hat"
+APP-ACC-004,Store Brand Baseball Cap one size,Store Brand,"Accessories, scarves & caps",one size,"accessories, scarves & caps|baseball cap|hat"
+APP-ACC-005,Store Brand Knit Beanie one size,Store Brand,"Accessories, scarves & caps",one size,"accessories, scarves & caps|hat|knit beanie"
+APP-ACC-006,Urban Thread Knit Beanie one size,Urban Thread,"Accessories, scarves & caps",one size,"accessories, scarves & caps|hat|knit beanie"
+APP-ACC-007,Urban Thread Leather Belt one size,Urban Thread,"Accessories, scarves & caps",one size,"accessories, scarves & caps|belt|leather belt"
+APP-ACC-008,Basic Co Leather Belt one size,Basic Co,"Accessories, scarves & caps",one size,"accessories, scarves & caps|belt|leather belt"
+APP-HOO-001,Urban Thread Pullover Hoodie S,Urban Thread,"Hoodies, jackets & activewear",S,"hoodies, jackets & activewear|hoody|pullover hoodie"
+APP-HOO-002,Basic Co Pullover Hoodie M,Basic Co,"Hoodies, jackets & activewear",M,"hoodies, jackets & activewear|hoody|pullover hoodie"
+APP-HOO-003,Basic Co Zip Hoodie M,Basic Co,"Hoodies, jackets & activewear",M,"hoodies, jackets & activewear|hoody|zip hoodie"
+APP-HOO-004,Store Brand Zip Hoodie L,Store Brand,"Hoodies, jackets & activewear",L,"hoodies, jackets & activewear|hoody|zip hoodie"
+APP-HOO-005,Store Brand Track Jacket L,Store Brand,"Hoodies, jackets & activewear",L,"hoodies, jackets & activewear|jacket|track jacket"
+APP-HOO-006,Urban Thread Track Jacket S,Urban Thread,"Hoodies, jackets & activewear",S,"hoodies, jackets & activewear|jacket|track jacket"
+APP-HOO-007,Urban Thread Sports Leggings S,Urban Thread,"Hoodies, jackets & activewear",S,"gym|hoodies, jackets & activewear|sports leggings"
+APP-HOO-008,Basic Co Sports Leggings M,Basic Co,"Hoodies, jackets & activewear",M,"gym|hoodies, jackets & activewear|sports leggings"
+APP-CAS-001,Urban Thread Winter Coat S,Urban Thread,Casual apparel & coats,S,casual apparel & coats|jacket|winter coat
+APP-CAS-002,Basic Co Winter Coat M,Basic Co,Casual apparel & coats,M,casual apparel & coats|jacket|winter coat
+APP-CAS-003,Basic Co Raincoat M,Basic Co,Casual apparel & coats,M,casual apparel & coats|mac|raincoat
+APP-CAS-004,Store Brand Raincoat L,Store Brand,Casual apparel & coats,L,casual apparel & coats|mac|raincoat
+APP-CAS-005,Store Brand Casual Dress L,Store Brand,Casual apparel & coats,L,casual apparel & coats|casual dress|dress
+APP-CAS-006,Urban Thread Casual Dress S,Urban Thread,Casual apparel & coats,S,casual apparel & coats|casual dress|dress
+APP-CAS-007,Urban Thread Denim Jacket S,Urban Thread,Casual apparel & coats,S,casual apparel & coats|denim jacket|jacket
+APP-CAS-008,Basic Co Denim Jacket M,Basic Co,Casual apparel & coats,M,casual apparel & coats|denim jacket|jacket
+APP-FLO-001,Urban Thread Duffel Bag standard,Urban Thread,Floor displays & bags,standard,duffel bag|floor displays & bags|gym bag
+APP-FLO-002,Basic Co Duffel Bag large,Basic Co,Floor displays & bags,large,duffel bag|floor displays & bags|gym bag
+APP-FLO-003,Basic Co Travel Backpack large,Basic Co,Floor displays & bags,large,floor displays & bags|rucksack|travel backpack
+APP-FLO-004,Store Brand Travel Backpack standard,Store Brand,Floor displays & bags,standard,floor displays & bags|rucksack|travel backpack
+APP-FLO-005,Store Brand Laundry Bag standard,Store Brand,Floor displays & bags,standard,bag|floor displays & bags|laundry bag
+APP-FLO-006,Urban Thread Laundry Bag large,Urban Thread,Floor displays & bags,large,bag|floor displays & bags|laundry bag
+APP-FLO-007,Urban Thread Beach Bag large,Urban Thread,Floor displays & bags,large,beach bag|floor displays & bags|tote
+APP-FLO-008,Basic Co Beach Bag standard,Basic Co,Floor displays & bags,standard,beach bag|floor displays & bags|tote
+SEA-SEA-001,Harvest Treats Pumpkin Spice Cookies 150 g,Harvest Treats,Seasonal sweets & treats,150 g,cookies|pumpkin spice cookies|seasonal sweets & treats
+SEA-SEA-002,Store Brand Pumpkin Spice Cookies 300 g,Store Brand,Seasonal sweets & treats,300 g,cookies|pumpkin spice cookies|seasonal sweets & treats
+SEA-SEA-003,Store Brand Caramel Apple Treats 300 g,Store Brand,Seasonal sweets & treats,300 g,caramel apple treats|seasonal sweets & treats|sweets
+SEA-SEA-004,Festive Co Caramel Apple Treats 150 g,Festive Co,Seasonal sweets & treats,150 g,caramel apple treats|seasonal sweets & treats|sweets
+SEA-SEA-005,Festive Co Festive Chocolates 150 g,Festive Co,Seasonal sweets & treats,150 g,chocolate|festive chocolates|seasonal sweets & treats
+SEA-SEA-006,Harvest Treats Festive Chocolates 300 g,Harvest Treats,Seasonal sweets & treats,300 g,chocolate|festive chocolates|seasonal sweets & treats
+SEA-SEA-007,Harvest Treats Spiced Gingerbread 300 g,Harvest Treats,Seasonal sweets & treats,300 g,biscuits|seasonal sweets & treats|spiced gingerbread
+SEA-SEA-008,Store Brand Spiced Gingerbread 150 g,Store Brand,Seasonal sweets & treats,150 g,biscuits|seasonal sweets & treats|spiced gingerbread
+SEA-MUL-001,Harvest Treats Multipack Crisps 6 pack,Harvest Treats,Multipack snacks,6 pack,chips|multipack crisps|multipack snacks
+SEA-MUL-002,Store Brand Multipack Crisps 12 pack,Store Brand,Multipack snacks,12 pack,chips|multipack crisps|multipack snacks
+SEA-MUL-003,Store Brand Multipack Biscuits 12 pack,Store Brand,Multipack snacks,12 pack,cookies|multipack biscuits|multipack snacks
+SEA-MUL-004,Festive Co Multipack Biscuits 6 pack,Festive Co,Multipack snacks,6 pack,cookies|multipack biscuits|multipack snacks
+SEA-MUL-005,Festive Co Multipack Popcorn 6 pack,Festive Co,Multipack snacks,6 pack,multipack popcorn|multipack snacks|popcorn
+SEA-MUL-006,Harvest Treats Multipack Popcorn 12 pack,Harvest Treats,Multipack snacks,12 pack,multipack popcorn|multipack snacks|popcorn
+SEA-MUL-007,Harvest Treats Multipack Cereal Bars 12 pack,Harvest Treats,Multipack snacks,12 pack,multipack cereal bars|multipack snacks|snack bar
+SEA-MUL-008,Store Brand Multipack Cereal Bars 6 pack,Store Brand,Multipack snacks,6 pack,multipack cereal bars|multipack snacks|snack bar
+SEA-DUM-001,Harvest Treats Mixed Sweets Bag 200 g,Harvest Treats,Dump bin sweet treats,200 g,dump bin sweet treats|mixed sweets bag|sweets
+SEA-DUM-002,Store Brand Mixed Sweets Bag 400 g,Store Brand,Dump bin sweet treats,400 g,dump bin sweet treats|mixed sweets bag|sweets
+SEA-DUM-003,Store Brand Chocolate Eggs 400 g,Store Brand,Dump bin sweet treats,400 g,chocolate|chocolate eggs|dump bin sweet treats
+SEA-DUM-004,Festive Co Chocolate Eggs 200 g,Festive Co,Dump bin sweet treats,200 g,chocolate|chocolate eggs|dump bin sweet treats
+SEA-DUM-005,Festive Co Fudge Bites 200 g,Festive Co,Dump bin sweet treats,200 g,dump bin sweet treats|fudge|fudge bites
+SEA-DUM-006,Harvest Treats Fudge Bites 400 g,Harvest Treats,Dump bin sweet treats,400 g,dump bin sweet treats|fudge|fudge bites
+SEA-DUM-007,Harvest Treats Toffee Popcorn 400 g,Harvest Treats,Dump bin sweet treats,400 g,dump bin sweet treats|popcorn|toffee popcorn
+SEA-DUM-008,Store Brand Toffee Popcorn 200 g,Store Brand,Dump bin sweet treats,200 g,dump bin sweet treats|popcorn|toffee popcorn
+SEA-BUL-001,Harvest Treats Party Pack Crisps 500 g,Harvest Treats,Bulk party & chip packs,500 g,bulk party & chip packs|chips|party pack crisps
+SEA-BUL-002,Store Brand Party Pack Crisps 1 kg,Store Brand,Bulk party & chip packs,1 kg,bulk party & chip packs|chips|party pack crisps
+SEA-BUL-003,Store Brand Party Pack Popcorn 1 kg,Store Brand,Bulk party & chip packs,1 kg,bulk party & chip packs|party pack popcorn|popcorn
+SEA-BUL-004,Festive Co Party Pack Popcorn 500 g,Festive Co,Bulk party & chip packs,500 g,bulk party & chip packs|party pack popcorn|popcorn
+SEA-BUL-005,Festive Co Bulk Tortilla Chips 500 g,Festive Co,Bulk party & chip packs,500 g,bulk party & chip packs|bulk tortilla chips|chips
+SEA-BUL-006,Harvest Treats Bulk Tortilla Chips 1 kg,Harvest Treats,Bulk party & chip packs,1 kg,bulk party & chip packs|bulk tortilla chips|chips
+SEA-BUL-007,Harvest Treats Party Snack Box 1 kg,Harvest Treats,Bulk party & chip packs,1 kg,bulk party & chip packs|party snack box|snack
+SEA-BUL-008,Store Brand Party Snack Box 500 g,Store Brand,Bulk party & chip packs,500 g,bulk party & chip packs|party snack box|snack
+SEA-SEA-009,Harvest Treats Cola 12 pack,Harvest Treats,Seasonal drink packs,12 pack,cola|seasonal drink packs|soda
+SEA-SEA-010,Store Brand Cola 24 pack,Store Brand,Seasonal drink packs,24 pack,cola|seasonal drink packs|soda
+SEA-SEA-011,Store Brand Lemon Soda 24 pack,Store Brand,Seasonal drink packs,24 pack,lemon soda|seasonal drink packs|soda
+SEA-SEA-012,Festive Co Lemon Soda 12 pack,Festive Co,Seasonal drink packs,12 pack,lemon soda|seasonal drink packs|soda
+SEA-SEA-013,Festive Co Apple Cider 12 pack,Festive Co,Seasonal drink packs,12 pack,apple cider|cider|seasonal drink packs
+SEA-SEA-014,Harvest Treats Apple Cider 24 pack,Harvest Treats,Seasonal drink packs,24 pack,apple cider|cider|seasonal drink packs
+SEA-SEA-015,Harvest Treats Orange Squash 24 pack,Harvest Treats,Seasonal drink packs,24 pack,orange squash|seasonal drink packs|squash
+SEA-SEA-016,Store Brand Orange Squash 12 pack,Store Brand,Seasonal drink packs,12 pack,orange squash|seasonal drink packs|squash
+SEA-STA-001,Harvest Treats Holiday Biscuit Box standard,Harvest Treats,Stacked pallets bulk promotion,standard,cookies|holiday biscuit box|stacked pallets bulk promotion
+SEA-STA-002,Store Brand Holiday Biscuit Box large,Store Brand,Stacked pallets bulk promotion,large,cookies|holiday biscuit box|stacked pallets bulk promotion
+SEA-STA-003,Store Brand Apple Cider Case large,Store Brand,Stacked pallets bulk promotion,large,apple cider case|cider|stacked pallets bulk promotion
+SEA-STA-004,Festive Co Apple Cider Case standard,Festive Co,Stacked pallets bulk promotion,standard,apple cider case|cider|stacked pallets bulk promotion
+SEA-STA-005,Festive Co Festive Tin Selection standard,Festive Co,Stacked pallets bulk promotion,standard,festive tin selection|stacked pallets bulk promotion|tin
+SEA-STA-006,Harvest Treats Festive Tin Selection large,Harvest Treats,Stacked pallets bulk promotion,large,festive tin selection|stacked pallets bulk promotion|tin
+SEA-STA-007,Harvest Treats Hot Chocolate Tin large,Harvest Treats,Stacked pallets bulk promotion,large,cocoa|hot chocolate tin|stacked pallets bulk promotion
+SEA-STA-008,Store Brand Hot Chocolate Tin standard,Store Brand,Stacked pallets bulk promotion,standard,cocoa|hot chocolate tin|stacked pallets bulk promotion
+SEA-GRA-001,Harvest Treats Compact Umbrella standard,Harvest Treats,Grab-n-go accessories,standard,compact umbrella|grab-n-go accessories|umbrella
+SEA-GRA-002,Store Brand Reusable Tote Bag large,Store Brand,Grab-n-go accessories,large,grab-n-go accessories|reusable tote bag|tote
+SEA-GRA-003,Festive Co Reusable Tote Bag standard,Festive Co,Grab-n-go accessories,standard,grab-n-go accessories|reusable tote bag|tote
+SEA-GRA-004,Festive Co Water Bottle standard,Festive Co,Grab-n-go accessories,standard,flask|grab-n-go accessories|water bottle
+SEA-GRA-005,Harvest Treats Water Bottle large,Harvest Treats,Grab-n-go accessories,large,flask|grab-n-go accessories|water bottle
+SEA-GRA-006,Harvest Treats Pocket Flashlight large,Harvest Treats,Grab-n-go accessories,large,grab-n-go accessories|pocket flashlight|torch
+SEA-GRA-007,Store Brand Pocket Flashlight standard,Store Brand,Grab-n-go accessories,standard,grab-n-go accessories|pocket flashlight|torch
+SEA-HIG-001,Harvest Treats Still Water Multipack 6 pack,Harvest Treats,High-volume beverages & quick picks,6 pack,high-volume beverages & quick picks|still water multipack|water
+SEA-HIG-002,Store Brand Still Water Multipack 12 pack,Store Brand,High-volume beverages & quick picks,12 pack,high-volume beverages & quick picks|still water multipack|water
+SEA-HIG-003,Store Brand Sparkling Water Multipack 12 pack,Store Brand,High-volume beverages & quick picks,12 pack,high-volume beverages & quick picks|sparkling water multipack|water
+SEA-HIG-004,Festive Co Sparkling Water Multipack 6 pack,Festive Co,High-volume beverages & quick picks,6 pack,high-volume beverages & quick picks|sparkling water multipack|water
+SEA-HIG-005,Festive Co Energy Drink Multipack 6 pack,Festive Co,High-volume beverages & quick picks,6 pack,energy|energy drink multipack|high-volume beverages & quick picks
+SEA-HIG-006,Harvest Treats Energy Drink Multipack 12 pack,Harvest Treats,High-volume beverages & quick picks,12 pack,energy|energy drink multipack|high-volume beverages & quick picks
+SEA-HIG-007,Harvest Treats Isotonic Drink Multipack 12 pack,Harvest Treats,High-volume beverages & quick picks,12 pack,high-volume beverages & quick picks|isotonic drink multipack|sports drink
+SEA-HIG-008,Store Brand Isotonic Drink Multipack 6 pack,Store Brand,High-volume beverages & quick picks,6 pack,high-volume beverages & quick picks|isotonic drink multipack|sports drink
+CAF-JUI-001,Café Corner Orange Juice 330 ml,Café Corner,"Juices, iced coffee & smoothies",330 ml,"juice|juices, iced coffee & smoothies|orange juice"
+CAF-JUI-002,Store Brand Orange Juice 500 ml,Store Brand,"Juices, iced coffee & smoothies",500 ml,"juice|juices, iced coffee & smoothies|orange juice"
+CAF-JUI-003,Store Brand Iced Latte 500 ml,Store Brand,"Juices, iced coffee & smoothies",500 ml,"coffee|iced latte|juices, iced coffee & smoothies"
+CAF-JUI-004,Fresh Press Iced Latte 330 ml,Fresh Press,"Juices, iced coffee & smoothies",330 ml,"coffee|iced latte|juices, iced coffee & smoothies"
+CAF-JUI-005,Fresh Press Berry Smoothie 330 ml,Fresh Press,"Juices, iced coffee & smoothies",330 ml,"berry smoothie|juices, iced coffee & smoothies|smoothie"
+CAF-JUI-006,Café Corner Berry Smoothie 500 ml,Café Corner,"Juices, iced coffee & smoothies",500 ml,"berry smoothie|juices, iced coffee & smoothies|smoothie"
+CAF-JUI-007,Café Corner Cold Brew Coffee 500 ml,Café Corner,"Juices, iced coffee & smoothies",500 ml,"coffee|cold brew coffee|juices, iced coffee & smoothies"
+CAF-JUI-008,Store Brand Cold Brew Coffee 330 ml,Store Brand,"Juices, iced coffee & smoothies",330 ml,"coffee|cold brew coffee|juices, iced coffee & smoothies"
+CAF-ENE-001,Café Corner Energy Drink 330 ml,Café Corner,"Energy, water & kombucha",330 ml,"energy|energy drink|energy, water & kombucha"
+CAF-ENE-002,Store Brand Energy Drink 500 ml,Store Brand,"Energy, water & kombucha",500 ml,"energy|energy drink|energy, water & kombucha"
+CAF-ENE-003,Store Brand Still Water 500 ml,Store Brand,"Energy, water & kombucha",500 ml,"energy, water & kombucha|still water|water"
+CAF-ENE-004,Fresh Press Still Water 330 ml,Fresh Press,"Energy, water & kombucha",330 ml,"energy, water & kombucha|still water|water"
+CAF-ENE-005,Fresh Press Ginger Kombucha 330 ml,Fresh Press,"Energy, water & kombucha",330 ml,"energy, water & kombucha|ginger kombucha|kombucha"
+CAF-ENE-006,Café Corner Ginger Kombucha 500 ml,Café Corner,"Energy, water & kombucha",500 ml,"energy, water & kombucha|ginger kombucha|kombucha"
+CAF-ENE-007,Café Corner Sparkling Water 500 ml,Café Corner,"Energy, water & kombucha",500 ml,"energy, water & kombucha|sparkling water|water"
+CAF-ENE-008,Store Brand Sparkling Water 330 ml,Store Brand,"Energy, water & kombucha",330 ml,"energy, water & kombucha|sparkling water|water"
+CAF-CAR-001,Café Corner Cola 330 ml,Café Corner,Carbonated & sports drinks,330 ml,carbonated & sports drinks|cola|soda|soft drink
+CAF-CAR-002,Store Brand Cola 500 ml,Store Brand,Carbonated & sports drinks,500 ml,carbonated & sports drinks|cola|soda|soft drink
+CAF-CAR-003,Store Brand Lemon Lime Soda 500 ml,Store Brand,Carbonated & sports drinks,500 ml,carbonated & sports drinks|lemon lime soda|soda
+CAF-CAR-004,Fresh Press Lemon Lime Soda 330 ml,Fresh Press,Carbonated & sports drinks,330 ml,carbonated & sports drinks|lemon lime soda|soda
+CAF-CAR-005,Fresh Press Sports Drink Blue 330 ml,Fresh Press,Carbonated & sports drinks,330 ml,carbonated & sports drinks|isotonic|sports drink blue
+CAF-CAR-006,Café Corner Sports Drink Blue 500 ml,Café Corner,Carbonated & sports drinks,500 ml,carbonated & sports drinks|isotonic|sports drink blue
+CAF-CAR-007,Café Corner Sports Drink Orange 500 ml,Café Corner,Carbonated & sports drinks,500 ml,carbonated & sports drinks|isotonic|sports drink orange
+CAF-CAR-008,Store Brand Sports Drink Orange 330 ml,Store Brand,Carbonated & sports drinks,330 ml,carbonated & sports drinks|isotonic|sports drink orange
+CAF-PRE-001,Café Corner Chicken Sandwich standard,Café Corner,"Prepared sandwiches, wraps & salads",standard,"chicken sandwich|prepared sandwiches, wraps & salads|sandwich"
+CAF-PRE-002,Store Brand Chicken Sandwich large,Store Brand,"Prepared sandwiches, wraps & salads",large,"chicken sandwich|prepared sandwiches, wraps & salads|sandwich"
+CAF-PRE-003,Store Brand Falafel Wrap large,Store Brand,"Prepared sandwiches, wraps & salads",large,"falafel wrap|prepared sandwiches, wraps & salads|wrap"
+CAF-PRE-004,Fresh Press Falafel Wrap standard,Fresh Press,"Prepared sandwiches, wraps & salads",standard,"falafel wrap|prepared sandwiches, wraps & salads|wrap"
+CAF-PRE-005,Fresh Press Caesar Salad standard,Fresh Press,"Prepared sandwiches, wraps & salads",standard,"caesar salad|prepared sandwiches, wraps & salads|salad"
+CAF-PRE-006,Café Corner Caesar Salad large,Café Corner,"Prepared sandwiches, wraps & salads",large,"caesar salad|prepared sandwiches, wraps & salads|salad"
+CAF-PRE-007,Café Corner Egg and Cress Sandwich large,Café Corner,"Prepared sandwiches, wraps & salads",large,"egg and cress sandwich|prepared sandwiches, wraps & salads|sandwich"
+CAF-PRE-008,Store Brand Egg and Cress Sandwich standard,Store Brand,"Prepared sandwiches, wraps & salads",standard,"egg and cress sandwich|prepared sandwiches, wraps & salads|sandwich"
+CAF-BUL-001,Café Corner Whole Milk 1 L,Café Corner,Bulk beverages & milk products,1 L,bulk beverages & milk products|milk|whole milk
+CAF-BUL-002,Store Brand Oat Milk 2 L,Store Brand,Bulk beverages & milk products,2 L,bulk beverages & milk products|oat milk|plant milk
+CAF-BUL-003,Fresh Press Oat Milk 1 L,Fresh Press,Bulk beverages & milk products,1 L,bulk beverages & milk products|oat milk|plant milk
+CAF-BUL-004,Fresh Press Chocolate Milk 1 L,Fresh Press,Bulk beverages & milk products,1 L,bulk beverages & milk products|chocolate milk|milk
+CAF-BUL-005,Café Corner Chocolate Milk 2 L,Café Corner,Bulk beverages & milk products,2 L,bulk beverages & milk products|chocolate milk|milk
+CAF-BUL-006,Café Corner Bulk Water Pack 2 L,Café Corner,Bulk beverages & milk products,2 L,bulk beverages & milk products|bulk water pack|water
+CAF-BUL-007,Store Brand Bulk Water Pack 1 L,Store Brand,Bulk beverages & milk products,1 L,bulk beverages & milk products|bulk water pack|water
+CAF-GOU-001,Café Corner Dried Mango 50 g,Café Corner,Gourmet snacks & dried fruit,50 g,dried mango|fruit|gourmet snacks & dried fruit
+CAF-GOU-002,Store Brand Dried Mango 100 g,Store Brand,Gourmet snacks & dried fruit,100 g,dried mango|fruit|gourmet snacks & dried fruit
+CAF-GOU-003,Store Brand Roasted Chickpeas 100 g,Store Brand,Gourmet snacks & dried fruit,100 g,gourmet snacks & dried fruit|roasted chickpeas|snack
+CAF-GOU-004,Fresh Press Roasted Chickpeas 50 g,Fresh Press,Gourmet snacks & dried fruit,50 g,gourmet snacks & dried fruit|roasted chickpeas|snack
+CAF-GOU-005,Fresh Press Granola Clusters 50 g,Fresh Press,Gourmet snacks & dried fruit,50 g,gourmet snacks & dried fruit|granola|granola clusters
+CAF-GOU-006,Café Corner Granola Clusters 100 g,Café Corner,Gourmet snacks & dried fruit,100 g,gourmet snacks & dried fruit|granola|granola clusters
+CAF-GOU-007,Café Corner Seaweed Snacks 100 g,Café Corner,Gourmet snacks & dried fruit,100 g,gourmet snacks & dried fruit|seaweed snacks|snack
+CAF-GOU-008,Store Brand Seaweed Snacks 50 g,Store Brand,Gourmet snacks & dried fruit,50 g,gourmet snacks & dried fruit|seaweed snacks|snack
+CAF-DAN-001,Café Corner Almond Danish single,Café Corner,"Danishes, granola bars & muffins",single,"almond danish|danishes, granola bars & muffins|pastry"
+CAF-DAN-002,Store Brand Granola Bar 2 pack,Store Brand,"Danishes, granola bars & muffins",2 pack,"danishes, granola bars & muffins|granola bar|snack bar"
+CAF-DAN-003,Fresh Press Granola Bar single,Fresh Press,"Danishes, granola bars & muffins",single,"danishes, granola bars & muffins|granola bar|snack bar"
+CAF-DAN-004,Fresh Press Blueberry Muffin single,Fresh Press,"Danishes, granola bars & muffins",single,"blueberry muffin|danishes, granola bars & muffins|muffin"
+CAF-DAN-005,Café Corner Blueberry Muffin 2 pack,Café Corner,"Danishes, granola bars & muffins",2 pack,"blueberry muffin|danishes, granola bars & muffins|muffin"
+CAF-DAN-006,Café Corner Cinnamon Swirl 2 pack,Café Corner,"Danishes, granola bars & muffins",2 pack,"cinnamon swirl|danishes, granola bars & muffins|pastry"
+CAF-DAN-007,Store Brand Cinnamon Swirl single,Store Brand,"Danishes, granola bars & muffins",single,"cinnamon swirl|danishes, granola bars & muffins|pastry"
+CAF-BAG-001,Café Corner Salted Crisps 50 g,Café Corner,"Bag chips, pretzels & popcorn",50 g,"bag chips, pretzels & popcorn|chips|salted crisps"
+CAF-BAG-002,Store Brand Salted Crisps 100 g,Store Brand,"Bag chips, pretzels & popcorn",100 g,"bag chips, pretzels & popcorn|chips|salted crisps"
+CAF-BAG-003,Store Brand Soft Pretzels 100 g,Store Brand,"Bag chips, pretzels & popcorn",100 g,"bag chips, pretzels & popcorn|pretzel|soft pretzels"
+CAF-BAG-004,Fresh Press Soft Pretzels 50 g,Fresh Press,"Bag chips, pretzels & popcorn",50 g,"bag chips, pretzels & popcorn|pretzel|soft pretzels"
+CAF-BAG-005,Fresh Press Sweet Popcorn 50 g,Fresh Press,"Bag chips, pretzels & popcorn",50 g,"bag chips, pretzels & popcorn|popcorn|sweet popcorn"
+CAF-BAG-006,Café Corner Sweet Popcorn 100 g,Café Corner,"Bag chips, pretzels & popcorn",100 g,"bag chips, pretzels & popcorn|popcorn|sweet popcorn"
+CAF-BAG-007,Café Corner Cheese Popcorn 100 g,Café Corner,"Bag chips, pretzels & popcorn",100 g,"bag chips, pretzels & popcorn|cheese popcorn|popcorn"
+CAF-BAG-008,Store Brand Cheese Popcorn 50 g,Store Brand,"Bag chips, pretzels & popcorn",50 g,"bag chips, pretzels & popcorn|cheese popcorn|popcorn"
+CAF-CON-001,Café Corner Brownie Bites single,Café Corner,Confectionery & sweet snacks,single,brownie|brownie bites|confectionery & sweet snacks
+CAF-CON-002,Store Brand Brownie Bites 2 pack,Store Brand,Confectionery & sweet snacks,2 pack,brownie|brownie bites|confectionery & sweet snacks
+CAF-CON-003,Store Brand Chocolate Cookies 2 pack,Store Brand,Confectionery & sweet snacks,2 pack,chocolate cookies|confectionery & sweet snacks|cookies
+CAF-CON-004,Fresh Press Chocolate Cookies single,Fresh Press,Confectionery & sweet snacks,single,chocolate cookies|confectionery & sweet snacks|cookies
+CAF-CON-005,Fresh Press Fudge Squares single,Fresh Press,Confectionery & sweet snacks,single,confectionery & sweet snacks|fudge|fudge squares
+CAF-CON-006,Café Corner Fudge Squares 2 pack,Café Corner,Confectionery & sweet snacks,2 pack,confectionery & sweet snacks|fudge|fudge squares
+CAF-CON-007,Café Corner Millionaire Shortbread 2 pack,Café Corner,Confectionery & sweet snacks,2 pack,confectionery & sweet snacks|millionaire shortbread|shortbread
+CAF-CON-008,Store Brand Millionaire Shortbread single,Store Brand,Confectionery & sweet snacks,single,confectionery & sweet snacks|millionaire shortbread|shortbread
+CAF-BUL-008,Café Corner Mixed Snack Box standard,Café Corner,Bulk snacks & extra inventory,standard,bulk snacks & extra inventory|mixed snack box|snack
+CAF-BUL-009,Store Brand Mixed Snack Box large,Store Brand,Bulk snacks & extra inventory,large,bulk snacks & extra inventory|mixed snack box|snack
+CAF-BUL-010,Store Brand Crisps Multipack large,Store Brand,Bulk snacks & extra inventory,large,bulk snacks & extra inventory|chips|crisps multipack
+CAF-BUL-011,Fresh Press Crisps Multipack standard,Fresh Press,Bulk snacks & extra inventory,standard,bulk snacks & extra inventory|chips|crisps multipack
+CAF-BUL-012,Fresh Press Bulk Cookies standard,Fresh Press,Bulk snacks & extra inventory,standard,bulk cookies|bulk snacks & extra inventory|cookies
+CAF-BUL-013,Café Corner Bulk Cookies large,Café Corner,Bulk snacks & extra inventory,large,bulk cookies|bulk snacks & extra inventory|cookies
+CAF-BUL-014,Café Corner Trail Mix Pouch large,Café Corner,Bulk snacks & extra inventory,large,bulk snacks & extra inventory|trail mix|trail mix pouch
+CAF-BUL-015,Store Brand Trail Mix Pouch standard,Store Brand,Bulk snacks & extra inventory,standard,bulk snacks & extra inventory|trail mix|trail mix pouch
+CUS-GIF-001,PowerTech Store Gift Card 10 value,PowerTech,Gift cards & ticket center,10 value,gift card|gift cards & ticket center|store gift card
+CUS-GIF-002,Store Brand Store Gift Card 25 value,Store Brand,Gift cards & ticket center,25 value,gift card|gift cards & ticket center|store gift card
+CUS-GIF-003,Store Brand Streaming Gift Card 25 value,Store Brand,Gift cards & ticket center,25 value,gift card|gift cards & ticket center|streaming gift card
+CUS-GIF-004,Carry Smart Streaming Gift Card 50 value,Carry Smart,Gift cards & ticket center,50 value,gift card|gift cards & ticket center|streaming gift card
+CUS-GIF-005,Carry Smart Gaming Gift Card 50 value,Carry Smart,Gift cards & ticket center,50 value,gaming gift card|gift card|gift cards & ticket center
+CUS-GIF-006,PowerTech Gaming Gift Card 10 value,PowerTech,Gift cards & ticket center,10 value,gaming gift card|gift card|gift cards & ticket center
+CUS-GIF-007,PowerTech Cinema Voucher 10 value,PowerTech,Gift cards & ticket center,10 value,cinema voucher|gift cards & ticket center|ticket
+CUS-GIF-008,Store Brand Cinema Voucher 25 value,Store Brand,Gift cards & ticket center,25 value,cinema voucher|gift cards & ticket center|ticket
+CUS-UPP-001,PowerTech Phone Case standard,PowerTech,Upper sackwall display,standard,case|phone case|upper sackwall display
+CUS-UPP-002,Store Brand Phone Case premium,Store Brand,Upper sackwall display,premium,case|phone case|upper sackwall display
+CUS-UPP-003,Store Brand Screen Protector premium,Store Brand,Upper sackwall display,premium,screen guard|screen protector|upper sackwall display
+CUS-UPP-004,Carry Smart Screen Protector standard,Carry Smart,Upper sackwall display,standard,screen guard|screen protector|upper sackwall display
+CUS-UPP-005,Carry Smart Phone Grip standard,Carry Smart,Upper sackwall display,standard,phone grip|pop socket|upper sackwall display
+CUS-UPP-006,PowerTech Phone Grip premium,PowerTech,Upper sackwall display,premium,phone grip|pop socket|upper sackwall display
+CUS-UPP-007,PowerTech Lanyard premium,PowerTech,Upper sackwall display,premium,badge holder|lanyard|upper sackwall display
+CUS-UPP-008,Store Brand Lanyard standard,Store Brand,Upper sackwall display,standard,badge holder|lanyard|upper sackwall display
+CUS-POS-001,PowerTech Pen Holder single,PowerTech,POS counter essentials,single,pen|pen holder|pos counter essentials
+CUS-POS-002,Store Brand Pen Holder 3 pack,Store Brand,POS counter essentials,3 pack,pen|pen holder|pos counter essentials
+CUS-POS-003,Store Brand Receipt Rolls 3 pack,Store Brand,POS counter essentials,3 pack,paper|pos counter essentials|receipt rolls
+CUS-POS-004,Carry Smart Receipt Rolls single,Carry Smart,POS counter essentials,single,paper|pos counter essentials|receipt rolls
+CUS-POS-005,Carry Smart Mini Hand Sanitiser single,Carry Smart,POS counter essentials,single,mini hand sanitiser|pos counter essentials|sanitizer
+CUS-POS-006,PowerTech Mini Hand Sanitiser 3 pack,PowerTech,POS counter essentials,3 pack,mini hand sanitiser|pos counter essentials|sanitizer
+CUS-POS-007,PowerTech Counter Mints 3 pack,PowerTech,POS counter essentials,3 pack,counter mints|mints|pos counter essentials
+CUS-POS-008,Store Brand Counter Mints single,Store Brand,POS counter essentials,single,counter mints|mints|pos counter essentials
+CUS-BRO-001,PowerTech Return Form Pad 25 sheets,PowerTech,"Brochures, slips & store forms",25 sheets,"brochures, slips & store forms|form|return form pad"
+CUS-BRO-002,Store Brand Return Form Pad 50 sheets,Store Brand,"Brochures, slips & store forms",50 sheets,"brochures, slips & store forms|form|return form pad"
+CUS-BRO-003,Store Brand Loyalty Application Pad 50 sheets,Store Brand,"Brochures, slips & store forms",50 sheets,"brochures, slips & store forms|form|loyalty application pad"
+CUS-BRO-004,Carry Smart Loyalty Application Pad 25 sheets,Carry Smart,"Brochures, slips & store forms",25 sheets,"brochures, slips & store forms|form|loyalty application pad"
+CUS-BRO-005,Carry Smart Delivery Slip Pad 25 sheets,Carry Smart,"Brochures, slips & store forms",25 sheets,"brochures, slips & store forms|delivery slip pad|slip"
+CUS-BRO-006,PowerTech Delivery Slip Pad 50 sheets,PowerTech,"Brochures, slips & store forms",50 sheets,"brochures, slips & store forms|delivery slip pad|slip"
+CUS-BRO-007,PowerTech Warranty Claim Pad 50 sheets,PowerTech,"Brochures, slips & store forms",50 sheets,"brochures, slips & store forms|form|warranty claim pad"
+CUS-BRO-008,Store Brand Warranty Claim Pad 25 sheets,Store Brand,"Brochures, slips & store forms",25 sheets,"brochures, slips & store forms|form|warranty claim pad"
+CUS-SHO-001,PowerTech Paper Shopping Bags 10 pack,PowerTech,Shopping bags & supplies,10 pack,bags|paper shopping bags|shopping bags & supplies
+CUS-SHO-002,Store Brand Paper Shopping Bags 25 pack,Store Brand,Shopping bags & supplies,25 pack,bags|paper shopping bags|shopping bags & supplies
+CUS-SHO-003,Store Brand Reusable Shopping Bag 25 pack,Store Brand,Shopping bags & supplies,25 pack,reusable shopping bag|shopping bags & supplies|tote
+CUS-SHO-004,Carry Smart Reusable Shopping Bag 10 pack,Carry Smart,Shopping bags & supplies,10 pack,reusable shopping bag|shopping bags & supplies|tote
+CUS-SHO-005,Carry Smart Gift Wrap Roll 10 pack,Carry Smart,Shopping bags & supplies,10 pack,gift wrap roll|shopping bags & supplies|wrapping paper
+CUS-SHO-006,PowerTech Gift Wrap Roll 25 pack,PowerTech,Shopping bags & supplies,25 pack,gift wrap roll|shopping bags & supplies|wrapping paper
+CUS-SHO-007,PowerTech Gift Bags 25 pack,PowerTech,Shopping bags & supplies,25 pack,bags|gift bags|shopping bags & supplies
+CUS-SHO-008,Store Brand Gift Bags 10 pack,Store Brand,Shopping bags & supplies,10 pack,bags|gift bags|shopping bags & supplies
+CUS-HIG-001,PowerTech Digital Camera standard,PowerTech,High-value locked showcase,standard,camera|digital camera|high-value locked showcase
+CUS-HIG-002,Store Brand Digital Camera premium,Store Brand,High-value locked showcase,premium,camera|digital camera|high-value locked showcase
+CUS-HIG-003,Store Brand Bluetooth Speaker premium,Store Brand,High-value locked showcase,premium,bluetooth speaker|high-value locked showcase|speaker
+CUS-HIG-004,Carry Smart Bluetooth Speaker standard,Carry Smart,High-value locked showcase,standard,bluetooth speaker|high-value locked showcase|speaker
+CUS-HIG-005,Carry Smart Smart Watch standard,Carry Smart,High-value locked showcase,standard,high-value locked showcase|smart watch|watch
+CUS-HIG-006,PowerTech Smart Watch premium,PowerTech,High-value locked showcase,premium,high-value locked showcase|smart watch|watch
+CUS-HIG-007,PowerTech Wireless Earbuds premium,PowerTech,High-value locked showcase,premium,earphones|high-value locked showcase|wireless earbuds
+CUS-HIG-008,Store Brand Wireless Earbuds standard,Store Brand,High-value locked showcase,standard,earphones|high-value locked showcase|wireless earbuds
+CUS-MOB-001,PowerTech USB-C Cable standard,PowerTech,"Mobile, audio & travel tech",standard,"cable|charger|mobile, audio & travel tech|usb-c cable"
+CUS-MOB-002,Store Brand USB-C Cable long,Store Brand,"Mobile, audio & travel tech",long,"cable|charger|mobile, audio & travel tech|usb-c cable"
+CUS-MOB-003,Store Brand Power Bank long,Store Brand,"Mobile, audio & travel tech",long,"battery pack|mobile, audio & travel tech|power bank"
+CUS-MOB-004,Carry Smart Power Bank standard,Carry Smart,"Mobile, audio & travel tech",standard,"battery pack|mobile, audio & travel tech|power bank"
+CUS-MOB-005,Carry Smart Wired Headphones standard,Carry Smart,"Mobile, audio & travel tech",standard,"earphones|mobile, audio & travel tech|wired headphones"
+CUS-MOB-006,PowerTech Wired Headphones long,PowerTech,"Mobile, audio & travel tech",long,"earphones|mobile, audio & travel tech|wired headphones"
+CUS-MOB-007,PowerTech Travel Adapter long,PowerTech,"Mobile, audio & travel tech",long,"mobile, audio & travel tech|plug|travel adapter"
+CUS-MOB-008,Store Brand Travel Adapter standard,Store Brand,"Mobile, audio & travel tech",standard,"mobile, audio & travel tech|plug|travel adapter"
+CUS-COU-001,PowerTech Phone Stand single,PowerTech,Countertop impulse displays,single,countertop impulse displays|holder|phone stand
+CUS-COU-002,Store Brand Phone Stand 3 pack,Store Brand,Countertop impulse displays,3 pack,countertop impulse displays|holder|phone stand
+CUS-COU-003,Store Brand Cable Organizer 3 pack,Store Brand,Countertop impulse displays,3 pack,cable organizer|cable tidy|countertop impulse displays
+CUS-COU-004,Carry Smart Cable Organizer single,Carry Smart,Countertop impulse displays,single,cable organizer|cable tidy|countertop impulse displays
+CUS-COU-005,Carry Smart Key Ring single,Carry Smart,Countertop impulse displays,single,countertop impulse displays|key ring|keychain
+CUS-COU-006,PowerTech Key Ring 3 pack,PowerTech,Countertop impulse displays,3 pack,countertop impulse displays|key ring|keychain
+CUS-COU-007,PowerTech Hair Bands 3 pack,PowerTech,Countertop impulse displays,3 pack,countertop impulse displays|hair bands|scrunchie
+CUS-COU-008,Store Brand Hair Bands single,Store Brand,Countertop impulse displays,single,countertop impulse displays|hair bands|scrunchie
+CUS-CUS-001,PowerTech Gift Ribbon standard,PowerTech,"Customer wraps, bags & secured stock",standard,"customer wraps, bags & secured stock|gift ribbon|ribbon"
+CUS-CUS-002,Store Brand Gift Ribbon large,Store Brand,"Customer wraps, bags & secured stock",large,"customer wraps, bags & secured stock|gift ribbon|ribbon"
+CUS-CUS-003,Store Brand Gift Tags large,Store Brand,"Customer wraps, bags & secured stock",large,"customer wraps, bags & secured stock|gift tags|tag"
+CUS-CUS-004,Carry Smart Gift Tags standard,Carry Smart,"Customer wraps, bags & secured stock",standard,"customer wraps, bags & secured stock|gift tags|tag"
+CUS-CUS-005,Carry Smart Padded Envelope standard,Carry Smart,"Customer wraps, bags & secured stock",standard,"customer wraps, bags & secured stock|mailer|padded envelope"
+CUS-CUS-006,PowerTech Padded Envelope large,PowerTech,"Customer wraps, bags & secured stock",large,"customer wraps, bags & secured stock|mailer|padded envelope"
+CUS-CUS-007,PowerTech Bubble Wrap large,PowerTech,"Customer wraps, bags & secured stock",large,"bubble wrap|customer wraps, bags & secured stock|packing"
+CUS-CUS-008,Store Brand Bubble Wrap standard,Store Brand,"Customer wraps, bags & secured stock",standard,"bubble wrap|customer wraps, bags & secured stock|packing"
+CUS-SEC-001,PowerTech Portable Charger Stand standard,PowerTech,Secured foot and base displays,standard,dock|portable charger stand|secured foot and base displays
+CUS-SEC-002,Store Brand Portable Charger Stand premium,Store Brand,Secured foot and base displays,premium,dock|portable charger stand|secured foot and base displays
+CUS-SEC-003,Store Brand Transit Wallet premium,Store Brand,Secured foot and base displays,premium,secured foot and base displays|transit wallet|wallet
+CUS-SEC-004,Carry Smart Transit Wallet standard,Carry Smart,Secured foot and base displays,standard,secured foot and base displays|transit wallet|wallet
+CUS-SEC-005,Carry Smart Electronic Lock standard,Carry Smart,Secured foot and base displays,standard,electronic lock|padlock|secured foot and base displays
+CUS-SEC-006,PowerTech Electronic Lock premium,PowerTech,Secured foot and base displays,premium,electronic lock|padlock|secured foot and base displays
+CUS-SEC-007,PowerTech Luggage Tag premium,PowerTech,Secured foot and base displays,premium,luggage tag|secured foot and base displays|tag
+CUS-SEC-008,Store Brand Luggage Tag standard,Store Brand,Secured foot and base displays,standard,luggage tag|secured foot and base displays|tag

@@ -1,0 +1,403 @@
+{
+  "description": "Extra queries dataset to verify generalization and check for overfitting.",
+  "cases": [
+    {
+      "id": "EXT-EXA-01",
+      "category": "exact",
+      "query": "Bella Pasta Fusilli 500 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-PAS-015"
+        ]
+      }
+    },
+    {
+      "id": "EXT-EXA-02",
+      "category": "exact",
+      "query": "Bella Pasta Chopped Tomatoes 400 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-001"
+        ]
+      }
+    },
+    {
+      "id": "EXT-EXA-03",
+      "category": "exact",
+      "query": "Store Brand Kidney Beans 800 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-003"
+        ]
+      }
+    },
+    {
+      "id": "EXT-EXA-04",
+      "category": "exact",
+      "query": "Golden Harvest Chickpeas 400 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-005"
+        ]
+      }
+    },
+    {
+      "id": "EXT-EXA-05",
+      "category": "exact",
+      "query": "Organic Roots Spring Onions 1 bunch",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "PRO-BUN-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-EXA-06",
+      "category": "exact",
+      "query": "Store Brand Instant Noodles 100 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-SPE-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-01",
+      "category": "typo",
+      "query": "Blla Pasta Fusilli 500 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-PAS-015"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-02",
+      "category": "typo",
+      "query": "Bella Pasta Choped Tomatoes 400 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-001"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-03",
+      "category": "typo",
+      "query": "Store Brand Kidny Beans 800 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-003"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-04",
+      "category": "typo",
+      "query": "Golden Harvest Chickpas 400 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-005"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-05",
+      "category": "typo",
+      "query": "Orgnic Roots Spring Onions 1 bunch",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "PRO-BUN-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-TYP-06",
+      "category": "typo",
+      "query": "Store Brand Insant Noodles 100 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-SPE-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-01",
+      "category": "synonym",
+      "query": "Golden Harvest garbanzo 400 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-CAN-005"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-02",
+      "category": "synonym",
+      "query": "Bella Pasta marinara 350 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-PAS-001"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-03",
+      "category": "synonym",
+      "query": "Bella Pasta ramen 250 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "GA1-SPE-007"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-04",
+      "category": "synonym",
+      "query": "Fresh Farms scallions 500 g",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "PRO-BUN-007"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-05",
+      "category": "synonym",
+      "query": "CleanHome tissue 4 pack",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "HOU-PAP-001"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-06",
+      "category": "synonym",
+      "query": "Urban Thread sweater S",
+      "expect": {
+        "status": "matched",
+        "acceptable_skus": [
+          "APP-SEA-001"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-07",
+      "category": "bare_synonym",
+      "query": "garbanzo",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "GA1-CAN-005",
+          "GA1-CAN-006"
+        ]
+      }
+    },
+    {
+      "id": "EXT-SYN-08",
+      "category": "bare_synonym",
+      "query": "ramen",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "GA1-SPE-007",
+          "GA1-SPE-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-01",
+      "category": "generic",
+      "query": "pasta",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "DEL-PRE-013",
+          "DEL-PRE-014",
+          "GA1-BUL-001",
+          "GA1-BUL-002",
+          "GA1-BUL-003",
+          "GA1-BUL-004",
+          "GA1-BUL-005",
+          "GA1-BUL-006",
+          "GA1-CAN-001",
+          "GA1-CAN-006",
+          "GA1-CAN-007",
+          "GA1-PAS-001",
+          "GA1-PAS-002",
+          "GA1-PAS-003",
+          "GA1-PAS-004",
+          "GA1-PAS-005",
+          "GA1-PAS-006",
+          "GA1-PAS-007",
+          "GA1-PAS-008",
+          "GA1-PAS-009",
+          "GA1-PAS-010",
+          "GA1-PAS-011",
+          "GA1-PAS-012",
+          "GA1-PAS-013",
+          "GA1-PAS-014",
+          "GA1-PAS-015",
+          "GA1-PAS-016",
+          "GA1-SPE-001",
+          "GA1-SPE-006",
+          "GA1-SPE-007"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-02",
+      "category": "generic",
+      "query": "apples",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "PRO-APP-001",
+          "PRO-APP-002",
+          "PRO-APP-003",
+          "PRO-APP-004"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-03",
+      "category": "generic",
+      "query": "soup",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "GA1-SPE-001",
+          "GA1-SPE-002"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-04",
+      "category": "generic",
+      "query": "beans",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "GA1-CAN-003",
+          "GA1-CAN-004",
+          "GA4-MEX-005",
+          "GA4-MEX-006"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-05",
+      "category": "generic",
+      "query": "cereal",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "GA2-CER-001",
+          "GA2-CER-002",
+          "GA2-CER-003",
+          "GA2-CER-004",
+          "GA2-CER-005",
+          "GA2-CER-006",
+          "GA2-CER-007",
+          "GA2-CER-008",
+          "SEA-MUL-007",
+          "SEA-MUL-008"
+        ]
+      }
+    },
+    {
+      "id": "EXT-GEN-06",
+      "category": "generic",
+      "query": "coffee",
+      "expect": {
+        "status": "ambiguous",
+        "acceptable_skus": [
+          "CAF-JUI-001",
+          "CAF-JUI-002",
+          "CAF-JUI-003",
+          "CAF-JUI-004",
+          "CAF-JUI-005",
+          "CAF-JUI-006",
+          "CAF-JUI-007",
+          "CAF-JUI-008",
+          "DAI-CRE-001",
+          "DAI-CRE-002",
+          "HOU-SMA-001",
+          "HOU-SMA-002"
+        ]
+      }
+    },
+    {
+      "id": "EXT-NTF-01",
+      "category": "not_found",
+      "query": "unobtainium ingots",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    },
+    {
+      "id": "EXT-NTF-02",
+      "category": "not_found",
+      "query": "laser cannon",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    },
+    {
+      "id": "EXT-NTF-03",
+      "category": "not_found",
+      "query": "teleportation portal device",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    },
+    {
+      "id": "EXT-NTF-04",
+      "category": "not_found",
+      "query": "kryptonite shard",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    },
+    {
+      "id": "EXT-NTF-05",
+      "category": "not_found",
+      "query": "antimatter containment vessel",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    },
+    {
+      "id": "EXT-NTF-06",
+      "category": "not_found",
+      "query": "warp drive manifold",
+      "expect": {
+        "status": "not_found",
+        "acceptable_skus": []
+      }
+    }
+  ]
+}

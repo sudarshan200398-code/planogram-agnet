@@ -1,0 +1,49 @@
+sku,floor,zone,bay,shelf_level,position,node_id
+GRO-RIC-001,1,Grocery Aisle 1,A,2,1,L1_A1
+GRO-FLR-001,1,Grocery Aisle 1,B,1,1,L1_A1
+GRO-OIL-001,1,Grocery Aisle 1,C,2,2,L1_A1
+GRO-PAS-001,1,Grocery Aisle 2,A,3,1,L1_A2
+GRO-PAS-002,1,Grocery Aisle 2,C,3,2,L1_A2
+GRO-PAS-003,1,Grocery Aisle 2,C,3,4,L1_A2
+GRO-SAU-001,1,Grocery Aisle 2,A,4,1,L1_A2
+GRO-SAU-002,1,Grocery Aisle 2,C,4,3,L1_A2
+GRO-CAN-001,1,Grocery Aisle 2,A,2,1,L1_A2
+GRO-CAN-002,1,Grocery Aisle 2,B,2,2,L1_A2
+GRO-SNK-001,1,Grocery Aisle 3,A,3,1,L1_A3
+GRO-BEV-001,1,Grocery Aisle 3,C,4,1,L1_A3
+PRO-FRU-001,1,Produce,C,2,4,L1_PRODUCE
+PRO-FRU-002,1,Produce,C,4,1,L1_PRODUCE
+PRO-VEG-001,1,Produce,A,3,1,L1_PRODUCE
+PRO-VEG-002,1,Produce,A,5,1,L1_PRODUCE
+BAK-BRD-001,1,Bakery,A,4,1,L1_BAKERY
+BAK-BRD-002,1,Bakery,B,3,3,L1_BAKERY
+BAK-PAS-001,1,Bakery,C,4,1,L1_BAKERY
+BAK-CAK-001,1,Bakery,D,1,1,L1_BAKERY
+DEL-MEA-001,1,Deli & Meat,A,4,1,L1_DELI
+DEL-MEA-002,1,Deli & Meat,A,5,1,L1_DELI
+DEL-DEL-001,1,Deli & Meat,C,5,1,L1_DELI
+DAI-MLK-001,1,Dairy & Frozen,A,1,1,L1_DAIRY
+DAI-BTR-001,1,Dairy & Frozen,A,5,1,L1_DAIRY
+DAI-YOG-001,1,Dairy & Frozen,A,4,3,L1_DAIRY
+FRO-ICE-001,1,Dairy & Frozen,C,5,1,L1_DAIRY
+FRO-PIZ-001,1,Dairy & Frozen,C,1,1,L1_DAIRY
+CHK-BAT-001,1,Checkout Zone,A,5,1,L1_CHECKOUT
+CHK-GUM-001,1,Checkout Zone,A,3,1,L1_CHECKOUT
+CHK-CHO-001,1,Checkout Zone,C,3,1,L1_CHECKOUT
+TOY-BLK-001,2,Toys & Stationery,A,2,1,L2_TOYS
+TOY-BRD-001,2,Toys & Stationery,A,5,1,L2_TOYS
+STA-CRY-001,2,Toys & Stationery,C,2,1,L2_TOYS
+STA-PAP-001,2,Toys & Stationery,D,1,1,L2_TOYS
+APP-TSH-001,2,Apparel,D,3,1,L2_APPAREL_W
+APP-JEA-001,2,Apparel,A,2,1,L2_APPAREL_W
+APP-HOO-001,2,Apparel,C,3,2,L2_APPAREL_N
+HOU-TRP-001,2,Household,A,1,1,L2_HOUSEHOLD
+HOU-DET-001,2,Household,A,4,1,L2_HOUSEHOLD
+HOU-BAG-001,2,Household,A,5,1,L2_HOUSEHOLD
+HOM-TST-001,2,Home Goods & Appliances,C,5,2,L2_HOMEGOODS
+HOM-AIR-001,2,Home Goods & Appliances,C,3,2,L2_HOMEGOODS
+CAF-WAT-001,2,Cafe,A,4,1,L2_CAFE
+CAF-ICE-001,2,Cafe,A,5,1,L2_CAFE
+PRM-SNK-001,2,Seasonal Promo,A,4,1,L2_PROMO
+PRM-WAT-001,2,Seasonal Promo,D,1,1,L2_PROMO
+SVC-GFT-001,2,Customer Service,B,3,1,L2_CUSTSERVICE
