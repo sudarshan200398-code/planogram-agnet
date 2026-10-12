@@ -20,6 +20,9 @@ class Settings(BaseModel):
     exact_stop_limit: int = Field(default=8, ge=1)
     max_plan_evaluations: int = Field(default=200000, ge=1)
     retries: int = Field(default=1, ge=0)
+    provider: str = Field(default="gemini")
+    model_name: str = Field(default="gemini-3-flash-preview")
+    max_tokens: int = Field(default=1000, ge=1)
 
 
 def _find_default_settings_file() -> Path | None:

@@ -1,0 +1,379 @@
+{
+  "description": "Extra customer-style test queries for the Query Agent fallback overfitting check.",
+  "cases": [
+    {
+      "id": "EQA-01",
+      "type": "polite_request",
+      "query": "Can you help me find Daily Bake White Sandwich Bread 400 g and Store Brand Salted Butter 250 g please",
+      "expect": {
+        "items": [
+          {"text": "Daily Bake White Sandwich Bread 400 g", "qty": 1},
+          {"text": "Store Brand Salted Butter 250 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-02",
+      "type": "polite_request",
+      "query": "Please help me locate Fresh Farms Grapes 500 g",
+      "expect": {
+        "items": [
+          {"text": "Fresh Farms Grapes 500 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-03",
+      "type": "polite_request",
+      "query": "Could you please find Store Brand Paprika 100 g and Golden Harvest Lentils 2 kg",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Paprika 100 g", "qty": 1},
+          {"text": "Golden Harvest Lentils 2 kg", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-04",
+      "type": "polite_request",
+      "query": "Can you find Store Brand Dark Chocolate Bar 90 g please?",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Dark Chocolate Bar 90 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-05",
+      "type": "quantity_leading",
+      "query": "I'd like 2 of Store Brand Whole Milk 2 L",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Whole Milk 2 L", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-06",
+      "type": "quantity_leading",
+      "query": "3x Fizz Up Lemon Lime Soda 1 L and 2x Store Brand Salted Butter 250 g",
+      "expect": {
+        "items": [
+          {"text": "Fizz Up Lemon Lime Soda 1 L", "qty": 3},
+          {"text": "Store Brand Salted Butter 250 g", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-07",
+      "type": "quantity_leading",
+      "query": "I need 4 Store Brand Strawberry Yogurt 500 g",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Strawberry Yogurt 500 g", "qty": 4}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-08",
+      "type": "quantity_leading",
+      "query": "Please get 2 CleanHome Trash Bags 20 pack",
+      "expect": {
+        "items": [
+          {"text": "CleanHome Trash Bags 20 pack", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-09",
+      "type": "quantity_word_or_trailing",
+      "query": "two of Golden Crust Blueberry Muffins 6 pack",
+      "expect": {
+        "items": [
+          {"text": "Golden Crust Blueberry Muffins 6 pack", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-10",
+      "type": "quantity_word_or_trailing",
+      "query": "three Prime Cuts Turkey Mince 1 kg",
+      "expect": {
+        "items": [
+          {"text": "Prime Cuts Turkey Mince 1 kg", "qty": 3}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-11",
+      "type": "quantity_word_or_trailing",
+      "query": "Store Brand Whole Milk 2 L x2",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Whole Milk 2 L", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-12",
+      "type": "quantity_word_or_trailing",
+      "query": "Daily Bake Apple Pie 1 slice 2x",
+      "expect": {
+        "items": [
+          {"text": "Daily Bake Apple Pie 1 slice", "qty": 2}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-13",
+      "type": "start_landmark",
+      "query": "Where's Store Brand Whole Milk 2 L? I'm by the Bakery",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Whole Milk 2 L", "qty": 1}
+        ],
+        "start": "Bakery",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-14",
+      "type": "start_landmark",
+      "query": "Looking for Fresh Farms Grapes 500 g, I am at the Produce",
+      "expect": {
+        "items": [
+          {"text": "Fresh Farms Grapes 500 g", "qty": 1}
+        ],
+        "start": "Produce",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-15",
+      "type": "start_landmark",
+      "query": "Daily Bake White Sandwich Bread 400 g, near the Café",
+      "expect": {
+        "items": [
+          {"text": "Daily Bake White Sandwich Bread 400 g", "qty": 1}
+        ],
+        "start": "Café",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-16",
+      "type": "start_landmark",
+      "query": "Find me PlayTime Coloured Pencils 24 pack, I'm near the Escalators",
+      "expect": {
+        "items": [
+          {"text": "PlayTime Coloured Pencils 24 pack", "qty": 1}
+        ],
+        "start": "Escalators",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-17",
+      "type": "accessible_route",
+      "query": "Need Basic Co Baseball Cap one size, no stairs",
+      "expect": {
+        "items": [
+          {"text": "Basic Co Baseball Cap one size", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "EQA-18",
+      "type": "accessible_route",
+      "query": "Where is BrightHome Microwave Oven 4 L (wheelchair accessible)",
+      "expect": {
+        "items": [
+          {"text": "BrightHome Microwave Oven 4 L", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "EQA-19",
+      "type": "accessible_route",
+      "query": "Store Brand Salted Butter 250 g and Fresh Press Falafel Wrap standard step-free route",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Salted Butter 250 g", "qty": 1},
+          {"text": "Fresh Press Falafel Wrap standard", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "EQA-20",
+      "type": "plus_also_connectors",
+      "query": "Store Brand Whole Milk 2 L + Daily Bake White Sandwich Bread 400 g + Store Brand Salted Butter 250 g",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Whole Milk 2 L", "qty": 1},
+          {"text": "Daily Bake White Sandwich Bread 400 g", "qty": 1},
+          {"text": "Store Brand Salted Butter 250 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-21",
+      "type": "plus_also_connectors",
+      "query": "I want Fresh Farms Grapes 500 g plus Golden Crust Blueberry Muffins 6 pack",
+      "expect": {
+        "items": [
+          {"text": "Fresh Farms Grapes 500 g", "qty": 1},
+          {"text": "Golden Crust Blueberry Muffins 6 pack", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-22",
+      "type": "plus_also_connectors",
+      "query": "Find CleanHome Trash Bags 20 pack and also CleanHome Blender premium",
+      "expect": {
+        "items": [
+          {"text": "CleanHome Trash Bags 20 pack", "qty": 1},
+          {"text": "CleanHome Blender premium", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-23",
+      "type": "plus_also_connectors",
+      "query": "Organic Roots Button Mushrooms 150 g also Sweet Spot Still Water Bottle 500 ml",
+      "expect": {
+        "items": [
+          {"text": "Organic Roots Button Mushrooms 150 g", "qty": 1},
+          {"text": "Sweet Spot Still Water Bottle 500 ml", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-24",
+      "type": "punctuation_and_casing",
+      "query": "   store brand whole milk 2 l   .",
+      "expect": {
+        "items": [
+          {"text": "store brand whole milk 2 l", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-25",
+      "type": "punctuation_and_casing",
+      "query": "daily bake white sandwich bread 400 g,store brand salted butter 250 g",
+      "expect": {
+        "items": [
+          {"text": "daily bake white sandwich bread 400 g", "qty": 1},
+          {"text": "store brand salted butter 250 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-26",
+      "type": "punctuation_and_casing",
+      "query": "fresh farms grapes 500 g ; golden harvest lentils 2 kg ; fizz up lemon lime soda 1 l.",
+      "expect": {
+        "items": [
+          {"text": "fresh farms grapes 500 g", "qty": 1},
+          {"text": "golden harvest lentils 2 kg", "qty": 1},
+          {"text": "fizz up lemon lime soda 1 l", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-27",
+      "type": "punctuation_and_casing",
+      "query": "Where is Store Brand Paprika 100 g?   ",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Paprika 100 g", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-28",
+      "type": "conjunction_in_product_name",
+      "query": "Café Corner Egg and Cress Sandwich large",
+      "expect": {
+        "items": [
+          {"text": "Café Corner Egg and Cress Sandwich large", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-29",
+      "type": "conjunction_in_product_name",
+      "query": "Café Corner Egg and Cress Sandwich large and Store Brand Whole Milk 2 L",
+      "expect": {
+        "items": [
+          {"text": "Café Corner Egg and Cress Sandwich large", "qty": 1},
+          {"text": "Store Brand Whole Milk 2 L", "qty": 1}
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "EQA-30",
+      "type": "conjunction_in_product_name",
+      "query": "Store Brand Egg and Cress Sandwich standard and CleanHome Trash Bags 20 pack, I'm near the Toys & Stationery",
+      "expect": {
+        "items": [
+          {"text": "Store Brand Egg and Cress Sandwich standard", "qty": 1},
+          {"text": "CleanHome Trash Bags 20 pack", "qty": 1}
+        ],
+        "start": "Toys & Stationery",
+        "accessible_only": false
+      }
+    }
+  ]
+}
