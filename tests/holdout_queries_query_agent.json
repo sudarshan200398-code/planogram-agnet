@@ -1,0 +1,451 @@
+{
+  "description": "Holdout customer-style messages for the rule-based fallback of the Query agent. Expected values come from the store data. Do not tune code against this file.",
+  "how_to_check": "item texts must equal the expected texts (after trimming), quantities must match, start must equal the landmark name (null if none), accessible_only must match",
+  "cases": [
+    {
+      "id": "HLD-01",
+      "type": "casual_request",
+      "query": "hi, do you have Sunfield Brownie Mix 250 g?",
+      "expect": {
+        "items": [
+          {
+            "text": "Sunfield Brownie Mix 250 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-02",
+      "type": "casual_request",
+      "query": "any chance you stock Store Brand Cola 500 ml",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Cola 500 ml",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-03",
+      "type": "casual_request",
+      "query": "could you point me to Store Brand Salted Potato Chips 180 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Salted Potato Chips 180 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-04",
+      "type": "casual_request",
+      "query": "looking for Store Brand Potato Salad 250 g and Fresh Press Sports Drink Blue 330 ml, thanks",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Potato Salad 250 g",
+            "qty": 1
+          },
+          {
+            "text": "Fresh Press Sports Drink Blue 330 ml",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-05",
+      "type": "quantity_forms",
+      "query": "3 x Basic Co Canvas Sneakers UK 8",
+      "expect": {
+        "items": [
+          {
+            "text": "Basic Co Canvas Sneakers UK 8",
+            "qty": 3
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-06",
+      "type": "quantity_forms",
+      "query": "get me 3 Prime Cuts Honey Ham 200 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Prime Cuts Honey Ham 200 g",
+            "qty": 3
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-07",
+      "type": "quantity_forms",
+      "query": "Quick Pick Turkey Jerky 120 g - qty 2",
+      "expect": {
+        "items": [
+          {
+            "text": "Quick Pick Turkey Jerky 120 g",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-08",
+      "type": "quantity_forms",
+      "query": "I need two Store Brand Paper Shopping Bags 25 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Paper Shopping Bags 25 pack",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-09",
+      "type": "lists_connectors",
+      "query": "I need Store Brand Chocolate Ice Cream 1 L, Store Brand Warranty Claim Pad 25 sheets, and Café Corner Sweet Popcorn 100 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Chocolate Ice Cream 1 L",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Warranty Claim Pad 25 sheets",
+            "qty": 1
+          },
+          {
+            "text": "Café Corner Sweet Popcorn 100 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-10",
+      "type": "lists_connectors",
+      "query": "Spice Route Tomato Ketchup 250 g; Store Brand Crossbody Bag standard",
+      "expect": {
+        "items": [
+          {
+            "text": "Spice Route Tomato Ketchup 250 g",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Crossbody Bag standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-11",
+      "type": "lists_connectors",
+      "query": "Store Brand Blouse L & Store Brand Chocolate Cookies 2 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Blouse L",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Chocolate Cookies 2 pack",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-12",
+      "type": "lists_connectors",
+      "query": "Basic Co Weekender Bag standard as well as Store Brand Creative Painting Kit small",
+      "expect": {
+        "items": [
+          {
+            "text": "Basic Co Weekender Bag standard",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Creative Painting Kit small",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-13",
+      "type": "start_phrases",
+      "query": "starting from the Bakery, find Basic Co Sweatshirt M",
+      "expect": {
+        "items": [
+          {
+            "text": "Basic Co Sweatshirt M",
+            "qty": 1
+          }
+        ],
+        "start": "Bakery",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-14",
+      "type": "start_phrases",
+      "query": "Store Brand Pork Chops 500 g (I'm at Café)",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Pork Chops 500 g",
+            "qty": 1
+          }
+        ],
+        "start": "Café",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-15",
+      "type": "start_phrases",
+      "query": "I'm near the Produce and need Golden Crust Ciabatta Rolls 6 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Golden Crust Ciabatta Rolls 6 pack",
+            "qty": 1
+          }
+        ],
+        "start": "Produce",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-16",
+      "type": "start_phrases",
+      "query": "ArtBox Document Box standard. I'm standing by the Toys & Stationery",
+      "expect": {
+        "items": [
+          {
+            "text": "ArtBox Document Box standard",
+            "qty": 1
+          }
+        ],
+        "start": "Toys & Stationery",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-17",
+      "type": "accessible_phrases",
+      "query": "Spice Route Egg Noodles 200 g please, wheelchair friendly route",
+      "expect": {
+        "items": [
+          {
+            "text": "Spice Route Egg Noodles 200 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HLD-18",
+      "type": "accessible_phrases",
+      "query": "no stairs please: Store Brand Gift Ribbon large",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Gift Ribbon large",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HLD-19",
+      "type": "accessible_phrases",
+      "query": "step free route to Harvest Treats Apple Cider 24 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Harvest Treats Apple Cider 24 pack",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HLD-20",
+      "type": "accessible_phrases",
+      "query": "ArtBox Craft Kit small, avoid stairs and escalators",
+      "expect": {
+        "items": [
+          {
+            "text": "ArtBox Craft Kit small",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HLD-21",
+      "type": "mixed_real_world",
+      "query": "hey! where can i find Store Brand Steam Iron standard??",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Steam Iron standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-22",
+      "type": "mixed_real_world",
+      "query": "Crunchy Co Energy Drink 1.5 L and Store Brand Salted Butter 500 g please, I'm at the Dairy & Frozen, no stairs",
+      "expect": {
+        "items": [
+          {
+            "text": "Crunchy Co Energy Drink 1.5 L",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Salted Butter 500 g",
+            "qty": 1
+          }
+        ],
+        "start": "Dairy & Frozen",
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HLD-23",
+      "type": "mixed_real_world",
+      "query": "need 2 Carry Smart Bluetooth Speaker standard and Fresh Farms Cherries 500 g - near Deli & Meat",
+      "expect": {
+        "items": [
+          {
+            "text": "Carry Smart Bluetooth Speaker standard",
+            "qty": 2
+          },
+          {
+            "text": "Fresh Farms Cherries 500 g",
+            "qty": 1
+          }
+        ],
+        "start": "Deli & Meat",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-24",
+      "type": "mixed_real_world",
+      "query": "Is PlayTime Garden Slide large available? thanks",
+      "expect": {
+        "items": [
+          {
+            "text": "PlayTime Garden Slide large",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-25",
+      "type": "conjunction_in_name",
+      "query": "Café Corner Egg and Cress Sandwich large and Store Brand Cough Sweets small",
+      "expect": {
+        "items": [
+          {
+            "text": "Café Corner Egg and Cress Sandwich large",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Cough Sweets small",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-26",
+      "type": "conjunction_in_name",
+      "query": "where is Sweet Spot Fruit and Nut Mix 60 g?",
+      "expect": {
+        "items": [
+          {
+            "text": "Sweet Spot Fruit and Nut Mix 60 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HLD-27",
+      "type": "conjunction_in_name",
+      "query": "Sweet Spot Caramel Bar 45 g, Store Brand Egg and Cress Sandwich standard",
+      "expect": {
+        "items": [
+          {
+            "text": "Sweet Spot Caramel Bar 45 g",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Egg and Cress Sandwich standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    }
+  ]
+}

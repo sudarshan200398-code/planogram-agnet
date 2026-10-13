@@ -1,9 +1,11 @@
 """Query agent: interprets shopper queries via LLM or rule-based fallback."""
 from __future__ import annotations
 
+import functools
 import json
 import logging
 import re
+from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
 from pydantic import BaseModel, Field
@@ -171,12 +173,91 @@ def _validate_model_output(raw_output: _RawModelOutput, original_text: str, sett
     )
 
 
+def _find_query_phrases_file() -> Path | None:
+    cwd_path = Path("config/query_phrases.json")
+    if cwd_path.is_file():
+        return cwd_path
+    repo_path = Path(__file__).resolve().parent.parent.parent / "config" / "query_phrases.json"
+    if repo_path.is_file():
+        return repo_path
+    return None
+
+
+@functools.lru_cache(maxsize=1)
+def _load_query_phrases() -> dict:
+    f = _find_query_phrases_file()
+    if f and f.is_file():
+        return json.loads(f.read_text(encoding="utf-8"))
+    return {}
+
+
+@functools.lru_cache(maxsize=1)
+def _get_composed_phrases() -> tuple[list[str], list[str], dict[str, int], list[str], list[str], list[str], list[str]]:
+    data = _load_query_phrases()
+    components = data.get("request_prefix_components", {})
+    modals = components.get("modals", ["can you", "could you", "would you", "can", "could", "would"])
+    courtesy = components.get("courtesy", ["please"])
+    helper_verbs = components.get("helper_verbs", ["help me", "help us"])
+    action_verbs = components.get("action_verbs", ["find", "locate", "get", "show", "point me to"])
+    pronouns = components.get("pronouns", ["me", "us"])
+
+    fixed_prefixes = data.get("fixed_request_prefixes", [
+        "i'd like to find", "i'd like", "i would like", "i need", "i want",
+        "need", "point me", "looking for", "i'm looking for", "i am looking for",
+        "where can i find", "where can i get", "where is", "where are", "where's",
+        "do you have", "is there", "is", "are"
+    ])
+
+    generated = set(fixed_prefixes)
+    generated.update(courtesy)
+
+    for m in modals + [""]:
+        for c in courtesy + [""]:
+            for h in helper_verbs + [""]:
+                for a in action_verbs:
+                    for pr in pronouns + [""]:
+                        parts = [p for p in (m, c, h, a, pr) if p]
+                        if parts:
+                            generated.add(" ".join(parts))
+
+    sorted_prefixes = sorted(generated, key=len, reverse=True)
+    trailing_polite = sorted(data.get("trailing_politeness", ["please", "thanks", "thank you"]), key=len, reverse=True)
+    number_words = data.get("number_words", {
+        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
+    })
+    connectors = data.get("connectors", ["as well as", "and also", "and", "plus", "also", "+", "&", ",", ";", "\n"])
+    start_prefixes = sorted(data.get("start_phrase_prefixes", [
+        "i'm near", "i am near", "i'm by", "i am by", "i'm at", "i am at",
+        "starting from", "starting at", "standing by", "standing near", "standing at",
+        "near the", "near", "by the", "by", "from the", "from"
+    ]), key=len, reverse=True)
+    first_person_start = sorted(data.get("first_person_start_prefixes", [
+        "i'm near", "i am near", "i'm by", "i am by", "i'm at", "i am at",
+        "starting from", "starting at", "standing by", "standing near", "standing at"
+    ]), key=len, reverse=True)
+    step_free_phrases = sorted(data.get("step_free_phrases", [
+        "step-free route", "step free route", "step-free", "step free",
+        "no stairs", "avoid stairs", "wheelchair accessible", "wheelchair",
+        "accessible route", "accessible", "elevator only"
+    ]), key=len, reverse=True)
+
+    return sorted_prefixes, trailing_polite, number_words, connectors, start_prefixes, first_person_start, step_free_phrases
+
+
+def _norm_landmark(text: str) -> str:
+    t = text.strip().lower()
+    if t.startswith("the "):
+        t = t[4:].strip()
+    return t
+
+
 def rule_based_fallback(
     text: str,
     settings: Settings,
     dataset: Dataset | None = None,
 ) -> ParsedRequest:
-    """Rule-based fallback parser using general heuristics without AI model calls."""
+    """Rule-based fallback parser using general grammar patterns without AI model calls."""
     if not text or not text.strip():
         return ParsedRequest(intent="unknown", items=[], reason="Query is empty or whitespace")
 
@@ -193,55 +274,83 @@ def rule_based_fallback(
 
     clean_text = text.strip()
 
-    # Detect and extract accessibility phrases
+    (
+        sorted_prefixes,
+        trailing_polite,
+        number_words,
+        connectors,
+        start_prefixes,
+        first_person_start,
+        step_free_phrases,
+    ) = _get_composed_phrases()
+
+    # 1. Step-free accessibility detection
     accessible_only = False
-    acc_parens_pattern = re.compile(
-        r"\s*\((?:step[- ]free(?:\s+route)?|no\s+stairs|wheelchair(?:\s+accessible)?|accessible(?:\s+route)?)\)",
-        re.IGNORECASE,
-    )
-    if acc_parens_pattern.search(clean_text):
-        accessible_only = True
-        clean_text = acc_parens_pattern.sub("", clean_text).strip()
+    for sfp in step_free_phrases:
+        pattern = re.compile(
+            r"(?:\s*\(\s*" + re.escape(sfp) + r"\s*\)|,?\s*\b" + re.escape(sfp) + r"\b)",
+            re.IGNORECASE,
+        )
+        if pattern.search(clean_text):
+            accessible_only = True
+            clean_text = pattern.sub(" ", clean_text).strip()
 
-    acc_plain_pattern = re.compile(
-        r",?\s*\b(?:step[- ]free(?:\s+route)?|no\s+stairs|wheelchair(?:\s+accessible)?|accessible\s+route)\b",
-        re.IGNORECASE,
-    )
-    if acc_plain_pattern.search(clean_text):
-        accessible_only = True
-        clean_text = acc_plain_pattern.sub("", clean_text).strip()
-
-    # Detect and extract checkout phrase
+    # 2. End at checkout detection
     end_at_checkout = False
-    checkout_pattern = re.compile(
+    checkout_pat = re.compile(
         r",?\s*\b(?:end|finish|pay|stop)\s+(?:at|by)\s+(?:the\s+)?checkout\b",
         re.IGNORECASE,
     )
-    if checkout_pattern.search(clean_text):
+    if checkout_pat.search(clean_text):
         end_at_checkout = True
-        clean_text = checkout_pattern.sub("", clean_text).strip()
+        clean_text = checkout_pat.sub(" ", clean_text).strip()
 
-    # Detect start landmark phrase at the end
+    # 3. Start clause detection
     start: str | None = None
-    start_pattern = re.compile(
-        r",?\s*(?:i[\'’]?m\s+near\s+|i[\'’]?m\s+at\s+|near\s+|starting\s+(?:from|at)\s+|from\s+)(?:the\s+)?(.+?)\s*$",
-        re.IGNORECASE,
-    )
-    m_start = start_pattern.search(clean_text)
-    if m_start:
-        start_val = m_start.group(1).strip()
-        if start_val.lower().startswith("the "):
-            start_val = start_val[4:].strip()
-        start = start_val
-        clean_text = clean_text[: m_start.start()].strip()
+    label_map: dict[str, str] = {}
+    if dataset is not None and hasattr(dataset, "graph"):
+        for n in dataset.graph.nodes:
+            if n.label and n.type != "junction":
+                norm_lbl = _norm_landmark(n.label)
+                label_map[norm_lbl] = n.label
 
-    # If dataset is given, find product names to protect their spans from being split
+    prefixes_to_check = start_prefixes if dataset is not None else first_person_start
+    for sp in prefixes_to_check:
+        pat = re.compile(
+            r"(?:[,\n\r;!?]|^|\band\b)\s*\b"
+            + re.escape(sp)
+            + r"\s+(?:the\s+)?([^,\n\r;!?]+?)(?=[,\n\r;!?]|$|\band\b)",
+            re.IGNORECASE,
+        )
+        m = pat.search(clean_text)
+        if m:
+            cand = m.group(1).strip()
+            norm_cand = _norm_landmark(cand)
+            if dataset is not None:
+                if norm_cand in label_map:
+                    start = label_map[norm_cand]
+                    clean_text = clean_text[: m.start()] + " " + clean_text[m.end() :]
+                    break
+            else:
+                start = cand
+                clean_text = clean_text[: m.start()] + " " + clean_text[m.end() :]
+                break
+
+    clean_text = clean_text.strip()
+
+    # 4. Protect product names from dataset
     protected_spans: list[tuple[int, int]] = []
+    matched_prods: list[str] = []
     if dataset is not None and hasattr(dataset, "products"):
+        lower_clean = clean_text.lower()
         for p in dataset.products:
-            p_name = p.name
-            p_pattern = re.compile(re.escape(p_name), re.IGNORECASE)
-            for m in p_pattern.finditer(clean_text):
+            if p.name.lower() in lower_clean:
+                matched_prods.append(p.name)
+
+        matched_prods.sort(key=len, reverse=True)
+        for p_name in matched_prods:
+            p_pat = re.compile(re.escape(p_name), re.IGNORECASE)
+            for m in p_pat.finditer(clean_text):
                 protected_spans.append((m.start(), m.end()))
 
     def is_protected(s_idx: int, e_idx: int) -> bool:
@@ -250,10 +359,23 @@ def rule_based_fallback(
                 return True
         return False
 
-    # Split delimiters: comma, semicolon, newline, &, and
-    delim_pattern = re.compile(r"(?:,\s*and\s+|[,\n\r;]+|\s+and\s+|\s*&\s*)", re.IGNORECASE)
+    # 5. Connectors splitting outside protected spans
+    delim_patterns: list[str] = []
+    for c in connectors:
+        if c in [",", ";", "\n", "+"]:
+            delim_patterns.append(re.escape(c))
+        elif c == "&":
+            delim_patterns.append(r"\s*&\s*")
+        else:
+            delim_patterns.append(r"\b" + re.escape(c) + r"\b")
+
+    combined_delim = re.compile(
+        r"(?:,\s*and\s+also\b|,\s*and\b|,\s*as\s+well\s+as\b|" + "|".join(delim_patterns) + r")",
+        re.IGNORECASE,
+    )
+
     splits = [0]
-    for m in delim_pattern.finditer(clean_text):
+    for m in combined_delim.finditer(clean_text):
         if not is_protected(m.start(), m.end()):
             splits.append(m.start())
             splits.append(m.end())
@@ -267,51 +389,124 @@ def rule_based_fallback(
         if chunk:
             raw_items.append(chunk)
 
-    # Clean each item chunk: leading quantity, filler words, stray punctuation
-    filler_pattern = re.compile(
-        r"^\s*(?:where\s+(?:is|are)\s+(?:the\s+)?|find\s+(?:me\s+)?(?:the\s+)?|i\s+need\s+(?:a\s+|an\s+|the\s+)?|"
-        r"can\s+you\s+find\s+(?:me\s+)?(?:the\s+)?|looking\s+for\s+(?:a\s+|an\s+|the\s+)?|i\s+want\s+(?:a\s+|an\s+|the\s+)?|"
-        r"get\s+me\s+(?:a\s+|an\s+|the\s+)?|show\s+me\s+(?:where\s+is\s+)?(?:the\s+)?|search\s+for\s+(?:the\s+)?)\s*",
-        re.IGNORECASE,
-    )
-    qty_prefix_pattern = re.compile(r"^\s*(\d{1,2})\s*(?:x\s*|\*\s*|\s+)\s*", re.IGNORECASE)
-
+    # 6. Per-item cleaning and quantity extraction
     parsed_items: list[ParsedItem] = []
-    for item_str in raw_items:
-        cleaned = filler_pattern.sub("", item_str).strip()
+    for chunk in raw_items:
+        # Strip trailing politeness and punctuation
+        for tp in trailing_polite:
+            chunk = re.sub(
+                r"(?:[,\s]+|^)\b" + re.escape(tp) + r"\b\s*[.?!,;]*$",
+                "",
+                chunk,
+                flags=re.IGNORECASE,
+            ).strip()
+        chunk = chunk.strip("?.,;! ")
+
+        # Strip leading request prefixes (longest first)
+        for rp in sorted_prefixes:
+            pat = re.compile(r"^\b" + re.escape(rp) + r"\b\s*(?:of\s+|to\s+|for\s+)?", re.IGNORECASE)
+            m = pat.match(chunk)
+            if m:
+                cand_remainder = chunk[m.end() :].strip()
+                if cand_remainder:
+                    chunk = cand_remainder
+                    break
+
+        for tp in trailing_polite:
+            chunk = re.sub(
+                r"(?:[,\s]+|^)\b" + re.escape(tp) + r"\b\s*[.?!,;]*$",
+                "",
+                chunk,
+                flags=re.IGNORECASE,
+            ).strip()
+        chunk = chunk.strip("?.,;! ")
+
+        if not chunk:
+            continue
+
+        matched_prod_span = None
+        if dataset is not None and matched_prods:
+            for p_name in matched_prods:
+                p_pat = re.compile(r"\b" + re.escape(p_name) + r"\b", re.IGNORECASE)
+                m_prod = p_pat.search(chunk)
+                if m_prod:
+                    matched_prod_span = (m_prod.start(), m_prod.end())
+                    break
 
         qty = 1
-        m_qty = qty_prefix_pattern.match(cleaned)
-        if m_qty:
-            potential_qty = int(m_qty.group(1))
-            remainder = cleaned[m_qty.end() :].strip()
-            # If dataset is given, check whether the entire cleaned string is a known product name
-            is_full_product = False
-            if dataset is not None and hasattr(dataset, "products"):
-                for p in dataset.products:
-                    if p.name.lower() == cleaned.lower():
-                        is_full_product = True
-                        break
-            if not is_full_product and remainder and 1 <= potential_qty <= 99:
-                qty = potential_qty
-                cleaned = remainder
+        item_text = chunk
 
-        cleaned = cleaned.strip(",; .")
-        if cleaned:
-            parsed_items.append(ParsedItem(text=cleaned, qty=qty))
+        if matched_prod_span is not None:
+            p_start, p_end = matched_prod_span
+            typed_prod_text = chunk[p_start:p_end]
+            before = chunk[:p_start].strip()
+            after = chunk[p_end:].strip()
 
-    if not parsed_items:
-        return ParsedRequest(
-            intent="unknown",
-            items=[],
-            start=start,
-            accessible_only=accessible_only,
-            end_at_checkout=end_at_checkout,
-            reason="No valid items found",
-        )
+            if before:
+                m_num = re.match(r"^(\d{1,2})\s*(?:x\b|\*\s*|of\b)?\s*$", before, re.IGNORECASE)
+                if m_num:
+                    qty = int(m_num.group(1))
+                    before = ""
+                else:
+                    m_word = re.match(
+                        r"^(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b)?\s*$",
+                        before,
+                        re.IGNORECASE,
+                    )
+                    if m_word:
+                        qty = number_words[m_word.group(1).lower()]
+                        before = ""
 
-    merged_items = _merge_duplicate_items(parsed_items)
-    if not merged_items:
+            if after:
+                m_trail = re.match(
+                    r"^(?:x\s*(\d{1,2})|(\d{1,2})\s*x|qty\s*:?\s*(\d{1,2}))$",
+                    after,
+                    re.IGNORECASE,
+                )
+                if m_trail:
+                    g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
+                    qty = int(g)
+                    after = ""
+
+            item_text = " ".join([part for part in (before, typed_prod_text, after) if part]).strip()
+        else:
+            trail_pat = re.compile(
+                r"(?:\s+|,)(?:x\s*(\d{1,2})|(\d{1,2})\s*x|qty\s*:?\s*(\d{1,2}))\s*$",
+                re.IGNORECASE,
+            )
+            m_trail = trail_pat.search(chunk)
+            if m_trail:
+                g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
+                qty = int(g)
+                chunk = chunk[: m_trail.start()].strip()
+
+            m_num = re.match(r"^\s*(\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", chunk, re.IGNORECASE)
+            if m_num:
+                cand_qty = int(m_num.group(1))
+                rem = chunk[m_num.end() :].strip()
+                if rem and 1 <= cand_qty <= 99:
+                    qty = cand_qty
+                    chunk = rem
+            else:
+                m_word = re.match(
+                    r"^\s*(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b|\s+)",
+                    chunk,
+                    re.IGNORECASE,
+                )
+                if m_word:
+                    cand_qty = number_words[m_word.group(1).lower()]
+                    rem = chunk[m_word.end() :].strip()
+                    if rem:
+                        qty = cand_qty
+                        chunk = rem
+
+            item_text = chunk.strip("?.,;! ")
+
+        if item_text:
+            parsed_items.append(ParsedItem(text=item_text, qty=qty))
+
+    merged = _merge_duplicate_items(parsed_items)
+    if not merged:
         return ParsedRequest(
             intent="unknown",
             items=[],
@@ -322,17 +517,17 @@ def rule_based_fallback(
         )
 
     truncated = False
-    if len(merged_items) > settings.max_items:
-        merged_items = merged_items[: settings.max_items]
+    if len(merged) > settings.max_items:
+        merged = merged[: settings.max_items]
         truncated = True
 
     intent: Literal["find", "shopping_list", "unknown"] = (
-        "find" if len(merged_items) == 1 else "shopping_list"
+        "find" if len(merged) == 1 else "shopping_list"
     )
 
     return ParsedRequest(
         intent=intent,
-        items=merged_items,
+        items=merged,
         start=start,
         accessible_only=accessible_only,
         end_at_checkout=end_at_checkout,

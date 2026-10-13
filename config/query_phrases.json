@@ -1,0 +1,125 @@
+{
+  "request_prefix_components": {
+    "modals": [
+      "can you",
+      "could you",
+      "would you",
+      "can",
+      "could",
+      "would"
+    ],
+    "courtesy": [
+      "please"
+    ],
+    "helper_verbs": [
+      "help me",
+      "help us"
+    ],
+    "action_verbs": [
+      "find",
+      "locate",
+      "get",
+      "show",
+      "point me to"
+    ],
+    "pronouns": [
+      "me",
+      "us"
+    ]
+  },
+  "fixed_request_prefixes": [
+    "i'd like to find",
+    "i'd like",
+    "i would like",
+    "i need",
+    "i want",
+    "need",
+    "point me",
+    "looking for",
+    "i'm looking for",
+    "i am looking for",
+    "where can i find",
+    "where can i get",
+    "where is",
+    "where are",
+    "where's",
+    "do you have",
+    "is there",
+    "is",
+    "are"
+  ],
+  "trailing_politeness": [
+    "please",
+    "thanks",
+    "thank you"
+  ],
+  "connectors": [
+    "as well as",
+    "and also",
+    "and",
+    "plus",
+    "also",
+    "+",
+    "&",
+    ",",
+    ";",
+    "\n"
+  ],
+  "number_words": {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10
+  },
+  "start_phrase_prefixes": [
+    "i'm near",
+    "i am near",
+    "i'm by",
+    "i am by",
+    "i'm at",
+    "i am at",
+    "starting from",
+    "starting at",
+    "standing by",
+    "standing near",
+    "standing at",
+    "near the",
+    "near",
+    "by the",
+    "by",
+    "from the",
+    "from"
+  ],
+  "first_person_start_prefixes": [
+    "i'm near",
+    "i am near",
+    "i'm by",
+    "i am by",
+    "i'm at",
+    "i am at",
+    "starting from",
+    "starting at",
+    "standing by",
+    "standing near",
+    "standing at"
+  ],
+  "step_free_phrases": [
+    "step-free route",
+    "step free route",
+    "step-free",
+    "step free",
+    "no stairs",
+    "avoid stairs",
+    "wheelchair accessible",
+    "wheelchair",
+    "accessible route",
+    "accessible",
+    "elevator only"
+  ]
+}

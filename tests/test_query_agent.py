@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import sys
 
 import pytest
@@ -12,11 +13,20 @@ from planogram_agent.agents.query import (
     parse_request,
     rule_based_fallback,
 )
+from planogram_agent.data_loader import load_dataset
 from planogram_agent.llm.base import LLMClient
 from planogram_agent.llm.factory import make_client
 from planogram_agent.llm.fake_client import FakeLLMClient
 from planogram_agent.llm.gemini_client import GeminiClient
 from planogram_agent.settings import Settings
+
+STORE_DEMO_DIR = Path(__file__).resolve().parent.parent / "data" / "store_demo"
+
+
+@pytest.fixture(scope="session")
+def store_demo_dataset():
+    return load_dataset(STORE_DEMO_DIR, validate=True)
+
 
 # ---------------------------------------------------------------------------
 # FakeLLMClient tests
@@ -351,3 +361,57 @@ def test_fallback_unicode_letters_not_rejected_as_symbols_only():
     assert result.intent == "find"
     assert len(result.items) == 1
     assert result.items[0].text == "பால்"
+
+
+def test_fallback_product_with_size_and_no_quantity(store_demo_dataset):
+    settings = Settings()
+    result = rule_based_fallback("Store Brand Whole Milk 2 L", settings, dataset=store_demo_dataset)
+    assert result.intent == "find"
+    assert len(result.items) == 1
+    assert result.items[0].text == "Store Brand Whole Milk 2 L"
+    assert result.items[0].qty == 1
+
+
+def test_fallback_product_containing_one_size(store_demo_dataset):
+    settings = Settings()
+    result = rule_based_fallback("Basic Co Baseball Cap one size", settings, dataset=store_demo_dataset)
+    assert result.intent == "find"
+    assert len(result.items) == 1
+    assert result.items[0].text == "Basic Co Baseball Cap one size"
+    assert result.items[0].qty == 1
+
+
+def test_fallback_product_name_containing_and(store_demo_dataset):
+    settings = Settings()
+    result = rule_based_fallback("Café Corner Egg and Cress Sandwich large", settings, dataset=store_demo_dataset)
+    assert result.intent == "find"
+    assert len(result.items) == 1
+    assert result.items[0].text == "Café Corner Egg and Cress Sandwich large"
+    assert result.items[0].qty == 1
+
+
+def test_fallback_word_near_inside_product_name(dataset):
+    settings = Settings()
+    # "near" within text that does not match a map landmark must not strip start
+    result = rule_based_fallback("Linear Motion Track near", settings, dataset=dataset)
+    assert result.start is None
+    assert any("Linear Motion Track" in it.text for it in result.items)
+
+
+def test_fallback_trailing_please_and_thanks(dataset):
+    settings = Settings()
+    res1 = rule_based_fallback("Daily Bake Apple Pie 1 slice please", settings, dataset=dataset)
+    assert len(res1.items) == 1
+    assert res1.items[0].text == "Daily Bake Apple Pie 1 slice"
+
+    res2 = rule_based_fallback("Store Brand Salted Butter 250 g thanks", settings, dataset=dataset)
+    assert len(res2.items) == 1
+    assert res2.items[0].text == "Store Brand Salted Butter 250 g"
+
+
+def test_fallback_question_mark_stripped(dataset):
+    settings = Settings()
+    res = rule_based_fallback("Where is Store Brand Paprika 100 g?", settings, dataset=dataset)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Store Brand Paprika 100 g"
+
