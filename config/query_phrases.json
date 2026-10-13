@@ -1,4 +1,13 @@
 {
+  "greetings": [
+    "good morning",
+    "good afternoon",
+    "good evening",
+    "hello",
+    "hiya",
+    "hey",
+    "hi"
+  ],
   "request_prefix_components": {
     "modals": [
       "can you",
@@ -28,12 +37,19 @@
     ]
   },
   "fixed_request_prefixes": [
+    "any chance you stock",
+    "any chance you have",
+    "do you stock",
+    "do you sell",
+    "do you carry",
+    "can you check if you have",
     "i'd like to find",
     "i'd like",
     "i would like",
     "i need",
     "i want",
     "need",
+    "got",
     "point me",
     "looking for",
     "i'm looking for",
@@ -44,14 +60,18 @@
     "where are",
     "where's",
     "do you have",
-    "is there",
-    "is",
-    "are"
+    "is there"
+  ],
+  "trailing_availability": [
+    "in stock",
+    "available"
   ],
   "trailing_politeness": [
-    "please",
+    "thank you",
     "thanks",
-    "thank you"
+    "thx",
+    "ty",
+    "please"
   ],
   "connectors": [
     "as well as",
@@ -78,48 +98,99 @@
     "ten": 10
   },
   "start_phrase_prefixes": [
-    "i'm near",
-    "i am near",
-    "i'm by",
-    "i am by",
-    "i'm at",
-    "i am at",
+    "i am standing near",
+    "i am standing by",
+    "i am standing at",
+    "i'm standing near",
+    "i'm standing by",
+    "i'm standing at",
     "starting from",
     "starting at",
-    "standing by",
     "standing near",
+    "standing by",
     "standing at",
+    "i am near",
+    "i am by",
+    "i am at",
+    "i'm near",
+    "i'm by",
+    "i'm at",
     "near the",
-    "near",
-    "by the",
-    "by",
     "from the",
-    "from"
+    "by the",
+    "near",
+    "from",
+    "by",
+    "at"
   ],
   "first_person_start_prefixes": [
-    "i'm near",
-    "i am near",
-    "i'm by",
-    "i am by",
-    "i'm at",
-    "i am at",
+    "i am standing near",
+    "i am standing by",
+    "i am standing at",
+    "i'm standing near",
+    "i'm standing by",
+    "i'm standing at",
     "starting from",
     "starting at",
-    "standing by",
     "standing near",
-    "standing at"
+    "standing by",
+    "standing at",
+    "i am near",
+    "i am by",
+    "i am at",
+    "i'm near",
+    "i'm by",
+    "i'm at"
+  ],
+  "bare_start_prefixes": [
+    "from",
+    "by",
+    "at"
   ],
   "step_free_phrases": [
     "step-free route",
     "step free route",
+    "step-free path",
+    "step free path",
     "step-free",
     "step free",
-    "no stairs",
+    "avoid stairs and escalators",
     "avoid stairs",
+    "no stairs please",
+    "no stairs",
+    "wheelchair accessible route",
     "wheelchair accessible",
+    "wheelchair friendly route",
+    "wheelchair friendly access",
+    "wheelchair friendly",
+    "wheelchair route",
+    "wheelchair access",
     "wheelchair",
     "accessible route",
+    "accessible path",
+    "accessible access",
     "accessible",
-    "elevator only"
+    "elevator only",
+    "lift only"
+  ],
+  "spoken_step_free": [
+    "i can't use stairs",
+    "i cannot use stairs",
+    "cant use stairs",
+    "can't use stairs",
+    "wheelchair user here",
+    "wheelchair user"
+  ],
+  "step_free_filler_tails": [
+    "friendly access route",
+    "friendly route",
+    "friendly access",
+    "friendly",
+    "access route",
+    "access",
+    "options",
+    "route",
+    "path",
+    "please"
   ]
 }

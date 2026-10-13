@@ -12,6 +12,7 @@ STORE_DEMO_DIR = Path(__file__).resolve().parent.parent / "data" / "store_demo"
 GOLDEN_QUERIES_PATH = Path(__file__).resolve().parent / "golden_queries.json"
 EXTRA_QUERIES_PATH = Path(__file__).resolve().parent / "extra_queries_query_agent.json"
 HOLDOUT_QUERIES_PATH = Path(__file__).resolve().parent / "holdout_queries_query_agent.json"
+HOLDOUT_V2_QUERIES_PATH = Path(__file__).resolve().parent / "holdout_queries_query_agent_v2.json"
 
 TARGET_RATES = {
     "invalid_input (structural)": 100.0,
@@ -334,4 +335,94 @@ def test_holdout_queries_report():
     if not has_any_fail:
         print("No failures encountered.")
     print("-" * 76)
+
+
+def test_holdout_v2_queries_report():
+    """Report-only evaluation of rule-based fallback on holdout v2 queries."""
+    if not HOLDOUT_V2_QUERIES_PATH.is_file():
+        return
+
+    dataset = load_dataset(STORE_DEMO_DIR, validate=True)
+    settings = Settings()
+    with open(HOLDOUT_V2_QUERIES_PATH, "r", encoding="utf-8") as f:
+        holdout_data = json.load(f)
+
+    types: dict[str, list[dict]] = {}
+    for case in holdout_data["cases"]:
+        types.setdefault(case.get("type", "general"), []).append(case)
+
+    results: dict[str, dict] = {}
+    failures: dict[str, list[tuple[str, str, str]]] = {}
+
+    for qtype, cases in types.items():
+        passed = 0
+        type_fails: list[tuple[str, str, str]] = []
+
+        for case in cases:
+            case_id = case["id"]
+            query = case["query"]
+            res = rule_based_fallback(query, settings, dataset=dataset)
+
+            expected_items = case["expect"].get("items", [])
+            expected_start = case["expect"].get("start")
+            expected_acc = case["expect"].get("accessible_only", False)
+
+            actual_items = [{"text": it.text, "qty": it.qty} for it in res.items]
+            items_ok = actual_items == expected_items
+            start_ok = res.start == expected_start
+            acc_ok = res.accessible_only == expected_acc
+
+            if items_ok and start_ok and acc_ok:
+                passed += 1
+            else:
+                reasons: list[str] = []
+                if not items_ok:
+                    reasons.append(f"items: expected {expected_items}, got {actual_items}")
+                if not start_ok:
+                    reasons.append(f"start: expected {expected_start}, got {res.start}")
+                if not acc_ok:
+                    reasons.append(f"accessible: expected {expected_acc}, got {res.accessible_only}")
+                type_fails.append((case_id, query, "; ".join(reasons)))
+
+        rate = (passed / len(cases)) * 100.0 if cases else 0.0
+        results[qtype] = {
+            "passed": passed,
+            "total": len(cases),
+            "rate": rate,
+        }
+        failures[qtype] = type_fails
+
+    print("\n" + "=" * 76)
+    print("HOLDOUT V2 QUERIES EVALUATION (REPORT-ONLY)")
+    print("=" * 76)
+    print(f"{'PHRASING TYPE':<32} | {'PASSED':<8} | {'RATE':<8}")
+    print("-" * 76)
+
+    total_passed = sum(d["passed"] for d in results.values())
+    total_cases = sum(d["total"] for d in results.values())
+
+    for qtype, data in results.items():
+        rate = data["rate"]
+        passed = data["passed"]
+        total = data["total"]
+        print(f"{qtype:<32} | {passed}/{total:<6} | {rate:>5.1f}%")
+
+    print("-" * 76)
+    overall_rate = (total_passed / total_cases) * 100.0 if total_cases else 0.0
+    print(f"{'OVERALL':<32} | {total_passed}/{total_cases:<6} | {overall_rate:>5.1f}%")
+    print("=" * 76)
+
+    print("\nHoldout V2 Queries Failing Cases Detail:")
+    print("-" * 76)
+    has_any_fail = False
+    for qtype, fails in failures.items():
+        if fails:
+            has_any_fail = True
+            print(f"\n--- {qtype} ({len(fails)} failing) ---")
+            for cid, q, reason in fails:
+                print(f"[{cid}] {q!r}:\n  -> {reason}")
+    if not has_any_fail:
+        print("No failures encountered.")
+    print("-" * 76)
+
 

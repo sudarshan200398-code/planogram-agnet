@@ -1,0 +1,451 @@
+{
+  "description": "Third holdout (v2) of customer-style messages for the rule-based fallback of the Query agent. Expected values come from the store data. Do not tune code against this file.",
+  "how_to_check": "item texts must equal the expected texts (after trimming), quantities must match, start must equal the landmark name (null if none), accessible_only must match",
+  "cases": [
+    {
+      "id": "HL2-01",
+      "type": "casual_request",
+      "query": "hello! got Organic Roots Red Apples 2 kg?",
+      "expect": {
+        "items": [
+          {
+            "text": "Organic Roots Red Apples 2 kg",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-02",
+      "type": "casual_request",
+      "query": "do you sell PlayTime Garden Slide large",
+      "expect": {
+        "items": [
+          {
+            "text": "PlayTime Garden Slide large",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-03",
+      "type": "casual_request",
+      "query": "is there any chance of finding Organic Roots Kale 500 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Organic Roots Kale 500 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-04",
+      "type": "casual_request",
+      "query": "I was hoping to get Golden Harvest Gluten Free Penne 250 g and Carry Smart Electronic Lock standard",
+      "expect": {
+        "items": [
+          {
+            "text": "Golden Harvest Gluten Free Penne 250 g",
+            "qty": 1
+          },
+          {
+            "text": "Carry Smart Electronic Lock standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-05",
+      "type": "quantity_forms",
+      "query": "Basic Co Tank Top M, qty 3",
+      "expect": {
+        "items": [
+          {
+            "text": "Basic Co Tank Top M",
+            "qty": 3
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-06",
+      "type": "quantity_forms",
+      "query": "2 of Sweet Spot Still Water Bottle 500 ml",
+      "expect": {
+        "items": [
+          {
+            "text": "Sweet Spot Still Water Bottle 500 ml",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-07",
+      "type": "quantity_forms",
+      "query": "Store Brand Coffee Creamer 1 L (x2)",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Coffee Creamer 1 L",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-08",
+      "type": "quantity_forms",
+      "query": "I want three Festive Co Festive Chocolates 150 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Festive Co Festive Chocolates 150 g",
+            "qty": 3
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-09",
+      "type": "lists_connectors",
+      "query": "CleanHome Mini Fridge standard, Store Brand Penne 500 g + Crunchy Co Apple Juice 2 L",
+      "expect": {
+        "items": [
+          {
+            "text": "CleanHome Mini Fridge standard",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Penne 500 g",
+            "qty": 1
+          },
+          {
+            "text": "Crunchy Co Apple Juice 2 L",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-10",
+      "type": "lists_connectors",
+      "query": "Quick Pick Mixed Nuts 50 g and also Store Brand Orange Squash 12 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Quick Pick Mixed Nuts 50 g",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Orange Squash 12 pack",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-11",
+      "type": "lists_connectors",
+      "query": "Quick Pick Cheese Crackers 100 g\nStore Brand Still Water Multipack 12 pack",
+      "expect": {
+        "items": [
+          {
+            "text": "Quick Pick Cheese Crackers 100 g",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Still Water Multipack 12 pack",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-12",
+      "type": "lists_connectors",
+      "query": "Fizz Up Cheese Puffs 90 g as well as Farm Fresh Potato Salad 500 g and ArtBox Soft Plush Bunny small",
+      "expect": {
+        "items": [
+          {
+            "text": "Fizz Up Cheese Puffs 90 g",
+            "qty": 1
+          },
+          {
+            "text": "Farm Fresh Potato Salad 500 g",
+            "qty": 1
+          },
+          {
+            "text": "ArtBox Soft Plush Bunny small",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-13",
+      "type": "start_phrases",
+      "query": "from the Produce: Arctic Treat Cheese Slices 200 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Arctic Treat Cheese Slices 200 g",
+            "qty": 1
+          }
+        ],
+        "start": "Produce",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-14",
+      "type": "start_phrases",
+      "query": "Carry Smart Screen Protector standard - I'm by the Toys & Stationery",
+      "expect": {
+        "items": [
+          {
+            "text": "Carry Smart Screen Protector standard",
+            "qty": 1
+          }
+        ],
+        "start": "Toys & Stationery",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-15",
+      "type": "start_phrases",
+      "query": "I'm at the Deli & Meat. Need Store Brand Garlic Butter 250 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Garlic Butter 250 g",
+            "qty": 1
+          }
+        ],
+        "start": "Deli & Meat",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-16",
+      "type": "start_phrases",
+      "query": "currently near the Bakery, looking for Basic Co Chinos M",
+      "expect": {
+        "items": [
+          {
+            "text": "Basic Co Chinos M",
+            "qty": 1
+          }
+        ],
+        "start": "Bakery",
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-17",
+      "type": "accessible_phrases",
+      "query": "wheelchair user here, Festive Co Water Bottle standard",
+      "expect": {
+        "items": [
+          {
+            "text": "Festive Co Water Bottle standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HL2-18",
+      "type": "accessible_phrases",
+      "query": "Arctic Treat Strawberry Ice Cream 500 ml - step-free please",
+      "expect": {
+        "items": [
+          {
+            "text": "Arctic Treat Strawberry Ice Cream 500 ml",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HL2-19",
+      "type": "accessible_phrases",
+      "query": "I can't use stairs, Organic Roots Sweet Potatoes 1 kg",
+      "expect": {
+        "items": [
+          {
+            "text": "Organic Roots Sweet Potatoes 1 kg",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HL2-20",
+      "type": "accessible_phrases",
+      "query": "accessible route for Café Corner Sports Drink Orange 500 ml",
+      "expect": {
+        "items": [
+          {
+            "text": "Café Corner Sports Drink Orange 500 ml",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HL2-21",
+      "type": "mixed_real_world",
+      "query": "hiya, Store Brand Iced Tea 500 ml and Store Brand Stain Remover 1 L, I'm near the Café, wheelchair friendly",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Iced Tea 500 ml",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Stain Remover 1 L",
+            "qty": 1
+          }
+        ],
+        "start": "Café",
+        "accessible_only": true
+      }
+    },
+    {
+      "id": "HL2-22",
+      "type": "mixed_real_world",
+      "query": "can you check Store Brand Sparkling Water Multipack 12 pack for me? thx",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Sparkling Water Multipack 12 pack",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-23",
+      "type": "mixed_real_world",
+      "query": "where would I find Daily Bake White Sandwich Bread 400 g",
+      "expect": {
+        "items": [
+          {
+            "text": "Daily Bake White Sandwich Bread 400 g",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-24",
+      "type": "mixed_real_world",
+      "query": "quick one: Store Brand Millionaire Shortbread single x2",
+      "expect": {
+        "items": [
+          {
+            "text": "Store Brand Millionaire Shortbread single",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-25",
+      "type": "conjunction_in_name",
+      "query": "Urban Thread Folded Jumper S plus Store Brand Egg and Cress Sandwich standard",
+      "expect": {
+        "items": [
+          {
+            "text": "Urban Thread Folded Jumper S",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Egg and Cress Sandwich standard",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-26",
+      "type": "conjunction_in_name",
+      "query": "do you have Café Corner Egg and Cress Sandwich large?",
+      "expect": {
+        "items": [
+          {
+            "text": "Café Corner Egg and Cress Sandwich large",
+            "qty": 1
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    },
+    {
+      "id": "HL2-27",
+      "type": "conjunction_in_name",
+      "query": "Quick Pick Fruit and Nut Mix 120 g, 2 Store Brand Cold Brew Coffee 330 ml",
+      "expect": {
+        "items": [
+          {
+            "text": "Quick Pick Fruit and Nut Mix 120 g",
+            "qty": 1
+          },
+          {
+            "text": "Store Brand Cold Brew Coffee 330 ml",
+            "qty": 2
+          }
+        ],
+        "start": null,
+        "accessible_only": false
+      }
+    }
+  ]
+}

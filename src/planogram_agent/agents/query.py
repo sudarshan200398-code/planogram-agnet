@@ -5,6 +5,8 @@ import functools
 import json
 import logging
 import re
+import weakref
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
@@ -191,8 +193,51 @@ def _load_query_phrases() -> dict:
     return {}
 
 
+@dataclass
+class DatasetQueryPatterns:
+    label_map: dict[str, str]
+    sorted_labels: list[str]
+    protected_regex: re.Pattern | None
+    paren_start_pat: re.Pattern | None
+    begin_start_pat: re.Pattern | None
+    delim_start_pat: re.Pattern | None
+    known_sizes: set[str]
+
+
+_DATASET_PATTERN_CACHE: dict[int, tuple[weakref.ref[Dataset], DatasetQueryPatterns]] = {}
+
+
+def _norm_landmark(text: str) -> str:
+    t = text.strip().lower()
+    if t.startswith("the "):
+        t = t[4:].strip()
+    return t
+
+
+@dataclass
+class ComposedPhrases:
+    prefix_pat: re.Pattern
+    trailing_polite_pat: re.Pattern
+    trailing_avail_pat: re.Pattern
+    spoken_step_free_pat: re.Pattern
+    step_free_pat: re.Pattern
+    combined_delim: re.Pattern
+    number_words: dict[str, int]
+    start_prefixes: list[str]
+    first_person_start: list[str]
+    first_person_paren_pat: re.Pattern
+    first_person_delim_pat: re.Pattern
+    checkout_pat: re.Pattern
+    greet_pat: re.Pattern
+    trail_qty_pat: re.Pattern
+    lead_qty_num_pat: re.Pattern
+    lead_qty_word_pat: re.Pattern
+    lead_qty_unmatched_num: re.Pattern
+    lead_qty_unmatched_word: re.Pattern
+
+
 @functools.lru_cache(maxsize=1)
-def _get_composed_phrases() -> tuple[list[str], list[str], dict[str, int], list[str], list[str], list[str], list[str]]:
+def _get_composed_phrases() -> ComposedPhrases:
     data = _load_query_phrases()
     components = data.get("request_prefix_components", {})
     modals = components.get("modals", ["can you", "could you", "would you", "can", "could", "would"])
@@ -202,10 +247,12 @@ def _get_composed_phrases() -> tuple[list[str], list[str], dict[str, int], list[
     pronouns = components.get("pronouns", ["me", "us"])
 
     fixed_prefixes = data.get("fixed_request_prefixes", [
+        "any chance you stock", "any chance you have", "do you stock",
+        "do you sell", "do you carry", "can you check if you have",
         "i'd like to find", "i'd like", "i would like", "i need", "i want",
-        "need", "point me", "looking for", "i'm looking for", "i am looking for",
-        "where can i find", "where can i get", "where is", "where are", "where's",
-        "do you have", "is there", "is", "are"
+        "need", "got", "point me", "looking for", "i'm looking for",
+        "i am looking for", "where can i find", "where can i get",
+        "where is", "where are", "where's", "do you have", "is there",
     ])
 
     generated = set(fixed_prefixes)
@@ -221,35 +268,218 @@ def _get_composed_phrases() -> tuple[list[str], list[str], dict[str, int], list[
                             generated.add(" ".join(parts))
 
     sorted_prefixes = sorted(generated, key=len, reverse=True)
-    trailing_polite = sorted(data.get("trailing_politeness", ["please", "thanks", "thank you"]), key=len, reverse=True)
+    trailing_polite = sorted(data.get("trailing_politeness", ["thank you", "thanks", "thx", "ty", "please"]), key=len, reverse=True)
+    trailing_avail = sorted(data.get("trailing_availability", ["in stock", "available"]), key=len, reverse=True)
     number_words = data.get("number_words", {
         "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
+        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
     })
     connectors = data.get("connectors", ["as well as", "and also", "and", "plus", "also", "+", "&", ",", ";", "\n"])
     start_prefixes = sorted(data.get("start_phrase_prefixes", [
-        "i'm near", "i am near", "i'm by", "i am by", "i'm at", "i am at",
-        "starting from", "starting at", "standing by", "standing near", "standing at",
-        "near the", "near", "by the", "by", "from the", "from"
+        "i am standing near", "i am standing by", "i am standing at",
+        "i'm standing near", "i'm standing by", "i'm standing at",
+        "starting from", "starting at", "standing near", "standing by",
+        "standing at", "i am near", "i am by", "i am at", "i'm near",
+        "i'm by", "i'm at", "near the", "from the", "by the", "near",
+        "from", "by", "at",
     ]), key=len, reverse=True)
     first_person_start = sorted(data.get("first_person_start_prefixes", [
-        "i'm near", "i am near", "i'm by", "i am by", "i'm at", "i am at",
-        "starting from", "starting at", "standing by", "standing near", "standing at"
+        "i am standing near", "i am standing by", "i am standing at",
+        "i'm standing near", "i'm standing by", "i'm standing at",
+        "starting from", "starting at", "standing near", "standing by",
+        "standing at", "i am near", "i am by", "i am at", "i'm near",
+        "i'm by", "i'm at",
     ]), key=len, reverse=True)
     step_free_phrases = sorted(data.get("step_free_phrases", [
-        "step-free route", "step free route", "step-free", "step free",
-        "no stairs", "avoid stairs", "wheelchair accessible", "wheelchair",
-        "accessible route", "accessible", "elevator only"
+        "step-free route", "step free route", "step-free path", "step free path",
+        "step-free", "step free", "avoid stairs and escalators", "avoid stairs",
+        "no stairs please", "no stairs", "wheelchair accessible route",
+        "wheelchair accessible", "wheelchair friendly route", "wheelchair friendly access",
+        "wheelchair friendly", "wheelchair route", "wheelchair access", "wheelchair",
+        "accessible route", "accessible path", "accessible access", "accessible",
+        "elevator only", "lift only",
+    ]), key=len, reverse=True)
+    spoken_step_free = sorted(data.get("spoken_step_free", [
+        "i can't use stairs", "i cannot use stairs", "cant use stairs",
+        "can't use stairs", "wheelchair user here", "wheelchair user",
+    ]), key=len, reverse=True)
+    step_free_filler_tails = sorted(data.get("step_free_filler_tails", [
+        "friendly access route", "friendly route", "friendly access", "friendly",
+        "access route", "access", "options", "route", "path", "please",
     ]), key=len, reverse=True)
 
-    return sorted_prefixes, trailing_polite, number_words, connectors, start_prefixes, first_person_start, step_free_phrases
+    prefix_pat = re.compile(
+        r"^\b(?:" + "|".join(re.escape(rp) for rp in sorted_prefixes) + r")\b\s*(?:of\s+|to\s+|for\s+)?",
+        re.IGNORECASE,
+    )
+    trailing_polite_pat = re.compile(
+        r"(?:[,\s]+|^)\b(?:" + "|".join(re.escape(tp) for tp in trailing_polite) + r")\b\s*[.?!,;]*$",
+        re.IGNORECASE,
+    )
+    trailing_avail_pat = re.compile(
+        r"(?:[,\s]+|^)\b(?:" + "|".join(re.escape(ta) for ta in trailing_avail) + r")\b\s*[.?!,;]*$",
+        re.IGNORECASE,
+    )
+    spoken_step_free_pat = re.compile(
+        r"(?:[,\-:;(\s]|^)\b(?:" + "|".join(re.escape(s) for s in spoken_step_free) + r")\b(?:\s*\))?",
+        re.IGNORECASE,
+    )
+    fillers_expr = r"(?:\s+(?:" + "|".join(re.escape(f) for f in step_free_filler_tails) + r"))*"
+    trailing_to = r"(?:\s+(?:route\s+)?to\b)?"
+    step_free_pat = re.compile(
+        r"(?:[,\-:;(\s]|^)\b(?:" + "|".join(re.escape(sfp) for sfp in step_free_phrases) + r")"
+        + fillers_expr
+        + trailing_to
+        + r"(?:\s*[:\-,;)])?",
+        re.IGNORECASE,
+    )
+
+    delim_patterns: list[str] = []
+    for c in connectors:
+        if c == ",":
+            delim_patterns.append(r",(?!\s*(?:qty\s*:?\s*\d+|x\s*\d+|\d+\s*x\b))")
+        elif c in [";", "\n", "+"]:
+            delim_patterns.append(re.escape(c))
+        elif c == "&":
+            delim_patterns.append(r"\s*&\s*")
+        else:
+            delim_patterns.append(r"\b" + re.escape(c) + r"\b")
+
+    combined_delim = re.compile(
+        r"(?:,\s*and\s+also\b|,\s*and\b|,\s*as\s+well\s+as\b|" + "|".join(delim_patterns) + r")",
+        re.IGNORECASE,
+    )
+
+    first_pfx_expr = "|".join(re.escape(sp) for sp in first_person_start)
+    first_person_paren_pat = re.compile(
+        r"\(\s*(?:(?:" + first_pfx_expr + r")\s+)(?:the\s+)?([^)]+?)\s*\)",
+        re.IGNORECASE,
+    )
+    first_person_delim_pat = re.compile(
+        r"(?:[,\n\r;!?]|^|\band\b|[.\-:])\s*\b(?:" + first_pfx_expr + r")\s+(?:the\s+)?([^,\n\r;!?.\-:]+?)(?=[,\n\r;!?.\-:]|$|\band\b)",
+        re.IGNORECASE,
+    )
+    checkout_pat = re.compile(
+        r"(?:[,\s]+|^)\b(?:end|finish|pay|stop)\s+(?:at|by)\s+(?:the\s+)?checkout\b\s*",
+        re.IGNORECASE,
+    )
+    greet_pat = re.compile(
+        r"^(?:good\s+morning|good\s+afternoon|good\s+evening|hello|hiya|hey|hi)(?=[,.!\s])[,.!\s]+",
+        re.IGNORECASE,
+    )
+    trail_qty_pat = re.compile(
+        r"^(?:[-,\s]+|\s*\()?\s*(?:qty\s*:?\s*(\d{1,2})|x\s*(\d{1,2})|(\d{1,2})\s*x)\s*\)?\s*$",
+        re.IGNORECASE,
+    )
+    lead_qty_num_pat = re.compile(r"^(\d{1,2})\s*(?:x\b|\*\s*|of\b)?\s*$", re.IGNORECASE)
+    lead_qty_word_pat = re.compile(r"^(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b)?\s*$", re.IGNORECASE)
+    lead_qty_unmatched_num = re.compile(r"^\s*(\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", re.IGNORECASE)
+    lead_qty_unmatched_word = re.compile(r"^\s*(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b|\s+)", re.IGNORECASE)
+
+    return ComposedPhrases(
+        prefix_pat=prefix_pat,
+        trailing_polite_pat=trailing_polite_pat,
+        trailing_avail_pat=trailing_avail_pat,
+        spoken_step_free_pat=spoken_step_free_pat,
+        step_free_pat=step_free_pat,
+        combined_delim=combined_delim,
+        number_words=number_words,
+        start_prefixes=start_prefixes,
+        first_person_start=first_person_start,
+        first_person_paren_pat=first_person_paren_pat,
+        first_person_delim_pat=first_person_delim_pat,
+        checkout_pat=checkout_pat,
+        greet_pat=greet_pat,
+        trail_qty_pat=trail_qty_pat,
+        lead_qty_num_pat=lead_qty_num_pat,
+        lead_qty_word_pat=lead_qty_word_pat,
+        lead_qty_unmatched_num=lead_qty_unmatched_num,
+        lead_qty_unmatched_word=lead_qty_unmatched_word,
+    )
 
 
-def _norm_landmark(text: str) -> str:
-    t = text.strip().lower()
-    if t.startswith("the "):
-        t = t[4:].strip()
-    return t
+def get_dataset_query_patterns(dataset: Dataset) -> DatasetQueryPatterns:
+    """Retrieve or build the DatasetQueryPatterns cache for a dataset instance."""
+    ds_id = id(dataset)
+    if ds_id in _DATASET_PATTERN_CACHE:
+        stored_ref, patterns = _DATASET_PATTERN_CACHE[ds_id]
+        if stored_ref() is dataset:
+            return patterns
+
+    phrases = _get_composed_phrases()
+    label_map: dict[str, str] = {}
+    if hasattr(dataset, "graph") and dataset.graph.nodes:
+        for n in dataset.graph.nodes:
+            if n.label and n.type != "junction":
+                norm_lbl = _norm_landmark(n.label)
+                label_map[norm_lbl] = n.label
+
+    sorted_labels = sorted(label_map.values(), key=len, reverse=True)
+
+    terms: set[str] = set()
+    known_sizes: set[str] = set()
+    if hasattr(dataset, "products") and dataset.products:
+        for p in dataset.products:
+            if p.name:
+                terms.add(p.name)
+            if p.size:
+                known_sizes.add(p.size.lower())
+
+    for lbl in sorted_labels:
+        terms.add(lbl)
+
+    if terms:
+        sorted_terms = sorted(terms, key=len, reverse=True)
+        protected_regex = re.compile(
+            r"(?<![a-zA-Z0-9])(?:" + "|".join(re.escape(t) for t in sorted_terms) + r")(?![a-zA-Z0-9])",
+            re.IGNORECASE,
+        )
+    else:
+        protected_regex = None
+
+    if sorted_labels:
+        labels_expr = "|".join(re.escape(l) for l in sorted_labels)
+        start_pfx_expr = "|".join(re.escape(sp) for sp in phrases.start_prefixes)
+        paren_start_pat = re.compile(
+            r"\(\s*(?:(?:(?:" + start_pfx_expr + r")\s+)?(?:the\s+)?)?(" + labels_expr + r")\s*\)",
+            re.IGNORECASE,
+        )
+        begin_start_pat = re.compile(
+            r"^(?:(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?)(" + labels_expr + r")(?:\s*[:\-,])?\s*",
+            re.IGNORECASE,
+        )
+        delim_start_pat = re.compile(
+            r"(?:(?:\b(?:and)\b|[.\-:,;!?])\s*|\s+)\b(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?(" + labels_expr + r")(?=[.\-:,;!?]|$|\b(?:and)\b)",
+            re.IGNORECASE,
+        )
+    else:
+        paren_start_pat = None
+        begin_start_pat = None
+        delim_start_pat = None
+
+    patterns = DatasetQueryPatterns(
+        label_map=label_map,
+        sorted_labels=sorted_labels,
+        protected_regex=protected_regex,
+        paren_start_pat=paren_start_pat,
+        begin_start_pat=begin_start_pat,
+        delim_start_pat=delim_start_pat,
+        known_sizes=known_sizes,
+    )
+
+    def _cleanup(_ref: weakref.ref, key: int = ds_id) -> None:
+        _DATASET_PATTERN_CACHE.pop(key, None)
+
+    _DATASET_PATTERN_CACHE[ds_id] = (weakref.ref(dataset, _cleanup), patterns)
+    return patterns
+
+
+def clear_dataset_query_cache(dataset: Dataset | None = None) -> None:
+    """Clear the cached patterns for a dataset, or all datasets if None."""
+    if dataset is None:
+        _DATASET_PATTERN_CACHE.clear()
+    else:
+        _DATASET_PATTERN_CACHE.pop(id(dataset), None)
 
 
 def rule_based_fallback(
@@ -274,84 +504,74 @@ def rule_based_fallback(
 
     clean_text = text.strip()
 
-    (
-        sorted_prefixes,
-        trailing_polite,
-        number_words,
-        connectors,
-        start_prefixes,
-        first_person_start,
-        step_free_phrases,
-    ) = _get_composed_phrases()
+    phrases = _get_composed_phrases()
+    cached_patterns = get_dataset_query_patterns(dataset) if dataset is not None else None
 
-    # 1. Step-free accessibility detection
+    # Step 1: Strip leading greeting (only when followed by [,!.\s], NEVER a hyphen)
+    clean_text = phrases.greet_pat.sub("", clean_text).strip()
+
+    # Step 2: Step-free accessibility detection and removal
     accessible_only = False
-    for sfp in step_free_phrases:
-        pattern = re.compile(
-            r"(?:\s*\(\s*" + re.escape(sfp) + r"\s*\)|,?\s*\b" + re.escape(sfp) + r"\b)",
-            re.IGNORECASE,
-        )
-        if pattern.search(clean_text):
-            accessible_only = True
-            clean_text = pattern.sub(" ", clean_text).strip()
+    if phrases.spoken_step_free_pat.search(clean_text):
+        accessible_only = True
+        clean_text = phrases.spoken_step_free_pat.sub(" ", clean_text).strip()
 
-    # 2. End at checkout detection
+    if phrases.step_free_pat.search(clean_text):
+        accessible_only = True
+        clean_text = phrases.step_free_pat.sub(" ", clean_text).strip()
+
+    # Step 3: End at checkout detection
     end_at_checkout = False
-    checkout_pat = re.compile(
-        r",?\s*\b(?:end|finish|pay|stop)\s+(?:at|by)\s+(?:the\s+)?checkout\b",
-        re.IGNORECASE,
-    )
-    if checkout_pat.search(clean_text):
+    if phrases.checkout_pat.search(clean_text):
         end_at_checkout = True
-        clean_text = checkout_pat.sub(" ", clean_text).strip()
+        clean_text = phrases.checkout_pat.sub(" ", clean_text).strip()
 
-    # 3. Start clause detection
+    # Step 4: Start clause detection and removal (BEFORE item splitting)
     start: str | None = None
-    label_map: dict[str, str] = {}
-    if dataset is not None and hasattr(dataset, "graph"):
-        for n in dataset.graph.nodes:
-            if n.label and n.type != "junction":
-                norm_lbl = _norm_landmark(n.label)
-                label_map[norm_lbl] = n.label
 
-    prefixes_to_check = start_prefixes if dataset is not None else first_person_start
-    for sp in prefixes_to_check:
-        pat = re.compile(
-            r"(?:[,\n\r;!?]|^|\band\b)\s*\b"
-            + re.escape(sp)
-            + r"\s+(?:the\s+)?([^,\n\r;!?]+?)(?=[,\n\r;!?]|$|\band\b)",
-            re.IGNORECASE,
-        )
-        m = pat.search(clean_text)
-        if m:
-            cand = m.group(1).strip()
-            norm_cand = _norm_landmark(cand)
-            if dataset is not None:
-                if norm_cand in label_map:
-                    start = label_map[norm_cand]
-                    clean_text = clean_text[: m.start()] + " " + clean_text[m.end() :]
-                    break
-            else:
-                start = cand
-                clean_text = clean_text[: m.start()] + " " + clean_text[m.end() :]
-                break
+    if dataset is not None and cached_patterns is not None and cached_patterns.sorted_labels:
+        if cached_patterns.paren_start_pat:
+            m_paren = cached_patterns.paren_start_pat.search(clean_text)
+            if m_paren:
+                norm_cand = _norm_landmark(m_paren.group(1))
+                if norm_cand in cached_patterns.label_map:
+                    start = cached_patterns.label_map[norm_cand]
+                    clean_text = clean_text[: m_paren.start()] + " " + clean_text[m_paren.end() :]
+
+        if start is None and cached_patterns.begin_start_pat:
+            m_begin = cached_patterns.begin_start_pat.match(clean_text)
+            if m_begin:
+                norm_cand = _norm_landmark(m_begin.group(1))
+                if norm_cand in cached_patterns.label_map:
+                    start = cached_patterns.label_map[norm_cand]
+                    clean_text = clean_text[m_begin.end() :].strip()
+
+        if start is None and cached_patterns.delim_start_pat:
+            m_delim = cached_patterns.delim_start_pat.search(clean_text)
+            if m_delim:
+                norm_cand = _norm_landmark(m_delim.group(1))
+                if norm_cand in cached_patterns.label_map:
+                    start = cached_patterns.label_map[norm_cand]
+                    clean_text = clean_text[: m_delim.start()] + " " + clean_text[m_delim.end() :]
+    else:
+        m_fp_paren = phrases.first_person_paren_pat.search(clean_text)
+        if m_fp_paren:
+            start = m_fp_paren.group(1).strip()
+            clean_text = clean_text[: m_fp_paren.start()] + " " + clean_text[m_fp_paren.end() :]
+
+        if start is None:
+            m_fp = phrases.first_person_delim_pat.search(clean_text)
+            if m_fp:
+                start = m_fp.group(1).strip()
+                clean_text = clean_text[: m_fp.start()] + " " + clean_text[m_fp.end() :]
 
     clean_text = clean_text.strip()
 
-    # 4. Protect product names from dataset
+    # Step 5: Protect product names and landmark labels from connector splits
     protected_spans: list[tuple[int, int]] = []
-    matched_prods: list[str] = []
-    if dataset is not None and hasattr(dataset, "products"):
-        lower_clean = clean_text.lower()
-        for p in dataset.products:
-            if p.name.lower() in lower_clean:
-                matched_prods.append(p.name)
-
-        matched_prods.sort(key=len, reverse=True)
-        for p_name in matched_prods:
-            p_pat = re.compile(re.escape(p_name), re.IGNORECASE)
-            for m in p_pat.finditer(clean_text):
-                protected_spans.append((m.start(), m.end()))
+    if cached_patterns is not None and cached_patterns.protected_regex is not None:
+        for m in cached_patterns.protected_regex.finditer(clean_text):
+            protected_spans.append((m.start(), m.end()))
 
     def is_protected(s_idx: int, e_idx: int) -> bool:
         for ps, pe in protected_spans:
@@ -359,23 +579,9 @@ def rule_based_fallback(
                 return True
         return False
 
-    # 5. Connectors splitting outside protected spans
-    delim_patterns: list[str] = []
-    for c in connectors:
-        if c in [",", ";", "\n", "+"]:
-            delim_patterns.append(re.escape(c))
-        elif c == "&":
-            delim_patterns.append(r"\s*&\s*")
-        else:
-            delim_patterns.append(r"\b" + re.escape(c) + r"\b")
-
-    combined_delim = re.compile(
-        r"(?:,\s*and\s+also\b|,\s*and\b|,\s*as\s+well\s+as\b|" + "|".join(delim_patterns) + r")",
-        re.IGNORECASE,
-    )
-
+    # Step 6: Connectors splitting outside protected spans
     splits = [0]
-    for m in combined_delim.finditer(clean_text):
+    for m in phrases.combined_delim.finditer(clean_text):
         if not is_protected(m.start(), m.end()):
             splits.append(m.start())
             splits.append(m.end())
@@ -389,49 +595,38 @@ def rule_based_fallback(
         if chunk:
             raw_items.append(chunk)
 
-    # 6. Per-item cleaning and quantity extraction
+    # Step 7: Per-item cleaning and quantity extraction
     parsed_items: list[ParsedItem] = []
     for chunk in raw_items:
-        # Strip trailing politeness and punctuation
-        for tp in trailing_polite:
-            chunk = re.sub(
-                r"(?:[,\s]+|^)\b" + re.escape(tp) + r"\b\s*[.?!,;]*$",
-                "",
-                chunk,
-                flags=re.IGNORECASE,
-            ).strip()
-        chunk = chunk.strip("?.,;! ")
+        # 7a. Clean leftover joining words and leading punctuation
+        chunk = re.sub(r"^[:\-;,]+\s*", "", chunk).strip()
+        chunk = re.sub(r"^(?:to|for)\s+", "", chunk, flags=re.IGNORECASE).strip()
+        chunk = re.sub(r"^[:\-;,]+\s*", "", chunk).strip()
 
-        # Strip leading request prefixes (longest first)
-        for rp in sorted_prefixes:
-            pat = re.compile(r"^\b" + re.escape(rp) + r"\b\s*(?:of\s+|to\s+|for\s+)?", re.IGNORECASE)
-            m = pat.match(chunk)
-            if m:
-                cand_remainder = chunk[m.end() :].strip()
-                if cand_remainder:
-                    chunk = cand_remainder
-                    break
+        # 7b. Strip trailing politeness
+        chunk = phrases.trailing_polite_pat.sub("", chunk).strip("?.,;! -")
 
-        for tp in trailing_polite:
-            chunk = re.sub(
-                r"(?:[,\s]+|^)\b" + re.escape(tp) + r"\b\s*[.?!,;]*$",
-                "",
-                chunk,
-                flags=re.IGNORECASE,
-            ).strip()
-        chunk = chunk.strip("?.,;! ")
+        # 7c. Trailing availability & guarded "is" / "are"
+        m_ta = phrases.trailing_avail_pat.search(chunk)
+        if m_ta:
+            chunk = chunk[: m_ta.start()].strip()
+            chunk = re.sub(r"^\b(?:is|are)\b\s+", "", chunk, flags=re.IGNORECASE).strip()
+
+        # 7d. Strip other request prefixes
+        chunk = phrases.prefix_pat.sub("", chunk).strip()
+
+        # Re-clean trailing politeness & punctuation
+        chunk = phrases.trailing_polite_pat.sub("", chunk).strip("?.,;! -")
 
         if not chunk:
             continue
 
+        # 7e. Quantity extraction with product name protection
         matched_prod_span = None
-        if dataset is not None and matched_prods:
-            for p_name in matched_prods:
-                p_pat = re.compile(r"\b" + re.escape(p_name) + r"\b", re.IGNORECASE)
-                m_prod = p_pat.search(chunk)
-                if m_prod:
-                    matched_prod_span = (m_prod.start(), m_prod.end())
-                    break
+        if cached_patterns is not None and cached_patterns.protected_regex is not None:
+            m_prod = cached_patterns.protected_regex.search(chunk)
+            if m_prod:
+                matched_prod_span = (m_prod.start(), m_prod.end())
 
         qty = 1
         item_text = chunk
@@ -443,26 +638,18 @@ def rule_based_fallback(
             after = chunk[p_end:].strip()
 
             if before:
-                m_num = re.match(r"^(\d{1,2})\s*(?:x\b|\*\s*|of\b)?\s*$", before, re.IGNORECASE)
+                m_num = phrases.lead_qty_num_pat.match(before)
                 if m_num:
                     qty = int(m_num.group(1))
                     before = ""
                 else:
-                    m_word = re.match(
-                        r"^(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b)?\s*$",
-                        before,
-                        re.IGNORECASE,
-                    )
+                    m_word = phrases.lead_qty_word_pat.match(before)
                     if m_word:
-                        qty = number_words[m_word.group(1).lower()]
+                        qty = phrases.number_words[m_word.group(1).lower()]
                         before = ""
 
             if after:
-                m_trail = re.match(
-                    r"^(?:x\s*(\d{1,2})|(\d{1,2})\s*x|qty\s*:?\s*(\d{1,2}))$",
-                    after,
-                    re.IGNORECASE,
-                )
+                m_trail = phrases.trail_qty_pat.match(after)
                 if m_trail:
                     g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
                     qty = int(g)
@@ -471,16 +658,22 @@ def rule_based_fallback(
             item_text = " ".join([part for part in (before, typed_prod_text, after) if part]).strip()
         else:
             trail_pat = re.compile(
-                r"(?:\s+|,)(?:x\s*(\d{1,2})|(\d{1,2})\s*x|qty\s*:?\s*(\d{1,2}))\s*$",
+                r"(?:[-,\s]+|\s*\()\s*(?:qty\s*:?\s*(\d{1,2})|x\s*(\d{1,2})|(\d{1,2})\s*x)\s*\)?\s*$",
                 re.IGNORECASE,
             )
             m_trail = trail_pat.search(chunk)
             if m_trail:
-                g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
-                qty = int(g)
-                chunk = chunk[: m_trail.start()].strip()
+                candidate_token = m_trail.group(0).strip(" -(),")
+                is_known_size = False
+                if cached_patterns is not None and candidate_token.lower() in cached_patterns.known_sizes:
+                    is_known_size = True
 
-            m_num = re.match(r"^\s*(\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", chunk, re.IGNORECASE)
+                if not is_known_size:
+                    g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
+                    qty = int(g)
+                    chunk = chunk[: m_trail.start()].strip()
+
+            m_num = phrases.lead_qty_unmatched_num.match(chunk)
             if m_num:
                 cand_qty = int(m_num.group(1))
                 rem = chunk[m_num.end() :].strip()
@@ -488,19 +681,15 @@ def rule_based_fallback(
                     qty = cand_qty
                     chunk = rem
             else:
-                m_word = re.match(
-                    r"^\s*(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b|\s+)",
-                    chunk,
-                    re.IGNORECASE,
-                )
+                m_word = phrases.lead_qty_unmatched_word.match(chunk)
                 if m_word:
-                    cand_qty = number_words[m_word.group(1).lower()]
+                    cand_qty = phrases.number_words[m_word.group(1).lower()]
                     rem = chunk[m_word.end() :].strip()
                     if rem:
                         qty = cand_qty
                         chunk = rem
 
-            item_text = chunk.strip("?.,;! ")
+            item_text = chunk.strip("?.,;! -")
 
         if item_text:
             parsed_items.append(ParsedItem(text=item_text, qty=qty))

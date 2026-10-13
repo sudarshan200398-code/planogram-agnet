@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -414,4 +414,354 @@ def test_fallback_question_mark_stripped(dataset):
     res = rule_based_fallback("Where is Store Brand Paprika 100 g?", settings, dataset=dataset)
     assert len(res.items) == 1
     assert res.items[0].text == "Store Brand Paprika 100 g"
+
+
+# --- Class 1 & 2: Start clauses with real map labels & contexts ---
+
+def test_fallback_start_parentheses_real_label(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("Organic Whole Milk 1 L (I'm at Bakery)", settings, dataset=store_demo_dataset)
+    assert res.start == "Bakery"
+    assert len(res.items) == 1
+    assert res.items[0].text == "Organic Whole Milk 1 L"
+
+
+def test_fallback_start_dash_with_conjunction_label(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("Bath Towel blue - near Deli & Meat", settings, dataset=store_demo_dataset)
+    assert res.start == "Deli & Meat"
+    assert len(res.items) == 1
+    assert res.items[0].text == "Bath Towel blue"
+
+
+def test_fallback_start_full_stop_with_conjunction_label(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("Kitchen Scissors standard. Standing by Toys & Stationery", settings, dataset=store_demo_dataset)
+    assert res.start == "Toys & Stationery"
+    assert len(res.items) == 1
+    assert res.items[0].text == "Kitchen Scissors standard"
+
+
+def test_fallback_start_beginning_with_colon(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("From the Entrance: Fresh Apples 1 kg", settings, dataset=store_demo_dataset)
+    assert res.start == "Entrance"
+    assert len(res.items) == 1
+    assert res.items[0].text == "Fresh Apples 1 kg"
+
+
+def test_fallback_non_map_label_stays_in_item(store_demo_dataset):
+    settings = Settings()
+    # Pharmacy is not a map label in store_demo; must not set start and must stay in item text
+    res = rule_based_fallback("Store Brand Milk 1 L near Pharmacy", settings, dataset=store_demo_dataset)
+    assert res.start is None
+    assert len(res.items) == 1
+    assert "Pharmacy" in res.items[0].text
+
+
+# --- Class 2 Guarded Risky Words & Negative Tests ---
+
+def test_fallback_negative_product_starting_with_is(store_demo_dataset):
+    settings = Settings()
+    # Product starting with "Is" without trailing availability must NOT strip "Is"
+    res = rule_based_fallback("Isla Coconut Water 500 ml", settings, dataset=store_demo_dataset)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Isla Coconut Water 500 ml"
+
+
+def test_fallback_negative_product_starting_with_hi_hyphen(store_demo_dataset):
+    settings = Settings()
+    # "Hi-" must not be stripped as a greeting
+    res = rule_based_fallback("Hi-Fi Audio Cable 2 m", settings, dataset=store_demo_dataset)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Hi-Fi Audio Cable 2 m"
+
+
+def test_fallback_negative_item_containing_from_non_landmark(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("Organic Bread from Yesterday", settings, dataset=store_demo_dataset)
+    assert res.start is None
+    assert len(res.items) == 1
+    assert res.items[0].text == "Organic Bread from Yesterday"
+
+
+def test_fallback_negative_item_containing_by_non_landmark(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("Cleaning Cloth by Acme", settings, dataset=store_demo_dataset)
+    assert res.start is None
+    assert len(res.items) == 1
+    assert res.items[0].text == "Cleaning Cloth by Acme"
+
+
+def test_fallback_guarded_is_stripped_when_availability_present(store_demo_dataset):
+    settings = Settings()
+    res = rule_based_fallback("is Olive Oil 1 L in stock? thx", settings, dataset=store_demo_dataset)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Olive Oil 1 L"
+
+
+# --- Class 3: Step-free spoken forms and leftovers ---
+
+def test_fallback_spoken_step_free_cant_use_stairs():
+    settings = Settings()
+    res = rule_based_fallback("Fresh Milk 2 L, I can't use stairs", settings)
+    assert res.accessible_only is True
+    assert len(res.items) == 1
+    assert res.items[0].text == "Fresh Milk 2 L"
+
+
+def test_fallback_spoken_step_free_wheelchair_user_here():
+    settings = Settings()
+    res = rule_based_fallback("Dark Roast Coffee 500 g, wheelchair user here", settings)
+    assert res.accessible_only is True
+    assert len(res.items) == 1
+    assert res.items[0].text == "Dark Roast Coffee 500 g"
+
+
+def test_fallback_step_free_avoid_stairs_and_escalators():
+    settings = Settings()
+    res = rule_based_fallback("Sparkling Water 6 pack, avoid stairs and escalators", settings)
+    assert res.accessible_only is True
+    assert len(res.items) == 1
+    assert res.items[0].text == "Sparkling Water 6 pack"
+
+
+def test_fallback_step_free_leading_colon_cleaned():
+    settings = Settings()
+    res = rule_based_fallback("no stairs please: Cotton T-Shirt medium", settings)
+    assert res.accessible_only is True
+    assert len(res.items) == 1
+    assert res.items[0].text == "Cotton T-Shirt medium"
+
+
+def test_fallback_step_free_dangling_to_cleaned():
+    settings = Settings()
+    res = rule_based_fallback("step-free route to Almond Butter 500 g", settings)
+    assert res.accessible_only is True
+    assert len(res.items) == 1
+    assert res.items[0].text == "Almond Butter 500 g"
+
+
+# --- Class 4: Greetings & Casual Openers ---
+
+def test_fallback_greeting_with_comma():
+    settings = Settings()
+    res = rule_based_fallback("hiya, do you have Dark Chocolate Bar 100 g?", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Dark Chocolate Bar 100 g"
+
+
+def test_fallback_casual_opener_any_chance():
+    settings = Settings()
+    res = rule_based_fallback("any chance you stock Coconut Milk 400 ml", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Coconut Milk 400 ml"
+
+
+def test_fallback_casual_opener_got():
+    settings = Settings()
+    res = rule_based_fallback("got Green Tea Bags 50 pack?", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Green Tea Bags 50 pack"
+
+
+# --- Class 5 & 6: Quantity forms vs Sizes ---
+
+def test_fallback_quantity_trailing_dash_qty():
+    settings = Settings()
+    res = rule_based_fallback("Black Pepper 50 g - qty 2", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Black Pepper 50 g"
+    assert res.items[0].qty == 2
+
+
+def test_fallback_quantity_trailing_comma_qty():
+    settings = Settings()
+    res = rule_based_fallback("Organic Eggs 12 pack, qty 3", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Organic Eggs 12 pack"
+    assert res.items[0].qty == 3
+
+
+def test_fallback_quantity_trailing_parenthesized_x():
+    settings = Settings()
+    res = rule_based_fallback("Granola Bar 6 pack (x2)", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Granola Bar 6 pack"
+    assert res.items[0].qty == 2
+
+
+def test_fallback_quantity_trailing_bare_x():
+    settings = Settings()
+    res = rule_based_fallback("Peanut Butter 1 kg x2", settings)
+    assert len(res.items) == 1
+    assert res.items[0].text == "Peanut Butter 1 kg"
+    assert res.items[0].qty == 2
+
+
+def test_fallback_trailing_size_6x_not_quantity(store_demo_dataset):
+    settings = Settings()
+    # Product with size "6x" in dataset must NOT convert "6x" into qty=6
+    from planogram_agent.agents.query import clear_dataset_query_cache
+    from planogram_agent.schemas import Product
+    prod = Product(sku="TEST-6X", name="Drawing Pencils 6x", category="Stationery", size="6x", keywords=[])
+    store_demo_dataset.products.append(prod)
+    clear_dataset_query_cache(store_demo_dataset)
+    try:
+        res = rule_based_fallback("Drawing Pencils 6x", settings, dataset=store_demo_dataset)
+        assert len(res.items) == 1
+        assert res.items[0].text == "Drawing Pencils 6x"
+        assert res.items[0].qty == 1
+    finally:
+        store_demo_dataset.products.remove(prod)
+        clear_dataset_query_cache(store_demo_dataset)
+
+
+def test_fallback_trailing_size_200g_not_quantity(store_demo_dataset):
+    settings = Settings()
+    # A size like "200 g" must not be treated as a quantity
+    res = rule_based_fallback("Almond Butter 200 g", settings, dataset=store_demo_dataset)
+    assert len(res.items) == 1
+    assert res.items[0].qty == 1
+
+
+def test_fallback_quantity_real_demo_products(store_demo_dataset):
+    """Test quantity forms on dynamically chosen products from demo dataset."""
+    settings = Settings()
+    # First product whose name ends with its size
+    p_size = next(p for p in store_demo_dataset.products if p.size and p.name.endswith(p.size))
+    # First product whose name contains digits before any trailing size
+    p_digits = next(
+        p for p in store_demo_dataset.products
+        if any(c.isdigit() for c in (p.name[: -len(p.size)] if p.size and p.name.endswith(p.size) else p.name))
+    )
+
+    quantity_variations = [
+        (" x2", 2),
+        (" 2x", 2),
+        (" (x2)", 2),
+        (" - qty 2", 2),
+        (", qty 3", 3),
+    ]
+
+    for p in [p_size, p_digits]:
+        for suffix, exp_qty in quantity_variations:
+            query = f"{p.name}{suffix}"
+            res = rule_based_fallback(query, settings, dataset=store_demo_dataset)
+            assert len(res.items) == 1, f"Failed for {query}: got {len(res.items)} items"
+            assert res.items[0].text == p.name, f"Failed for {query}: text is {res.items[0].text!r}, expected {p.name!r}"
+            assert res.items[0].qty == exp_qty, f"Failed for {query}: qty is {res.items[0].qty}, expected {exp_qty}"
+
+
+def test_fallback_quantity_invented_phrases():
+    """Test quantity forms on invented phrases with sizes and trailing quantities."""
+    settings = Settings()
+    cases = [
+        ("Farm Fresh Orange Juice 2 L x2", "Farm Fresh Orange Juice 2 L", 2),
+        ("Bakery Delight Lemon Cake 1 slice 2x", "Bakery Delight Lemon Cake 1 slice", 2),
+        ("Mountain Honey 500 g (x3)", "Mountain Honey 500 g", 3),
+        ("Herbal Tea Bags 10 pack - qty 4", "Herbal Tea Bags 10 pack", 4),
+        ("Cold Pressed Olive Oil 750 ml, qty 5", "Cold Pressed Olive Oil 750 ml", 5),
+    ]
+    for q, exp_item, exp_qty in cases:
+        res = rule_based_fallback(q, settings)
+        assert len(res.items) == 1, f"Failed for {q}: {res.items}"
+        assert res.items[0].text == exp_item, f"Failed for {q}: got {res.items[0].text!r}"
+        assert res.items[0].qty == exp_qty, f"Failed for {q}: got qty {res.items[0].qty}"
+
+
+def test_cache_weakref_dataset_garbage_collection():
+    """Verify weakref caches evict on GC and return answers only from target dataset."""
+    import gc
+
+    from planogram_agent.agents.query import (
+        _DATASET_PATTERN_CACHE,
+        get_dataset_query_patterns,
+    )
+    from planogram_agent.data_loader import Dataset
+    from planogram_agent.matching import (
+        _DATASET_INDEX_CACHE,
+        get_search_index,
+        search_products,
+    )
+    from planogram_agent.schemas import Bounds, GraphData, Node, NodeType, Product
+
+    ds_a = Dataset(
+        graph=GraphData(
+            store_id="test_a",
+            floors=[1],
+            bounds=Bounds(width=10, height=10),
+            nodes=[Node(id="n1", floor=1, x=0, y=0, label="Entrance", type=NodeType.ENTRANCE)],
+            edges=[],
+            connectors=[],
+        ),
+        products=[Product(sku="SKU-A", name="Alpha Product 100 g", category="Snacks", size="100 g", keywords=["alpha"])],
+        planogram=[],
+        inventory=[],
+    )
+    id_a = id(ds_a)
+    get_search_index(ds_a)
+    get_dataset_query_patterns(ds_a)
+
+    assert id_a in _DATASET_INDEX_CACHE
+    assert id_a in _DATASET_PATTERN_CACHE
+    assert _DATASET_INDEX_CACHE[id_a][0]() is ds_a
+    assert _DATASET_PATTERN_CACHE[id_a][0]() is ds_a
+
+    del ds_a
+    gc.collect()
+
+    # Verify automatic eviction by weakref callback upon garbage collection
+    assert id_a not in _DATASET_INDEX_CACHE
+    assert id_a not in _DATASET_PATTERN_CACHE
+
+    ds_b = Dataset(
+        graph=GraphData(
+            store_id="test_b",
+            floors=[1],
+            bounds=Bounds(width=10, height=10),
+            nodes=[Node(id="n2", floor=1, x=0, y=0, label="Checkout", type=NodeType.CHECKOUT)],
+            edges=[],
+            connectors=[],
+        ),
+        products=[Product(sku="SKU-B", name="Beta Item 200 g", category="Pantry", size="200 g", keywords=["beta"])],
+        planogram=[],
+        inventory=[],
+    )
+    id_b = id(ds_b)
+
+    # Fallback query and search against ds_b
+    fb_res = rule_based_fallback("find Beta Item 200 g and Alpha Product 100 g", Settings(), dataset=ds_b)
+    assert len(fb_res.items) == 2
+
+    m_beta = search_products("Beta Item 200 g", 5, ds_b)
+    m_alpha = search_products("Alpha Product 100 g", 5, ds_b)
+
+    assert any(m.sku == "SKU-B" and m.score > 0.5 for m in m_beta)
+    assert not any(m.sku == "SKU-A" for m in m_alpha)
+    assert not any(m.sku == "SKU-B" and m.score > 0.5 for m in m_alpha)
+    assert id_b in _DATASET_INDEX_CACHE
+    assert id_b in _DATASET_PATTERN_CACHE
+
+
+
+# --- Class 6: Speed Benchmark Test ---
+
+def test_fallback_demo_store_speed_100_calls(store_demo_dataset):
+    import time
+    settings = Settings()
+    queries = [
+        "can you help me find Sunfield Brownie Mix 250 g and Fresh Farms Cherries 500 g",
+        "where is Store Brand Steam Iron standard? I'm at Entrance",
+        "need 2 Carry Smart Bluetooth Speaker standard, wheelchair friendly route",
+        "ArtBox Document Box standard. I'm standing by Toys & Stationery",
+        "hi, do you have Daily Bake White Bread 800 g - qty 2?",
+    ]
+    start_time = time.perf_counter()
+    for i in range(100):
+        q = queries[i % len(queries)]
+        rule_based_fallback(q, settings, dataset=store_demo_dataset)
+    elapsed = time.perf_counter() - start_time
+    assert elapsed < 5.0, f"100 calls took {elapsed:.2f}s, expected < 5.0s"
+
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+import weakref
 from dataclasses import dataclass
 from typing import Literal
 
@@ -140,15 +141,32 @@ class SearchIndex:
             ))
 
 
-_DATASET_INDEX_CACHE: dict[int, SearchIndex] = {}
+_DATASET_INDEX_CACHE: dict[int, tuple[weakref.ref[Dataset], SearchIndex]] = {}
 
 
 def get_search_index(dataset: Dataset) -> SearchIndex:
     """Retrieve or build the SearchIndex for a dataset instance."""
     ds_id = id(dataset)
-    if ds_id not in _DATASET_INDEX_CACHE:
-        _DATASET_INDEX_CACHE[ds_id] = SearchIndex(dataset)
-    return _DATASET_INDEX_CACHE[ds_id]
+    if ds_id in _DATASET_INDEX_CACHE:
+        stored_ref, index = _DATASET_INDEX_CACHE[ds_id]
+        if stored_ref() is dataset:
+            return index
+
+    index = SearchIndex(dataset)
+
+    def _cleanup(_ref: weakref.ref, key: int = ds_id) -> None:
+        _DATASET_INDEX_CACHE.pop(key, None)
+
+    _DATASET_INDEX_CACHE[ds_id] = (weakref.ref(dataset, _cleanup), index)
+    return index
+
+
+def clear_dataset_index_cache(dataset: Dataset | None = None) -> None:
+    """Clear cached search index for a dataset, or all datasets if None."""
+    if dataset is None:
+        _DATASET_INDEX_CACHE.clear()
+    else:
+        _DATASET_INDEX_CACHE.pop(id(dataset), None)
 
 
 _GENERIC_SIZE_PATTERN = re.compile(r"\b\d+(?:\.\d+)?\s*[a-z]+\b")
