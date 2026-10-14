@@ -65,6 +65,7 @@ class RouteSummary(BaseModel):
     floor_changes: int
     connectors_used: list[ConnectorType]
     accessible_only: bool
+    path: list[str] = Field(default_factory=list)
     steps: list[DirectionStep] = Field(default_factory=list)
     directions_text: str = ""
 

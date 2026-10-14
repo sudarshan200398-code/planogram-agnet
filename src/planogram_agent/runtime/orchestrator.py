@@ -75,6 +75,16 @@ def _build_route_summary(
     node_map = {n.id: n.label for n in dataset.graph.nodes}
     start_label = node_map.get(routing_result.start_node, routing_result.start_node)
     plan = routing_result.trip_plan
+    path: list[str] = []
+    if plan.legs:
+        for leg in plan.legs:
+            if not path:
+                path.extend(leg.path)
+            else:
+                path.extend(leg.path[1:])
+    elif routing_result.start_node:
+        path = [routing_result.start_node]
+
     return RouteSummary(
         start_node=routing_result.start_node,
         start_label=start_label,
@@ -84,6 +94,7 @@ def _build_route_summary(
         floor_changes=plan.floor_changes,
         connectors_used=plan.connectors_used,
         accessible_only=accessible_only,
+        path=path,
         steps=routing_result.directions,
         directions_text=routing_result.directions_text,
     )
@@ -264,6 +275,14 @@ class Orchestrator:
             ttl_seconds=self.settings.session_ttl_seconds,
             max_sessions=1000,
         )
+
+    @property
+    def model_label(self) -> str:
+        """User-facing model indicator label."""
+        if not isinstance(self.client, NoModelClient):
+            model_name = getattr(self.settings, "model_name", "unknown")
+            return f"AI model: on ({model_name})"
+        return self.model_note or "AI model: off, using simple rules"
 
     def _execute_stage(
         self,

@@ -17,10 +17,20 @@ accessible-only mode).
 ## Run
 
     pip install -e ".[dev]"
-    pytest                                              # 45 tests
+    pytest                                              # tests
     python -m planogram_agent.cli L1_ENTRANCE L2_TOYS   # route in the terminal
     python -m planogram_agent.cli L1_ENTRANCE L2_TOYS --accessible
     python scripts/plot_route.py L1_ENTRANCE L2_TOYS docs/route.png
+
+## Web UI
+
+Install the UI extra dependency:
+
+    pip install -e ".[ui]"
+
+Run the Streamlit application:
+
+    streamlit run src/planogram_agent/ui/streamlit_app.py
 
 ## Data (data/)
 

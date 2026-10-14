@@ -137,6 +137,16 @@ def rebuild_answer(
 
             start_label = node_map.get(r_res.start_node, r_res.start_node)
             plan = r_res.trip_plan
+            path: list[str] = []
+            if plan.legs:
+                for leg in plan.legs:
+                    if not path:
+                        path.extend(leg.path)
+                    else:
+                        path.extend(leg.path[1:])
+            elif r_res.start_node:
+                path = [r_res.start_node]
+
             route_summary = RouteSummary(
                 start_node=r_res.start_node,
                 start_label=start_label,
@@ -146,6 +156,7 @@ def rebuild_answer(
                 floor_changes=plan.floor_changes,
                 connectors_used=plan.connectors_used,
                 accessible_only=state.accessible_only,
+                path=path,
                 steps=r_res.directions,
                 directions_text=r_res.directions_text,
             )

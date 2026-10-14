@@ -1,8 +1,12 @@
 pydantic>=2.0
 networkx>=3.0
 matplotlib>=3.7
+rapidfuzz>=3.0
 
 [dev]
 pytest
 hypothesis
 ruff
+
+[ui]
+streamlit>=1.30

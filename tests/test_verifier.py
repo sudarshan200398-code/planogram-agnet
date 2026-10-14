@@ -493,6 +493,102 @@ def test_fatal_verification_failure_when_verifier_always_fails(dataset, settings
     assert ans.messages == ["Could not produce a verified answer"]
 
 
+def _make_base_routed_answer(dataset, settings):
+    from planogram_agent.agents.query import ParsedItem, ParsedRequest
+    from planogram_agent.agents.routing import plan_trip
+    r_res = plan_trip(dataset, start_text="Entrance", skus=["PRO-APP-001"], settings=settings)
+    loc = Location(floor=1, zone="Produce", bay="C", shelf_level=3, node_id="L1_PRODUCE")
+    item = ItemResult(
+        index=0,
+        requested="Fresh Farms Red Apples 1 kg",
+        status="available",
+        sku="PRO-APP-001",
+        name="Fresh Farms Red Apples 1 kg",
+        quantity=51,
+        locations=[loc],
+        chosen_location=loc,
+    )
+    valid_path: list[str] = []
+    for leg in r_res.trip_plan.legs:
+        if not valid_path:
+            valid_path.extend(leg.path)
+        else:
+            valid_path.extend(leg.path[1:])
+    route = RouteSummary(
+        start_node=r_res.start_node,
+        start_label="Entrance",
+        ordered_skus=["PRO-APP-001"],
+        total_cost=r_res.trip_plan.total_cost,
+        walking_distance=r_res.trip_plan.walking_distance,
+        floor_changes=r_res.trip_plan.floor_changes,
+        connectors_used=r_res.trip_plan.connectors_used,
+        accessible_only=False,
+        path=valid_path,
+        steps=r_res.directions,
+        directions_text=r_res.directions_text,
+    )
+    ans = Answer(
+        status="ok",
+        items=[item],
+        route=route,
+    )
+    state = RunState(
+        session_id="s_test_path",
+        original_text="Fresh Farms Red Apples 1 kg",
+        start="Entrance",
+        start_node=r_res.start_node,
+        parsed_request=ParsedRequest(
+            raw_text="Fresh Farms Red Apples 1 kg",
+            intent="find",
+            items=[ParsedItem(text="Fresh Farms Red Apples 1 kg", qty=1)],
+        ),
+        routing_result=r_res,
+    )
+    return ans, state
+
+
+def test_verifier_detects_path_invalid_wrong_start(dataset, settings):
+    """Problem code PATH_INVALID when route.path does not start at route.start_node."""
+    ans, state = _make_base_routed_answer(dataset, settings)
+    assert ans.route is not None
+    ans.route.path = ["L1_CHECKOUT", "L1_PRODUCE"]
+    verdict = verify_answer(ans, state, dataset, settings)
+    codes = {p.code for p in verdict.problems}
+    assert "PATH_INVALID" in codes
+
+
+def test_verifier_detects_path_invalid_disconnected_pair(dataset, settings):
+    """Problem code PATH_INVALID when consecutive nodes are not joined by edge or connector."""
+    ans, state = _make_base_routed_answer(dataset, settings)
+    assert ans.route is not None
+    # L1_ENTRANCE and L2_TOYS are not connected
+    ans.route.path = ["L1_ENTRANCE", "L2_TOYS", "L1_PRODUCE"]
+    verdict = verify_answer(ans, state, dataset, settings)
+    codes = {p.code for p in verdict.problems}
+    assert "PATH_INVALID" in codes
+
+
+def test_verifier_detects_path_invalid_missing_stop(dataset, settings):
+    """Problem code PATH_INVALID when route.path is missing an ordered stop node."""
+    ans, state = _make_base_routed_answer(dataset, settings)
+    assert ans.route is not None
+    # Missing L1_PRODUCE
+    ans.route.path = ["L1_ENTRANCE", "L1_J_SW"]
+    verdict = verify_answer(ans, state, dataset, settings)
+    codes = {p.code for p in verdict.problems}
+    assert "PATH_INVALID" in codes
+
+
+def test_verifier_detects_path_invalid_empty_path_multi_stop(dataset, settings):
+    """Problem code PATH_INVALID when route.path is empty for a route with stops."""
+    ans, state = _make_base_routed_answer(dataset, settings)
+    assert ans.route is not None
+    ans.route.path = []
+    verdict = verify_answer(ans, state, dataset, settings)
+    codes = {p.code for p in verdict.problems}
+    assert "PATH_INVALID" in codes
+
+
 def test_verifier_does_not_import_compose_answer_or_composer_status():
     """agents/verifier.py must never import compose_answer or rebuild_answer."""
     source_code = VERIFIER_PATH.read_text(encoding="utf-8")

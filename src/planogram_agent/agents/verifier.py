@@ -412,6 +412,68 @@ def verify_answer(
                     )
                 )
 
+        # PATH_INVALID check
+        path = route.path
+        if not path:
+            if route.ordered_skus:
+                problems.append(
+                    Problem(
+                        code="PATH_INVALID",
+                        message="Route path is empty for a route with ordered stops",
+                    )
+                )
+            elif route.start_node:
+                problems.append(
+                    Problem(
+                        code="PATH_INVALID",
+                        message=f"Route path is empty; expected at least [{route.start_node}]",
+                    )
+                )
+        else:
+            if path[0] != route.start_node:
+                problems.append(
+                    Problem(
+                        code="PATH_INVALID",
+                        message=f"Route path starts at '{path[0]}' instead of start_node '{route.start_node}'",
+                    )
+                )
+
+            for u, v in zip(path, path[1:]):
+                if u not in G or v not in G or not G.has_edge(u, v):
+                    problems.append(
+                        Problem(
+                            code="PATH_INVALID",
+                            message=f"Consecutive nodes '{u}' and '{v}' in path are not connected by an edge or connector",
+                        )
+                    )
+                else:
+                    edge_data = G[u][v]
+                    u_floor = G.nodes[u]["floor"]
+                    v_floor = G.nodes[v]["floor"]
+                    if u_floor != v_floor:
+                        if edge_data.get("kind") != "connector" or (u, v) not in connector_map:
+                            problems.append(
+                                Problem(
+                                    code="PATH_INVALID",
+                                    message=f"Consecutive nodes '{u}' and '{v}' on different floors are not joined by a real connector",
+                                )
+                            )
+
+            sku_to_loc = {
+                it.sku: it.chosen_location.node_id
+                for it in answer.items
+                if it.sku and it.chosen_location
+            }
+            for sku in route.ordered_skus:
+                expected_stop = sku_to_loc.get(sku)
+                if expected_stop and expected_stop not in path:
+                    problems.append(
+                        Problem(
+                            code="PATH_INVALID",
+                            message=f"Route path does not contain ordered stop node '{expected_stop}' for SKU '{sku}'",
+                        )
+                    )
+
     # 5. STATUS_INCONSISTENT check
     expected_status = compute_expected_status(answer, state)
     if answer.status != expected_status:
@@ -471,7 +533,7 @@ def repair_answer(
     answer.items = repaired_items
 
     # Repair route if needed
-    if any(c in codes for c in ("ROUTE_ITEM_INVALID", "LEG_COST_MISMATCH", "TOTAL_MISMATCH", "FLOOR_CHANGE_MISMATCH", "TEXT_MISMATCH", "ARRIVE_STEP_MISSING")):
+    if any(c in codes for c in ("ROUTE_ITEM_INVALID", "LEG_COST_MISMATCH", "TOTAL_MISMATCH", "FLOOR_CHANGE_MISMATCH", "TEXT_MISMATCH", "ARRIVE_STEP_MISSING", "PATH_INVALID")):
         from ..agents.routing import plan_trip
         routable = [
             it.sku for it in repaired_items

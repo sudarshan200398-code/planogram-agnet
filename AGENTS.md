@@ -39,6 +39,7 @@ Streamlit page -> `interface.run_query()` -> orchestrator -> agents -> tools -> 
 6. If something is unclear, ask. Do not guess requirements.
 7. For each new function or bug fix, write the test first, run it and show that it fails for the right reason, then implement, then run it and show that it passes.
 8. Before a release or a commit that touches src/planogram_agent/matching.py, run pytest -m slow.
+9. From now on, every output, number and text quoted in a report must come from a command you actually ran in this task. Never write sample output by hand.
 
 ## Code style
 - Python 3.11+, type hints, pydantic v2 models, small functions, clear names.
