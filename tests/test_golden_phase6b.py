@@ -229,10 +229,6 @@ def test_golden_queries_phase6b_runner():
     else:
         print("\nAll tested golden query categories passed with 100% success!")
 
-    # Verify high pass rates
+    # Verify 100% pass rates across all categories
     for cat, data in results.items():
-        if cat == "multi_item":
-            # 8 of 9 pass (88.9%); MIT-06 is an existing matcher scoring limitation (AAA vs AA batteries)
-            assert data["rate"] >= 88.0, f"Category '{cat}' pass rate below 88%: {data}"
-        else:
-            assert data["passed"] == data["total"], f"Category '{cat}' had unexpected failures: {failing_cases[cat]}"
+        assert data["passed"] == data["total"], f"Category '{cat}' had unexpected failures: {failing_cases[cat]}"

@@ -78,9 +78,11 @@ class SearchIndex:
         self.word_to_skus: dict[str, set[str]] = {}
         self.known_brands: set[str] = set()
         self.known_sizes: set[str] = set()
+        self.norm_name_to_skus: dict[str, list[str]] = {}
 
         for p in dataset.products:
             n_name = normalize_text(p.name)
+            self.norm_name_to_skus.setdefault(n_name, []).append(p.sku)
             n_brand = normalize_text(p.brand or "")
             n_size = normalize_text(p.size or "")
             n_cat = normalize_text(p.category or "")
@@ -256,6 +258,24 @@ def decide_match(
 
     index = get_search_index(dataset)
     norm_q = normalize_text(query)
+
+    # Exact full-name match check:
+    # If the normalised query equals exactly one candidate's normalised full name,
+    # the result is matched with that candidate, whatever the margin.
+    # If two or more products share the same normalised name, it stays ambiguous.
+    if norm_q and norm_q in index.norm_name_to_skus:
+        exact_skus = index.norm_name_to_skus[norm_q]
+        if len(exact_skus) == 1:
+            exact_sku = exact_skus[0]
+            exact_cand = next((c for c in candidates if c.sku == exact_sku), None)
+            if exact_cand is None:
+                p_match = next((p for p in dataset.products if p.sku == exact_sku), None)
+                p_name = p_match.name if p_match else ""
+                exact_cand = Candidate(sku=exact_sku, name=p_name, score=1.0)
+            return MatchDecision(status="matched", candidates=[exact_cand])
+        elif len(exact_skus) >= 2:
+            return MatchDecision(status="ambiguous", candidates=ambiguous_pool)
+
     q_words = norm_q.split()
 
     # Data-driven generic words rule:
