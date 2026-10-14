@@ -21,6 +21,7 @@ class TripPlan(BaseModel):
     floor_changes: int
     connectors_used: list[ConnectorType]
     unlocated_skus: list[str] = Field(default_factory=list)
+    stops: list[tuple[str, list[str]]] = Field(default_factory=list)
 
 
 def plan_route(
@@ -233,10 +234,15 @@ def plan_route(
         connectors_used.extend(leg.connectors_used)
 
     ordered_skus: list[str] = []
+    stops: list[tuple[str, list[str]]] = []
     for stop in best_order:
+        stop_skus: list[str] = []
         for s in located_skus:
             if best_sku_to_node[s] == stop and s not in ordered_skus:
                 ordered_skus.append(s)
+                stop_skus.append(s)
+        if stop_skus:
+            stops.append((stop, stop_skus))
 
     return TripPlan(
         ordered_skus=ordered_skus,
@@ -246,4 +252,6 @@ def plan_route(
         floor_changes=floor_changes,
         connectors_used=connectors_used,
         unlocated_skus=unlocated_skus,
+        stops=stops,
     )
+

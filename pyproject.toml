@@ -18,3 +18,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+markers = [
+    "slow: marks slow full-dataset scan tests (deselect with '-m \"not slow\"')",
+]
+addopts = '-m "not slow"'

@@ -92,6 +92,12 @@ def main() -> None:
     ans_f = run_query(finder, qf, start="Atlantis")
     print_answer("(f) Unknown start place 'Atlantis'", ans_f)
 
+    # (g) original scenario (a): start near Bakery with product in Bakery
+    qg = "Daily Bake Plain Bagels 4 pack and Café Corner Trail Mix Pouch large, I'm near the Bakery"
+    ans_g = run_query(finder, qg)
+    print_answer("(g) Original scenario (a): start near Bakery with item at Bakery", ans_g)
+
+
 
 if __name__ == "__main__":
     main()

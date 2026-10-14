@@ -1,12 +1,21 @@
 """Test-first suite for exact full product name matching bug fix."""
 from __future__ import annotations
 
+import random
+from collections import defaultdict
 from pathlib import Path
 
+import numpy as np
 import pytest
+from rapidfuzz import fuzz, process
 
 from planogram_agent.data_loader import load_dataset
-from planogram_agent.matching import decide_match, normalize_text, search_products
+from planogram_agent.matching import (
+    decide_match,
+    get_search_index,
+    normalize_text,
+    search_products,
+)
 from planogram_agent.settings import Settings
 
 STORE_DEMO_DIR = Path(__file__).resolve().parent.parent / "data" / "store_demo"
@@ -36,32 +45,148 @@ def test_exact_name_aaa_vs_aa_batteries(dataset, settings):
     assert decision.candidates[0].sku == "CHK-BAT-003"
 
 
+def test_exact_name_mutation_without_exact_rule(dataset, settings):
+    """Mutation check: emptying exact-name dictionary causes decide_match on AAA batteries to NOT match."""
+    query = "Store Brand AAA Batteries 8 pack"
+    candidates = search_products(query, top_k=settings.top_k, dataset=dataset)
+    index = get_search_index(dataset)
+
+    saved_dict = index.norm_name_to_skus
+    try:
+        index.norm_name_to_skus = {}
+        decision = decide_match(candidates, settings, dataset, query=query)
+        assert decision.status != "matched", (
+            f"Expected decide_match on '{query}' to NOT be matched when exact-name index is empty, "
+            f"got status='{decision.status}'"
+        )
+    finally:
+        index.norm_name_to_skus = saved_dict
+
+
+def compute_fast_prefilter_products(dataset):
+    """Pairwise similarity prefilter using union of ratio and token_set_ratio matrices >= 90."""
+    norm_names = [normalize_text(p.name) for p in dataset.products]
+    m_ratio = process.cdist(norm_names, norm_names, scorer=fuzz.ratio, workers=-1)
+    m_tokenset = process.cdist(norm_names, norm_names, scorer=fuzz.token_set_ratio, workers=-1)
+    np.fill_diagonal(m_ratio, 0)
+    np.fill_diagonal(m_tokenset, 0)
+    mask = (m_ratio >= 90) | (m_tokenset >= 90)
+    candidate_indices = np.where(mask.any(axis=1))[0]
+    return [dataset.products[i] for i in candidate_indices]
+
+
 def test_exact_name_property_over_all_dataset_products(dataset, settings):
-    """Case (b): searching any product's full name matches that product, unless a duplicate normalized name exists."""
-    failures: list[tuple[str, str, str]] = []
+    """Case (b): searching any product's full name matches that product (fast version).
 
+    Uses rapidfuzz.process.cdist over normalized names (fuzz.ratio >= 90 or fuzz.token_set_ratio >= 90)
+    to prefilter near-duplicate candidates, and computes the sensitive set within that subset.
+    Asserts:
+    (a) set is not empty and contains CHK-BAT-002 and CHK-BAT-003
+    (b) for every product in the set whose normalised name is unique, decide_match returns matched with that SKU
+    Also tests a fixed-seed random sample of 150 products. Target: under 8 seconds.
+    """
+    norm_name_to_skus = defaultdict(list)
     for p in dataset.products:
-        norm_p = normalize_text(p.name)
-        # Check if another distinct product shares the exact identical normalized name
-        same_name = [
-            p2 for p2 in dataset.products
-            if p2.sku != p.sku and normalize_text(p2.name) == norm_p
-        ]
-        if same_name:
-            continue
+        norm_name_to_skus[normalize_text(p.name)].append(p.sku)
 
+    candidate_products = compute_fast_prefilter_products(dataset)
+    print(f"\n[Fast Prefilter] Selected {len(candidate_products)} products out of {len(dataset.products)}")
+
+    # Compute sensitive set dynamically inside prefiltered candidates
+    sensitive_products = []
+    for p in candidate_products:
         candidates = search_products(p.name, top_k=settings.top_k, dataset=dataset)
-        decision = decide_match(candidates, settings, dataset, query=p.name)
+        if not candidates or candidates[0].sku != p.sku:
+            sensitive_products.append(p)
+        elif len(candidates) >= 2 and (candidates[0].score - candidates[1].score <= settings.margin + 1e-9):
+            sensitive_products.append(p)
 
-        if decision.status != "matched" or not decision.candidates or decision.candidates[0].sku != p.sku:
-            actual_sku = decision.candidates[0].sku if decision.candidates else None
-            failures.append((p.sku, p.name, f"status='{decision.status}', top_sku='{actual_sku}'"))
+    sensitive_skus = {p.sku for p in sensitive_products}
 
-    print(f"\n[Property Test] Failing products count: {len(failures)}")
-    for sku, name, reason in failures:
-        print(f"  - {sku}: {name} ({reason})")
+    # Print size, SKUs, and names
+    print(f"\n[Fast Sensitive Set] Computed {len(sensitive_products)} sensitive products from data:")
+    for p in sensitive_products:
+        print(f"  - {p.sku}: {p.name}")
 
-    assert len(failures) == 0, f"{len(failures)} products failed full-name matching: {failures}"
+    # (a) Assert set is not empty and contains CHK-BAT-002 and CHK-BAT-003
+    assert len(sensitive_products) > 0, "Sensitive set must not be empty"
+    assert "CHK-BAT-002" in sensitive_skus, "Sensitive set must contain CHK-BAT-002"
+    assert "CHK-BAT-003" in sensitive_skus, "Sensitive set must contain CHK-BAT-003"
+
+    # (b) Assert for every product in the set whose normalized name is unique, decide_match returns matched
+    for p in sensitive_products:
+        norm_p = normalize_text(p.name)
+        if len(norm_name_to_skus[norm_p]) > 1:
+            continue
+        cands = search_products(p.name, top_k=settings.top_k, dataset=dataset)
+        decision = decide_match(cands, settings, dataset, query=p.name)
+        assert decision.status == "matched", (
+            f"Expected matched for sensitive SKU {p.sku} ('{p.name}'), got {decision.status}"
+        )
+        assert decision.candidates[0].sku == p.sku
+
+    # Also test fixed-seed random sample of 150 products
+    rng = random.Random(42)
+    sample_150 = rng.sample(dataset.products, 150)
+    for p in sample_150:
+        norm_p = normalize_text(p.name)
+        if len(norm_name_to_skus[norm_p]) > 1:
+            continue
+        cands = search_products(p.name, top_k=settings.top_k, dataset=dataset)
+        decision = decide_match(cands, settings, dataset, query=p.name)
+        assert decision.status == "matched", (
+            f"Expected matched for sampled SKU {p.sku} ('{p.name}'), got {decision.status}"
+        )
+        assert decision.candidates[0].sku == p.sku
+
+
+@pytest.mark.slow
+def test_exact_name_property_slow_full_scan(dataset, settings):
+    """Full 971-product scan and recall check against fast prefilter."""
+    norm_name_to_skus = defaultdict(list)
+    for p in dataset.products:
+        norm_name_to_skus[normalize_text(p.name)].append(p.sku)
+
+    # Compute full sensitive set over all 971 products
+    full_sensitive_products = []
+    for p in dataset.products:
+        candidates = search_products(p.name, top_k=settings.top_k, dataset=dataset)
+        if not candidates or candidates[0].sku != p.sku:
+            full_sensitive_products.append(p)
+        elif len(candidates) >= 2 and (candidates[0].score - candidates[1].score <= settings.margin + 1e-9):
+            full_sensitive_products.append(p)
+
+    full_sensitive_skus = {p.sku for p in full_sensitive_products}
+
+    print(f"\n[Slow Sensitive Set] Computed {len(full_sensitive_products)} sensitive products from all {len(dataset.products)} products:")
+    for p in full_sensitive_products:
+        print(f"  - {p.sku}: {p.name}")
+
+    # Recall check: fast prefilter must contain every product of the full sensitive set
+    prefilter_products = compute_fast_prefilter_products(dataset)
+    prefilter_skus = {p.sku for p in prefilter_products}
+
+    missing_skus = full_sensitive_skus - prefilter_skus
+    if missing_skus:
+        missing_products = [p for p in full_sensitive_products if p.sku in missing_skus]
+        missing_details = [f"{p.sku}: {p.name}" for p in missing_products]
+        pytest.fail(
+            f"Recall check failed: fast prefilter missed {len(missing_skus)} sensitive product(s):\n"
+            + "\n".join(f"  - {d}" for d in missing_details)
+        )
+    assert full_sensitive_skus.issubset(prefilter_skus), "Fast prefilter must contain every sensitive product"
+
+    # Full sensitive set matching check
+    for p in full_sensitive_products:
+        norm_p = normalize_text(p.name)
+        if len(norm_name_to_skus[norm_p]) > 1:
+            continue
+        cands = search_products(p.name, top_k=settings.top_k, dataset=dataset)
+        decision = decide_match(cands, settings, dataset, query=p.name)
+        assert decision.status == "matched", (
+            f"Expected matched for sensitive SKU {p.sku} ('{p.name}'), got {decision.status}"
+        )
+        assert decision.candidates[0].sku == p.sku
 
 
 def test_partial_name_without_size_remains_ambiguous(dataset, settings):

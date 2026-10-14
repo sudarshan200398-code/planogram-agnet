@@ -45,6 +45,8 @@ def format_direction_step(step: DirectionStep) -> str:
     """Format a structured DirectionStep into a plain-English line (no AI)."""
     if step.kind == "walk":
         dist_m = round(step.distance)
+        if dist_m == 0:
+            return f"Walk less than 1 m from {step.from_label} to {step.to_label}."
         return f"Walk {dist_m}m from {step.from_label} to {step.to_label}."
 
     if step.kind == "take_connector":
@@ -88,17 +90,86 @@ def build_direction_steps(
     node_map = {n.id: n for n in dataset.graph.nodes}
     prod_map = {p.sku: p.name for p in dataset.products}
 
-    # Partition ordered_skus into the stops chosen by the planner
+    def _emit_arrive_steps_for_skus(stop_node_id: str, skus: list[str]) -> None:
+        stop_node_obj = node_map.get(stop_node_id)
+        dest_label = stop_node_obj.label if stop_node_obj else stop_node_id
+        for sku in skus:
+            matching_entry = next(
+                (
+                    e
+                    for e in dataset.planogram
+                    if e.sku == sku and e.node_id == stop_node_id
+                ),
+                None,
+            )
+            if matching_entry is None:
+                matching_entry = next(
+                    (e for e in dataset.planogram if e.sku == sku),
+                    None,
+                )
+            loc_text = (
+                f"Level {matching_entry.floor}, {matching_entry.zone}, "
+                f"Bay {matching_entry.bay}, Shelf {matching_entry.shelf_level}"
+            ) if matching_entry else ""
+            floor_val = matching_entry.floor if matching_entry else (stop_node_obj.floor if stop_node_obj else 1)
+            steps.append(
+                DirectionStep(
+                    kind="arrive",
+                    floor=floor_val,
+                    from_label=dest_label,
+                    to_label=dest_label,
+                    distance=0.0,
+                    sku=sku,
+                    product_name=prod_map.get(sku, sku),
+                    location_text=loc_text,
+                )
+            )
+
+    if trip_plan.stops:
+        stops_to_process = list(trip_plan.stops)
+        # 1. Arrive steps for products located at start_node come first, before any walking
+        if stops_to_process and stops_to_process[0][0] == start_node:
+            first_node, first_skus = stops_to_process.pop(0)
+            _emit_arrive_steps_for_skus(first_node, first_skus)
+
+        # 2. Each leg is its walk and connector steps followed by arrive steps for that leg's end stop
+        for leg, (stop_node_id, stop_skus) in zip(trip_plan.legs, stops_to_process):
+            for route_step in leg.steps:
+                if route_step.action == "walk":
+                    steps.append(
+                        DirectionStep(
+                            kind="walk",
+                            floor=route_step.floor_from,
+                            from_label=route_step.from_label,
+                            to_label=route_step.to_label,
+                            distance=route_step.distance,
+                        )
+                    )
+                elif route_step.action == "take_connector":
+                    steps.append(
+                        DirectionStep(
+                            kind="take_connector",
+                            floor=route_step.floor_from,
+                            to_floor=route_step.floor_to,
+                            from_label=route_step.from_label,
+                            to_label=route_step.to_label,
+                            distance=0.0,
+                            connector_type=route_step.connector_type,
+                        )
+                    )
+            _emit_arrive_steps_for_skus(stop_node_id, stop_skus)
+
+        return steps
+
+    # Legacy fallback if trip_plan.stops is empty
     remaining_skus = list(trip_plan.ordered_skus)
 
     def _emit_arrive_steps_for_stop(stop_node_id: str) -> None:
         stop_node_obj = node_map.get(stop_node_id)
         dest_label = stop_node_obj.label if stop_node_obj else stop_node_id
 
-        # Take consecutive SKUs from remaining_skus placed at stop_node_id
         while remaining_skus:
             cand_sku = remaining_skus[0]
-            # Find the planogram entry whose map point matches the chosen stop
             matching_entry = next(
                 (
                     e
@@ -108,7 +179,6 @@ def build_direction_steps(
                 None,
             )
             if matching_entry is None:
-                # SKU belongs to a subsequent stop
                 break
 
             remaining_skus.pop(0)
@@ -130,7 +200,6 @@ def build_direction_steps(
             )
 
     if not trip_plan.legs:
-        # No legs walked (e.g. shopper started at destination)
         _emit_arrive_steps_for_stop(start_node)
         return steps
 
@@ -159,7 +228,6 @@ def build_direction_steps(
                     )
                 )
 
-        # Arrive steps for products at leg's end stop
         _emit_arrive_steps_for_stop(leg.end)
 
     return steps

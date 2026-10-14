@@ -9,11 +9,12 @@ from ..agents.availability import check_availability
 from ..agents.query import parse_request
 from ..agents.routing import RoutingResult, plan_trip
 from ..agents.search import match_item
-from ..agents.verifier import compute_expected_status, rebuild_answer, repair_answer, verify_answer
+from ..agents.verifier import compute_expected_status, repair_answer, verify_answer
 from ..llm.base import LLMClient
 from ..llm.no_model import NoModelClient
 from ..settings import Settings, load_settings
 from ..tools import Location, get_location, resolve_start
+from .rebuild import rebuild_answer
 from .state import Answer, ItemResult, Question, RouteSummary, RunState, TraceEvent
 
 if TYPE_CHECKING:
@@ -96,7 +97,11 @@ def compose_answer(state: RunState, dataset: Dataset) -> Answer:
 
     # Map leg destination nodes from routing result if available
     sku_to_dest_node: dict[str, str] = {}
-    if state.routing_result and state.routing_result.trip_plan.legs:
+    if state.routing_result and state.routing_result.trip_plan.stops:
+        for stop_node, stop_skus in state.routing_result.trip_plan.stops:
+            for s in stop_skus:
+                sku_to_dest_node[s] = stop_node
+    elif state.routing_result and state.routing_result.trip_plan.legs:
         # Trace ordered_skus to their matching leg ends
         remaining = list(state.routing_result.trip_plan.ordered_skus)
         for leg in state.routing_result.trip_plan.legs:
@@ -251,6 +256,8 @@ class Orchestrator:
         self.composer = composer
         self.verifier = verifier
         self.id_factory = id_factory
+        if model_note is None and isinstance(self.client, NoModelClient):
+            model_note = "Using NoModelClient fallback"
         self.model_note = model_note
         self.sessions = SessionStore(
             clock=self.clock,
@@ -461,57 +468,107 @@ class Orchestrator:
             return draft
 
         # Stage 7: COMPOSE
+        t0 = self.clock()
         draft_answer = self.composer(state, dataset)
-        state.trace.append(TraceEvent(stage="COMPOSE", ok=True, ms=0.0))
+        elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
+        state.trace.append(
+            TraceEvent(
+                stage="COMPOSE",
+                ok=True,
+                ms=elapsed_ms,
+                note=f"Items: {len(draft_answer.items)}",
+            )
+        )
+        draft_answer.trace = list(state.trace)
 
         # Stage 8: VERIFY & REPAIR Loop
+        t0 = self.clock()
         verdict = self.verifier(draft_answer, state, dataset, settings)
+        elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
+        v_note = f"Problems: {len(verdict.problems)}" if not verdict.ok else "Audit passed"
         state.trace.append(
             TraceEvent(
                 stage="VERIFY",
                 ok=verdict.ok,
-                ms=0.0,
-                note=f"Problems: {len(verdict.problems)}" if not verdict.ok else "",
+                ms=elapsed_ms,
+                note=v_note,
             )
         )
+        draft_answer.trace = list(state.trace)
 
         if verdict.ok:
             draft_answer.verified = True
             return draft_answer
 
         # Verification loop with repairs
-        for _ in range(settings.max_repairs):
+        for rep_idx in range(settings.max_repairs):
+            t0 = self.clock()
             draft_answer = repair_answer(draft_answer, verdict, state, dataset, settings)
+            elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
             draft_answer.repaired = True
-            state.trace.append(TraceEvent(stage="REPAIR", ok=True, ms=0.0))
+            state.trace.append(
+                TraceEvent(
+                    stage="REPAIR",
+                    ok=True,
+                    ms=elapsed_ms,
+                    note=f"Repair pass {rep_idx + 1}",
+                )
+            )
+            draft_answer.trace = list(state.trace)
 
+            t0 = self.clock()
             verdict = self.verifier(draft_answer, state, dataset, settings)
+            elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
+            v_note = (
+                f"Problems after repair: {len(verdict.problems)}"
+                if not verdict.ok
+                else "Audit passed after repair"
+            )
             state.trace.append(
                 TraceEvent(
                     stage="VERIFY",
                     ok=verdict.ok,
-                    ms=0.0,
-                    note=f"Problems after repair: {len(verdict.problems)}" if not verdict.ok else "",
+                    ms=elapsed_ms,
+                    note=v_note,
                 )
             )
+            draft_answer.trace = list(state.trace)
             if verdict.ok:
                 draft_answer.verified = True
                 return draft_answer
 
         # Rebuild answer if repairs failed
+        t0 = self.clock()
         rebuilt = rebuild_answer(state, dataset, settings)
+        elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
         rebuilt.rebuilt = True
-        state.trace.append(TraceEvent(stage="REBUILD", ok=True, ms=0.0))
+        state.trace.append(
+            TraceEvent(
+                stage="REBUILD",
+                ok=True,
+                ms=elapsed_ms,
+                note="Rebuilt deterministically from facts",
+            )
+        )
+        rebuilt.trace = list(state.trace)
 
+        t0 = self.clock()
         verdict = self.verifier(rebuilt, state, dataset, settings)
+        elapsed_ms = round((self.clock() - t0) * 1000.0, 2)
+        v_note = (
+            f"Problems after rebuild: {len(verdict.problems)}"
+            if not verdict.ok
+            else "Audit passed after rebuild"
+        )
         state.trace.append(
             TraceEvent(
                 stage="VERIFY",
                 ok=verdict.ok,
-                ms=0.0,
-                note=f"Problems after rebuild: {len(verdict.problems)}" if not verdict.ok else "",
+                ms=elapsed_ms,
+                note=v_note,
             )
         )
+        rebuilt.trace = list(state.trace)
 
         if verdict.ok:
             rebuilt.verified = True
@@ -525,7 +582,7 @@ class Orchestrator:
             verified=False,
             repaired=draft_answer.repaired,
             rebuilt=True,
-            trace=state.trace,
+            trace=list(state.trace),
         )
 
     def run(
@@ -549,10 +606,11 @@ class Orchestrator:
 
         if self.model_note:
             state.trace.append(
-                TraceEvent(stage="INIT", ok=True, ms=0.0, note=self.model_note)
+                TraceEvent(stage="MODEL_NOTE", ok=True, ms=0.0, note=self.model_note)
             )
 
         return self._run_from_stage(state, from_stage="PARSE")
+
 
     def answer_question(
         self,

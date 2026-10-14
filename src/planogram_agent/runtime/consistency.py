@@ -27,7 +27,7 @@ def check_directions_consistency(steps: list[DirectionStep], text: str) -> tuple
         return False, errors
 
     # Check distances: rounded whole metres
-    step_distances = {round(s.distance) for s in steps if s.kind == "walk"}
+    step_distances = {round(s.distance) for s in steps if s.kind == "walk" and round(s.distance) > 0}
     text_distances = {int(m) for m in re.findall(r"\b(\d+)m\b", text)}
     if text_distances != step_distances:
         errors.append(
@@ -43,9 +43,15 @@ def check_directions_consistency(steps: list[DirectionStep], text: str) -> tuple
                 errors.append(f"Line {idx} missing from_label '{step.from_label}'")
             if step.to_label not in line:
                 errors.append(f"Line {idx} missing to_label '{step.to_label}'")
-            expected_dist_str = f"{round(step.distance)}m"
-            if expected_dist_str not in line:
-                errors.append(f"Line {idx} missing distance string '{expected_dist_str}'")
+            dist_m = round(step.distance)
+            if dist_m == 0:
+                if "less than 1 m" not in line:
+                    errors.append(f"Line {idx} missing 'less than 1 m'")
+            else:
+                expected_dist_str = f"{dist_m}m"
+                if expected_dist_str not in line:
+                    errors.append(f"Line {idx} missing distance string '{expected_dist_str}'")
+
 
         elif step.kind == "take_connector":
             conn_name = (

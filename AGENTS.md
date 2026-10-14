@@ -38,6 +38,7 @@ Streamlit page -> `interface.run_query()` -> orchestrator -> agents -> tools -> 
 5. Keep changes small. Show a short summary of what changed and which tests ran.
 6. If something is unclear, ask. Do not guess requirements.
 7. For each new function or bug fix, write the test first, run it and show that it fails for the right reason, then implement, then run it and show that it passes.
+8. Before a release or a commit that touches src/planogram_agent/matching.py, run pytest -m slow.
 
 ## Code style
 - Python 3.11+, type hints, pydantic v2 models, small functions, clear names.

@@ -233,6 +233,50 @@ def verify_answer(
                 )
             )
 
+        # ARRIVE_STEP_MISSING check
+        arrive_steps = [s for s in route.steps if s.kind == "arrive"]
+        arrive_skus = [s.sku for s in arrive_steps]
+
+        for sku in route.ordered_skus:
+            count = arrive_skus.count(sku)
+            if count == 0:
+                problems.append(
+                    Problem(
+                        code="ARRIVE_STEP_MISSING",
+                        message=f"Missing arrive step for ordered SKU '{sku}'",
+                    )
+                )
+            elif count > 1:
+                problems.append(
+                    Problem(
+                        code="ARRIVE_STEP_MISSING",
+                        message=f"Duplicate arrive steps for ordered SKU '{sku}' ({count})",
+                    )
+                )
+
+        for s in arrive_steps:
+            if s.sku in prod_by_sku:
+                p = prod_by_sku[s.sku]
+                if s.product_name != p.name:
+                    problems.append(
+                        Problem(
+                            code="ARRIVE_STEP_MISSING",
+                            message=f"Arrive step product name '{s.product_name}' != dataset name '{p.name}' for SKU '{s.sku}'",
+                        )
+                    )
+                valid_loc_texts = {
+                    f"Level {e.floor}, {e.zone}, Bay {e.bay}, Shelf {e.shelf_level}"
+                    for e in dataset.planogram
+                    if e.sku == s.sku
+                }
+                if not s.location_text or s.location_text not in valid_loc_texts:
+                    problems.append(
+                        Problem(
+                            code="ARRIVE_STEP_MISSING",
+                            message=f"Arrive step location_text '{s.location_text}' does not match planogram for SKU '{s.sku}'",
+                        )
+                    )
+
         # TEXT_MISMATCH check
         is_consistent, text_errs = check_directions_consistency(
             route.steps, route.directions_text
@@ -427,7 +471,7 @@ def repair_answer(
     answer.items = repaired_items
 
     # Repair route if needed
-    if any(c in codes for c in ("ROUTE_ITEM_INVALID", "LEG_COST_MISMATCH", "TOTAL_MISMATCH", "FLOOR_CHANGE_MISMATCH", "TEXT_MISMATCH")):
+    if any(c in codes for c in ("ROUTE_ITEM_INVALID", "LEG_COST_MISMATCH", "TOTAL_MISMATCH", "FLOOR_CHANGE_MISMATCH", "TEXT_MISMATCH", "ARRIVE_STEP_MISSING")):
         from ..agents.routing import plan_trip
         routable = [
             it.sku for it in repaired_items
@@ -455,12 +499,3 @@ def repair_answer(
     answer.status = compute_expected_status(answer, state)
     return answer
 
-
-def rebuild_answer(
-    state: RunState,
-    dataset: Dataset,
-    settings: Settings,
-) -> Answer:
-    """Deterministically reconstruct a clean, safe answer from scratch using raw tool outputs."""
-    from ..runtime.orchestrator import compose_answer
-    return compose_answer(state, dataset)
