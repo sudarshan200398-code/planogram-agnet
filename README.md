@@ -22,6 +22,24 @@ accessible-only mode).
     python -m planogram_agent.cli L1_ENTRANCE L2_TOYS --accessible
     python scripts/plot_route.py L1_ENTRANCE L2_TOYS docs/route.png
 
+### Live Check with Gemini
+
+To run the live check against the Gemini API (note: this script sends test sentences to Google):
+
+    # Windows CMD
+    set GEMINI_API_KEY=your_key_here
+    python scripts\live_check.py
+
+    # Windows PowerShell
+    $env:GEMINI_API_KEY="your_key_here"
+    python scripts\live_check.py
+
+    # Linux / macOS
+    export GEMINI_API_KEY="your_key_here"
+    python scripts/live_check.py
+
+Full redacted logs are saved to `reports/live_check_<YYYYMMDD_HHMMSS>.txt`.
+
 ## Web UI
 
 Install the UI extra dependency:

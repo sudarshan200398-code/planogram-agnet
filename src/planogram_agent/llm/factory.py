@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 from ..settings import Settings, load_settings
 
 
-def make_client(settings: Settings | None = None) -> LLMClient:
+def make_client(settings: Settings | None = None, **kwargs) -> LLMClient:
     """Instantiate an LLMClient based on the settings provider."""
     if settings is None:
         settings = load_settings()
@@ -17,11 +17,11 @@ def make_client(settings: Settings | None = None) -> LLMClient:
     if provider == "gemini":
         from .gemini_client import GeminiClient
 
-        return GeminiClient(settings=settings)
+        return GeminiClient(settings=settings, **kwargs)
     elif provider == "fake":
         from .fake_client import FakeLLMClient
 
-        return FakeLLMClient()
+        return FakeLLMClient(**kwargs)
     elif provider == "none":
         from .no_model import NoModelClient
 

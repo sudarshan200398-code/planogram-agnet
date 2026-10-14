@@ -47,6 +47,7 @@ class GeminiClient:
         *,
         clock: Callable[[], float] = time.monotonic,
         sleep: Callable[[float], None] = time.sleep,
+        on_call: Callable[[], None] | None = None,
     ) -> None:
         if settings is None:
             settings = load_settings()
@@ -56,6 +57,7 @@ class GeminiClient:
             raise ValueError("GEMINI_API_KEY environment variable not set")
         self.clock = clock
         self.sleep = sleep
+        self.on_call = on_call
 
     def generate(self, system: str, user: str, timeout: float | None = None) -> str:
         try:
@@ -82,6 +84,9 @@ class GeminiClient:
             call_timeout_ms = int(remaining * 1000)
 
             try:
+                if self.on_call is not None:
+                    self.on_call()
+
                 http_options = types.HttpOptions(timeout=call_timeout_ms) if hasattr(types, "HttpOptions") else None
                 client_kwargs = {"api_key": self.api_key}
                 if http_options is not None:

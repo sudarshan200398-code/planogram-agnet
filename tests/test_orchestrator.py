@@ -456,3 +456,26 @@ def test_create_finder_missing_key_sets_model_note(monkeypatch):
     ans = finder.run("Fresh Farms Red Apples 1 kg")
     assert any(e.stage == "MODEL_NOTE" and "NoModelClient" in e.note for e in ans.trace)
 
+
+def test_orchestrator_parse_trace_note_source():
+    from planogram_agent.llm.fake_client import FakeLLMClient
+
+    dataset = load_dataset(STORE_DIR, validate=True)
+    settings = Settings()
+
+    # 1. Model source in trace
+    valid_resp = '{"intent": "find", "items": [{"text": "Store Brand Whole Milk 2 L", "qty": 1}], "start": null, "accessible_only": false, "end_at_checkout": false}'
+    model_finder = Orchestrator(dataset=dataset, settings=settings, client=FakeLLMClient(responses=[valid_resp]))
+    ans_model = model_finder.run("Store Brand Whole Milk 2 L")
+    parse_event_model = next((e for e in ans_model.trace if e.stage == "PARSE"), None)
+    assert parse_event_model is not None
+    assert parse_event_model.note == "source: model"
+
+    # 2. Fallback source in trace (NoModelClient)
+    fallback_finder = Orchestrator(dataset=dataset, settings=settings, client=NoModelClient())
+    ans_fallback = fallback_finder.run("Store Brand Whole Milk 2 L")
+    parse_event_fallback = next((e for e in ans_fallback.trace if e.stage == "PARSE"), None)
+    assert parse_event_fallback is not None
+    assert parse_event_fallback.note == "source: fallback"
+
+

@@ -989,3 +989,96 @@ def test_parse_request_time_budget_skips_retry_when_less_than_1_second_remaining
     assert clock.now() == 7.5
 
 
+def test_parse_request_structural_rejections_without_calling_client():
+    client = FakeLLMClient(responses=['{"intent": "find", "items": [{"text": "item", "qty": 1}]}'])
+    settings = Settings(max_query_chars=100)
+
+    # Empty text
+    res_empty = parse_request("", client, settings)
+    assert res_empty.source == "fallback"
+    assert res_empty.fallback_reason == "structural"
+    assert len(client.calls) == 0
+
+    # Whitespace only
+    res_ws = parse_request("   \t\n  ", client, settings)
+    assert res_ws.source == "fallback"
+    assert res_ws.fallback_reason == "structural"
+    assert len(client.calls) == 0
+
+    # Over-long text
+    res_long = parse_request("a" * 101, client, settings)
+    assert res_long.source == "fallback"
+    assert res_long.fallback_reason == "structural"
+    assert len(client.calls) == 0
+
+    # No letters (digits/punctuation only)
+    res_no_letters = parse_request("12345 6789 !!! ???", client, settings)
+    assert res_no_letters.source == "fallback"
+    assert res_no_letters.fallback_reason == "structural"
+    assert len(client.calls) == 0
+
+
+def test_parse_request_fallback_reasons_and_model_success():
+    from planogram_agent.llm.no_model import ModelUnavailableError
+
+    settings = Settings(model_timeout_seconds=8, retries=1)
+
+    # 1. Model success -> fallback_reason is None, source is 'model'
+    valid_resp = '{"intent": "find", "items": [{"text": "Store Brand Whole Milk 2 L", "qty": 1}], "start": null, "accessible_only": false, "end_at_checkout": false}'
+    client_ok = FakeLLMClient(responses=[valid_resp])
+    res_ok = parse_request("Store Brand Whole Milk 2 L", client_ok, settings)
+    assert res_ok.source == "model"
+    assert res_ok.fallback_reason is None
+
+    # 2. Model unavailable
+    class UnavailableClient:
+        def generate(self, system: str, user: str, timeout: float | None = None) -> str:
+            raise ModelUnavailableError("Service unavailable")
+
+    res_unavail = parse_request("Store Brand Whole Milk 2 L", UnavailableClient(), settings)
+    assert res_unavail.source == "fallback"
+    assert res_unavail.fallback_reason == "model_unavailable"
+
+    # 3. Time budget exhausted
+    clock = SimulatedClock(0.0)
+
+    class TimeoutClient:
+        def generate(self, system: str, user: str, timeout: float | None = None) -> str:
+            clock.sleep(7.5)
+            return "invalid json"
+
+    res_budget = parse_request("Store Brand Whole Milk 2 L", TimeoutClient(), settings, clock=clock.now)
+    assert res_budget.source == "fallback"
+    assert res_budget.fallback_reason == "time_budget"
+
+    # 4. Invalid output after retries
+    client_invalid = FakeLLMClient(responses=["not json", "still not json"])
+    res_invalid = parse_request("Store Brand Whole Milk 2 L", client_invalid, settings)
+    assert res_invalid.source == "fallback"
+    assert res_invalid.fallback_reason == "invalid_output"
+
+
+def test_redact_with_fake_key_string(monkeypatch):
+    import sys
+    from pathlib import Path
+    scripts_dir = Path(__file__).resolve().parent.parent / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    from live_check import redact
+
+    fake_env_key = "MY_SPECIAL_SECRET_KEY_12345"
+    monkeypatch.setenv("GEMINI_API_KEY", fake_env_key)
+
+    fake_aiza_key = "AIzaSyDfakeKey1234567890abcdefghijk1234"
+    assert len(fake_aiza_key) == 39  # 'AIza' (4) + 35 characters
+    sample_text = (
+        f"Connecting with key={fake_env_key} and backup {fake_aiza_key}"
+    )
+    redacted = redact(sample_text)
+    assert fake_env_key not in redacted
+    assert fake_aiza_key not in redacted
+    assert "***REDACTED***" in redacted
+    assert redacted == "Connecting with key=***REDACTED*** and backup ***REDACTED***"
+
+
+

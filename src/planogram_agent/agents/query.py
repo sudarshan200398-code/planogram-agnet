@@ -43,6 +43,8 @@ class ParsedRequest(BaseModel):
     truncated: bool = False
     reason: str | None = None
     source: Literal["model", "fallback"] = "model"
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] | None = None
+
 
 
 class _RawModelOutput(BaseModel):
@@ -490,10 +492,18 @@ def rule_based_fallback(
     text: str,
     settings: Settings,
     dataset: Dataset | None = None,
+    *,
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] = "model_unavailable",
 ) -> ParsedRequest:
     """Rule-based fallback parser using general grammar patterns without AI model calls."""
     if not text or not text.strip():
-        return ParsedRequest(intent="unknown", items=[], reason="Query is empty or whitespace", source="fallback")
+        return ParsedRequest(
+            intent="unknown",
+            items=[],
+            reason="Query is empty or whitespace",
+            source="fallback",
+            fallback_reason="structural",
+        )
 
     if len(text) > settings.max_query_chars:
         return ParsedRequest(
@@ -501,11 +511,18 @@ def rule_based_fallback(
             items=[],
             reason=f"Query exceeds max length of {settings.max_query_chars} characters",
             source="fallback",
+            fallback_reason="structural",
         )
 
     # Structural check: text must contain at least one letter (Unicode-aware)
     if not any(c.isalpha() for c in text):
-        return ParsedRequest(intent="unknown", items=[], reason="No letters found in query", source="fallback")
+        return ParsedRequest(
+            intent="unknown",
+            items=[],
+            reason="No letters found in query",
+            source="fallback",
+            fallback_reason="structural",
+        )
 
     clean_text = text.strip()
 
@@ -709,6 +726,7 @@ def rule_based_fallback(
             end_at_checkout=end_at_checkout,
             reason="No valid items found",
             source="fallback",
+            fallback_reason=fallback_reason,
         )
 
     truncated = False
@@ -729,6 +747,7 @@ def rule_based_fallback(
         truncated=truncated,
         reason=None,
         source="fallback",
+        fallback_reason=fallback_reason,
     )
 
 
@@ -752,6 +771,7 @@ def parse_request(
             truncated=False,
             reason="Empty query",
             source="fallback",
+            fallback_reason="structural",
         )
 
     # Pre-check 2: over max_query_chars (rejected WITHOUT calling client)
@@ -765,6 +785,21 @@ def parse_request(
             truncated=False,
             reason=f"Query exceeds max length of {settings.max_query_chars} characters",
             source="fallback",
+            fallback_reason="structural",
+        )
+
+    # Pre-check 3: no letters (rejected WITHOUT calling client)
+    if not any(c.isalpha() for c in text):
+        return ParsedRequest(
+            intent="unknown",
+            items=[],
+            start=None,
+            accessible_only=False,
+            end_at_checkout=False,
+            truncated=False,
+            reason="No letters found in query",
+            source="fallback",
+            fallback_reason="structural",
         )
 
     deadline = clock() + float(settings.model_timeout_seconds)
@@ -772,6 +807,7 @@ def parse_request(
     user_prompt = f"<user_request>\n{safe_text}\n</user_request>"
 
     last_error: Exception | str | None = None
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] = "invalid_output"
 
     # Maximum of 2 attempts (initial + 1 retry)
     for attempt in range(1 + settings.retries):
@@ -781,6 +817,7 @@ def parse_request(
                 "Model time budget exhausted (remaining %.2fs < 1.0s); falling back to rule-based parser",
                 remaining,
             )
+            fallback_reason = "time_budget"
             break
 
         if attempt > 0:
@@ -800,9 +837,11 @@ def parse_request(
             )
         except ModelUnavailableError as exc:
             logger.warning("Model unavailable (%s); going straight to rule-based fallback", exc)
+            fallback_reason = "model_unavailable"
             break
         except Exception as exc:  # noqa: BLE001
             logger.warning("LLM client call failed (%s); aborting to rule-based fallback", exc)
+            fallback_reason = "model_unavailable"
             break
 
         try:
@@ -811,10 +850,12 @@ def parse_request(
             raw_output = _RawModelOutput.model_validate(data)
             parsed_req = _validate_model_output(raw_output, text, settings)
             parsed_req.source = "model"
+            parsed_req.fallback_reason = None
             return parsed_req
         except Exception as exc:  # noqa: BLE001
             last_error = exc
+            fallback_reason = "invalid_output"
             logger.warning("LLM generation/parsing attempt %d failed: %s", attempt + 1, exc)
 
     # Fallback when all attempts fail or deadline is reached
-    return rule_based_fallback(text, settings, dataset=dataset)
+    return rule_based_fallback(text, settings, dataset=dataset, fallback_reason=fallback_reason)
