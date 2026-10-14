@@ -327,6 +327,7 @@ class Orchestrator:
                     client=self.client,
                     settings=settings,
                     dataset=dataset,
+                    clock=self.clock,
                 )
                 if state.start is not None:
                     parsed.start = state.start

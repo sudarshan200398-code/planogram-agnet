@@ -15,10 +15,12 @@ class FakeLLMClient:
         self._responses: list[str | Exception | type[Exception]] = (
             list(responses) if responses is not None else []
         )
-        self.calls: list[dict[str, str]] = []
+        self.calls: list[dict[str, object]] = []
+        self.timeouts: list[float | None] = []
 
-    def generate(self, system: str, user: str) -> str:
-        self.calls.append({"system": system, "user": user})
+    def generate(self, system: str, user: str, timeout: float | None = None) -> str:
+        self.calls.append({"system": system, "user": user, "timeout": timeout})
+        self.timeouts.append(timeout)
         if not self._responses:
             raise RuntimeError("FakeLLMClient ran out of scripted replies")
 

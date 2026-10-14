@@ -37,8 +37,8 @@ def test_fake_client_returns_replies_in_order():
     assert client.generate("system", "user 1") == "first reply"
     assert client.generate("system", "user 2") == "second reply"
     assert len(client.calls) == 2
-    assert client.calls[0] == {"system": "system", "user": "user 1"}
-    assert client.calls[1] == {"system": "system", "user": "user 2"}
+    assert client.calls[0] == {"system": "system", "user": "user 1", "timeout": None}
+    assert client.calls[1] == {"system": "system", "user": "user 2", "timeout": None}
 
 
 def test_fake_client_raises_scripted_exception():
@@ -85,8 +85,15 @@ def test_gemini_client_raises_when_api_key_missing(monkeypatch):
 
 
 def test_gemini_client_import_does_not_import_google_genai():
-    # Verify that importing gemini_client module did not import google.genai
-    assert "google.genai" not in sys.modules
+    # Verify in an isolated subprocess that importing gemini_client module does not import google.genai
+    import subprocess
+    cmd = [
+        sys.executable,
+        "-c",
+        "import sys, planogram_agent.llm.gemini_client; assert 'google.genai' not in sys.modules, 'google.genai was imported'",
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    assert res.returncode == 0, f"Import test failed: {res.stderr}"
 
 
 def test_make_client_gemini(monkeypatch):
@@ -763,5 +770,222 @@ def test_fallback_demo_store_speed_100_calls(store_demo_dataset):
         rule_based_fallback(q, settings, dataset=store_demo_dataset)
     elapsed = time.perf_counter() - start_time
     assert elapsed < 5.0, f"100 calls took {elapsed:.2f}s, expected < 5.0s"
+
+
+# ---------------------------------------------------------------------------
+# Simulated Clock & GeminiClient Retry / Time Budget Unit Tests
+# ---------------------------------------------------------------------------
+
+class SimulatedClock:
+    def __init__(self, start_time: float = 0.0):
+        self.time = start_time
+
+    def now(self) -> float:
+        return self.time
+
+    def sleep(self, seconds: float) -> None:
+        self.time += seconds
+
+
+class FakeGenaiContext:
+    def __init__(self, responses):
+        self.responses = list(responses)
+        self.call_count = 0
+        self.calls = []
+
+    def make_modules(self):
+        ctx = self
+
+        class FakeHttpOptions:
+            def __init__(self, timeout=None):
+                self.timeout = timeout
+
+        class FakeConfig:
+            def __init__(self, **kwargs):
+                self.kwargs = kwargs
+
+        class FakeModels:
+            def generate_content(self, model, contents, config):
+                ctx.call_count += 1
+                ctx.calls.append({"model": model, "contents": contents, "config": config})
+                if not ctx.responses:
+                    raise RuntimeError("No more scripted fake genai responses")
+                resp = ctx.responses.pop(0)
+                if isinstance(resp, Exception):
+                    raise resp
+                if isinstance(resp, type) and issubclass(resp, Exception):
+                    raise resp("Scripted error")
+
+                class FakeResponse:
+                    text = str(resp)
+
+                return FakeResponse()
+
+        class FakeClient:
+            def __init__(self, api_key=None, http_options=None):
+                self.api_key = api_key
+                self.http_options = http_options
+                self.models = FakeModels()
+
+        import types as py_types
+        fake_genai = py_types.ModuleType("google.genai")
+        fake_genai.Client = FakeClient
+
+        fake_types = py_types.ModuleType("google.genai.types")
+        fake_types.HttpOptions = FakeHttpOptions
+        fake_types.GenerateContentConfig = FakeConfig
+        fake_genai.types = fake_types
+
+        fake_google = py_types.ModuleType("google")
+        fake_google.genai = fake_genai
+
+        return fake_google, fake_genai, fake_types
+
+
+@pytest.fixture
+def fake_genai_env(monkeypatch):
+    def _setup(responses):
+        ctx = FakeGenaiContext(responses)
+        fake_google, fake_genai, fake_types = ctx.make_modules()
+        monkeypatch.setitem(sys.modules, "google", fake_google)
+        monkeypatch.setitem(sys.modules, "google.genai", fake_genai)
+        monkeypatch.setitem(sys.modules, "google.genai.types", fake_types)
+        return ctx
+
+    return _setup
+
+
+def test_gemini_client_two_503s_then_success_gives_result_after_3_calls(fake_genai_env):
+    valid_json = json.dumps({
+        "intent": "find",
+        "items": [{"text": "Store Brand Whole Milk 2 L", "qty": 1}],
+    })
+    ctx = fake_genai_env([
+        RuntimeError("503 Service Unavailable"),
+        RuntimeError("503 Service Unavailable"),
+        valid_json,
+    ])
+    clock = SimulatedClock(100.0)
+    settings = Settings(model_timeout_seconds=20)
+    client = GeminiClient(
+        settings=settings,
+        api_key="mock-api-key",
+        clock=clock.now,
+        sleep=clock.sleep,
+    )
+    result = client.generate("system", "user")
+    assert ctx.call_count == 3
+    assert "Store Brand Whole Milk 2 L" in result
+    assert clock.now() == 107.0  # 100 + 2.0 (wait 1) + 5.0 (wait 2)
+
+
+def test_gemini_client_three_503s_gives_model_unavailable_error(fake_genai_env):
+    from planogram_agent.llm.no_model import ModelUnavailableError
+
+    ctx = fake_genai_env([
+        RuntimeError("503 Service Unavailable"),
+        RuntimeError("503 Service Unavailable"),
+        RuntimeError("503 Service Unavailable"),
+    ])
+    clock = SimulatedClock(100.0)
+    settings = Settings(model_timeout_seconds=20)
+    client = GeminiClient(
+        settings=settings,
+        api_key="mock-api-key",
+        clock=clock.now,
+        sleep=clock.sleep,
+    )
+    with pytest.raises(ModelUnavailableError, match="Gemini service unavailable after 3 attempts"):
+        client.generate("system", "user")
+    assert ctx.call_count == 3
+
+
+def test_gemini_client_model_not_found_raises_at_once_after_1_call(fake_genai_env):
+    ctx = fake_genai_env([
+        RuntimeError("Model not found: gemini-custom-model"),
+    ])
+    clock = SimulatedClock(100.0)
+    settings = Settings(model_timeout_seconds=20)
+    client = GeminiClient(
+        settings=settings,
+        api_key="mock-api-key",
+        clock=clock.now,
+        sleep=clock.sleep,
+    )
+    with pytest.raises(RuntimeError, match="Model not found"):
+        client.generate("system", "user")
+    assert ctx.call_count == 1
+    assert clock.now() == 100.0  # no sleep performed
+
+
+def test_gemini_client_total_fake_clock_time_never_exceeds_model_timeout_seconds(fake_genai_env):
+    from planogram_agent.llm.no_model import ModelUnavailableError
+
+    # Budget is 5 seconds.
+    # Attempt 0: fails (503). Wait 2s -> elapsed 2s. Remaining is 5 - 2 = 3s.
+    # Attempt 1: fails (503). Wait 5s would need 2 + 5 = 7s > 5s budget, remaining_after_wait < 1s.
+    # Aborts before sleeping 5s!
+    ctx = fake_genai_env([
+        RuntimeError("503 Service Unavailable"),
+        RuntimeError("503 Service Unavailable"),
+    ])
+    clock = SimulatedClock(0.0)
+    settings = Settings(model_timeout_seconds=5)
+    client = GeminiClient(
+        settings=settings,
+        api_key="mock-api-key",
+        clock=clock.now,
+        sleep=clock.sleep,
+    )
+    with pytest.raises(ModelUnavailableError, match="Deadline does not allow retry wait"):
+        client.generate("system", "user")
+
+    assert clock.now() <= settings.model_timeout_seconds
+    assert clock.now() == 2.0  # Only the first 2s wait occurred
+
+
+def test_parse_request_with_model_that_always_fails_with_503_returns_fallback_result_quickly():
+    from planogram_agent.llm.no_model import ModelUnavailableError
+
+    class Always503Client:
+        def __init__(self):
+            self.calls = []
+
+        def generate(self, system: str, user: str, timeout: float | None = None) -> str:
+            self.calls.append({"system": system, "user": user, "timeout": timeout})
+            raise ModelUnavailableError("503 Service Unavailable")
+
+    client = Always503Client()
+    clock = SimulatedClock(0.0)
+    settings = Settings(model_timeout_seconds=8, retries=1)
+    result = parse_request("Store Brand Whole Milk 2 L", client, settings, clock=clock.now)
+
+    assert result.source == "fallback"
+    assert result.intent == "find"
+    assert len(result.items) == 1
+    assert result.items[0].text == "Store Brand Whole Milk 2 L"
+    # Agent retry must NOT occur on ModelUnavailableError
+    assert len(client.calls) == 1
+
+
+def test_parse_request_time_budget_skips_retry_when_less_than_1_second_remaining():
+    clock = SimulatedClock(0.0)
+
+    class SlowFailingClient:
+        def __init__(self):
+            self.calls = []
+
+        def generate(self, system: str, user: str, timeout: float | None = None) -> str:
+            self.calls.append({"system": system, "user": user, "timeout": timeout})
+            clock.sleep(7.5)  # consumes 7.5 seconds of the 8.0 second budget
+            return "not-json"
+
+    client = SlowFailingClient()
+    settings = Settings(model_timeout_seconds=8, retries=1)
+    result = parse_request("Store Brand Whole Milk 2 L", client, settings, clock=clock.now)
+
+    assert result.source == "fallback"
+    assert len(client.calls) == 1  # retry skipped because remaining time (0.5s) < 1.0s
+    assert clock.now() == 7.5
 
 

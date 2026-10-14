@@ -15,5 +15,5 @@ class NoModelClient(LLMClient):
     and deterministic fallback.
     """
 
-    def generate(self, system: str, user: str) -> str:
+    def generate(self, system: str, user: str, timeout: float | None = None) -> str:
         raise ModelUnavailableError("No AI model configured or available")

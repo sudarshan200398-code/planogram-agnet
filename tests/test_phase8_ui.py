@@ -29,6 +29,11 @@ def settings():
     return Settings()
 
 
+@pytest.fixture(autouse=True)
+def configure_ui_provider(monkeypatch):
+    monkeypatch.setenv("PLANOGRAM_PROVIDER", "none")
+
+
 def test_page_loads():
     """Streamlit page loads cleanly with no exceptions."""
     at = AppTest.from_file(APP_FILE, default_timeout=30)
@@ -324,3 +329,22 @@ def test_out_of_stock_example_data_integrity(dataset):
     assert any("Status: Out of stock" in t for t in markdown_texts)
     assert any("Location: Level 2, Toys & Stationery, Bay C, Shelf 2" in t for t in markdown_texts)
     assert any("Out of stock" in (c.value or "") for c in at.caption)
+
+
+def test_unknown_planogram_provider_uses_no_model_and_does_not_crash(monkeypatch):
+    """Unknown PLANOGRAM_PROVIDER uses NoModelClient, sets model_note, and does not crash UI."""
+    import streamlit as st
+    st.cache_resource.clear()
+    try:
+        monkeypatch.setenv("PLANOGRAM_PROVIDER", "bogus_provider_xyz")
+        finder = create_finder(STORE_DIR)
+        assert isinstance(finder.client, NoModelClient)
+        assert finder.model_note is not None
+        assert "bogus_provider_xyz" in finder.model_note
+
+        at = AppTest.from_file(APP_FILE, default_timeout=30)
+        at.run()
+        assert not at.exception
+        assert any("bogus_provider_xyz" in s.value for s in at.sidebar.text)
+    finally:
+        st.cache_resource.clear()

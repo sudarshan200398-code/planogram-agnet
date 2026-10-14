@@ -21,5 +21,6 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 markers = [
     "slow: marks slow full-dataset scan tests (deselect with '-m \"not slow\"')",
+    "live: marks tests that make live network calls (deselect with '-m \"not live\"')",
 ]
-addopts = '-m "not slow"'
+addopts = '-m "not slow and not live"'
