@@ -1,6 +1,7 @@
 """Temporary pipeline helper chaining Query, Search, Availability, and Routing agents.
 
-NOTE: This module is temporary and will be replaced by the Orchestrator in Phase 7.
+# NOTE: This module is superseded by the Orchestrator (runtime/orchestrator.py).
+# It is retained for existing test compatibility.
 """
 from __future__ import annotations
 

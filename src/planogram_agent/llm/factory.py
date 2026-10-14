@@ -22,7 +22,11 @@ def make_client(settings: Settings | None = None) -> LLMClient:
         from .fake_client import FakeLLMClient
 
         return FakeLLMClient()
+    elif provider == "none":
+        from .no_model import NoModelClient
+
+        return NoModelClient()
     else:
         raise ValueError(
-            f"Unknown LLM provider '{settings.provider}'. Supported providers are: 'gemini', 'fake'."
+            f"Unknown LLM provider '{settings.provider}'. Supported providers are: 'gemini', 'fake', 'none'."
         )

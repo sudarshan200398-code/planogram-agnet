@@ -12,5 +12,7 @@
   "retries": 1,
   "provider": "gemini",
   "model_name": "gemini-3-flash-preview",
-  "max_tokens": 1000
+  "max_tokens": 1000,
+  "session_ttl_seconds": 600,
+  "max_repairs": 1
 }
