@@ -7,6 +7,23 @@ from .base import LLMClient
 class ModelUnavailableError(Exception):
     """Raised when an AI model is unavailable or no model is configured."""
 
+    def __init__(self, message: str = "No AI model configured or available", reason: str | None = None) -> None:
+        super().__init__(message)
+        self.reason = reason
+
+
+class QuotaExhaustedError(ModelUnavailableError):
+    """Raised when an AI model's quota has been exhausted."""
+
+    def __init__(
+        self,
+        message: str = "AI model quota exhausted",
+        retry_after_seconds: float | None = None,
+        reason: str = "quota_exhausted",
+    ) -> None:
+        super().__init__(message, reason=reason)
+        self.retry_after_seconds = retry_after_seconds
+
 
 class NoModelClient(LLMClient):
     """Deterministic client representing an unavailable or unconfigured AI model.

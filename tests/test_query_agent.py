@@ -921,16 +921,16 @@ def test_gemini_client_model_not_found_raises_at_once_after_1_call(fake_genai_en
 def test_gemini_client_total_fake_clock_time_never_exceeds_model_timeout_seconds(fake_genai_env):
     from planogram_agent.llm.no_model import ModelUnavailableError
 
-    # Budget is 5 seconds.
-    # Attempt 0: fails (503). Wait 2s -> elapsed 2s. Remaining is 5 - 2 = 3s.
-    # Attempt 1: fails (503). Wait 5s would need 2 + 5 = 7s > 5s budget, remaining_after_wait < 1s.
+    # Budget is 15 seconds (with min_call_timeout = 10s).
+    # Attempt 0: fails (503). Wait 2s -> elapsed 2s. Remaining is 15 - 2 = 13s >= 10s.
+    # Attempt 1: fails (503). Wait 5s would leave 15 - 2 - 5 = 8s < 10s min timeout.
     # Aborts before sleeping 5s!
     ctx = fake_genai_env([
         RuntimeError("503 Service Unavailable"),
         RuntimeError("503 Service Unavailable"),
     ])
     clock = SimulatedClock(0.0)
-    settings = Settings(model_timeout_seconds=5)
+    settings = Settings(model_timeout_seconds=15)
     client = GeminiClient(
         settings=settings,
         api_key="mock-api-key",

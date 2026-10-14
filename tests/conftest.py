@@ -66,3 +66,75 @@ def graph_data(dataset):
 @pytest.fixture(scope="session")
 def G(graph_data):
     return build_graph(graph_data)
+
+
+import sys
+
+
+class FakeGenaiContext:
+    def __init__(self, responses):
+        self.responses = list(responses)
+        self.call_count = 0
+        self.calls = []
+
+    def make_modules(self):
+        ctx = self
+
+        class FakeHttpOptions:
+            def __init__(self, timeout=None):
+                self.timeout = timeout
+
+        class FakeConfig:
+            def __init__(self, **kwargs):
+                self.kwargs = kwargs
+
+        class FakeModels:
+            def generate_content(self, model, contents, config):
+                ctx.call_count += 1
+                ctx.calls.append({"model": model, "contents": contents, "config": config})
+                if not ctx.responses:
+                    raise RuntimeError("No more scripted fake genai responses")
+                resp = ctx.responses.pop(0)
+                if isinstance(resp, Exception):
+                    raise resp
+                if isinstance(resp, type) and issubclass(resp, Exception):
+                    raise resp("Scripted error")
+
+                class FakeResponse:
+                    text = str(resp)
+
+                return FakeResponse()
+
+        class FakeClient:
+            def __init__(self, api_key=None, http_options=None):
+                self.api_key = api_key
+                self.http_options = http_options
+                self.models = FakeModels()
+
+        import types as py_types
+
+        fake_genai = py_types.ModuleType("google.genai")
+        fake_genai.Client = FakeClient
+
+        fake_types = py_types.ModuleType("google.genai.types")
+        fake_types.HttpOptions = FakeHttpOptions
+        fake_types.GenerateContentConfig = FakeConfig
+        fake_genai.types = fake_types
+
+        fake_google = py_types.ModuleType("google")
+        fake_google.genai = fake_genai
+
+        return fake_google, fake_genai, fake_types
+
+
+@pytest.fixture
+def fake_genai_env(monkeypatch):
+    def _setup(responses):
+        ctx = FakeGenaiContext(responses)
+        fake_google, fake_genai, fake_types = ctx.make_modules()
+        monkeypatch.setitem(sys.modules, "google", fake_google)
+        monkeypatch.setitem(sys.modules, "google.genai", fake_genai)
+        monkeypatch.setitem(sys.modules, "google.genai.types", fake_types)
+        return ctx
+
+    return _setup

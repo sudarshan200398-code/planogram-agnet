@@ -25,7 +25,8 @@ class Settings(BaseModel):
     max_tokens: int = Field(default=1000, ge=1)
     session_ttl_seconds: int = Field(default=600, ge=1)
     max_repairs: int = Field(default=1, ge=0)
-    model_timeout_seconds: float = Field(default=8.0, ge=0.0)
+    # Gemini rejects calls under 10 s
+    model_timeout_seconds: float = Field(default=20.0, ge=0.0)
 
 
 def _find_default_settings_file() -> Path | None:

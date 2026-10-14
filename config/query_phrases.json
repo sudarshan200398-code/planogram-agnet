@@ -6,6 +6,7 @@
     "hello",
     "hiya",
     "hey",
+    "hi there",
     "hi"
   ],
   "request_prefix_components": {
@@ -67,8 +68,13 @@
     "available"
   ],
   "trailing_politeness": [
+    "thank you so much",
+    "thanks a lot",
+    "many thanks",
+    "much appreciated",
     "thank you",
     "thanks",
+    "cheers",
     "thx",
     "ty",
     "please"

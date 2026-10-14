@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Literal
 
 from pydantic import BaseModel, Field
 
-from ..llm.no_model import ModelUnavailableError
+from ..llm.no_model import ModelUnavailableError, QuotaExhaustedError
 from ..matching import normalize_text
 from ..settings import Settings
 
@@ -43,7 +43,7 @@ class ParsedRequest(BaseModel):
     truncated: bool = False
     reason: str | None = None
     source: Literal["model", "fallback"] = "model"
-    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] | None = None
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural", "quota_exhausted"] | None = None
 
 
 
@@ -240,6 +240,7 @@ class ComposedPhrases:
     lead_qty_word_pat: re.Pattern
     lead_qty_unmatched_num: re.Pattern
     lead_qty_unmatched_word: re.Pattern
+    polite_sentence_pat: re.Pattern
 
 
 @functools.lru_cache(maxsize=1)
@@ -382,6 +383,21 @@ def _get_composed_phrases() -> ComposedPhrases:
     lead_qty_unmatched_num = re.compile(r"^\s*(\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", re.IGNORECASE)
     lead_qty_unmatched_word = re.compile(r"^\s*(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b|\s+)", re.IGNORECASE)
 
+    greetings = data.get("greetings", ["good morning", "good afternoon", "good evening", "hello", "hiya", "hey", "hi there", "hi"])
+    all_polite = set(greetings)
+    all_polite.update(trailing_polite)
+    all_polite.update([
+        "thank you so much", "thanks a lot", "many thanks", "much appreciated",
+        "good morning", "good evening", "good afternoon", "hi there", "cheers",
+        "please", "thank you", "thanks", "hello", "hi", "hey", "hiya", "thx", "ty",
+    ])
+    sorted_polite = sorted(all_polite, key=len, reverse=True)
+    p_expr = "|".join(re.escape(p) for p in sorted_polite)
+    polite_sentence_pat = re.compile(
+        r"^(?:(?:" + p_expr + r")[\s,;:.!?-]*)+$",
+        re.IGNORECASE,
+    )
+
     return ComposedPhrases(
         prefix_pat=prefix_pat,
         trailing_polite_pat=trailing_polite_pat,
@@ -401,6 +417,7 @@ def _get_composed_phrases() -> ComposedPhrases:
         lead_qty_word_pat=lead_qty_word_pat,
         lead_qty_unmatched_num=lead_qty_unmatched_num,
         lead_qty_unmatched_word=lead_qty_unmatched_word,
+        polite_sentence_pat=polite_sentence_pat,
     )
 
 
@@ -493,7 +510,7 @@ def rule_based_fallback(
     settings: Settings,
     dataset: Dataset | None = None,
     *,
-    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] = "model_unavailable",
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural", "quota_exhausted"] = "model_unavailable",
 ) -> ParsedRequest:
     """Rule-based fallback parser using general grammar patterns without AI model calls."""
     if not text or not text.strip():
@@ -528,6 +545,55 @@ def rule_based_fallback(
 
     phrases = _get_composed_phrases()
     cached_patterns = get_dataset_query_patterns(dataset) if dataset is not None else None
+
+    # Sentence-level rule: split text into sentences at . ? ! (not inside protected product names and not inside numbers like 2.5)
+    # Drop sentences made only of greeting or politeness phrases
+    initial_protected_spans: list[tuple[int, int]] = []
+    if cached_patterns is not None and cached_patterns.protected_regex is not None:
+        for m in cached_patterns.protected_regex.finditer(clean_text):
+            initial_protected_spans.append((m.start(), m.end()))
+
+    def is_protected_boundary(s_idx: int, e_idx: int) -> bool:
+        for ps, pe in initial_protected_spans:
+            if not (e_idx <= ps or s_idx >= pe):
+                return True
+        return False
+
+    delim_pat = re.compile(r"[.?!\n]+")
+    splits = [0]
+    for m in delim_pat.finditer(clean_text):
+        s_idx, e_idx = m.start(), m.end()
+        # Protect decimal numbers like 2.5
+        if clean_text[s_idx:e_idx] == "." and s_idx > 0 and e_idx < len(clean_text):
+            if clean_text[s_idx - 1].isdigit() and clean_text[e_idx].isdigit():
+                continue
+        if not is_protected_boundary(s_idx, e_idx):
+            splits.append(s_idx)
+            splits.append(e_idx)
+    splits.append(len(clean_text))
+
+    kept_sentences: list[str] = []
+    for i in range(0, len(splits), 2):
+        s_idx = splits[i]
+        e_idx = splits[i + 1] if i + 1 < len(splits) else len(clean_text)
+        chunk = clean_text[s_idx:e_idx].strip()
+        if not chunk:
+            continue
+        norm_s = chunk.strip(" .?!,;:-\"'")
+        if norm_s and phrases.polite_sentence_pat.fullmatch(norm_s):
+            continue
+        kept_sentences.append(chunk)
+
+    if not kept_sentences:
+        return ParsedRequest(
+            intent="unknown",
+            items=[],
+            reason="Query contains only greeting or politeness phrases",
+            source="fallback",
+            fallback_reason=fallback_reason,
+        )
+
+    clean_text = " ".join(kept_sentences).strip()
 
     # Step 1: Strip leading greeting (only when followed by [,!.\s], NEVER a hyphen)
     clean_text = phrases.greet_pat.sub("", clean_text).strip()
@@ -713,6 +779,9 @@ def rule_based_fallback(
 
             item_text = chunk.strip("?.,;! -")
 
+        item_text = re.sub(r"[?!]", "", item_text).strip("?.,;! -")
+        item_text = re.sub(r"\s+", " ", item_text).strip()
+
         if item_text:
             parsed_items.append(ParsedItem(text=item_text, qty=qty))
 
@@ -807,15 +876,18 @@ def parse_request(
     user_prompt = f"<user_request>\n{safe_text}\n</user_request>"
 
     last_error: Exception | str | None = None
-    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural"] = "invalid_output"
+    fallback_reason: Literal["model_unavailable", "time_budget", "invalid_output", "structural", "quota_exhausted"] = "invalid_output"
+
+    min_timeout = getattr(client, "min_call_timeout", 1.0)
 
     # Maximum of 2 attempts (initial + 1 retry)
     for attempt in range(1 + settings.retries):
         remaining = deadline - clock()
-        if remaining < 1.0:
+        if remaining < min_timeout:
             logger.warning(
-                "Model time budget exhausted (remaining %.2fs < 1.0s); falling back to rule-based parser",
+                "Model time budget exhausted (remaining %.2fs < %.1fs); falling back to rule-based parser",
                 remaining,
+                min_timeout,
             )
             fallback_reason = "time_budget"
             break
@@ -835,9 +907,18 @@ def parse_request(
                 user=prompt_to_send,
                 timeout=remaining,
             )
+        except QuotaExhaustedError as exc:
+            logger.warning("Model quota exhausted (%s); going straight to rule-based fallback", exc)
+            fallback_reason = "quota_exhausted"
+            break
         except ModelUnavailableError as exc:
-            logger.warning("Model unavailable (%s); going straight to rule-based fallback", exc)
-            fallback_reason = "model_unavailable"
+            if getattr(exc, "reason", None) == "time_budget":
+                fallback_reason = "time_budget"
+            elif isinstance(exc, QuotaExhaustedError) or getattr(exc, "reason", None) == "quota_exhausted":
+                fallback_reason = "quota_exhausted"
+            else:
+                fallback_reason = "model_unavailable"
+            logger.warning("Model unavailable (%s, reason=%s); going straight to rule-based fallback", exc, fallback_reason)
             break
         except Exception as exc:  # noqa: BLE001
             logger.warning("LLM client call failed (%s); aborting to rule-based fallback", exc)
