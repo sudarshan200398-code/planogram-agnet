@@ -194,7 +194,7 @@ def test_page_renders_search_box_without_errors(monkeypatch):
 
 def _assert_fallback_pick_fills_query_box(at: AppTest):
     assert not at.exception
-    search = next(t for t in at.text_input if t.label == "Find a product")
+    search = next(t for t in at.text_input if t.key == "product_search_text")
     search.input("bre").run()
     picks = [b for b in at.button if b.key and b.key.startswith("suggest_")]
     assert 0 < len(picks) <= 8

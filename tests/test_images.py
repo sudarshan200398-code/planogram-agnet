@@ -262,7 +262,7 @@ def _new_app() -> AppTest:
 
 def test_item_cards_show_images(spy):
     at = _new_app()
-    at.button[0].click().run()  # Example: Multi-product
+    at.button(key="example_multi").click().run()  # Example: Multi-product
     assert not at.exception
     found = [it.sku for it in at.session_state["last_answer"].items if it.sku]
     assert found and set(found) <= {sku for sku, _ in spy}
@@ -271,7 +271,7 @@ def test_item_cards_show_images(spy):
 
 def test_basket_rows_show_images(spy):
     at = _new_app()
-    at.button[0].click().run()
+    at.button(key="example_multi").click().run()
     for b in [b for b in at.button if b.key and b.key.startswith("add_item_")]:
         b.click().run()
     assert not at.exception
@@ -282,7 +282,7 @@ def test_fallback_suggestion_rows_show_images(spy, monkeypatch):
     monkeypatch.setitem(sys.modules, "streamlit_searchbox", None)
     at = _new_app()
     spy.clear()
-    next(t for t in at.text_input if t.label == "Find a product").input("bre").run()
+    next(t for t in at.text_input if t.key == "product_search_text").input("bre").run()
     assert not at.exception
     rows = [b.key.removeprefix("suggest_") for b in at.button if b.key and b.key.startswith("suggest_")]
     assert rows and set(rows) <= {sku for sku, _ in spy}
@@ -298,11 +298,11 @@ def test_picked_dropdown_product_shows_image(spy, monkeypatch, dataset):
 
 def test_page_uses_real_image_from_store_folder(spy, store):
     at = _new_app()
-    at.button[0].click().run()
+    at.button(key="example_multi").click().run()
     sku = next(it.sku for it in at.session_state["last_answer"].items if it.sku)
     _write_image(store / "images" / f"{sku}.png", "red", "PNG")
     next(t for t in at.sidebar.text_input if t.label == "Store folder").set_value(str(store)).run()
     spy.clear()
-    at.button[0].click().run()
+    at.button(key="find").click().run()
     assert not at.exception
     assert (sku, "file") in spy

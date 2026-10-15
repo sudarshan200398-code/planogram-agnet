@@ -323,7 +323,7 @@ def test_ui_empty_text():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input("   ")
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-01] Unexpected exception in Streamlit AppTest"
     assert len(at.info) >= 1, "[UI-01] Expected info message for empty input"
@@ -336,7 +336,7 @@ def test_ui_600_characters():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(case["input_text"])
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-02] Unexpected exception in Streamlit AppTest"
     ans = at.session_state.last_answer
@@ -350,7 +350,7 @@ def test_ui_hostile_text():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(case["input_text"])
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-03] Unexpected exception in Streamlit AppTest"
     ans = at.session_state.last_answer
@@ -364,8 +364,8 @@ def test_ui_rapid_second_click():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(case["input_text"])
-    at.button[3].click().run()
-    at.button[3].click().run()
+    at.button(key="find").click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-04] Unexpected exception on second click"
     ans = at.session_state.last_answer
@@ -379,7 +379,7 @@ def test_ui_change_start_after_answer():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(case["input_text"])
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-05] Exception on first run"
     ans1 = at.session_state.last_answer
@@ -387,8 +387,8 @@ def test_ui_change_start_after_answer():
     assert ans1.route.start_label == "Entrance"
 
     # Change start point to Produce and re-run
-    at.sidebar.selectbox[0].select("Produce")
-    at.button[3].click().run()
+    at.selectbox(key="start_point").select("Produce")
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-05] Exception after changing start point"
     ans2 = at.session_state.last_answer
@@ -401,9 +401,9 @@ def test_ui_step_free_level_1():
     case = CASE_MAP["UI-06"]
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    at.sidebar.toggle[0].set_value(True)
+    at.toggle(key="step_free").set_value(True)
     at.text_area[0].input(case["input_text"])
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception, "[UI-06] Exception on step-free request"
     ans = at.session_state.last_answer
@@ -462,11 +462,11 @@ def test_unit_ui_start_on_level_2_default_floor():
     """Unit test: UI with default sidebar ('Use my message, or the entrance') picks Level 2 Café from message."""
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    assert at.sidebar.selectbox[0].value == "Use my message, or the entrance"
+    assert at.selectbox(key="start_point").value == "Use my message, or the entrance"
 
     query = "CleanHome Trash Bags 20 pack, I'm near the Café"
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer

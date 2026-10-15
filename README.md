@@ -50,6 +50,42 @@ Run the Streamlit application:
 
     streamlit run src/planogram_agent/ui/streamlit_app.py
 
+## Run and deploy
+
+### Run locally
+
+    python -m venv .venv
+    .venv\Scripts\activate            # macOS/Linux: source .venv/bin/activate
+    pip install -r requirements.txt -e ".[dev]"
+    PLANOGRAM_PROVIDER=none streamlit run src/planogram_agent/ui/streamlit_app.py
+    # PowerShell: $env:PLANOGRAM_PROVIDER='none'; streamlit run src/planogram_agent/ui/streamlit_app.py
+
+The page loads the store folder (`data/store_demo` by default) once and caches it. The theme
+lives in `.streamlit/config.toml`.
+
+### Run the tests
+
+    PLANOGRAM_PROVIDER=none pytest            # full suite, no network
+    PLANOGRAM_PROVIDER=none pytest -m slow    # slow full-dataset scans
+    PLANOGRAM_PROVIDER=none python scripts/edge_case_report.py
+
+### Deploy on Streamlit Cloud
+
+1. Push the repository to GitHub and create a new app pointing at
+   `src/planogram_agent/ui/streamlit_app.py`.
+2. Streamlit Cloud installs `requirements.txt`: the project itself (`.[ui]`) plus pinned
+   `streamlit`, `streamlit-searchbox` and `google-genai`.
+3. In App settings > Secrets, paste the contents of `.streamlit/secrets.toml.example` and
+   fill in the values. Never commit `.streamlit/secrets.toml`; it is in `.gitignore`.
+
+### Turn the AI model on or off
+
+- Off (default for demos and tests): `PLANOGRAM_PROVIDER = "none"`. Everything works with
+  simple rules; the header chip shows "AI model: off".
+- On: `PLANOGRAM_PROVIDER = "gemini"` and `GEMINI_API_KEY = "<your key>"`, as environment
+  variables locally or as secrets on Streamlit Cloud. If the key is missing the app falls
+  back to simple rules and says so.
+
 ## Data (data/)
 
 - `graph.json`: nodes (floor, x, y, type), walk edges, and floor connectors

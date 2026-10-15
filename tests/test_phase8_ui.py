@@ -41,8 +41,8 @@ def test_page_loads():
     assert not at.exception
     assert len(at.title) >= 1
     assert "Store Product Finder" in at.title[0].value
-    assert len(at.sidebar.selectbox) >= 1
-    assert at.sidebar.selectbox[0].value == "Use my message, or the entrance"
+    assert len(at.selectbox) >= 1
+    assert at.selectbox(key="start_point").value == "Use my message, or the entrance"
 
 
 def test_plain_bagels_gives_ok_answer_with_route():
@@ -51,7 +51,7 @@ def test_plain_bagels_gives_ok_answer_with_route():
     at.run()
     at.text_area[0].input("Daily Bake Plain Bagels 4 pack")
     # Button index 3 is 'Find'
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -75,7 +75,7 @@ def test_milk_shows_options_and_choice_gives_answer():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input("milk")
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -88,7 +88,7 @@ def test_milk_shows_options_and_choice_gives_answer():
     assert any("Meadow Fresh Whole Milk 1 L" in lbl for lbl in button_labels)
 
     # Click the first clarification choice button (index 4)
-    at.button[4].click().run()
+    next(b for b in at.button if b.key and b.key.startswith("opt_")).click().run()
 
     assert not at.exception
     resolved_ans = at.session_state.last_answer
@@ -104,7 +104,7 @@ def test_empty_text_shows_message():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input("   ")
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     assert len(at.info) >= 1
@@ -118,7 +118,7 @@ def test_message_with_default_sidebar_starts_at_bakery():
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -132,9 +132,9 @@ def test_message_with_sidebar_produce_starts_at_produce():
     query = "Daily Bake Plain Bagels 4 pack, I'm near the Bakery"
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    at.sidebar.selectbox[0].select("Produce")
+    at.selectbox(key="start_point").select("Produce")
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -149,9 +149,9 @@ def test_step_free_toggle_gives_route_without_stairs_or_escalators():
 
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    at.sidebar.toggle[0].set_value(True)
+    at.toggle(key="step_free").set_value(True)
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -198,7 +198,7 @@ def test_item_cards_match_inventory_and_planogram_data(dataset):
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -218,7 +218,8 @@ def test_item_cards_match_inventory_and_planogram_data(dataset):
         assert item.quantity == expected_qty
 
         # Verify page displays the exact quantity
-        expected_status_str = f"Status: Available | Quantity: {expected_qty}"
+        assert any("Status: Available" in t for t in markdown_texts)
+        expected_status_str = f"In stock: {expected_qty}"
         assert any(expected_status_str in t for t in markdown_texts), (
             f"Expected '{expected_status_str}' rendered on page"
         )
@@ -228,10 +229,10 @@ def test_item_cards_match_inventory_and_planogram_data(dataset):
         loc = item.chosen_location
         loc_key = (item.sku, loc.floor, loc.zone, loc.bay, loc.shelf_level)
         assert loc_key in plan_rows, f"Rendered location {loc_key} not in planogram"
-        expected_loc_str = f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}"
-        assert any(expected_loc_str in t for t in markdown_texts), (
-            f"Expected '{expected_loc_str}' rendered on page"
-        )
+        for expected_loc_str in (f"Level {loc.floor} · {loc.zone}", f"Bay {loc.bay} · Shelf {loc.shelf_level}"):
+            assert any(expected_loc_str in t for t in markdown_texts), (
+                f"Expected '{expected_loc_str}' rendered on page"
+            )
 
 
 def test_example1_directions_and_summary_distance(dataset):
@@ -240,7 +241,7 @@ def test_example1_directions_and_summary_distance(dataset):
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -275,11 +276,11 @@ def test_milk_flow_shows_stock_quantity(dataset):
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input("milk")
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     # Click option 1 (Meadow Fresh Whole Milk 1 L, DAI-MIL-001)
-    at.button[4].click().run()
+    next(b for b in at.button if b.key and b.key.startswith("opt_")).click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -293,8 +294,8 @@ def test_milk_flow_shows_stock_quantity(dataset):
 
     # Verify card on page shows quantity 61
     markdown_texts = [m.value for m in at.markdown]
-    assert any("Quantity: 61" in t for t in markdown_texts)
-    assert any("Status: Available | Quantity: 61" in t for t in markdown_texts)
+    assert any("In stock: 61" in t for t in markdown_texts)
+    assert any("Status: Available" in t for t in markdown_texts)
 
 
 def test_out_of_stock_example_data_integrity(dataset):
@@ -303,7 +304,7 @@ def test_out_of_stock_example_data_integrity(dataset):
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input(query)
-    at.button[3].click().run()
+    at.button(key="find").click().run()
 
     assert not at.exception
     ans = at.session_state.last_answer
@@ -327,7 +328,8 @@ def test_out_of_stock_example_data_integrity(dataset):
     # Verify rendered texts
     markdown_texts = [m.value for m in at.markdown]
     assert any("Status: Out of stock" in t for t in markdown_texts)
-    assert any("Location: Level 2, Toys & Stationery, Bay C, Shelf 2" in t for t in markdown_texts)
+    assert any("Level 2 · Toys & Stationery" in t for t in markdown_texts)
+    assert any("Bay C · Shelf 2" in t for t in markdown_texts)
     assert any("Out of stock" in (c.value or "") for c in at.caption)
 
 

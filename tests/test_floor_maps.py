@@ -192,7 +192,7 @@ def _run_gift_cards_and_pick(level: int) -> AppTest:
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     at.text_area[0].input("gift cards")
-    at.button[3].click().run()
+    at.button(key="find").click().run()
     assert not at.exception
     assert at.session_state.last_answer.status == "needs_clarification"
 

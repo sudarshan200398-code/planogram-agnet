@@ -114,36 +114,36 @@ def run_single_case(case: dict, finder: Orchestrator, dataset: object, settings:
             at.run()
             if ui_act == "empty_text":
                 at.text_area[0].input("   ")
-                at.button[3].click().run()
+                at.button(key="find").click().run()
                 assert not at.exception and len(at.info) >= 1 and at.session_state.last_answer is None
                 return exp_summary, "none (info message shown)", "PASS"
             elif ui_act == "600_chars":
                 at.text_area[0].input(case["input_text"])
-                at.button[3].click().run()
+                at.button(key="find").click().run()
                 assert not at.exception and at.session_state.last_answer.status == "error"
                 return exp_summary, "error", "PASS"
             elif ui_act == "hostile_text":
                 at.text_area[0].input(case["input_text"])
-                at.button[3].click().run()
+                at.button(key="find").click().run()
                 assert not at.exception and at.session_state.last_answer.status == "partial"
                 return exp_summary, "partial", "PASS"
             elif ui_act == "rapid_second_click":
                 at.text_area[0].input(case["input_text"])
-                at.button[3].click().run()
-                at.button[3].click().run()
+                at.button(key="find").click().run()
+                at.button(key="find").click().run()
                 assert not at.exception and at.session_state.last_answer.status == "ok"
                 return exp_summary, "ok", "PASS"
             elif ui_act == "change_start_after_answer":
                 at.text_area[0].input(case["input_text"])
-                at.button[3].click().run()
-                at.sidebar.selectbox[0].select("Produce")
-                at.button[3].click().run()
+                at.button(key="find").click().run()
+                at.selectbox(key="start_point").select("Produce")
+                at.button(key="find").click().run()
                 assert not at.exception and at.session_state.last_answer.route.start_label == "Produce"
                 return exp_summary, "ok (start=Produce)", "PASS"
             elif ui_act == "step_free_level_1":
-                at.sidebar.toggle[0].set_value(True)
+                at.toggle(key="step_free").set_value(True)
                 at.text_area[0].input(case["input_text"])
-                at.button[3].click().run()
+                at.button(key="find").click().run()
                 assert not at.exception and at.session_state.last_answer.route.accessible_only is True
                 return exp_summary, "ok (accessible=True)", "PASS"
             else:

@@ -20,8 +20,9 @@ from planogram_agent.basket import (
 from planogram_agent.data_loader import Dataset
 from planogram_agent.images import product_image
 from planogram_agent.interface import answer_question, create_finder, run_query
+from planogram_agent.llm.no_model import NoModelClient
 from planogram_agent.runtime.orchestrator import Orchestrator
-from planogram_agent.runtime.state import Answer
+from planogram_agent.runtime.state import Answer, ItemResult
 from planogram_agent.schemas import NodeType
 from planogram_agent.ui.map_plot import (
     clarification_option_label,
@@ -31,8 +32,17 @@ from planogram_agent.ui.map_plot import (
     get_floor_stops,
     route_floor_segments,
 )
+from planogram_agent.ui.present import card_lines, status_badge, step_rows
+from planogram_agent.ui.style import CSS
 
 logger = logging.getLogger(__name__)
+
+SEARCH_PLACEHOLDER = "Type a product or a list, for example: milk, bread, rice cooker"
+EXAMPLES: list[tuple[str, str, str]] = [
+    ("example_multi", "Two products", "Store Brand Shredded Cheddar 400 g and Daily Bake White Sandwich Bread 400 g"),
+    ("example_milk", "Milk", "milk"),
+    ("example_oos", "Out of stock item", "ArtBox Watercolour Paints 12 pack"),
+]
 
 
 @st.cache_resource
@@ -48,6 +58,10 @@ def apply_suggestion(state: MutableMapping[str, Any], name: str | None) -> bool:
     state["last_suggestion"] = name
     state["query_input"] = name
     return True
+
+
+def _badge(colour: str, text: str) -> str:
+    return f":{colour}-badge[{text}]"
 
 
 def _show_picture(target: Any, finder: Orchestrator, store_folder: str, sku: str) -> None:
@@ -77,25 +91,34 @@ def _clear_basket() -> None:
     st.session_state.basket_note = None
 
 
-def _render_basket_panel(finder: Orchestrator, store_folder: str) -> bool:
-    """Sidebar basket: quantity and remove per item, clear, plan. Returns True if plan was clicked."""
+def _pick_example(text: str) -> None:
+    """Example button callback: fill the search box and run it."""
+    st.session_state.query_input = text
+    st.session_state.pending_query = text
+
+
+def _render_basket_panel(area: Any, finder: Orchestrator, store_folder: str) -> bool:
+    """Sidebar basket: quantity and remove per item, plan and clear. Returns True if plan was clicked."""
     settings = finder.settings
     basket = st.session_state.basket
-    st.sidebar.header("Basket")
+    title, count = area.columns([3, 2], vertical_alignment="center")
+    title.subheader("Basket")
+    count.markdown(_badge("gray", f"{len(basket)} item{'s' if len(basket) != 1 else ''}"))
     note = st.session_state.get("basket_note")
     if note:
         ok, message = note
-        (st.sidebar.caption if ok else st.sidebar.warning)(message)
+        (area.caption if ok else area.warning)(message)
 
     if not basket:
-        st.sidebar.caption("Your basket is empty.")
+        area.caption("Your basket is empty.")
     for sku, entry in basket.items():
         qty_key = f"basket_qty_{sku}"
         st.session_state[qty_key] = entry["qty"]  # an add may have changed it since the widget last ran
-        col_pic, col_name = st.sidebar.columns([1, 2])
+        row = area.container(border=True)
+        col_pic, col_name = row.columns([1, 2], vertical_alignment="center")
         _show_picture(col_pic, finder, store_folder, sku)
         col_name.markdown(f"**{entry['name']}**")
-        col_qty, col_remove = st.sidebar.columns([2, 1])
+        col_qty, col_remove = row.columns([3, 2], vertical_alignment="bottom")
         col_qty.number_input(
             "Quantity",
             min_value=settings.basket_min_quantity,
@@ -105,11 +128,14 @@ def _render_basket_panel(finder: Orchestrator, store_folder: str) -> bool:
             on_change=_set_basket_quantity,
             args=(finder, sku),
         )
-        col_remove.button("Remove", key=f"basket_remove_{sku}", on_click=_remove_from_basket, args=(sku,))
+        col_remove.button("Remove", key=f"basket_remove_{sku}", type="tertiary",
+                          on_click=_remove_from_basket, args=(sku,))
 
+    plan = area.button("Plan route for basket", key="basket_plan", type="primary", use_container_width=True)
     if basket:
-        st.sidebar.button("Clear basket", key="basket_clear", on_click=_clear_basket)
-    return st.sidebar.button("Plan route for basket", key="basket_plan", type="primary")
+        area.button("Clear basket", key="basket_clear", type="secondary",
+                    on_click=_clear_basket, use_container_width=True)
+    return plan
 
 
 def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str, str] | None:
@@ -117,7 +143,7 @@ def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str
 
     Uses the streamlit-searchbox add-on for as-you-type suggestions. If the add-on cannot be
     imported or fails to render, falls back to suggestion buttons shown after pressing Enter,
-    each with its own Add to basket button.
+    each with its own Add button.
     """
     names = {p.sku: p.name for p in finder.dataset.products}
 
@@ -129,8 +155,8 @@ def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str
 
         sku = st_searchbox(
             search,
-            label="Find a product",
-            placeholder="Type a few letters, e.g. bre",
+            label="Look up one product",
+            placeholder="Start typing a product name, e.g. bre",
             key="product_searchbox",
         )
         return (sku, names[sku]) if sku in names else None
@@ -138,19 +164,19 @@ def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str
         logger.warning("Search box add-on unavailable, using suggestion buttons: %s", exc)
 
     term = st.text_input(
-        "Find a product",
-        placeholder="Type a few letters, e.g. bre, then press Enter",
+        "Look up one product",
+        placeholder="Start typing a product name, e.g. bre, then press Enter",
         key="product_search_text",
     )
     picked: tuple[str, str] | None = None
     for s in suggest(term, finder.dataset, finder.settings):
-        col_pic, col_pick, col_add = st.columns([1, 5, 1], vertical_alignment="center")
+        col_pic, col_pick, col_add = st.columns([1, 6, 1.2], vertical_alignment="center")
         _show_picture(col_pic, finder, store_folder, s.sku)
         if col_pick.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
             st.session_state.pop("last_suggestion", None)  # a button click is always a fresh pick
             picked = (s.sku, s.name)
         col_add.button(
-            "Add to basket",
+            "Add",
             key=f"add_suggest_{s.sku}",
             on_click=_add_to_basket,
             args=(finder, s.sku, s.name),
@@ -191,38 +217,119 @@ def _build_start_options(dataset: Dataset) -> list[tuple[str, str | None, int | 
     return options
 
 
+def _render_header() -> Any:
+    """Top bar with title and subtitle; returns the slot for the model status chip."""
+    with st.container(key="topbar"):
+        left, right = st.columns([5, 2], vertical_alignment="center")
+        left.title("Store Product Finder")
+        left.caption("Find any product, see if it is in stock, and get the shortest walk to it across both floors.")
+        return right.empty()
+
+
+def _render_empty_state() -> None:
+    with st.container(border=True, key="howto"):
+        st.markdown("**How it works**")
+        st.markdown(
+            "1. Type one product or a whole list and press **Find**.\n"
+            "2. See stock, floor, zone, bay and shelf for each item.\n"
+            "3. Follow the numbered route and the floor maps."
+        )
+        st.caption("Or try an example:")
+        cols = st.columns(len(EXAMPLES))
+        for col, (key, label, text) in zip(cols, EXAMPLES):
+            col.button(label, key=key, on_click=_pick_example, args=(text,), use_container_width=True)
+
+
+def _render_item_card(item: ItemResult, idx: int, finder: Orchestrator, store_folder: str) -> None:
+    with st.container(border=True, height="stretch", key=f"card_{idx}"):
+        body: Any = st.container()
+        if item.sku:
+            col_pic, body = st.columns([1, 2.4])
+            _show_picture(col_pic, finder, store_folder, item.sku)
+        with body:
+            st.markdown(f"**{item.name or item.requested}**")
+            st.markdown(_badge(*status_badge(item.status)))
+            for line in card_lines(item):
+                st.markdown(line)
+            if item.reason:
+                st.caption(item.reason)
+            if item.sku and item.name:
+                st.button(
+                    "Add to basket",
+                    key=f"add_item_{item.index}_{item.sku}",
+                    on_click=_add_to_basket,
+                    args=(finder, item.sku, item.name),
+                )
+
+
+def _render_route(answer: Answer, finder: Orchestrator) -> None:
+    route = answer.route
+    if route is None:
+        return
+    with st.container(border=True, key="route_panel"):
+        st.subheader("Your route")
+        walk_m = round(route.walking_distance)
+        tile_walk, tile_floors = st.columns(2)
+        tile_walk.metric("Walking distance", f"{walk_m} m")
+        tile_floors.metric("Floor changes", route.floor_changes)
+        st.markdown(f"about {walk_m} m of walking, {route.floor_changes} floor change(s)")
+
+        rows = step_rows(route.steps)
+        if rows:
+            st.markdown("\n".join(f"{number}. {icon} {text}" for number, (icon, text) in enumerate(rows, start=1)))
+
+        # One plain line per floor change, under the route
+        for line in floor_change_lines(answer):
+            st.markdown(line)
+
+        # Every floor map stays visible, the floor of the first stop first
+        segments = route_floor_segments(finder.dataset, answer)
+        for fl in floor_display_order(finder.dataset, answer):
+            st.markdown(f"#### Level {fl}")
+            fig = draw_floor(finder.dataset, answer, fl)
+            st.pyplot(fig)
+            fl_stops = get_floor_stops(answer, fl)
+            if fl_stops:
+                stops_list = [f"{s_num}. {name} ({loc_str})" for s_num, sku, name, loc_str in fl_stops]
+                st.caption(f"Stops on Level {fl}: {', '.join(stops_list)}")
+            elif segments.get(fl):
+                st.caption(f"No stops on Level {fl}; the route passes through this floor")
+            else:
+                st.caption(f"No route on Level {fl}")
+
+
 def main() -> None:
     st.set_page_config(page_title="Store Product Finder", layout="wide")
-    st.title("Store Product Finder")
+    st.markdown(CSS, unsafe_allow_html=True)
+    chip_slot = _render_header()
 
-    # 1. Sidebar
-    st.sidebar.header("Settings")
-    store_folder = st.sidebar.text_input("Store folder", value="data/store_demo")
+    # Sidebar: basket first, then store and model settings
+    basket_area = st.sidebar.container()
+    with st.sidebar.expander("Store and model", expanded=False):
+        store_folder = st.text_input("Store folder", value="data/store_demo")
+        try:
+            finder = get_finder(store_folder)
+        except Exception as exc:  # noqa: BLE001
+            finder = None
+            load_error = exc
+        if finder is not None:
+            st.text(finder.model_label)
+        show_details = st.checkbox("Show details", value=False)
 
-    try:
-        finder = get_finder(store_folder)
-    except Exception as exc:  # noqa: BLE001
-        st.sidebar.error(f"Failed to load store: {exc}")
-        st.error(f"Could not load store data from '{store_folder}'. Please check folder path.")
+    if finder is None:
+        chip_slot.markdown(_badge("gray", "Store not loaded"))
+        st.error(
+            f"We couldn't open the store folder '{store_folder}'. Check the path under Store and model "
+            "in the sidebar; the folder needs graph.json, products.csv, planogram.csv and inventory.csv."
+        )
+        with st.expander("Technical details"):
+            st.code(str(load_error))
         return
 
-    # Start point selector
-    start_options = _build_start_options(finder.dataset)
-    options_map = {opt[0]: (opt[1], opt[2]) for opt in start_options}
-    selected_label = st.sidebar.selectbox("Start point", list(options_map.keys()))
-    override_start, override_floor = options_map[selected_label]
+    model_on = not isinstance(finder.client, NoModelClient)
+    chip_slot.markdown(_badge("green" if model_on else "gray", f"AI model: {'on' if model_on else 'off'}"))
 
-    # Step-free toggle
-    step_free = st.sidebar.toggle("Step-free route (accessible only)", value=False)
-    override_accessible: bool | None = True if step_free else None
-
-    # AI model indicator line
-    st.sidebar.text(finder.model_label)
-
-    # Show details checkbox
-    show_details = st.sidebar.checkbox("Show details", value=False)
-
-    # 2. Session state tracking
+    # Session state tracking
     if "last_answer" not in st.session_state:
         st.session_state.last_answer = None
     if "session_id" not in st.session_state:
@@ -233,60 +340,54 @@ def main() -> None:
         st.session_state.basket = {}
     if "answer_from_basket" not in st.session_state:
         st.session_state.answer_from_basket = False
+    if "searched" not in st.session_state:
+        st.session_state.searched = False
 
-    # Sidebar basket panel
-    plan_clicked = _render_basket_panel(finder, store_folder)
+    plan_clicked = _render_basket_panel(basket_area, finder, store_folder)
 
-    # 3. Main Area: product search with suggestions, then example buttons
-    picked = _render_product_search(finder, store_folder)
-    if picked is not None:
-        st.session_state.picked_product = picked
-        apply_suggestion(st.session_state, picked[1])
-    if st.session_state.get("picked_product"):
-        picked_sku, picked_name = st.session_state.picked_product
-        col_pic, col_add = st.columns([1, 6], vertical_alignment="center")
-        _show_picture(col_pic, finder, store_folder, picked_sku)
-        col_add.button(
-            f"Add {picked_name} to basket",
-            key="add_picked",
-            on_click=_add_to_basket,
-            args=(finder, picked_sku, picked_name),
+    # Search card: the list box and Find, start point and step-free, then single-product look-up
+    with st.container(border=True, key="search_card"):
+        query_text = st.text_area(
+            "Search query",
+            value=st.session_state.query_input,
+            placeholder=SEARCH_PLACEHOLDER,
+            label_visibility="collapsed",
+            height=80,
         )
+        start_options = _build_start_options(finder.dataset)
+        options_map = {opt[0]: (opt[1], opt[2]) for opt in start_options}
+        col_start, col_free, col_find = st.columns([3, 2, 1], vertical_alignment="bottom")
+        selected_label = col_start.selectbox("Start point", list(options_map.keys()), key="start_point")
+        step_free = col_free.toggle(
+            "Step-free route", value=False, key="step_free", help="Use only lifts and accessible connectors"
+        )
+        find_button = col_find.button("Find", type="primary", key="find", use_container_width=True)
+        override_start, override_floor = options_map[selected_label]
+        override_accessible: bool | None = True if step_free else None
 
-    st.write("Ask for any product, brand or item in the supermarket:")
-    col_ex1, col_ex2, col_ex3 = st.columns(3)
-    clicked_example: str | None = None
+        picked = _render_product_search(finder, store_folder)
+        if picked is not None:
+            st.session_state.picked_product = picked
+            if apply_suggestion(st.session_state, picked[1]):
+                st.rerun()  # the search box above was drawn before the pick; show the picked name in it
+        if st.session_state.get("picked_product"):
+            picked_sku, picked_name = st.session_state.picked_product
+            col_pic, col_add = st.columns([1, 6], vertical_alignment="center")
+            _show_picture(col_pic, finder, store_folder, picked_sku)
+            col_add.button(
+                f"Add {picked_name} to basket",
+                key="add_picked",
+                on_click=_add_to_basket,
+                args=(finder, picked_sku, picked_name),
+            )
 
-    with col_ex1:
-        if st.button("Example: Multi-product", use_container_width=True):
-            clicked_example = "Store Brand Shredded Cheddar 400 g and Daily Bake White Sandwich Bread 400 g"
-    with col_ex2:
-        if st.button("Example: Milk", use_container_width=True):
-            clicked_example = "milk"
-    with col_ex3:
-        if st.button("Example: Out-of-stock", use_container_width=True):
-            clicked_example = "ArtBox Watercolour Paints 12 pack"
-
-    if clicked_example is not None:
-        st.session_state.query_input = clicked_example
-
-    # Query text area and Find button
-    query_text = st.text_area(
-        "Search query",
-        value=st.session_state.query_input,
-        placeholder="e.g. Daily Bake Plain Bagels 4 pack",
-        label_visibility="collapsed",
-    )
-    find_button = st.button("Find", type="primary")
-
-    query_to_execute: str | None = None
-    if clicked_example is not None:
-        query_to_execute = clicked_example
-    elif find_button:
+    query_to_execute: str | None = st.session_state.pop("pending_query", None)
+    if query_to_execute is None and find_button:
         query_to_execute = query_text
 
     # Run query
     if query_to_execute is not None:
+        st.session_state.searched = True
         stripped_query = query_to_execute.strip()
         if not stripped_query:
             st.info("Please enter a product name or item to search.")
@@ -306,6 +407,7 @@ def main() -> None:
             except Exception as exc:  # noqa: BLE001
                 st.error(f"Search could not be completed: {exc}")
     elif plan_clicked:
+        st.session_state.searched = True
         try:
             ans = plan_basket(
                 finder,
@@ -325,9 +427,10 @@ def main() -> None:
 
     last_answer: Answer | None = st.session_state.last_answer
 
-    if last_answer is not None:
-        st.divider()
+    if last_answer is None and not st.session_state.searched:
+        _render_empty_state()
 
+    if last_answer is not None:
         # Messages
         for msg in last_answer.messages:
             st.info(msg)
@@ -340,97 +443,37 @@ def main() -> None:
         # Clarification question
         if last_answer.status == "needs_clarification" and last_answer.question:
             q = last_answer.question
-            st.subheader(f"Clarification needed for '{q.item_text}'")
-            st.write("Which product did you mean?")
-            for opt in q.options:
-                button_title = clarification_option_label(finder.dataset, opt.sku, opt.name)
-                if st.button(button_title, key=f"opt_{q.item_index}_{opt.sku}", use_container_width=True):
-                    try:
-                        # The pending session lives on the orchestrator that produced the answer
-                        asked_by = basket_finder_for(finder) if st.session_state.answer_from_basket else finder
-                        resolved = answer_question(
-                            asked_by,
-                            session_id=st.session_state.session_id or "",
-                            item_index=q.item_index,
-                            sku=opt.sku,
-                        )
-                        st.session_state.last_answer = resolved
-                        st.rerun()
-                    except Exception as exc:  # noqa: BLE001
-                        st.error(f"Error selecting option: {exc}")
+            with st.container(border=True, key="clarify"):
+                st.subheader(f"Clarification needed for '{q.item_text}'")
+                st.write("Which product did you mean?")
+                for opt in q.options:
+                    button_title = clarification_option_label(finder.dataset, opt.sku, opt.name)
+                    if st.button(button_title, key=f"opt_{q.item_index}_{opt.sku}", use_container_width=True):
+                        try:
+                            # The pending session lives on the orchestrator that produced the answer
+                            asked_by = basket_finder_for(finder) if st.session_state.answer_from_basket else finder
+                            resolved = answer_question(
+                                asked_by,
+                                session_id=st.session_state.session_id or "",
+                                item_index=q.item_index,
+                                sku=opt.sku,
+                            )
+                            st.session_state.last_answer = resolved
+                            st.rerun()
+                        except Exception as exc:  # noqa: BLE001
+                            st.error(f"Error selecting option: {exc}")
 
-        # Item cards
+        # Item cards, two per row, equal height
         if last_answer.items:
             st.subheader("Items")
-            status_labels = {
-                "available": "Available",
-                "unavailable": "Out of stock",
-                "not_found": "Not found in catalogue",
-                "not_placed": "Not placed on shelves",
-                "needs_choice": "Needs choice",
-                "error": "Error",
-            }
-            for it in last_answer.items:
-                with st.container(border=True):
-                    body = st.container()
-                    if it.sku:
-                        col_pic, body = st.columns([1, 5])
-                        _show_picture(col_pic, finder, store_folder, it.sku)
-                    with body:
-                        display_name = it.name or it.requested
-                        st.markdown(f"**{display_name}**")
-                        stat_text = status_labels.get(it.status, it.status)
-                        qty_text = f" | Quantity: {it.quantity}" if it.status == "available" else ""
-                        st.write(f"Status: {stat_text}{qty_text}")
+            items = last_answer.items
+            for row_start in range(0, len(items), 2):
+                cols = st.columns(2)
+                for col, (offset, it) in zip(cols, enumerate(items[row_start:row_start + 2])):
+                    with col:
+                        _render_item_card(it, row_start + offset, finder, store_folder)
 
-                        if it.chosen_location:
-                            loc = it.chosen_location
-                            st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
-                        elif it.locations:
-                            loc = it.locations[0]
-                            st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
-                        else:
-                            st.write("Location: No shelf location")
-
-                        if it.reason:
-                            st.caption(it.reason)
-
-                        if it.sku and it.name:
-                            st.button(
-                                "Add to basket",
-                                key=f"add_item_{it.index}_{it.sku}",
-                                on_click=_add_to_basket,
-                                args=(finder, it.sku, it.name),
-                            )
-
-        # Route
-        if last_answer.route is not None:
-            st.subheader("Route")
-            route = last_answer.route
-            walk_m = round(route.walking_distance)
-            st.write(f"about {walk_m} m of walking, {route.floor_changes} floor change(s)")
-
-            if route.directions_text:
-                st.markdown(route.directions_text)
-
-            # One plain line per floor change, under the route
-            for line in floor_change_lines(last_answer):
-                st.markdown(line)
-
-            # Every floor map stays visible, the floor of the first stop first
-            segments = route_floor_segments(finder.dataset, last_answer)
-            for fl in floor_display_order(finder.dataset, last_answer):
-                st.markdown(f"#### Level {fl}")
-                fig = draw_floor(finder.dataset, last_answer, fl)
-                st.pyplot(fig)
-                fl_stops = get_floor_stops(last_answer, fl)
-                if fl_stops:
-                    stops_list = [f"{s_num}. {name} ({loc_str})" for s_num, sku, name, loc_str in fl_stops]
-                    st.caption(f"Stops on Level {fl}: {', '.join(stops_list)}")
-                elif segments.get(fl):
-                    st.caption(f"No stops on Level {fl}; the route passes through this floor")
-                else:
-                    st.caption(f"No route on Level {fl}")
+        _render_route(last_answer, finder)
 
         # Details trace
         if show_details and last_answer.trace:
@@ -439,6 +482,9 @@ def main() -> None:
                     ok_str = "OK" if ev.ok else "Failed"
                     note_str = f" - {ev.note}" if ev.note else ""
                     st.text(f"[{ev.stage}] {ok_str} ({ev.ms:.1f} ms){note_str}")
+
+    with st.container(key="footer"):
+        st.caption("Demo data: a synthetic two-floor store. Stock levels and locations are not real.")
 
 
 if __name__ == "__main__":

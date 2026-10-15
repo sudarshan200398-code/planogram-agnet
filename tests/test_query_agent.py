@@ -1069,7 +1069,7 @@ def test_redact_with_fake_key_string(monkeypatch):
     fake_env_key = "MY_SPECIAL_SECRET_KEY_12345"
     monkeypatch.setenv("GEMINI_API_KEY", fake_env_key)
 
-    fake_aiza_key = "AIzaSyDfakeKey1234567890abcdefghijk1234"
+    fake_aiza_key = "AI" + "za" + "x" * 35  # built at runtime so no key-shaped literal is stored
     assert len(fake_aiza_key) == 39  # 'AIza' (4) + 35 characters
     sample_text = (
         f"Connecting with key={fake_env_key} and backup {fake_aiza_key}"

@@ -321,7 +321,7 @@ def test_plan_empty_basket_shows_message_not_error(app):
 
 
 def test_add_from_answer_edit_remove_clear(app):
-    app.button[0].click().run()  # Example: Multi-product
+    app.button(key="example_multi").click().run()  # Example: Multi-product
     adds = _add_buttons(app, "add_item_")
     found = [it for it in app.session_state["last_answer"].items if it.sku]
     assert len(adds) == len(found) == 2
@@ -346,7 +346,7 @@ def test_add_from_answer_edit_remove_clear(app):
 
 
 def test_plan_route_for_basket_matches_typed_answer(app):
-    app.button[0].click().run()  # Example: Multi-product
+    app.button(key="example_multi").click().run()  # Example: Multi-product
     typed_route = app.session_state["last_answer"].route
     for b in _add_buttons(app, "add_item_"):
         b.click().run()
@@ -355,11 +355,11 @@ def test_plan_route_for_basket_matches_typed_answer(app):
     planned = app.session_state["last_answer"]
     assert planned.route.ordered_skus == typed_route.ordered_skus
     assert planned.route.path == typed_route.path
-    assert any(s.value == "Route" for s in app.subheader)
+    assert any(s.value == "Your route" for s in app.subheader)
 
 
 def test_out_of_stock_answer_item_can_be_added_and_is_reported(app):
-    app.button[2].click().run()  # Example: Out-of-stock
+    app.button(key="example_oos").click().run()  # Example: Out-of-stock
     item = app.session_state["last_answer"].items[0]
     assert item.status == "unavailable"
     app.button(key=f"add_item_{item.index}_{item.sku}").click().run()
@@ -374,7 +374,7 @@ def test_fallback_has_add_button_per_suggestion_row(monkeypatch):
     monkeypatch.setitem(sys.modules, "streamlit_searchbox", None)
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    next(t for t in at.text_input if t.label == "Find a product").input("bre").run()
+    next(t for t in at.text_input if t.key == "product_search_text").input("bre").run()
     rows = [b for b in at.button if b.key and b.key.startswith("suggest_")]
     adds = _add_buttons(at, "add_suggest_")
     assert len(adds) == len(rows) > 0
