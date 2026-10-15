@@ -30,6 +30,9 @@ class Settings(BaseModel):
     # Search box suggestions
     autocomplete_limit: int = Field(default=8, ge=1)
     autocomplete_min_chars: int = Field(default=2, ge=1)
+    # Basket quantity per product
+    basket_min_quantity: int = Field(default=1, ge=1)
+    basket_max_quantity: int = Field(default=99, ge=1)
 
 
 def _find_default_settings_file() -> Path | None:

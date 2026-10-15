@@ -17,5 +17,7 @@
   "max_repairs": 1,
   "model_timeout_seconds": 20,
   "autocomplete_limit": 8,
-  "autocomplete_min_chars": 2
+  "autocomplete_min_chars": 2,
+  "basket_min_quantity": 1,
+  "basket_max_quantity": 99
 }

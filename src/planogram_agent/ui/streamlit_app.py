@@ -8,6 +8,15 @@ from typing import Any
 import streamlit as st
 
 from planogram_agent.autocomplete import suggest
+from planogram_agent.basket import (
+    EMPTY_BASKET_MESSAGE,
+    add_item,
+    basket_finder_for,
+    clear_basket,
+    plan_basket,
+    remove_item,
+    set_quantity,
+)
 from planogram_agent.data_loader import Dataset
 from planogram_agent.interface import answer_question, create_finder, run_query
 from planogram_agent.runtime.orchestrator import Orchestrator
@@ -40,24 +49,82 @@ def apply_suggestion(state: MutableMapping[str, Any], name: str | None) -> bool:
     return True
 
 
-def _render_product_search(finder: Orchestrator) -> str | None:
-    """Product search with suggestions; returns the picked product name, if any.
+def _add_to_basket(finder: Orchestrator, sku: str, name: str) -> None:
+    """Button callback: add one of a product and keep the message for the basket panel."""
+    result = add_item(st.session_state.basket, sku, name, finder.settings)
+    st.session_state.basket_note = (result.ok, result.message)
+
+
+def _set_basket_quantity(finder: Orchestrator, sku: str) -> None:
+    set_quantity(st.session_state.basket, sku, st.session_state[f"basket_qty_{sku}"], finder.settings)
+    st.session_state.basket_note = None
+
+
+def _remove_from_basket(sku: str) -> None:
+    remove_item(st.session_state.basket, sku)
+    st.session_state.basket_note = None
+
+
+def _clear_basket() -> None:
+    clear_basket(st.session_state.basket)
+    st.session_state.basket_note = None
+
+
+def _render_basket_panel(finder: Orchestrator) -> bool:
+    """Sidebar basket: quantity and remove per item, clear, plan. Returns True if plan was clicked."""
+    settings = finder.settings
+    basket = st.session_state.basket
+    st.sidebar.header("Basket")
+    note = st.session_state.get("basket_note")
+    if note:
+        ok, message = note
+        (st.sidebar.caption if ok else st.sidebar.warning)(message)
+
+    if not basket:
+        st.sidebar.caption("Your basket is empty.")
+    for sku, entry in basket.items():
+        qty_key = f"basket_qty_{sku}"
+        st.session_state[qty_key] = entry["qty"]  # an add may have changed it since the widget last ran
+        st.sidebar.markdown(f"**{entry['name']}**")
+        col_qty, col_remove = st.sidebar.columns([2, 1])
+        col_qty.number_input(
+            "Quantity",
+            min_value=settings.basket_min_quantity,
+            max_value=settings.basket_max_quantity,
+            step=1,
+            key=qty_key,
+            on_change=_set_basket_quantity,
+            args=(finder, sku),
+        )
+        col_remove.button("Remove", key=f"basket_remove_{sku}", on_click=_remove_from_basket, args=(sku,))
+
+    if basket:
+        st.sidebar.button("Clear basket", key="basket_clear", on_click=_clear_basket)
+    return st.sidebar.button("Plan route for basket", key="basket_plan", type="primary")
+
+
+def _render_product_search(finder: Orchestrator) -> tuple[str, str] | None:
+    """Product search with suggestions; returns the picked product as (sku, name), if any.
 
     Uses the streamlit-searchbox add-on for as-you-type suggestions. If the add-on cannot be
-    imported or fails to render, falls back to suggestion buttons shown after pressing Enter.
+    imported or fails to render, falls back to suggestion buttons shown after pressing Enter,
+    each with its own Add to basket button.
     """
+    names = {p.sku: p.name for p in finder.dataset.products}
+
     def search(term: str) -> list[tuple[str, str]]:
-        return [(s.label, s.name) for s in suggest(term, finder.dataset, finder.settings)]
+        return [(s.label, s.sku) for s in suggest(term, finder.dataset, finder.settings)]
 
     try:
         from streamlit_searchbox import st_searchbox
 
-        return st_searchbox(
+        sku = st_searchbox(
             search,
             label="Find a product",
             placeholder="Type a few letters, e.g. bre",
             key="product_searchbox",
         )
+        return (sku, names[sku]) if sku in names else None
     except Exception as exc:  # noqa: BLE001
         logger.warning("Search box add-on unavailable, using suggestion buttons: %s", exc)
 
@@ -66,11 +133,20 @@ def _render_product_search(finder: Orchestrator) -> str | None:
         placeholder="Type a few letters, e.g. bre, then press Enter",
         key="product_search_text",
     )
+    picked: tuple[str, str] | None = None
     for s in suggest(term, finder.dataset, finder.settings):
-        if st.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
+        col_pick, col_add = st.columns([5, 1])
+        if col_pick.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
             st.session_state.pop("last_suggestion", None)  # a button click is always a fresh pick
-            return s.name
-    return None
+            picked = (s.sku, s.name)
+        col_add.button(
+            "Add to basket",
+            key=f"add_suggest_{s.sku}",
+            on_click=_add_to_basket,
+            args=(finder, s.sku, s.name),
+            use_container_width=True,
+        )
+    return picked
 
 
 def _build_start_options(dataset: Dataset) -> list[tuple[str, str | None, int | None]]:
@@ -143,9 +219,27 @@ def main() -> None:
         st.session_state.session_id = None
     if "query_input" not in st.session_state:
         st.session_state.query_input = ""
+    if "basket" not in st.session_state:
+        st.session_state.basket = {}
+    if "answer_from_basket" not in st.session_state:
+        st.session_state.answer_from_basket = False
+
+    # Sidebar basket panel
+    plan_clicked = _render_basket_panel(finder)
 
     # 3. Main Area: product search with suggestions, then example buttons
-    apply_suggestion(st.session_state, _render_product_search(finder))
+    picked = _render_product_search(finder)
+    if picked is not None:
+        st.session_state.picked_product = picked
+        apply_suggestion(st.session_state, picked[1])
+    if st.session_state.get("picked_product"):
+        picked_sku, picked_name = st.session_state.picked_product
+        st.button(
+            f"Add {picked_name} to basket",
+            key="add_picked",
+            on_click=_add_to_basket,
+            args=(finder, picked_sku, picked_name),
+        )
 
     st.write("Ask for any product, brand or item in the supermarket:")
     col_ex1, col_ex2, col_ex3 = st.columns(3)
@@ -196,8 +290,26 @@ def main() -> None:
                 )
                 st.session_state.last_answer = ans
                 st.session_state.session_id = ans.session_id
+                st.session_state.answer_from_basket = False
             except Exception as exc:  # noqa: BLE001
                 st.error(f"Search could not be completed: {exc}")
+    elif plan_clicked:
+        try:
+            ans = plan_basket(
+                finder,
+                st.session_state.basket,
+                start=override_start,
+                floor=override_floor,
+                accessible_only=override_accessible,
+            )
+            if ans is None:
+                st.info(EMPTY_BASKET_MESSAGE)
+            else:
+                st.session_state.session_id = ans.session_id
+                st.session_state.answer_from_basket = True
+            st.session_state.last_answer = ans
+        except Exception as exc:  # noqa: BLE001
+            st.error(f"Basket route could not be planned: {exc}")
 
     last_answer: Answer | None = st.session_state.last_answer
 
@@ -222,8 +334,10 @@ def main() -> None:
                 button_title = clarification_option_label(finder.dataset, opt.sku, opt.name)
                 if st.button(button_title, key=f"opt_{q.item_index}_{opt.sku}", use_container_width=True):
                     try:
+                        # The pending session lives on the orchestrator that produced the answer
+                        asked_by = basket_finder_for(finder) if st.session_state.answer_from_basket else finder
                         resolved = answer_question(
-                            finder,
+                            asked_by,
                             session_id=st.session_state.session_id or "",
                             item_index=q.item_index,
                             sku=opt.sku,
@@ -263,6 +377,14 @@ def main() -> None:
 
                     if it.reason:
                         st.caption(it.reason)
+
+                    if it.sku and it.name:
+                        st.button(
+                            "Add to basket",
+                            key=f"add_item_{it.index}_{it.sku}",
+                            on_click=_add_to_basket,
+                            args=(finder, it.sku, it.name),
+                        )
 
         # Route
         if last_answer.route is not None:
