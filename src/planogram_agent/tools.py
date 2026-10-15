@@ -111,6 +111,11 @@ def resolve_start(text: str | None, dataset: Dataset, floor: int | None = None) 
             f"Start point '{text}' exists on multiple floors. Please specify a floor: {', '.join(options)}"
         )
 
+    if floor is not None and matching_nodes[0].floor != floor:
+        raise ValueError(
+            f"Start point '{text}' not found on Level {floor}."
+        )
+
     return matching_nodes[0].id
 
 

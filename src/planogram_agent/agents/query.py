@@ -281,7 +281,7 @@ def _get_composed_phrases() -> ComposedPhrases:
         "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
         "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
     })
-    connectors = data.get("connectors", ["as well as", "and also", "and", "plus", "also", "+", "&", ",", ";", "\n"])
+    connectors = data.get("connectors", ["as well as", "and also", "and", "plus", "also", "+", "&", ",", ";", "\n", "\t"])
     start_prefixes = sorted(data.get("start_phrase_prefixes", [
         "i am standing near", "i am standing by", "i am standing at",
         "i'm standing near", "i'm standing by", "i'm standing at",
@@ -345,7 +345,7 @@ def _get_composed_phrases() -> ComposedPhrases:
     for c in connectors:
         if c == ",":
             delim_patterns.append(r",(?!\s*(?:qty\s*:?\s*\d+|x\s*\d+|\d+\s*x\b))")
-        elif c in [";", "\n", "+"]:
+        elif c in [";", "\n", "\t", "+"]:
             delim_patterns.append(re.escape(c))
         elif c == "&":
             delim_patterns.append(r"\s*&\s*")
@@ -375,12 +375,12 @@ def _get_composed_phrases() -> ComposedPhrases:
         re.IGNORECASE,
     )
     trail_qty_pat = re.compile(
-        r"^(?:[-,\s]+|\s*\()?\s*(?:qty\s*:?\s*(\d{1,2})|x\s*(\d{1,2})|(\d{1,2})\s*x)\s*\)?\s*$",
+        r"^(?:[-,\s]+|\s*\()?\s*(?:qty\s*:?\s*(-?\d{1,2})|x\s*(-?\d{1,2})|(-?\d{1,2})\s*x)\s*\)?\s*$",
         re.IGNORECASE,
     )
-    lead_qty_num_pat = re.compile(r"^(\d{1,2})\s*(?:x\b|\*\s*|of\b)?\s*$", re.IGNORECASE)
+    lead_qty_num_pat = re.compile(r"^(-?\d{1,2})\s*(?:x\b|\*\s*|of\b)?\s*$", re.IGNORECASE)
     lead_qty_word_pat = re.compile(r"^(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b)?\s*$", re.IGNORECASE)
-    lead_qty_unmatched_num = re.compile(r"^\s*(\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", re.IGNORECASE)
+    lead_qty_unmatched_num = re.compile(r"^\s*(-?\d{1,2})\s*(?:x\b|\*\s*|of\b|\s+)", re.IGNORECASE)
     lead_qty_unmatched_word = re.compile(r"^\s*(one|two|three|four|five|six|seven|eight|nine|ten)\s*(?:of\b|\s+)", re.IGNORECASE)
 
     greetings = data.get("greetings", ["good morning", "good afternoon", "good evening", "hello", "hiya", "hey", "hi there", "hi"])
@@ -572,7 +572,7 @@ def rule_based_fallback(
             splits.append(e_idx)
     splits.append(len(clean_text))
 
-    kept_sentences: list[str] = []
+    kept_sentences: list[tuple[str, int, int]] = []
     for i in range(0, len(splits), 2):
         s_idx = splits[i]
         e_idx = splits[i + 1] if i + 1 < len(splits) else len(clean_text)
@@ -582,7 +582,7 @@ def rule_based_fallback(
         norm_s = chunk.strip(" .?!,;:-\"'")
         if norm_s and phrases.polite_sentence_pat.fullmatch(norm_s):
             continue
-        kept_sentences.append(chunk)
+        kept_sentences.append((chunk, s_idx, e_idx))
 
     if not kept_sentences:
         return ParsedRequest(
@@ -593,7 +593,15 @@ def rule_based_fallback(
             fallback_reason=fallback_reason,
         )
 
-    clean_text = " ".join(kept_sentences).strip()
+    # Reassemble kept sentences, preserving newlines when sentences were separated by newlines
+    joined_chunks: list[str] = [kept_sentences[0][0]]
+    for idx in range(1, len(kept_sentences)):
+        prev_end = kept_sentences[idx - 1][2]
+        curr_start = kept_sentences[idx][1]
+        delim = "\n" if "\n" in clean_text[prev_end:curr_start] else " "
+        joined_chunks.append(delim)
+        joined_chunks.append(kept_sentences[idx][0])
+    clean_text = "".join(joined_chunks).strip()
 
     # Step 1: Strip leading greeting (only when followed by [,!.\s], NEVER a hyphen)
     clean_text = phrases.greet_pat.sub("", clean_text).strip()
@@ -687,12 +695,12 @@ def rule_based_fallback(
     parsed_items: list[ParsedItem] = []
     for chunk in raw_items:
         # 7a. Clean leftover joining words and leading punctuation
-        chunk = re.sub(r"^[:\-;,]+\s*", "", chunk).strip()
+        chunk = re.sub(r"^(?:[:;,]+|-(?!\d))\s*", "", chunk).strip()
         chunk = re.sub(r"^(?:to|for)\s+", "", chunk, flags=re.IGNORECASE).strip()
-        chunk = re.sub(r"^[:\-;,]+\s*", "", chunk).strip()
+        chunk = re.sub(r"^(?:[:;,]+|-(?!\d))\s*", "", chunk).strip()
 
         # 7b. Strip trailing politeness
-        chunk = phrases.trailing_polite_pat.sub("", chunk).strip("?.,;! -")
+        chunk = phrases.trailing_polite_pat.sub("", chunk).rstrip("?.,;! -").strip()
 
         # 7c. Trailing availability & guarded "is" / "are"
         m_ta = phrases.trailing_avail_pat.search(chunk)
@@ -704,7 +712,7 @@ def rule_based_fallback(
         chunk = phrases.prefix_pat.sub("", chunk).strip()
 
         # Re-clean trailing politeness & punctuation
-        chunk = phrases.trailing_polite_pat.sub("", chunk).strip("?.,;! -")
+        chunk = phrases.trailing_polite_pat.sub("", chunk).rstrip("?.,;! -").strip()
 
         if not chunk:
             continue
@@ -728,7 +736,7 @@ def rule_based_fallback(
             if before:
                 m_num = phrases.lead_qty_num_pat.match(before)
                 if m_num:
-                    qty = int(m_num.group(1))
+                    qty = max(1, min(99, int(m_num.group(1))))
                     before = ""
                 else:
                     m_word = phrases.lead_qty_word_pat.match(before)
@@ -740,13 +748,13 @@ def rule_based_fallback(
                 m_trail = phrases.trail_qty_pat.match(after)
                 if m_trail:
                     g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
-                    qty = int(g)
+                    qty = max(1, min(99, int(g)))
                     after = ""
 
             item_text = " ".join([part for part in (before, typed_prod_text, after) if part]).strip()
         else:
             trail_pat = re.compile(
-                r"(?:[-,\s]+|\s*\()\s*(?:qty\s*:?\s*(\d{1,2})|x\s*(\d{1,2})|(\d{1,2})\s*x)\s*\)?\s*$",
+                r"(?:[-,\s]+|\s*\()\s*(?:qty\s*:?\s*(-?\d{1,2})|x\s*(-?\d{1,2})|(-?\d{1,2})\s*x)\s*\)?\s*$",
                 re.IGNORECASE,
             )
             m_trail = trail_pat.search(chunk)
@@ -758,15 +766,15 @@ def rule_based_fallback(
 
                 if not is_known_size:
                     g = m_trail.group(1) or m_trail.group(2) or m_trail.group(3)
-                    qty = int(g)
+                    qty = max(1, min(99, int(g)))
                     chunk = chunk[: m_trail.start()].strip()
 
             m_num = phrases.lead_qty_unmatched_num.match(chunk)
             if m_num:
                 cand_qty = int(m_num.group(1))
                 rem = chunk[m_num.end() :].strip()
-                if rem and 1 <= cand_qty <= 99:
-                    qty = cand_qty
+                if rem:
+                    qty = max(1, min(99, cand_qty))
                     chunk = rem
             else:
                 m_word = phrases.lead_qty_unmatched_word.match(chunk)
@@ -783,7 +791,11 @@ def rule_based_fallback(
         item_text = re.sub(r"\s+", " ", item_text).strip()
 
         if item_text:
-            parsed_items.append(ParsedItem(text=item_text, qty=qty))
+            safe_qty = max(1, min(99, qty))
+            try:
+                parsed_items.append(ParsedItem(text=item_text, qty=safe_qty))
+            except Exception:
+                parsed_items.append(ParsedItem(text=item_text, qty=1))
 
     merged = _merge_duplicate_items(parsed_items)
     if not merged:

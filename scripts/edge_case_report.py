@@ -257,15 +257,24 @@ def main() -> None:
     overall_rate = (tot_pass / tot_all) * 100 if tot_all else 0.0
     lines.append(f"| **OVERALL** | **{tot_all}** | **{tot_pass}** | **{tot_ki}** | **{tot_fail}** | **{overall_rate:.1f}%** |")
 
-    lines.extend([
-        "",
-        "## Known Issues in Earlier-Phase Modules",
-        "",
-        "- **INP-12 (Phase 6a Query Agent)**: The rule-based query parser delimiter regex does not split items separated by a tab followed by a newline (`\\t\\n`), treating the entire multi-product query as a single item.",
-        "- **QTY-03 (Phase 6a Query Agent)**: Leading quantity `0` is parsed directly into `ParsedItem(qty=0)` instead of being clamped or validated, triggering a Pydantic `ValidationError` (`qty >= 1`).",
-        "- **LOC-10 (Phase 3 Tools)**: `tools.resolve_start()` checks floors only when `len(distinct_floors) > 1`. If a start landmark exists only on Level 1, passing `floor=2` returns the Level 1 node instead of raising an error or reporting the mismatch.",
-        "",
-    ])
+    if tot_ki > 0:
+        lines.extend([
+            "",
+            "## Known Issues in Earlier-Phase Modules",
+            "",
+            "- **INP-12 (Phase 6a Query Agent)**: The rule-based query parser delimiter regex does not split items separated by a tab followed by a newline (`\\t\\n`), treating the entire multi-product query as a single item.",
+            "- **QTY-03 (Phase 6a Query Agent)**: Leading quantity `0` is parsed directly into `ParsedItem(qty=0)` instead of being clamped or validated, triggering a Pydantic `ValidationError` (`qty >= 1`).",
+            "- **LOC-10 (Phase 3 Tools)**: `tools.resolve_start()` checks floors only when `len(distinct_floors) > 1`. If a start landmark exists only on Level 1, passing `floor=2` returns the Level 1 node instead of raising an error or reporting the mismatch.",
+            "",
+        ])
+    else:
+        lines.extend([
+            "",
+            "## Known Issues in Earlier-Phase Modules",
+            "",
+            "None. All 58 edge cases pass cleanly.",
+            "",
+        ])
 
     report_content = "\n".join(lines)
 

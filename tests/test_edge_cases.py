@@ -69,47 +69,11 @@ def _verify_common_invariants(ans: Answer, dataset: object, settings: object):
 
 
 def get_parametrized_cases():
-    params = []
-    for c in ALL_CASES:
-        if c["group"] in ("session", "failure injection", "UI"):
-            continue
-        cid = c["id"]
-        if cid == "INP-12":
-            params.append(
-                pytest.param(
-                    c,
-                    id=cid,
-                    marks=pytest.mark.xfail(
-                        strict=True,
-                        reason="Query agent rule_based_fallback delimiter regex does not split on tab newline sequence (\\t\\n)",
-                    ),
-                )
-            )
-        elif cid == "QTY-03":
-            params.append(
-                pytest.param(
-                    c,
-                    id=cid,
-                    marks=pytest.mark.xfail(
-                        strict=True,
-                        reason="Query agent passes qty=0 to ParsedItem violating ge=1 constraint instead of clamping",
-                    ),
-                )
-            )
-        elif cid == "LOC-10":
-            params.append(
-                pytest.param(
-                    c,
-                    id=cid,
-                    marks=pytest.mark.xfail(
-                        strict=True,
-                        reason="tools.resolve_start ignores floor parameter when landmark only exists on a different floor",
-                    ),
-                )
-            )
-        else:
-            params.append(pytest.param(c, id=cid))
-    return params
+    return [
+        pytest.param(c, id=c["id"])
+        for c in ALL_CASES
+        if c["group"] not in ("session", "failure injection", "UI")
+    ]
 
 
 @pytest.mark.parametrize("case", get_parametrized_cases())
@@ -448,3 +412,67 @@ def test_ui_step_free_level_1():
     assert ans.route is not None
     assert ans.route.accessible_only is True
     assert ans.route.floor_changes == 0
+
+
+def test_unit_plain_newline_separated_list(finder):
+    """Unit test: plain newline list and casual greeting message with newlines."""
+    # Plain newline list gives 2 items
+    query1 = "Daily Bake Plain Bagels 4 pack\nDaily Bake White Sandwich Bread 400 g"
+    ans1 = run_query(finder, query1)
+    assert ans1.status == "ok"
+    assert len(ans1.items) == 2
+    assert ans1.items[0].name == "Daily Bake Plain Bagels 4 pack"
+    assert ans1.items[1].name == "Daily Bake White Sandwich Bread 400 g"
+
+    # Casual multiline message: 'hi\nI need milk\nand bread' drops greeting and gives 2 items
+    query2 = "hi\nI need milk\nand bread"
+    ans2 = run_query(finder, query2)
+    assert ans2.status == "needs_clarification"
+    assert len(ans2.items) == 2
+    assert ans2.items[0].requested.lower() == "milk"
+    assert ans2.items[1].requested.lower() == "bread"
+
+
+def test_unit_zero_and_negative_quantity_clamping(finder):
+    """Unit test: quantity <= 0 is clamped to 1 without raw validation errors."""
+    query = "0 Daily Bake Plain Bagels 4 pack and -5 Daily Bake White Sandwich Bread 400 g"
+    ans = run_query(finder, query)
+    assert ans.status == "ok"
+    assert len(ans.items) == 2
+    assert ans.items[0].qty == 1
+    assert ans.items[1].qty == 1
+    assert not any("validation error" in m.lower() for m in ans.messages)
+
+
+def test_unit_resolve_start_single_floor_mismatch(finder, dataset):
+    """Unit test: single-floor start landmark mismatch raises error and reports plain message."""
+    from planogram_agent.tools import resolve_start
+
+    with pytest.raises(ValueError, match="Start point 'Bakery' not found on Level 2"):
+        resolve_start("Bakery", dataset, floor=2)
+
+    ans = run_query(finder, "Daily Bake Plain Bagels 4 pack", start="Bakery", floor=2)
+    assert ans.status == "partial"
+    assert ans.route is None
+    assert any("Start point 'Bakery' not found on Level 2" in m for m in ans.messages)
+    assert not any("traceback" in m.lower() for m in ans.messages)
+
+
+def test_unit_ui_start_on_level_2_default_floor():
+    """Unit test: UI with default sidebar ('Use my message, or the entrance') picks Level 2 Café from message."""
+    at = AppTest.from_file(APP_FILE, default_timeout=30)
+    at.run()
+    assert at.sidebar.selectbox[0].value == "Use my message, or the entrance"
+
+    query = "CleanHome Trash Bags 20 pack, I'm near the Café"
+    at.text_area[0].input(query)
+    at.button[3].click().run()
+
+    assert not at.exception
+    ans = at.session_state.last_answer
+    assert ans is not None
+    assert ans.status == "ok"
+    assert ans.route is not None
+    assert "Caf" in ans.route.start_label
+    assert ans.route.floor_changes == 0
+
