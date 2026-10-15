@@ -32,17 +32,14 @@ from planogram_agent.ui.map_plot import (
     get_floor_stops,
     route_floor_segments,
 )
-from planogram_agent.ui.present import card_lines, status_badge, step_rows
+from planogram_agent.ui.present import card_lines, search_options, status_badge, step_rows
 from planogram_agent.ui.style import CSS
 
 logger = logging.getLogger(__name__)
 
+SEARCH_KEY = "product_searchbox"
 SEARCH_PLACEHOLDER = "Type a product or a list, for example: milk, bread, rice cooker"
-EXAMPLES: list[tuple[str, str, str]] = [
-    ("example_multi", "Two products", "Store Brand Shredded Cheddar 400 g and Daily Bake White Sandwich Bread 400 g"),
-    ("example_milk", "Milk", "milk"),
-    ("example_oos", "Out of stock item", "ArtBox Watercolour Paints 12 pack"),
-]
+SEARCH_HINT = 'Pick a product to see it, or choose Search for "…" (or press Enter) to search everything you typed.'
 
 
 @st.cache_resource
@@ -65,15 +62,17 @@ def _badge(colour: str, text: str) -> str:
 
 
 def _show_picture(target: Any, finder: Orchestrator, store_folder: str, sku: str) -> None:
-    """Draw a product's picture (real file or generated tile) into a column or the sidebar."""
+    """Draw a product's picture (real file or generated tile) into a column or container."""
     img = product_image(sku, finder.dataset, store_folder, finder.settings)
     target.image(img.data, width=finder.settings.image_tile_px)
 
 
 def _add_to_basket(finder: Orchestrator, sku: str, name: str) -> None:
-    """Button callback: add one of a product and keep the message for the basket panel."""
+    """Button callback: add one of a product and keep a short confirmation for the basket panel."""
+    before = st.session_state.basket.get(sku, {}).get("qty", 0)
     result = add_item(st.session_state.basket, sku, name, finder.settings)
-    st.session_state.basket_note = (result.ok, result.message)
+    after = st.session_state.basket.get(sku, {}).get("qty", 0)
+    st.session_state.basket_note = (True, f"Added: {name}") if after > before else (result.ok, result.message)
 
 
 def _set_basket_quantity(finder: Orchestrator, sku: str) -> None:
@@ -91,90 +90,56 @@ def _clear_basket() -> None:
     st.session_state.basket_note = None
 
 
-def _pick_example(text: str) -> None:
-    """Example button callback: fill the search box and run it."""
-    st.session_state.query_input = text
-    st.session_state.pending_query = text
+def _on_dropdown_pick(value: Any) -> None:
+    """Called by the search add-on when a row is picked: queue it and clear the add-on's stored
+    result, so picking the same row again is reported again (relies on the pinned add-on 0.1.24).
 
-
-def _render_basket_panel(area: Any, finder: Orchestrator, store_folder: str) -> bool:
-    """Sidebar basket: quantity and remove per item, plan and clear. Returns True if plan was clicked."""
-    settings = finder.settings
-    basket = st.session_state.basket
-    title, count = area.columns([3, 2], vertical_alignment="center")
-    title.subheader("Basket")
-    count.markdown(_badge("gray", f"{len(basket)} item{'s' if len(basket) != 1 else ''}"))
-    note = st.session_state.get("basket_note")
-    if note:
-        ok, message = note
-        (area.caption if ok else area.warning)(message)
-
-    if not basket:
-        area.caption("Your basket is empty.")
-    for sku, entry in basket.items():
-        qty_key = f"basket_qty_{sku}"
-        st.session_state[qty_key] = entry["qty"]  # an add may have changed it since the widget last ran
-        row = area.container(border=True)
-        col_pic, col_name = row.columns([1, 2], vertical_alignment="center")
-        _show_picture(col_pic, finder, store_folder, sku)
-        col_name.markdown(f"**{entry['name']}**")
-        col_qty, col_remove = row.columns([3, 2], vertical_alignment="bottom")
-        col_qty.number_input(
-            "Quantity",
-            min_value=settings.basket_min_quantity,
-            max_value=settings.basket_max_quantity,
-            step=1,
-            key=qty_key,
-            on_change=_set_basket_quantity,
-            args=(finder, sku),
-        )
-        col_remove.button("Remove", key=f"basket_remove_{sku}", type="tertiary",
-                          on_click=_remove_from_basket, args=(sku,))
-
-    plan = area.button("Plan route for basket", key="basket_plan", type="primary", use_container_width=True)
-    if basket:
-        area.button("Clear basket", key="basket_clear", type="secondary",
-                    on_click=_clear_basket, use_container_width=True)
-    return plan
-
-
-def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str, str] | None:
-    """Product search with suggestions; returns the picked product as (sku, name), if any.
-
-    Uses the streamlit-searchbox add-on for as-you-type suggestions. If the add-on cannot be
-    imported or fails to render, falls back to suggestion buttons shown after pressing Enter,
-    each with its own Add button.
+    With clear_on_submit the add-on then remounts under a new key, so its last 'submit' is not
+    sent again on later reruns (a clarification click or an Add would otherwise repeat the pick).
     """
-    names = {p.sku: p.name for p in finder.dataset.products}
+    st.session_state.pending_pick = value
+    st.session_state[SEARCH_KEY]["result"] = None
 
-    def search(term: str) -> list[tuple[str, str]]:
-        return [(s.label, s.sku) for s in suggest(term, finder.dataset, finder.settings)]
+
+def _render_search_bar(finder: Orchestrator, store_folder: str) -> bool:
+    """The one search bar. Picks are queued in session state; returns True if the fallback Find was clicked.
+
+    Uses the streamlit-searchbox add-on: 'Search for "<text>"' first (Enter picks it), then matching
+    products. If the add-on cannot be imported or fails to render, falls back to a text box with a
+    Find button and suggestion rows underneath, each with its own Add button.
+    """
+    def rows(term: str) -> list[tuple[str, tuple[str, str]]]:
+        return search_options(term, finder.dataset, finder.settings)
 
     try:
         from streamlit_searchbox import st_searchbox
 
-        sku = st_searchbox(
-            search,
-            label="Look up one product",
-            placeholder="Start typing a product name, e.g. bre",
-            key="product_searchbox",
+        st_searchbox(
+            rows,
+            label=None,
+            placeholder=SEARCH_PLACEHOLDER,
+            key=SEARCH_KEY,
+            submit_function=_on_dropdown_pick,
+            clear_on_submit=True,
         )
-        return (sku, names[sku]) if sku in names else None
+        return False
     except Exception as exc:  # noqa: BLE001
-        logger.warning("Search box add-on unavailable, using suggestion buttons: %s", exc)
+        logger.warning("Search box add-on unavailable, using the plain search box: %s", exc)
 
-    term = st.text_input(
-        "Look up one product",
-        placeholder="Start typing a product name, e.g. bre, then press Enter",
+    col_text, col_find = st.columns([5, 1], vertical_alignment="bottom")
+    term = col_text.text_input(
+        "Search products",
+        placeholder=SEARCH_PLACEHOLDER,
         key="product_search_text",
+        label_visibility="collapsed",
     )
-    picked: tuple[str, str] | None = None
+    find_text = col_find.button("Find", type="primary", key="find_text", use_container_width=True)
     for s in suggest(term, finder.dataset, finder.settings):
         col_pic, col_pick, col_add = st.columns([1, 6, 1.2], vertical_alignment="center")
         _show_picture(col_pic, finder, store_folder, s.sku)
         if col_pick.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
             st.session_state.pop("last_suggestion", None)  # a button click is always a fresh pick
-            picked = (s.sku, s.name)
+            st.session_state.pending_pick = ("product", s.sku)
         col_add.button(
             "Add",
             key=f"add_suggest_{s.sku}",
@@ -182,7 +147,48 @@ def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str
             args=(finder, s.sku, s.name),
             use_container_width=True,
         )
-    return picked
+    return find_text
+
+
+def _render_basket_panel(finder: Orchestrator, store_folder: str) -> bool:
+    """Main-page basket: picture, quantity and remove per item, clear and plan. True if plan was clicked."""
+    settings = finder.settings
+    basket = st.session_state.basket
+    with st.container(border=True, key="basket_panel"):
+        title, count = st.columns([4, 1], vertical_alignment="center")
+        title.subheader("Your basket")
+        count.markdown(_badge("gray", f"{len(basket)} item{'s' if len(basket) != 1 else ''}"))
+        note = st.session_state.get("basket_note")
+        if note:
+            ok, message = note
+            (st.caption if ok else st.warning)(message)
+
+        if not basket:
+            st.caption("Your basket is empty. Use Add to basket on a result card.")
+        for sku, entry in basket.items():
+            qty_key = f"basket_qty_{sku}"
+            st.session_state[qty_key] = entry["qty"]  # an add may have changed it since the widget last ran
+            col_pic, col_name, col_qty, col_remove = st.columns([1, 4, 2, 1.2], vertical_alignment="center")
+            _show_picture(col_pic, finder, store_folder, sku)
+            col_name.markdown(f"**{entry['name']}**")
+            col_qty.number_input(
+                "Quantity",
+                min_value=settings.basket_min_quantity,
+                max_value=settings.basket_max_quantity,
+                step=1,
+                key=qty_key,
+                on_change=_set_basket_quantity,
+                args=(finder, sku),
+            )
+            col_remove.button("Remove", key=f"basket_remove_{sku}", type="tertiary",
+                              on_click=_remove_from_basket, args=(sku,))
+
+        col_plan, col_clear = st.columns([2, 1])
+        plan = col_plan.button("Find route for basket", key="basket_plan", type="primary", use_container_width=True)
+        if basket:
+            col_clear.button("Clear basket", key="basket_clear", type="secondary",
+                             on_click=_clear_basket, use_container_width=True)
+    return plan
 
 
 def _build_start_options(dataset: Dataset) -> list[tuple[str, str | None, int | None]]:
@@ -224,20 +230,6 @@ def _render_header() -> Any:
         left.title("Store Product Finder")
         left.caption("Find any product, see if it is in stock, and get the shortest walk to it across both floors.")
         return right.empty()
-
-
-def _render_empty_state() -> None:
-    with st.container(border=True, key="howto"):
-        st.markdown("**How it works**")
-        st.markdown(
-            "1. Type one product or a whole list and press **Find**.\n"
-            "2. See stock, floor, zone, bay and shelf for each item.\n"
-            "3. Follow the numbered route and the floor maps."
-        )
-        st.caption("Or try an example:")
-        cols = st.columns(len(EXAMPLES))
-        for col, (key, label, text) in zip(cols, EXAMPLES):
-            col.button(label, key=key, on_click=_pick_example, args=(text,), use_container_width=True)
 
 
 def _render_item_card(item: ItemResult, idx: int, finder: Orchestrator, store_folder: str) -> None:
@@ -299,12 +291,11 @@ def _render_route(answer: Answer, finder: Orchestrator) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Store Product Finder", layout="wide")
+    st.set_page_config(page_title="Store Product Finder", layout="wide", initial_sidebar_state="collapsed")
     st.markdown(CSS, unsafe_allow_html=True)
     chip_slot = _render_header()
 
-    # Sidebar: basket first, then store and model settings
-    basket_area = st.sidebar.container()
+    # Sidebar: only store and model settings
     with st.sidebar.expander("Store and model", expanded=False):
         store_folder = st.text_input("Store folder", value="data/store_demo")
         try:
@@ -340,82 +331,73 @@ def main() -> None:
         st.session_state.basket = {}
     if "answer_from_basket" not in st.session_state:
         st.session_state.answer_from_basket = False
-    if "searched" not in st.session_state:
-        st.session_state.searched = False
 
-    plan_clicked = _render_basket_panel(basket_area, finder, store_folder)
+    names = {p.sku: p.name for p in finder.dataset.products}
 
-    # Search card: the list box and Find, start point and step-free, then single-product look-up
+    # Search card: one search bar, hint, start point and step-free, then the paste-a-list section
     with st.container(border=True, key="search_card"):
-        query_text = st.text_area(
-            "Search query",
-            value=st.session_state.query_input,
-            placeholder=SEARCH_PLACEHOLDER,
-            label_visibility="collapsed",
-            height=80,
-        )
+        find_text = _render_search_bar(finder, store_folder)
+        pick = st.session_state.pop("pending_pick", None)
+        if pick and pick[0] == "product" and pick[1] in names:
+            apply_suggestion(st.session_state, names[pick[1]])  # also shown in the paste box
+        st.caption(SEARCH_HINT)
+
         start_options = _build_start_options(finder.dataset)
         options_map = {opt[0]: (opt[1], opt[2]) for opt in start_options}
-        col_start, col_free, col_find = st.columns([3, 2, 1], vertical_alignment="bottom")
+        col_start, col_free = st.columns([3, 2], vertical_alignment="bottom")
         selected_label = col_start.selectbox("Start point", list(options_map.keys()), key="start_point")
         step_free = col_free.toggle(
             "Step-free route", value=False, key="step_free", help="Use only lifts and accessible connectors"
         )
-        find_button = col_find.button("Find", type="primary", key="find", use_container_width=True)
         override_start, override_floor = options_map[selected_label]
         override_accessible: bool | None = True if step_free else None
 
-        picked = _render_product_search(finder, store_folder)
-        if picked is not None:
-            st.session_state.picked_product = picked
-            if apply_suggestion(st.session_state, picked[1]):
-                st.rerun()  # the search box above was drawn before the pick; show the picked name in it
-        if st.session_state.get("picked_product"):
-            picked_sku, picked_name = st.session_state.picked_product
-            col_pic, col_add = st.columns([1, 6], vertical_alignment="center")
-            _show_picture(col_pic, finder, store_folder, picked_sku)
-            col_add.button(
-                f"Add {picked_name} to basket",
-                key="add_picked",
-                on_click=_add_to_basket,
-                args=(finder, picked_sku, picked_name),
+        with st.expander("Type or paste a list instead", expanded=False):
+            query_text = st.text_area(
+                "Search query",
+                value=st.session_state.query_input,
+                placeholder=SEARCH_PLACEHOLDER,
+                label_visibility="collapsed",
+                height=110,
             )
+            find_button = st.button("Find", type="primary", key="find")
 
-    query_to_execute: str | None = st.session_state.pop("pending_query", None)
-    if query_to_execute is None and find_button:
+    plan_clicked = _render_basket_panel(finder, store_folder)
+
+    route_args = {"start": override_start, "floor": override_floor, "accessible_only": override_accessible}
+    query_to_execute: str | None = None
+    if pick and pick[0] == "search":
+        query_to_execute = pick[1]
+    elif find_text:
+        query_to_execute = st.session_state.get("product_search_text", "")
+    elif find_button:
         query_to_execute = query_text
 
-    # Run query
-    if query_to_execute is not None:
-        st.session_state.searched = True
+    if pick and pick[0] == "product" and pick[1] in names:
+        # A picked product runs its exact name through the pipeline, without the AI model
+        try:
+            ans = run_query(basket_finder_for(finder), names[pick[1]], **route_args)
+            st.session_state.last_answer = ans
+            st.session_state.session_id = ans.session_id
+            st.session_state.answer_from_basket = True
+        except Exception as exc:  # noqa: BLE001
+            st.error(f"Search could not be completed: {exc}")
+    elif query_to_execute is not None:
         stripped_query = query_to_execute.strip()
         if not stripped_query:
             st.info("Please enter a product name or item to search.")
             st.session_state.last_answer = None
         else:
             try:
-                ans = run_query(
-                    finder,
-                    stripped_query,
-                    start=override_start,
-                    floor=override_floor,
-                    accessible_only=override_accessible,
-                )
+                ans = run_query(finder, stripped_query, **route_args)
                 st.session_state.last_answer = ans
                 st.session_state.session_id = ans.session_id
                 st.session_state.answer_from_basket = False
             except Exception as exc:  # noqa: BLE001
                 st.error(f"Search could not be completed: {exc}")
     elif plan_clicked:
-        st.session_state.searched = True
         try:
-            ans = plan_basket(
-                finder,
-                st.session_state.basket,
-                start=override_start,
-                floor=override_floor,
-                accessible_only=override_accessible,
-            )
+            ans = plan_basket(finder, st.session_state.basket, **route_args)
             if ans is None:
                 st.info(EMPTY_BASKET_MESSAGE)
             else:
@@ -426,9 +408,6 @@ def main() -> None:
             st.error(f"Basket route could not be planned: {exc}")
 
     last_answer: Answer | None = st.session_state.last_answer
-
-    if last_answer is None and not st.session_state.searched:
-        _render_empty_state()
 
     if last_answer is not None:
         # Messages

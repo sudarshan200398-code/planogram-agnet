@@ -260,9 +260,28 @@ def _new_app() -> AppTest:
     return at
 
 
+# The old example button's text, now typed into the paste box and run with Find
+MULTI_EXAMPLE = "Store Brand Shredded Cheddar 400 g and Daily Bake White Sandwich Bread 400 g"
+
+
+def _search(at: AppTest, text: str) -> None:
+    at.text_area[0].input(text)
+    at.button(key="find").click().run()
+
+
+def _basket_panel(at: AppTest):
+    """The main-page basket container (it used to be the sidebar)."""
+    def blocks(node):
+        for child in getattr(node, "children", {}).values():
+            yield child
+            yield from blocks(child)
+
+    return next(b for b in blocks(at.main) if str(getattr(getattr(b, "proto", None), "id", "")).endswith("-basket_panel"))
+
+
 def test_item_cards_show_images(spy):
     at = _new_app()
-    at.button(key="example_multi").click().run()  # Example: Multi-product
+    _search(at, MULTI_EXAMPLE)
     assert not at.exception
     found = [it.sku for it in at.session_state["last_answer"].items if it.sku]
     assert found and set(found) <= {sku for sku, _ in spy}
@@ -271,11 +290,11 @@ def test_item_cards_show_images(spy):
 
 def test_basket_rows_show_images(spy):
     at = _new_app()
-    at.button(key="example_multi").click().run()
+    _search(at, MULTI_EXAMPLE)
     for b in [b for b in at.button if b.key and b.key.startswith("add_item_")]:
         b.click().run()
     assert not at.exception
-    assert len(at.sidebar.get("image")) == len(at.session_state["basket"]) == 2
+    assert len(_basket_panel(at).get("image")) == len(at.session_state["basket"]) == 2
 
 
 def test_fallback_suggestion_rows_show_images(spy, monkeypatch):
@@ -291,14 +310,20 @@ def test_fallback_suggestion_rows_show_images(spy, monkeypatch):
 def test_picked_dropdown_product_shows_image(spy, monkeypatch, dataset):
     streamlit_searchbox = pytest.importorskip("streamlit_searchbox")
     sku = dataset.products[0].sku
-    monkeypatch.setattr(streamlit_searchbox, "st_searchbox", lambda *a, **k: sku)
+    picks = [("product", sku)]  # the add-on reports one pick of this product
+
+    def fake(*args, submit_function=None, **kwargs):
+        if picks:
+            submit_function(picks.pop(0))
+
+    monkeypatch.setattr(streamlit_searchbox, "st_searchbox", fake)
     at = _new_app()
     assert (sku, "placeholder") in spy
 
 
 def test_page_uses_real_image_from_store_folder(spy, store):
     at = _new_app()
-    at.button(key="example_multi").click().run()
+    _search(at, MULTI_EXAMPLE)
     sku = next(it.sku for it in at.session_state["last_answer"].items if it.sku)
     _write_image(store / "images" / f"{sku}.png", "red", "PNG")
     next(t for t in at.sidebar.text_input if t.label == "Store folder").set_value(str(store)).run()

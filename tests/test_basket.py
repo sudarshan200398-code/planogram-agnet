@@ -307,9 +307,29 @@ def _add_buttons(at: AppTest, prefix: str) -> list:
     return [b for b in at.button if b.key and b.key.startswith(prefix)]
 
 
+# The old example buttons' texts, now typed into the paste box and run with Find
+MULTI_EXAMPLE = "Store Brand Shredded Cheddar 400 g and Daily Bake White Sandwich Bread 400 g"
+OOS_EXAMPLE = "ArtBox Watercolour Paints 12 pack"
+
+
+def _search(at: AppTest, text: str) -> None:
+    at.text_area[0].input(text)
+    at.button(key="find").click().run()
+
+
+def _basket_panel(at: AppTest):
+    """The main-page basket container (it used to be the sidebar)."""
+    def blocks(node):
+        for child in getattr(node, "children", {}).values():
+            yield child
+            yield from blocks(child)
+
+    return next(b for b in blocks(at.main) if str(getattr(getattr(b, "proto", None), "id", "")).endswith("-basket_panel"))
+
+
 def test_new_session_starts_with_empty_basket(app):
     assert _basket(app) == {}
-    assert any("empty" in c.value.lower() for c in app.sidebar.caption)
+    assert any("empty" in c.value.lower() for c in _basket_panel(app).caption)
 
 
 def test_plan_empty_basket_shows_message_not_error(app):
@@ -321,7 +341,7 @@ def test_plan_empty_basket_shows_message_not_error(app):
 
 
 def test_add_from_answer_edit_remove_clear(app):
-    app.button(key="example_multi").click().run()  # Example: Multi-product
+    _search(app, MULTI_EXAMPLE)
     adds = _add_buttons(app, "add_item_")
     found = [it for it in app.session_state["last_answer"].items if it.sku]
     assert len(adds) == len(found) == 2
@@ -329,7 +349,7 @@ def test_add_from_answer_edit_remove_clear(app):
     adds[0].click().run()
     sku0 = found[0].sku
     assert _basket(app) == {sku0: {"name": found[0].name, "qty": 1}}
-    assert any(found[0].name in m.value for m in app.sidebar.markdown)
+    assert any(found[0].name in m.value for m in _basket_panel(app).markdown)
 
     app.number_input(key=f"basket_qty_{sku0}").set_value(5).run()
     assert _basket(app)[sku0]["qty"] == 5
@@ -346,7 +366,7 @@ def test_add_from_answer_edit_remove_clear(app):
 
 
 def test_plan_route_for_basket_matches_typed_answer(app):
-    app.button(key="example_multi").click().run()  # Example: Multi-product
+    _search(app, MULTI_EXAMPLE)
     typed_route = app.session_state["last_answer"].route
     for b in _add_buttons(app, "add_item_"):
         b.click().run()
@@ -359,7 +379,7 @@ def test_plan_route_for_basket_matches_typed_answer(app):
 
 
 def test_out_of_stock_answer_item_can_be_added_and_is_reported(app):
-    app.button(key="example_oos").click().run()  # Example: Out-of-stock
+    _search(app, OOS_EXAMPLE)
     item = app.session_state["last_answer"].items[0]
     assert item.status == "unavailable"
     app.button(key=f"add_item_{item.index}_{item.sku}").click().run()
@@ -390,10 +410,16 @@ def test_picked_dropdown_product_has_add_button(monkeypatch):
     finder = create_finder(STORE_DIR, client=NoModelClient())
     product = _picks(finder.dataset, 1)[0]
     monkeypatch.setenv("PLANOGRAM_PROVIDER", "none")
-    monkeypatch.setattr(streamlit_searchbox, "st_searchbox", lambda *a, **k: product.sku)
+    picks = [("product", product.sku)]  # the add-on reports one pick of this product
+
+    def fake(*args, submit_function=None, **kwargs):
+        if picks:
+            submit_function(picks.pop(0))
+
+    monkeypatch.setattr(streamlit_searchbox, "st_searchbox", fake)
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
     assert at.text_area[0].value == product.name  # the pick still fills the query box
-    at.button(key="add_picked").click().run()
+    at.button(key=f"add_item_0_{product.sku}").click().run()  # the picked product's result card
     assert not at.exception
     assert _basket(at) == {product.sku: {"name": product.name, "qty": 1}}

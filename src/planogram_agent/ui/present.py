@@ -9,9 +9,12 @@ from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
 from ..agents.routing import DirectionStep, format_direction_step
+from ..autocomplete import suggest
 
 if TYPE_CHECKING:
+    from ..data_loader import Dataset
     from ..runtime.state import ItemResult
+    from ..settings import Settings
 
 STEP_ICONS: dict[str, str] = {
     "walk": ":material/directions_walk:",
@@ -46,6 +49,19 @@ def status_badge(status: str) -> tuple[str, str]:
     """(badge colour, text) for an item status; colour is used for status only."""
     colour, label = _STATUS_BADGES.get(status, ("gray", status.replace("_", " ").capitalize()))
     return colour, f"Status: {label}"
+
+
+def search_options(term: str | None, dataset: Dataset, settings: Settings) -> list[tuple[str, tuple[str, str]]]:
+    """Dropdown rows: 'Search for "<text>"' first, then matching products (label, (kind, value)).
+
+    Kinds are "search" (run the full request on the text) and "product" (that exact sku).
+    """
+    text = (term or "").strip()
+    if not text:
+        return []
+    rows = [(f'Search for "{text}"', ("search", text))]
+    rows += [(s.label, ("product", s.sku)) for s in suggest(text, dataset, settings)]
+    return rows
 
 
 def card_lines(item: ItemResult) -> list[str]:

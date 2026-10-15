@@ -165,10 +165,14 @@ def test_header_chip_shows_model_off(app):
     assert any("AI model: off" in t for t in _texts(app))
 
 
-def test_empty_state_then_examples_go_away(app):
-    assert any("How it works" in t for t in _texts(app))
+def test_no_examples_or_how_it_works_and_hint_line_present(app):
+    from planogram_agent.ui.streamlit_app import SEARCH_HINT
+
+    assert not any("How it works" in t for t in _texts(app))
     keys = {b.key for b in app.button}
-    assert {"example_multi", "example_milk", "example_oos", "find"} <= keys
+    assert "find" in keys
+    assert not keys & {"example_multi", "example_milk", "example_oos"}
+    assert any(c.value == SEARCH_HINT for c in app.caption)
     app.text_area[0].input("Daily Bake Plain Bagels 4 pack")
     app.button(key="find").click().run()
     assert not app.exception
@@ -207,6 +211,6 @@ def test_fallback_rows_say_add(monkeypatch):
     monkeypatch.setitem(sys.modules, "streamlit_searchbox", None)
     at = AppTest.from_file(APP_FILE, default_timeout=30)
     at.run()
-    next(t for t in at.text_input if t.label == "Look up one product").input("bre").run()
+    at.text_input(key="product_search_text").input("bre").run()
     adds = [b for b in at.button if b.key and b.key.startswith("add_suggest_")]
     assert adds and all(b.label == "Add" for b in adds)
