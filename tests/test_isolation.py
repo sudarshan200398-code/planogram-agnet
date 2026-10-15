@@ -36,3 +36,11 @@ def test_socketpair_works():
 def test_asyncio_sleep_works():
     """asyncio event loop works cleanly without being blocked by network guard."""
     asyncio.run(asyncio.sleep(0))
+
+
+def test_provider_and_key_env_removed_for_every_test():
+    """conftest strips PLANOGRAM_PROVIDER and GEMINI_API_KEY so the shell cannot change test results."""
+    import os
+
+    assert "PLANOGRAM_PROVIDER" not in os.environ
+    assert "GEMINI_API_KEY" not in os.environ

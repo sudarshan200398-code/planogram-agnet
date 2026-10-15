@@ -7,11 +7,86 @@ from typing import TYPE_CHECKING
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
+from planogram_agent.agents.routing import format_direction_step
 from planogram_agent.schemas import NodeType
+from planogram_agent.tools import get_location
 
 if TYPE_CHECKING:
     from planogram_agent.data_loader import Dataset
     from planogram_agent.runtime.state import Answer
+
+
+def route_floor_segments(dataset: Dataset, answer: Answer | None) -> dict[int, list[tuple[str, str]]]:
+    """Group consecutive route path pairs by floor; pairs that change floor belong to no floor."""
+    segments: dict[int, list[tuple[str, str]]] = {}
+    if not answer or not answer.route:
+        return segments
+    node_floor = {n.id: n.floor for n in dataset.graph.nodes}
+    for u, v in itertools.pairwise(answer.route.path):
+        fu, fv = node_floor.get(u), node_floor.get(v)
+        if fu is not None and fu == fv:
+            segments.setdefault(fu, []).append((u, v))
+    return segments
+
+
+def floor_change_nodes(dataset: Dataset, answer: Answer | None) -> dict[int, list[str]]:
+    """Connector node ids where the route leaves or enters a floor, keyed by that node's floor."""
+    changes: dict[int, list[str]] = {}
+    if not answer or not answer.route:
+        return changes
+    node_floor = {n.id: n.floor for n in dataset.graph.nodes}
+    for u, v in itertools.pairwise(answer.route.path):
+        fu, fv = node_floor.get(u), node_floor.get(v)
+        if fu is None or fv is None or fu == fv:
+            continue
+        for nid, fl in ((u, fu), (v, fv)):
+            if nid not in changes.setdefault(fl, []):
+                changes[fl].append(nid)
+    return changes
+
+
+def floor_display_order(dataset: Dataset, answer: Answer | None) -> list[int]:
+    """All store floors, with the floor of the route's first stop first and the rest ascending."""
+    floors = sorted(dataset.graph.floors)
+    first_stops = _stop_floors(answer)
+    if first_stops:
+        first_floor = first_stops[0]
+        if first_floor in floors:
+            floors.remove(first_floor)
+            floors.insert(0, first_floor)
+    return floors
+
+
+def _stop_floors(answer: Answer | None) -> list[int]:
+    """Floor of each stop in visiting order."""
+    if not answer or not answer.route:
+        return []
+    item_by_sku = {it.sku: it for it in answer.items if it.sku}
+    floors: list[int] = []
+    for sku in answer.route.ordered_skus:
+        item = item_by_sku.get(sku)
+        if item and item.chosen_location:
+            floors.append(item.chosen_location.floor)
+    return floors
+
+
+def floor_change_lines(answer: Answer | None) -> list[str]:
+    """Plain lines for each floor change, worded exactly as the route directions word them."""
+    if not answer or not answer.route:
+        return []
+    return [format_direction_step(s) for s in answer.route.steps if s.kind == "take_connector"]
+
+
+def clarification_option_label(dataset: Dataset, sku: str, name: str) -> str:
+    """Option text with the floor and zone of each shelf placement, e.g. 'Gift Card, Level 2, Service Hub'."""
+    places: list[str] = []
+    for loc in get_location(sku, dataset):
+        place = f"Level {loc.floor}, {loc.zone}"
+        if place not in places:
+            places.append(place)
+    if not places:
+        return f"{name}, no shelf location"
+    return f"{name}, {' / '.join(places)}"
 
 
 def get_floor_stops(answer: Answer | None, floor: int) -> list[tuple[int, str, str, str]]:
@@ -151,33 +226,26 @@ def draw_floor(dataset: Dataset, answer: Answer | None, floor: int) -> Figure:
 
         # 5. Draw route segments on this floor only when both ends are on this floor
         legend_handles.append(Line2D([0], [0], color="#2563eb", lw=3.0, label="Route"))
-        for u, v in itertools.pairwise(route_path):
-            if u in floor_nodes and v in floor_nodes:
-                nu = floor_nodes[u]
-                nv = floor_nodes[v]
-                ax.plot([nu.x, nv.x], [nu.y, nv.y], color="#2563eb", lw=3.2, zorder=5)
+        for u, v in route_floor_segments(dataset, answer).get(floor, []):
+            nu = floor_nodes[u]
+            nv = floor_nodes[v]
+            ax.plot([nu.x, nv.x], [nu.y, nv.y], color="#2563eb", lw=3.2, zorder=5)
 
         # 6. Mark connector nodes where the route changes floors
         marked_floor_change = False
-        all_nodes = {n.id: n for n in dataset.graph.nodes}
-        for u, v in itertools.pairwise(route_path):
-            u_fl = all_nodes[u].floor if u in all_nodes else None
-            v_fl = all_nodes[v].floor if v in all_nodes else None
-            if u_fl != v_fl:
-                conn_node_id = u if u in floor_nodes else (v if v in floor_nodes else None)
-                if conn_node_id and conn_node_id in floor_nodes:
-                    cn = floor_nodes[conn_node_id]
-                    ax.scatter(
-                        cn.x,
-                        cn.y,
-                        s=260,
-                        facecolors="none",
-                        edgecolors="#dc2626",
-                        lw=2.5,
-                        linestyle="--",
-                        zorder=6,
-                    )
-                    marked_floor_change = True
+        for conn_node_id in floor_change_nodes(dataset, answer).get(floor, []):
+            cn = floor_nodes[conn_node_id]
+            ax.scatter(
+                cn.x,
+                cn.y,
+                s=260,
+                facecolors="none",
+                edgecolors="#dc2626",
+                lw=2.5,
+                linestyle="--",
+                zorder=6,
+            )
+            marked_floor_change = True
 
         if marked_floor_change:
             legend_handles.append(

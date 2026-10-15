@@ -8,7 +8,14 @@ from planogram_agent.interface import answer_question, create_finder, run_query
 from planogram_agent.runtime.orchestrator import Orchestrator
 from planogram_agent.runtime.state import Answer
 from planogram_agent.schemas import NodeType
-from planogram_agent.ui.map_plot import draw_floor, get_floor_stops
+from planogram_agent.ui.map_plot import (
+    clarification_option_label,
+    draw_floor,
+    floor_change_lines,
+    floor_display_order,
+    get_floor_stops,
+    route_floor_segments,
+)
 
 
 @st.cache_resource
@@ -161,7 +168,7 @@ def main() -> None:
             st.subheader(f"Clarification needed for '{q.item_text}'")
             st.write("Which product did you mean?")
             for opt in q.options:
-                button_title = f"{opt.name} ({opt.sku})"
+                button_title = clarification_option_label(finder.dataset, opt.sku, opt.name)
                 if st.button(button_title, key=f"opt_{q.item_index}_{opt.sku}", use_container_width=True):
                     try:
                         resolved = answer_question(
@@ -216,20 +223,24 @@ def main() -> None:
             if route.directions_text:
                 st.markdown(route.directions_text)
 
-            # Map tabs
-            floors = sorted(finder.dataset.graph.floors)
-            tabs = st.tabs([f"Level {fl}" for fl in floors])
-            for tab, fl in zip(tabs, floors):
-                with tab:
-                    fig = draw_floor(finder.dataset, last_answer, fl)
-                    st.pyplot(fig)
-                    # Caption under each floor's map
-                    fl_stops = get_floor_stops(last_answer, fl)
-                    if fl_stops:
-                        stops_list = [f"{s_num}. {name} ({loc_str})" for s_num, sku, name, loc_str in fl_stops]
-                        st.caption(f"Stops on Level {fl}: {', '.join(stops_list)}")
-                    else:
-                        st.caption(f"No stops on Level {fl}")
+            # One plain line per floor change, under the route
+            for line in floor_change_lines(last_answer):
+                st.markdown(line)
+
+            # Every floor map stays visible, the floor of the first stop first
+            segments = route_floor_segments(finder.dataset, last_answer)
+            for fl in floor_display_order(finder.dataset, last_answer):
+                st.markdown(f"#### Level {fl}")
+                fig = draw_floor(finder.dataset, last_answer, fl)
+                st.pyplot(fig)
+                fl_stops = get_floor_stops(last_answer, fl)
+                if fl_stops:
+                    stops_list = [f"{s_num}. {name} ({loc_str})" for s_num, sku, name, loc_str in fl_stops]
+                    st.caption(f"Stops on Level {fl}: {', '.join(stops_list)}")
+                elif segments.get(fl):
+                    st.caption(f"No stops on Level {fl}; the route passes through this floor")
+                else:
+                    st.caption(f"No route on Level {fl}")
 
         # Details trace
         if show_details and last_answer.trace:

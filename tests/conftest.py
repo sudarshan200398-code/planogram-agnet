@@ -25,6 +25,7 @@ def pytest_configure(config):
 
 @pytest.fixture(autouse=True)
 def isolate_environment_and_block_network(monkeypatch, request):
+    monkeypatch.delenv("PLANOGRAM_PROVIDER", raising=False)
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
 
