@@ -27,6 +27,9 @@ class Settings(BaseModel):
     max_repairs: int = Field(default=1, ge=0)
     # Gemini rejects calls under 10 s
     model_timeout_seconds: float = Field(default=20.0, ge=0.0)
+    # Search box suggestions
+    autocomplete_limit: int = Field(default=8, ge=1)
+    autocomplete_min_chars: int = Field(default=2, ge=1)
 
 
 def _find_default_settings_file() -> Path | None:

@@ -8,8 +8,8 @@ from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 
 from planogram_agent.agents.routing import format_direction_step
+from planogram_agent.autocomplete import placement_texts
 from planogram_agent.schemas import NodeType
-from planogram_agent.tools import get_location
 
 if TYPE_CHECKING:
     from planogram_agent.data_loader import Dataset
@@ -79,11 +79,7 @@ def floor_change_lines(answer: Answer | None) -> list[str]:
 
 def clarification_option_label(dataset: Dataset, sku: str, name: str) -> str:
     """Option text with the floor and zone of each shelf placement, e.g. 'Gift Card, Level 2, Service Hub'."""
-    places: list[str] = []
-    for loc in get_location(sku, dataset):
-        place = f"Level {loc.floor}, {loc.zone}"
-        if place not in places:
-            places.append(place)
+    places = placement_texts(sku, dataset)
     if not places:
         return f"{name}, no shelf location"
     return f"{name}, {' / '.join(places)}"

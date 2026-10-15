@@ -1,8 +1,13 @@
 """Streamlit application for store product finder and route planner."""
 from __future__ import annotations
 
+import logging
+from collections.abc import MutableMapping
+from typing import Any
+
 import streamlit as st
 
+from planogram_agent.autocomplete import suggest
 from planogram_agent.data_loader import Dataset
 from planogram_agent.interface import answer_question, create_finder, run_query
 from planogram_agent.runtime.orchestrator import Orchestrator
@@ -17,11 +22,55 @@ from planogram_agent.ui.map_plot import (
     route_floor_segments,
 )
 
+logger = logging.getLogger(__name__)
+
 
 @st.cache_resource
 def get_finder(folder: str) -> Orchestrator:
     """Load dataset and build finder cached by folder path."""
     return create_finder(folder)
+
+
+def apply_suggestion(state: MutableMapping[str, Any], name: str | None) -> bool:
+    """Put a picked suggestion's exact product name in the query box. Returns True if it changed."""
+    if not name or state.get("last_suggestion") == name:
+        return False
+    state["last_suggestion"] = name
+    state["query_input"] = name
+    return True
+
+
+def _render_product_search(finder: Orchestrator) -> str | None:
+    """Product search with suggestions; returns the picked product name, if any.
+
+    Uses the streamlit-searchbox add-on for as-you-type suggestions. If the add-on cannot be
+    imported or fails to render, falls back to suggestion buttons shown after pressing Enter.
+    """
+    def search(term: str) -> list[tuple[str, str]]:
+        return [(s.label, s.name) for s in suggest(term, finder.dataset, finder.settings)]
+
+    try:
+        from streamlit_searchbox import st_searchbox
+
+        return st_searchbox(
+            search,
+            label="Find a product",
+            placeholder="Type a few letters, e.g. bre",
+            key="product_searchbox",
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Search box add-on unavailable, using suggestion buttons: %s", exc)
+
+    term = st.text_input(
+        "Find a product",
+        placeholder="Type a few letters, e.g. bre, then press Enter",
+        key="product_search_text",
+    )
+    for s in suggest(term, finder.dataset, finder.settings):
+        if st.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
+            st.session_state.pop("last_suggestion", None)  # a button click is always a fresh pick
+            return s.name
+    return None
 
 
 def _build_start_options(dataset: Dataset) -> list[tuple[str, str | None, int | None]]:
@@ -95,7 +144,9 @@ def main() -> None:
     if "query_input" not in st.session_state:
         st.session_state.query_input = ""
 
-    # 3. Main Area: Example buttons
+    # 3. Main Area: product search with suggestions, then example buttons
+    apply_suggestion(st.session_state, _render_product_search(finder))
+
     st.write("Ask for any product, brand or item in the supermarket:")
     col_ex1, col_ex2, col_ex3 = st.columns(3)
     clicked_example: str | None = None

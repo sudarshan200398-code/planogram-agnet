@@ -15,5 +15,7 @@
   "max_tokens": 1000,
   "session_ttl_seconds": 600,
   "max_repairs": 1,
-  "model_timeout_seconds": 20
+  "model_timeout_seconds": 20,
+  "autocomplete_limit": 8,
+  "autocomplete_min_chars": 2
 }
