@@ -214,7 +214,7 @@ def test_page_falls_back_when_addon_missing(monkeypatch):
 
 
 def test_page_falls_back_when_addon_render_fails(monkeypatch):
-    import streamlit_searchbox
+    streamlit_searchbox = pytest.importorskip("streamlit_searchbox")
 
     def broken(*args, **kwargs):
         raise RuntimeError("component failed")
