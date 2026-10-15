@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import string
 import sys
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,7 @@ from planogram_agent.autocomplete import Suggestion, suggest
 from planogram_agent.data_loader import load_dataset
 from planogram_agent.interface import create_finder
 from planogram_agent.llm.no_model import NoModelClient
+from planogram_agent.matching import get_search_index
 from planogram_agent.settings import Settings, load_settings
 from planogram_agent.tools import check_inventory, get_location
 
@@ -116,6 +118,21 @@ def test_label_has_name_floor_zone_and_stock(dataset, settings):
             assert f"Level {loc.floor}, {loc.zone}" in s.label
         expected_stock = {"available": "In stock", "unavailable": "Out of stock", "unknown": "Stock unknown"}
         assert expected_stock[check_inventory(s.sku, dataset)] in s.label
+
+
+@pytest.mark.parametrize("prefix", ["br", "ch", "mi", "sh"])
+def test_most_common_word_comes_first(dataset, settings, prefix):
+    """Completions shared by more products rank higher; ties broken alphabetically."""
+    indexed = get_search_index(dataset).indexed
+    counts = Counter(w for p in indexed for w in set(p.all_words) if w.startswith(prefix))
+    assert prefix not in counts  # an exact word would rank first regardless of count
+    order = sorted(counts, key=lambda w: (-counts[w], w))
+    words_of = {p.sku: set(p.all_words) for p in indexed}
+
+    result = suggest(prefix, dataset, settings)
+    ranks = [min(order.index(w) for w in words_of[s.sku] if w in counts) for s in result]
+    assert result and ranks[0] == 0, [s.name for s in result]
+    assert ranks == sorted(ranks), list(zip(ranks, [s.name for s in result]))
 
 
 def test_suggestions_are_sorted_best_first(dataset, settings):
