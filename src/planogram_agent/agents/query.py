@@ -241,6 +241,7 @@ class ComposedPhrases:
     lead_qty_unmatched_num: re.Pattern
     lead_qty_unmatched_word: re.Pattern
     polite_sentence_pat: re.Pattern
+    start_label_suffix_expr: str  # optional word after a start zone name, e.g. 'section'
 
 
 @functools.lru_cache(maxsize=1)
@@ -297,6 +298,10 @@ def _get_composed_phrases() -> ComposedPhrases:
         "standing at", "i am near", "i am by", "i am at", "i'm near",
         "i'm by", "i'm at",
     ]), key=len, reverse=True)
+    start_label_suffixes = sorted(data.get("start_label_suffixes", []), key=len, reverse=True)
+    start_label_suffix_expr = (
+        r"(?:\s+(?:" + "|".join(re.escape(s) for s in start_label_suffixes) + r"))?" if start_label_suffixes else ""
+    )
     step_free_phrases = sorted(data.get("step_free_phrases", [
         "step-free route", "step free route", "step-free path", "step free path",
         "step-free", "step free", "avoid stairs and escalators", "avoid stairs",
@@ -418,6 +423,7 @@ def _get_composed_phrases() -> ComposedPhrases:
         lead_qty_unmatched_num=lead_qty_unmatched_num,
         lead_qty_unmatched_word=lead_qty_unmatched_word,
         polite_sentence_pat=polite_sentence_pat,
+        start_label_suffix_expr=start_label_suffix_expr,
     )
 
 
@@ -463,16 +469,17 @@ def get_dataset_query_patterns(dataset: Dataset) -> DatasetQueryPatterns:
     if sorted_labels:
         labels_expr = "|".join(re.escape(l) for l in sorted_labels)
         start_pfx_expr = "|".join(re.escape(sp) for sp in phrases.start_prefixes)
+        suffix = phrases.start_label_suffix_expr  # optional 'section', 'area', ... after the zone name
         paren_start_pat = re.compile(
-            r"\(\s*(?:(?:(?:" + start_pfx_expr + r")\s+)?(?:the\s+)?)?(" + labels_expr + r")\s*\)",
+            r"\(\s*(?:(?:(?:" + start_pfx_expr + r")\s+)?(?:the\s+)?)?(" + labels_expr + r")" + suffix + r"\s*\)",
             re.IGNORECASE,
         )
         begin_start_pat = re.compile(
-            r"^(?:(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?)(" + labels_expr + r")(?:\s*[:\-,])?\s*",
+            r"^(?:(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?)(" + labels_expr + r")" + suffix + r"(?:\s*[:\-,])?\s*",
             re.IGNORECASE,
         )
         delim_start_pat = re.compile(
-            r"(?:(?:\b(?:and)\b|[.\-:,;!?])\s*|\s+)\b(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?(" + labels_expr + r")(?=[.\-:,;!?]|$|\b(?:and)\b)",
+            r"(?:(?:\b(?:and)\b|[.\-:,;!?])\s*|\s+)\b(?:(?:" + start_pfx_expr + r")\s+)(?:the\s+)?(" + labels_expr + r")" + suffix + r"(?=[.\-:,;!?]|$|\b(?:and)\b)",
             re.IGNORECASE,
         )
     else:
