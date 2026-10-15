@@ -19,5 +19,11 @@
   "autocomplete_limit": 8,
   "autocomplete_min_chars": 2,
   "basket_min_quantity": 1,
-  "basket_max_quantity": 99
+  "basket_max_quantity": 99,
+  "image_tile_px": 96,
+  "image_max_bytes": 2000000,
+  "image_palette": [
+    "#2E6DB4", "#C2410C", "#15803D", "#B91C1C", "#7E22CE", "#A16207",
+    "#BE185D", "#0F766E", "#4D7C0F", "#1D4ED8", "#9A3412", "#475569"
+  ]
 }

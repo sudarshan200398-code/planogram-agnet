@@ -33,6 +33,16 @@ class Settings(BaseModel):
     # Basket quantity per product
     basket_min_quantity: int = Field(default=1, ge=1)
     basket_max_quantity: int = Field(default=99, ge=1)
+    # Product pictures: tile size, largest real file read, placeholder colours by category
+    image_tile_px: int = Field(default=96, ge=16)
+    image_max_bytes: int = Field(default=2_000_000, ge=1)
+    image_palette: list[str] = Field(
+        default_factory=lambda: [
+            "#2E6DB4", "#C2410C", "#15803D", "#B91C1C", "#7E22CE", "#A16207",
+            "#BE185D", "#0F766E", "#4D7C0F", "#1D4ED8", "#9A3412", "#475569",
+        ],
+        min_length=1,
+    )
 
 
 def _find_default_settings_file() -> Path | None:

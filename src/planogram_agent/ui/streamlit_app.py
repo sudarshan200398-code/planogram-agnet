@@ -18,6 +18,7 @@ from planogram_agent.basket import (
     set_quantity,
 )
 from planogram_agent.data_loader import Dataset
+from planogram_agent.images import product_image
 from planogram_agent.interface import answer_question, create_finder, run_query
 from planogram_agent.runtime.orchestrator import Orchestrator
 from planogram_agent.runtime.state import Answer
@@ -49,6 +50,12 @@ def apply_suggestion(state: MutableMapping[str, Any], name: str | None) -> bool:
     return True
 
 
+def _show_picture(target: Any, finder: Orchestrator, store_folder: str, sku: str) -> None:
+    """Draw a product's picture (real file or generated tile) into a column or the sidebar."""
+    img = product_image(sku, finder.dataset, store_folder, finder.settings)
+    target.image(img.data, width=finder.settings.image_tile_px)
+
+
 def _add_to_basket(finder: Orchestrator, sku: str, name: str) -> None:
     """Button callback: add one of a product and keep the message for the basket panel."""
     result = add_item(st.session_state.basket, sku, name, finder.settings)
@@ -70,7 +77,7 @@ def _clear_basket() -> None:
     st.session_state.basket_note = None
 
 
-def _render_basket_panel(finder: Orchestrator) -> bool:
+def _render_basket_panel(finder: Orchestrator, store_folder: str) -> bool:
     """Sidebar basket: quantity and remove per item, clear, plan. Returns True if plan was clicked."""
     settings = finder.settings
     basket = st.session_state.basket
@@ -85,7 +92,9 @@ def _render_basket_panel(finder: Orchestrator) -> bool:
     for sku, entry in basket.items():
         qty_key = f"basket_qty_{sku}"
         st.session_state[qty_key] = entry["qty"]  # an add may have changed it since the widget last ran
-        st.sidebar.markdown(f"**{entry['name']}**")
+        col_pic, col_name = st.sidebar.columns([1, 2])
+        _show_picture(col_pic, finder, store_folder, sku)
+        col_name.markdown(f"**{entry['name']}**")
         col_qty, col_remove = st.sidebar.columns([2, 1])
         col_qty.number_input(
             "Quantity",
@@ -103,7 +112,7 @@ def _render_basket_panel(finder: Orchestrator) -> bool:
     return st.sidebar.button("Plan route for basket", key="basket_plan", type="primary")
 
 
-def _render_product_search(finder: Orchestrator) -> tuple[str, str] | None:
+def _render_product_search(finder: Orchestrator, store_folder: str) -> tuple[str, str] | None:
     """Product search with suggestions; returns the picked product as (sku, name), if any.
 
     Uses the streamlit-searchbox add-on for as-you-type suggestions. If the add-on cannot be
@@ -135,7 +144,8 @@ def _render_product_search(finder: Orchestrator) -> tuple[str, str] | None:
     )
     picked: tuple[str, str] | None = None
     for s in suggest(term, finder.dataset, finder.settings):
-        col_pick, col_add = st.columns([5, 1])
+        col_pic, col_pick, col_add = st.columns([1, 5, 1], vertical_alignment="center")
+        _show_picture(col_pic, finder, store_folder, s.sku)
         if col_pick.button(s.label, key=f"suggest_{s.sku}", use_container_width=True):
             st.session_state.pop("last_suggestion", None)  # a button click is always a fresh pick
             picked = (s.sku, s.name)
@@ -225,16 +235,18 @@ def main() -> None:
         st.session_state.answer_from_basket = False
 
     # Sidebar basket panel
-    plan_clicked = _render_basket_panel(finder)
+    plan_clicked = _render_basket_panel(finder, store_folder)
 
     # 3. Main Area: product search with suggestions, then example buttons
-    picked = _render_product_search(finder)
+    picked = _render_product_search(finder, store_folder)
     if picked is not None:
         st.session_state.picked_product = picked
         apply_suggestion(st.session_state, picked[1])
     if st.session_state.get("picked_product"):
         picked_sku, picked_name = st.session_state.picked_product
-        st.button(
+        col_pic, col_add = st.columns([1, 6], vertical_alignment="center")
+        _show_picture(col_pic, finder, store_folder, picked_sku)
+        col_add.button(
             f"Add {picked_name} to basket",
             key="add_picked",
             on_click=_add_to_basket,
@@ -360,31 +372,36 @@ def main() -> None:
             }
             for it in last_answer.items:
                 with st.container(border=True):
-                    display_name = it.name or it.requested
-                    st.markdown(f"**{display_name}**")
-                    stat_text = status_labels.get(it.status, it.status)
-                    qty_text = f" | Quantity: {it.quantity}" if it.status == "available" else ""
-                    st.write(f"Status: {stat_text}{qty_text}")
+                    body = st.container()
+                    if it.sku:
+                        col_pic, body = st.columns([1, 5])
+                        _show_picture(col_pic, finder, store_folder, it.sku)
+                    with body:
+                        display_name = it.name or it.requested
+                        st.markdown(f"**{display_name}**")
+                        stat_text = status_labels.get(it.status, it.status)
+                        qty_text = f" | Quantity: {it.quantity}" if it.status == "available" else ""
+                        st.write(f"Status: {stat_text}{qty_text}")
 
-                    if it.chosen_location:
-                        loc = it.chosen_location
-                        st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
-                    elif it.locations:
-                        loc = it.locations[0]
-                        st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
-                    else:
-                        st.write("Location: No shelf location")
+                        if it.chosen_location:
+                            loc = it.chosen_location
+                            st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
+                        elif it.locations:
+                            loc = it.locations[0]
+                            st.write(f"Location: Level {loc.floor}, {loc.zone}, Bay {loc.bay}, Shelf {loc.shelf_level}")
+                        else:
+                            st.write("Location: No shelf location")
 
-                    if it.reason:
-                        st.caption(it.reason)
+                        if it.reason:
+                            st.caption(it.reason)
 
-                    if it.sku and it.name:
-                        st.button(
-                            "Add to basket",
-                            key=f"add_item_{it.index}_{it.sku}",
-                            on_click=_add_to_basket,
-                            args=(finder, it.sku, it.name),
-                        )
+                        if it.sku and it.name:
+                            st.button(
+                                "Add to basket",
+                                key=f"add_item_{it.index}_{it.sku}",
+                                on_click=_add_to_basket,
+                                args=(finder, it.sku, it.name),
+                            )
 
         # Route
         if last_answer.route is not None:
