@@ -343,6 +343,9 @@ class Orchestrator:
             if state.trace and state.trace[-1].stage == "PARSE" and state.parsed_request:
                 state.trace[-1].note = f"source: {state.parsed_request.source}"
 
+            if state.parsed_request and state.parsed_request.truncated:
+                state.errors.append(f"Shopping list truncated to maximum of {settings.max_items} items")
+
             if state.parsed_request is None or state.parsed_request.intent == "unknown" or not state.parsed_request.items:
                 reason = (
                     state.parsed_request.reason
