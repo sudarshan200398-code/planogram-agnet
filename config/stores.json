@@ -1,0 +1,6 @@
+{
+  "stores": [
+    {"id": "central", "name": "Central Store", "data_dir": "data/store_demo"},
+    {"id": "riverside", "name": "Riverside Market", "data_dir": "data/store_riverside"}
+  ]
+}

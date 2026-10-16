@@ -1,0 +1,445 @@
+sku,name,brand,category,size,keywords
+RS-FRU-001,Riverbend Alphonso Mango 1 kg,Riverbend,Fruit,1 kg,alphonso mango|fruit|mango
+RS-FRU-002,Riverbend Alphonso Mango 500 g,Riverbend,Fruit,500 g,alphonso mango|fruit|mango
+RS-FRU-003,Riverbend Royal Gala Apple 1 kg,Riverbend,Fruit,1 kg,apple|fruit|royal gala apple
+RS-FRU-004,Riverbend Royal Gala Apple 500 g,Riverbend,Fruit,500 g,apple|fruit|royal gala apple
+RS-FRU-005,Riverbend Robusta Banana 1 kg,Riverbend,Fruit,1 kg,banana|fruit|robusta banana
+RS-FRU-006,Riverbend Robusta Banana 500 g,Riverbend,Fruit,500 g,banana|fruit|robusta banana
+RS-FRU-007,Tulsi Grove Alphonso Mango 1 kg,Tulsi Grove,Fruit,1 kg,alphonso mango|fruit|mango
+RS-FRU-008,Tulsi Grove Alphonso Mango 500 g,Tulsi Grove,Fruit,500 g,alphonso mango|fruit|mango
+RS-FRU-009,Tulsi Grove Royal Gala Apple 1 kg,Tulsi Grove,Fruit,1 kg,apple|fruit|royal gala apple
+RS-FRU-010,Tulsi Grove Royal Gala Apple 500 g,Tulsi Grove,Fruit,500 g,apple|fruit|royal gala apple
+RS-FRU-011,Tulsi Grove Robusta Banana 1 kg,Tulsi Grove,Fruit,1 kg,banana|fruit|robusta banana
+RS-FRU-012,Tulsi Grove Robusta Banana 500 g,Tulsi Grove,Fruit,500 g,banana|fruit|robusta banana
+RS-VEG-001,Riverbend Baby Spinach 1 kg,Riverbend,Vegetables,1 kg,baby spinach|spinach|vegetables
+RS-VEG-002,Riverbend Baby Spinach 250 g,Riverbend,Vegetables,250 g,baby spinach|spinach|vegetables
+RS-VEG-003,Riverbend Red Onion 1 kg,Riverbend,Vegetables,1 kg,onion|red onion|vegetables
+RS-VEG-004,Riverbend Red Onion 250 g,Riverbend,Vegetables,250 g,onion|red onion|vegetables
+RS-VEG-005,Riverbend Cherry Tomato 1 kg,Riverbend,Vegetables,1 kg,cherry tomato|tomato|vegetables
+RS-VEG-006,Riverbend Cherry Tomato 250 g,Riverbend,Vegetables,250 g,cherry tomato|tomato|vegetables
+RS-VEG-007,Tulsi Grove Baby Spinach 1 kg,Tulsi Grove,Vegetables,1 kg,baby spinach|spinach|vegetables
+RS-VEG-008,Tulsi Grove Baby Spinach 250 g,Tulsi Grove,Vegetables,250 g,baby spinach|spinach|vegetables
+RS-VEG-009,Tulsi Grove Red Onion 1 kg,Tulsi Grove,Vegetables,1 kg,onion|red onion|vegetables
+RS-VEG-010,Tulsi Grove Red Onion 250 g,Tulsi Grove,Vegetables,250 g,onion|red onion|vegetables
+RS-VEG-011,Tulsi Grove Cherry Tomato 1 kg,Tulsi Grove,Vegetables,1 kg,cherry tomato|tomato|vegetables
+RS-VEG-012,Tulsi Grove Cherry Tomato 250 g,Tulsi Grove,Vegetables,250 g,cherry tomato|tomato|vegetables
+RS-HRB-001,Greenleaf Co Fresh Coriander 100 g,Greenleaf Co,Herbs,100 g,coriander|fresh coriander|herbs
+RS-HRB-002,Greenleaf Co Fresh Coriander 50 g,Greenleaf Co,Herbs,50 g,coriander|fresh coriander|herbs
+RS-HRB-003,Greenleaf Co Curry Leaves 100 g,Greenleaf Co,Herbs,100 g,curry leaves|herbs|leaves
+RS-HRB-004,Greenleaf Co Curry Leaves 50 g,Greenleaf Co,Herbs,50 g,curry leaves|herbs|leaves
+RS-HRB-005,Greenleaf Co Mint Bunch 100 g,Greenleaf Co,Herbs,100 g,bunch|herbs|mint bunch
+RS-HRB-006,Greenleaf Co Mint Bunch 50 g,Greenleaf Co,Herbs,50 g,bunch|herbs|mint bunch
+RS-HRB-007,Tulsi Grove Fresh Coriander 100 g,Tulsi Grove,Herbs,100 g,coriander|fresh coriander|herbs
+RS-HRB-008,Tulsi Grove Fresh Coriander 50 g,Tulsi Grove,Herbs,50 g,coriander|fresh coriander|herbs
+RS-HRB-009,Tulsi Grove Curry Leaves 100 g,Tulsi Grove,Herbs,100 g,curry leaves|herbs|leaves
+RS-HRB-010,Tulsi Grove Curry Leaves 50 g,Tulsi Grove,Herbs,50 g,curry leaves|herbs|leaves
+RS-HRB-011,Tulsi Grove Mint Bunch 100 g,Tulsi Grove,Herbs,100 g,bunch|herbs|mint bunch
+RS-HRB-012,Tulsi Grove Mint Bunch 50 g,Tulsi Grove,Herbs,50 g,bunch|herbs|mint bunch
+RS-BRD-001,Oakhill Multigrain Loaf 400 g,Oakhill,Breads,400 g,breads|loaf|multigrain loaf
+RS-BRD-002,Oakhill Multigrain Loaf 6 pack,Oakhill,Breads,6 pack,breads|loaf|multigrain loaf
+RS-BRD-003,Oakhill Pav Buns 400 g,Oakhill,Breads,400 g,breads|buns|pav buns
+RS-BRD-004,Oakhill Pav Buns 6 pack,Oakhill,Breads,6 pack,breads|buns|pav buns
+RS-BRD-005,Oakhill Garlic Focaccia 400 g,Oakhill,Breads,400 g,breads|focaccia|garlic focaccia
+RS-BRD-006,Oakhill Garlic Focaccia 6 pack,Oakhill,Breads,6 pack,breads|focaccia|garlic focaccia
+RS-BRD-007,Copperpot Multigrain Loaf 400 g,Copperpot,Breads,400 g,breads|loaf|multigrain loaf
+RS-BRD-008,Copperpot Multigrain Loaf 6 pack,Copperpot,Breads,6 pack,breads|loaf|multigrain loaf
+RS-BRD-009,Copperpot Pav Buns 400 g,Copperpot,Breads,400 g,breads|buns|pav buns
+RS-BRD-010,Copperpot Pav Buns 6 pack,Copperpot,Breads,6 pack,breads|buns|pav buns
+RS-BRD-011,Copperpot Garlic Focaccia 400 g,Copperpot,Breads,400 g,breads|focaccia|garlic focaccia
+RS-BRD-012,Copperpot Garlic Focaccia 6 pack,Copperpot,Breads,6 pack,breads|focaccia|garlic focaccia
+RS-PST-001,Oakhill Almond Croissant single,Oakhill,Pastries,single,almond croissant|croissant|pastries
+RS-PST-002,Oakhill Almond Croissant 4 pack,Oakhill,Pastries,4 pack,almond croissant|croissant|pastries
+RS-PST-003,Oakhill Cinnamon Swirl single,Oakhill,Pastries,single,cinnamon swirl|pastries|swirl
+RS-PST-004,Oakhill Cinnamon Swirl 4 pack,Oakhill,Pastries,4 pack,cinnamon swirl|pastries|swirl
+RS-PST-005,Oakhill Veg Puff single,Oakhill,Pastries,single,pastries|puff|veg puff
+RS-PST-006,Oakhill Veg Puff 4 pack,Oakhill,Pastries,4 pack,pastries|puff|veg puff
+RS-PST-007,Copperpot Almond Croissant single,Copperpot,Pastries,single,almond croissant|croissant|pastries
+RS-PST-008,Copperpot Almond Croissant 4 pack,Copperpot,Pastries,4 pack,almond croissant|croissant|pastries
+RS-PST-009,Copperpot Cinnamon Swirl single,Copperpot,Pastries,single,cinnamon swirl|pastries|swirl
+RS-PST-010,Copperpot Cinnamon Swirl 4 pack,Copperpot,Pastries,4 pack,cinnamon swirl|pastries|swirl
+RS-PST-011,Copperpot Veg Puff single,Copperpot,Pastries,single,pastries|puff|veg puff
+RS-PST-012,Copperpot Veg Puff 4 pack,Copperpot,Pastries,4 pack,pastries|puff|veg puff
+RS-POU-001,Kaveri Chicken Breast 500 g,Kaveri,Poultry,500 g,breast|chicken breast|poultry
+RS-POU-002,Kaveri Chicken Breast 1 kg,Kaveri,Poultry,1 kg,breast|chicken breast|poultry
+RS-POU-003,Kaveri Chicken Drumsticks 500 g,Kaveri,Poultry,500 g,chicken drumsticks|drumsticks|poultry
+RS-POU-004,Kaveri Chicken Drumsticks 1 kg,Kaveri,Poultry,1 kg,chicken drumsticks|drumsticks|poultry
+RS-POU-005,Kaveri Chicken Mince 500 g,Kaveri,Poultry,500 g,chicken mince|mince|poultry
+RS-POU-006,Kaveri Chicken Mince 1 kg,Kaveri,Poultry,1 kg,chicken mince|mince|poultry
+RS-POU-007,Harbour Line Chicken Breast 500 g,Harbour Line,Poultry,500 g,breast|chicken breast|poultry
+RS-POU-008,Harbour Line Chicken Breast 1 kg,Harbour Line,Poultry,1 kg,breast|chicken breast|poultry
+RS-POU-009,Harbour Line Chicken Drumsticks 500 g,Harbour Line,Poultry,500 g,chicken drumsticks|drumsticks|poultry
+RS-POU-010,Harbour Line Chicken Drumsticks 1 kg,Harbour Line,Poultry,1 kg,chicken drumsticks|drumsticks|poultry
+RS-POU-011,Harbour Line Chicken Mince 500 g,Harbour Line,Poultry,500 g,chicken mince|mince|poultry
+RS-POU-012,Harbour Line Chicken Mince 1 kg,Harbour Line,Poultry,1 kg,chicken mince|mince|poultry
+RS-LMB-001,Kaveri Mutton Curry Cut 500 g,Kaveri,Lamb and Mutton,500 g,cut|lamb and mutton|mutton curry cut
+RS-LMB-002,Kaveri Mutton Curry Cut 1 kg,Kaveri,Lamb and Mutton,1 kg,cut|lamb and mutton|mutton curry cut
+RS-LMB-003,Kaveri Lamb Chops 500 g,Kaveri,Lamb and Mutton,500 g,chops|lamb and mutton|lamb chops
+RS-LMB-004,Kaveri Lamb Chops 1 kg,Kaveri,Lamb and Mutton,1 kg,chops|lamb and mutton|lamb chops
+RS-LMB-005,Kaveri Mutton Keema 500 g,Kaveri,Lamb and Mutton,500 g,keema|lamb and mutton|mutton keema
+RS-LMB-006,Kaveri Mutton Keema 1 kg,Kaveri,Lamb and Mutton,1 kg,keema|lamb and mutton|mutton keema
+RS-LMB-007,Harbour Line Mutton Curry Cut 500 g,Harbour Line,Lamb and Mutton,500 g,cut|lamb and mutton|mutton curry cut
+RS-LMB-008,Harbour Line Mutton Curry Cut 1 kg,Harbour Line,Lamb and Mutton,1 kg,cut|lamb and mutton|mutton curry cut
+RS-LMB-009,Harbour Line Lamb Chops 500 g,Harbour Line,Lamb and Mutton,500 g,chops|lamb and mutton|lamb chops
+RS-LMB-010,Harbour Line Lamb Chops 1 kg,Harbour Line,Lamb and Mutton,1 kg,chops|lamb and mutton|lamb chops
+RS-LMB-011,Harbour Line Mutton Keema 500 g,Harbour Line,Lamb and Mutton,500 g,keema|lamb and mutton|mutton keema
+RS-LMB-012,Harbour Line Mutton Keema 1 kg,Harbour Line,Lamb and Mutton,1 kg,keema|lamb and mutton|mutton keema
+RS-FSH-001,Bluefin Bay Rohu Steaks 500 g,Bluefin Bay,Fish,500 g,fish|rohu steaks|steaks
+RS-FSH-002,Bluefin Bay Rohu Steaks 1 kg,Bluefin Bay,Fish,1 kg,fish|rohu steaks|steaks
+RS-FSH-003,Bluefin Bay Seer Fish Fillet 500 g,Bluefin Bay,Fish,500 g,fillet|fish|seer fish fillet
+RS-FSH-004,Bluefin Bay Seer Fish Fillet 1 kg,Bluefin Bay,Fish,1 kg,fillet|fish|seer fish fillet
+RS-FSH-005,Bluefin Bay Pomfret Whole 500 g,Bluefin Bay,Fish,500 g,fish|pomfret whole|whole
+RS-FSH-006,Bluefin Bay Pomfret Whole 1 kg,Bluefin Bay,Fish,1 kg,fish|pomfret whole|whole
+RS-FSH-007,Harbour Line Rohu Steaks 500 g,Harbour Line,Fish,500 g,fish|rohu steaks|steaks
+RS-FSH-008,Harbour Line Rohu Steaks 1 kg,Harbour Line,Fish,1 kg,fish|rohu steaks|steaks
+RS-FSH-009,Harbour Line Seer Fish Fillet 500 g,Harbour Line,Fish,500 g,fillet|fish|seer fish fillet
+RS-FSH-010,Harbour Line Seer Fish Fillet 1 kg,Harbour Line,Fish,1 kg,fillet|fish|seer fish fillet
+RS-FSH-011,Harbour Line Pomfret Whole 500 g,Harbour Line,Fish,500 g,fish|pomfret whole|whole
+RS-FSH-012,Harbour Line Pomfret Whole 1 kg,Harbour Line,Fish,1 kg,fish|pomfret whole|whole
+RS-PRW-001,Bluefin Bay Tiger Prawns 250 g,Bluefin Bay,Prawns and Shellfish,250 g,prawns|prawns and shellfish|tiger prawns
+RS-PRW-002,Bluefin Bay Tiger Prawns 500 g,Bluefin Bay,Prawns and Shellfish,500 g,prawns|prawns and shellfish|tiger prawns
+RS-PRW-003,Bluefin Bay Crab Meat 250 g,Bluefin Bay,Prawns and Shellfish,250 g,crab meat|meat|prawns and shellfish
+RS-PRW-004,Bluefin Bay Crab Meat 500 g,Bluefin Bay,Prawns and Shellfish,500 g,crab meat|meat|prawns and shellfish
+RS-PRW-005,Bluefin Bay Squid Rings 250 g,Bluefin Bay,Prawns and Shellfish,250 g,prawns and shellfish|rings|squid rings
+RS-PRW-006,Bluefin Bay Squid Rings 500 g,Bluefin Bay,Prawns and Shellfish,500 g,prawns and shellfish|rings|squid rings
+RS-PRW-007,Harbour Line Tiger Prawns 250 g,Harbour Line,Prawns and Shellfish,250 g,prawns|prawns and shellfish|tiger prawns
+RS-PRW-008,Harbour Line Tiger Prawns 500 g,Harbour Line,Prawns and Shellfish,500 g,prawns|prawns and shellfish|tiger prawns
+RS-PRW-009,Harbour Line Crab Meat 250 g,Harbour Line,Prawns and Shellfish,250 g,crab meat|meat|prawns and shellfish
+RS-PRW-010,Harbour Line Crab Meat 500 g,Harbour Line,Prawns and Shellfish,500 g,crab meat|meat|prawns and shellfish
+RS-PRW-011,Harbour Line Squid Rings 250 g,Harbour Line,Prawns and Shellfish,250 g,prawns and shellfish|rings|squid rings
+RS-PRW-012,Harbour Line Squid Rings 500 g,Harbour Line,Prawns and Shellfish,500 g,prawns and shellfish|rings|squid rings
+RS-PNR-001,Marigold Farm Malai Paneer 200 g,Marigold Farm,Paneer and Curd,200 g,malai paneer|paneer|paneer and curd
+RS-PNR-002,Marigold Farm Malai Paneer 400 g,Marigold Farm,Paneer and Curd,400 g,malai paneer|paneer|paneer and curd
+RS-PNR-003,Marigold Farm Set Curd 200 g,Marigold Farm,Paneer and Curd,200 g,curd|paneer and curd|set curd
+RS-PNR-004,Marigold Farm Set Curd 400 g,Marigold Farm,Paneer and Curd,400 g,curd|paneer and curd|set curd
+RS-PNR-005,Marigold Farm Greek Yoghurt 200 g,Marigold Farm,Paneer and Curd,200 g,greek yoghurt|paneer and curd|yoghurt
+RS-PNR-006,Marigold Farm Greek Yoghurt 400 g,Marigold Farm,Paneer and Curd,400 g,greek yoghurt|paneer and curd|yoghurt
+RS-PNR-007,Vanya Malai Paneer 200 g,Vanya,Paneer and Curd,200 g,malai paneer|paneer|paneer and curd
+RS-PNR-008,Vanya Malai Paneer 400 g,Vanya,Paneer and Curd,400 g,malai paneer|paneer|paneer and curd
+RS-PNR-009,Vanya Set Curd 200 g,Vanya,Paneer and Curd,200 g,curd|paneer and curd|set curd
+RS-PNR-010,Vanya Set Curd 400 g,Vanya,Paneer and Curd,400 g,curd|paneer and curd|set curd
+RS-PNR-011,Vanya Greek Yoghurt 200 g,Vanya,Paneer and Curd,200 g,greek yoghurt|paneer and curd|yoghurt
+RS-PNR-012,Vanya Greek Yoghurt 400 g,Vanya,Paneer and Curd,400 g,greek yoghurt|paneer and curd|yoghurt
+RS-GHE-001,Marigold Farm Cow Ghee 200 g,Marigold Farm,Butter and Ghee,200 g,butter and ghee|cow ghee|ghee
+RS-GHE-002,Marigold Farm Cow Ghee 500 g,Marigold Farm,Butter and Ghee,500 g,butter and ghee|cow ghee|ghee
+RS-GHE-003,Marigold Farm Salted Butter 200 g,Marigold Farm,Butter and Ghee,200 g,butter|butter and ghee|salted butter
+RS-GHE-004,Marigold Farm Salted Butter 500 g,Marigold Farm,Butter and Ghee,500 g,butter|butter and ghee|salted butter
+RS-GHE-005,Marigold Farm Cultured Butter 200 g,Marigold Farm,Butter and Ghee,200 g,butter|butter and ghee|cultured butter
+RS-GHE-006,Marigold Farm Cultured Butter 500 g,Marigold Farm,Butter and Ghee,500 g,butter|butter and ghee|cultured butter
+RS-GHE-007,Vanya Cow Ghee 200 g,Vanya,Butter and Ghee,200 g,butter and ghee|cow ghee|ghee
+RS-GHE-008,Vanya Cow Ghee 500 g,Vanya,Butter and Ghee,500 g,butter and ghee|cow ghee|ghee
+RS-GHE-009,Vanya Salted Butter 200 g,Vanya,Butter and Ghee,200 g,butter|butter and ghee|salted butter
+RS-GHE-010,Vanya Salted Butter 500 g,Vanya,Butter and Ghee,500 g,butter|butter and ghee|salted butter
+RS-GHE-011,Vanya Cultured Butter 200 g,Vanya,Butter and Ghee,200 g,butter|butter and ghee|cultured butter
+RS-GHE-012,Vanya Cultured Butter 500 g,Vanya,Butter and Ghee,500 g,butter|butter and ghee|cultured butter
+RS-JUI-001,Sunpeak Orange Juice 1 L,Sunpeak,Juices,1 L,juice|juices|orange juice
+RS-JUI-002,Sunpeak Orange Juice 200 ml,Sunpeak,Juices,200 ml,juice|juices|orange juice
+RS-JUI-003,Sunpeak Guava Nectar 1 L,Sunpeak,Juices,1 L,guava nectar|juices|nectar
+RS-JUI-004,Sunpeak Guava Nectar 200 ml,Sunpeak,Juices,200 ml,guava nectar|juices|nectar
+RS-JUI-005,Sunpeak Mixed Fruit Juice 1 L,Sunpeak,Juices,1 L,juice|juices|mixed fruit juice
+RS-JUI-006,Sunpeak Mixed Fruit Juice 200 ml,Sunpeak,Juices,200 ml,juice|juices|mixed fruit juice
+RS-JUI-007,Vanya Orange Juice 1 L,Vanya,Juices,1 L,juice|juices|orange juice
+RS-JUI-008,Vanya Orange Juice 200 ml,Vanya,Juices,200 ml,juice|juices|orange juice
+RS-JUI-009,Vanya Guava Nectar 1 L,Vanya,Juices,1 L,guava nectar|juices|nectar
+RS-JUI-010,Vanya Guava Nectar 200 ml,Vanya,Juices,200 ml,guava nectar|juices|nectar
+RS-JUI-011,Vanya Mixed Fruit Juice 1 L,Vanya,Juices,1 L,juice|juices|mixed fruit juice
+RS-JUI-012,Vanya Mixed Fruit Juice 200 ml,Vanya,Juices,200 ml,juice|juices|mixed fruit juice
+RS-FRZ-001,Monsoon Aloo Tikki 400 g,Monsoon,Frozen Snacks,400 g,aloo tikki|frozen snacks|tikki
+RS-FRZ-002,Monsoon Aloo Tikki 1 kg,Monsoon,Frozen Snacks,1 kg,aloo tikki|frozen snacks|tikki
+RS-FRZ-003,Monsoon Veg Spring Rolls 400 g,Monsoon,Frozen Snacks,400 g,frozen snacks|rolls|veg spring rolls
+RS-FRZ-004,Monsoon Veg Spring Rolls 1 kg,Monsoon,Frozen Snacks,1 kg,frozen snacks|rolls|veg spring rolls
+RS-FRZ-005,Monsoon Chicken Nuggets 400 g,Monsoon,Frozen Snacks,400 g,chicken nuggets|frozen snacks|nuggets
+RS-FRZ-006,Monsoon Chicken Nuggets 1 kg,Monsoon,Frozen Snacks,1 kg,chicken nuggets|frozen snacks|nuggets
+RS-FRZ-007,Kestrel Aloo Tikki 400 g,Kestrel,Frozen Snacks,400 g,aloo tikki|frozen snacks|tikki
+RS-FRZ-008,Kestrel Aloo Tikki 1 kg,Kestrel,Frozen Snacks,1 kg,aloo tikki|frozen snacks|tikki
+RS-FRZ-009,Kestrel Veg Spring Rolls 400 g,Kestrel,Frozen Snacks,400 g,frozen snacks|rolls|veg spring rolls
+RS-FRZ-010,Kestrel Veg Spring Rolls 1 kg,Kestrel,Frozen Snacks,1 kg,frozen snacks|rolls|veg spring rolls
+RS-FRZ-011,Kestrel Chicken Nuggets 400 g,Kestrel,Frozen Snacks,400 g,chicken nuggets|frozen snacks|nuggets
+RS-FRZ-012,Kestrel Chicken Nuggets 1 kg,Kestrel,Frozen Snacks,1 kg,chicken nuggets|frozen snacks|nuggets
+RS-ICE-001,Monsoon Kesar Pista Kulfi 500 ml,Monsoon,Ice Cream,500 ml,ice cream|kesar pista kulfi|kulfi
+RS-ICE-002,Monsoon Kesar Pista Kulfi 1 L,Monsoon,Ice Cream,1 L,ice cream|kesar pista kulfi|kulfi
+RS-ICE-003,Monsoon Belgian Chocolate Tub 500 ml,Monsoon,Ice Cream,500 ml,belgian chocolate tub|ice cream|tub
+RS-ICE-004,Monsoon Belgian Chocolate Tub 1 L,Monsoon,Ice Cream,1 L,belgian chocolate tub|ice cream|tub
+RS-ICE-005,Monsoon Mango Sorbet 500 ml,Monsoon,Ice Cream,500 ml,ice cream|mango sorbet|sorbet
+RS-ICE-006,Monsoon Mango Sorbet 1 L,Monsoon,Ice Cream,1 L,ice cream|mango sorbet|sorbet
+RS-ICE-007,Kestrel Kesar Pista Kulfi 500 ml,Kestrel,Ice Cream,500 ml,ice cream|kesar pista kulfi|kulfi
+RS-ICE-008,Kestrel Kesar Pista Kulfi 1 L,Kestrel,Ice Cream,1 L,ice cream|kesar pista kulfi|kulfi
+RS-ICE-009,Kestrel Belgian Chocolate Tub 500 ml,Kestrel,Ice Cream,500 ml,belgian chocolate tub|ice cream|tub
+RS-ICE-010,Kestrel Belgian Chocolate Tub 1 L,Kestrel,Ice Cream,1 L,belgian chocolate tub|ice cream|tub
+RS-ICE-011,Kestrel Mango Sorbet 500 ml,Kestrel,Ice Cream,500 ml,ice cream|mango sorbet|sorbet
+RS-ICE-012,Kestrel Mango Sorbet 1 L,Kestrel,Ice Cream,1 L,ice cream|mango sorbet|sorbet
+RS-RIC-001,Saffron Lane Basmati Rice 1 kg,Saffron Lane,Rice and Grains,1 kg,basmati rice|rice|rice and grains
+RS-RIC-002,Saffron Lane Basmati Rice 5 kg,Saffron Lane,Rice and Grains,5 kg,basmati rice|rice|rice and grains
+RS-RIC-003,Saffron Lane Sona Masoori Rice 1 kg,Saffron Lane,Rice and Grains,1 kg,rice|rice and grains|sona masoori rice
+RS-RIC-004,Saffron Lane Sona Masoori Rice 5 kg,Saffron Lane,Rice and Grains,5 kg,rice|rice and grains|sona masoori rice
+RS-RIC-005,Saffron Lane Brown Rice 1 kg,Saffron Lane,Rice and Grains,1 kg,brown rice|rice|rice and grains
+RS-RIC-006,Saffron Lane Brown Rice 5 kg,Saffron Lane,Rice and Grains,5 kg,brown rice|rice|rice and grains
+RS-RIC-007,Kaveri Basmati Rice 1 kg,Kaveri,Rice and Grains,1 kg,basmati rice|rice|rice and grains
+RS-RIC-008,Kaveri Basmati Rice 5 kg,Kaveri,Rice and Grains,5 kg,basmati rice|rice|rice and grains
+RS-RIC-009,Kaveri Sona Masoori Rice 1 kg,Kaveri,Rice and Grains,1 kg,rice|rice and grains|sona masoori rice
+RS-RIC-010,Kaveri Sona Masoori Rice 5 kg,Kaveri,Rice and Grains,5 kg,rice|rice and grains|sona masoori rice
+RS-RIC-011,Kaveri Brown Rice 1 kg,Kaveri,Rice and Grains,1 kg,brown rice|rice|rice and grains
+RS-RIC-012,Kaveri Brown Rice 5 kg,Kaveri,Rice and Grains,5 kg,brown rice|rice|rice and grains
+RS-CER-001,Sunpeak Rolled Oats 500 g,Sunpeak,Breakfast Cereals,500 g,breakfast cereals|oats|rolled oats
+RS-CER-002,Sunpeak Rolled Oats 1 kg,Sunpeak,Breakfast Cereals,1 kg,breakfast cereals|oats|rolled oats
+RS-CER-003,Sunpeak Corn Flakes 500 g,Sunpeak,Breakfast Cereals,500 g,breakfast cereals|corn flakes|flakes
+RS-CER-004,Sunpeak Corn Flakes 1 kg,Sunpeak,Breakfast Cereals,1 kg,breakfast cereals|corn flakes|flakes
+RS-CER-005,Sunpeak Ragi Flakes 500 g,Sunpeak,Breakfast Cereals,500 g,breakfast cereals|flakes|ragi flakes
+RS-CER-006,Sunpeak Ragi Flakes 1 kg,Sunpeak,Breakfast Cereals,1 kg,breakfast cereals|flakes|ragi flakes
+RS-CER-007,Northgate Rolled Oats 500 g,Northgate,Breakfast Cereals,500 g,breakfast cereals|oats|rolled oats
+RS-CER-008,Northgate Rolled Oats 1 kg,Northgate,Breakfast Cereals,1 kg,breakfast cereals|oats|rolled oats
+RS-CER-009,Northgate Corn Flakes 500 g,Northgate,Breakfast Cereals,500 g,breakfast cereals|corn flakes|flakes
+RS-CER-010,Northgate Corn Flakes 1 kg,Northgate,Breakfast Cereals,1 kg,breakfast cereals|corn flakes|flakes
+RS-CER-011,Northgate Ragi Flakes 500 g,Northgate,Breakfast Cereals,500 g,breakfast cereals|flakes|ragi flakes
+RS-CER-012,Northgate Ragi Flakes 1 kg,Northgate,Breakfast Cereals,1 kg,breakfast cereals|flakes|ragi flakes
+RS-ATT-001,Saffron Lane Whole Wheat Atta 1 kg,Saffron Lane,Atta and Flours,1 kg,atta|atta and flours|whole wheat atta
+RS-ATT-002,Saffron Lane Whole Wheat Atta 5 kg,Saffron Lane,Atta and Flours,5 kg,atta|atta and flours|whole wheat atta
+RS-ATT-003,Saffron Lane Besan Flour 1 kg,Saffron Lane,Atta and Flours,1 kg,atta and flours|besan flour|flour
+RS-ATT-004,Saffron Lane Besan Flour 5 kg,Saffron Lane,Atta and Flours,5 kg,atta and flours|besan flour|flour
+RS-ATT-005,Saffron Lane Ragi Flour 1 kg,Saffron Lane,Atta and Flours,1 kg,atta and flours|flour|ragi flour
+RS-ATT-006,Saffron Lane Ragi Flour 5 kg,Saffron Lane,Atta and Flours,5 kg,atta and flours|flour|ragi flour
+RS-ATT-007,Northgate Whole Wheat Atta 1 kg,Northgate,Atta and Flours,1 kg,atta|atta and flours|whole wheat atta
+RS-ATT-008,Northgate Whole Wheat Atta 5 kg,Northgate,Atta and Flours,5 kg,atta|atta and flours|whole wheat atta
+RS-ATT-009,Northgate Besan Flour 1 kg,Northgate,Atta and Flours,1 kg,atta and flours|besan flour|flour
+RS-ATT-010,Northgate Besan Flour 5 kg,Northgate,Atta and Flours,5 kg,atta and flours|besan flour|flour
+RS-ATT-011,Northgate Ragi Flour 1 kg,Northgate,Atta and Flours,1 kg,atta and flours|flour|ragi flour
+RS-ATT-012,Northgate Ragi Flour 5 kg,Northgate,Atta and Flours,5 kg,atta and flours|flour|ragi flour
+RS-DAL-001,Saffron Lane Toor Dal 500 g,Saffron Lane,Pulses and Dals,500 g,dal|pulses and dals|toor dal
+RS-DAL-002,Saffron Lane Toor Dal 1 kg,Saffron Lane,Pulses and Dals,1 kg,dal|pulses and dals|toor dal
+RS-DAL-003,Saffron Lane Moong Dal 500 g,Saffron Lane,Pulses and Dals,500 g,dal|moong dal|pulses and dals
+RS-DAL-004,Saffron Lane Moong Dal 1 kg,Saffron Lane,Pulses and Dals,1 kg,dal|moong dal|pulses and dals
+RS-DAL-005,Saffron Lane Masoor Dal 500 g,Saffron Lane,Pulses and Dals,500 g,dal|masoor dal|pulses and dals
+RS-DAL-006,Saffron Lane Masoor Dal 1 kg,Saffron Lane,Pulses and Dals,1 kg,dal|masoor dal|pulses and dals
+RS-DAL-007,Northgate Toor Dal 500 g,Northgate,Pulses and Dals,500 g,dal|pulses and dals|toor dal
+RS-DAL-008,Northgate Toor Dal 1 kg,Northgate,Pulses and Dals,1 kg,dal|pulses and dals|toor dal
+RS-DAL-009,Northgate Moong Dal 500 g,Northgate,Pulses and Dals,500 g,dal|moong dal|pulses and dals
+RS-DAL-010,Northgate Moong Dal 1 kg,Northgate,Pulses and Dals,1 kg,dal|moong dal|pulses and dals
+RS-DAL-011,Northgate Masoor Dal 500 g,Northgate,Pulses and Dals,500 g,dal|masoor dal|pulses and dals
+RS-DAL-012,Northgate Masoor Dal 1 kg,Northgate,Pulses and Dals,1 kg,dal|masoor dal|pulses and dals
+RS-SPC-001,Monsoon Garam Masala 100 g,Monsoon,Spices and Masalas,100 g,garam masala|masala|spices and masalas
+RS-SPC-002,Monsoon Garam Masala 200 g,Monsoon,Spices and Masalas,200 g,garam masala|masala|spices and masalas
+RS-SPC-003,Monsoon Turmeric Powder 100 g,Monsoon,Spices and Masalas,100 g,powder|spices and masalas|turmeric powder
+RS-SPC-004,Monsoon Turmeric Powder 200 g,Monsoon,Spices and Masalas,200 g,powder|spices and masalas|turmeric powder
+RS-SPC-005,Monsoon Kashmiri Chilli 100 g,Monsoon,Spices and Masalas,100 g,chilli|kashmiri chilli|spices and masalas
+RS-SPC-006,Monsoon Kashmiri Chilli 200 g,Monsoon,Spices and Masalas,200 g,chilli|kashmiri chilli|spices and masalas
+RS-SPC-007,Saffron Lane Garam Masala 100 g,Saffron Lane,Spices and Masalas,100 g,garam masala|masala|spices and masalas
+RS-SPC-008,Saffron Lane Garam Masala 200 g,Saffron Lane,Spices and Masalas,200 g,garam masala|masala|spices and masalas
+RS-SPC-009,Saffron Lane Turmeric Powder 100 g,Saffron Lane,Spices and Masalas,100 g,powder|spices and masalas|turmeric powder
+RS-SPC-010,Saffron Lane Turmeric Powder 200 g,Saffron Lane,Spices and Masalas,200 g,powder|spices and masalas|turmeric powder
+RS-SPC-011,Saffron Lane Kashmiri Chilli 100 g,Saffron Lane,Spices and Masalas,100 g,chilli|kashmiri chilli|spices and masalas
+RS-SPC-012,Saffron Lane Kashmiri Chilli 200 g,Saffron Lane,Spices and Masalas,200 g,chilli|kashmiri chilli|spices and masalas
+RS-OIL-001,Kaveri Groundnut Oil 1 L,Kaveri,Cooking Oils,1 L,cooking oils|groundnut oil|oil
+RS-OIL-002,Kaveri Groundnut Oil 5 L,Kaveri,Cooking Oils,5 L,cooking oils|groundnut oil|oil
+RS-OIL-003,Kaveri Mustard Oil 1 L,Kaveri,Cooking Oils,1 L,cooking oils|mustard oil|oil
+RS-OIL-004,Kaveri Mustard Oil 5 L,Kaveri,Cooking Oils,5 L,cooking oils|mustard oil|oil
+RS-OIL-005,Kaveri Sunflower Oil 1 L,Kaveri,Cooking Oils,1 L,cooking oils|oil|sunflower oil
+RS-OIL-006,Kaveri Sunflower Oil 5 L,Kaveri,Cooking Oils,5 L,cooking oils|oil|sunflower oil
+RS-OIL-007,Sunpeak Groundnut Oil 1 L,Sunpeak,Cooking Oils,1 L,cooking oils|groundnut oil|oil
+RS-OIL-008,Sunpeak Groundnut Oil 5 L,Sunpeak,Cooking Oils,5 L,cooking oils|groundnut oil|oil
+RS-OIL-009,Sunpeak Mustard Oil 1 L,Sunpeak,Cooking Oils,1 L,cooking oils|mustard oil|oil
+RS-OIL-010,Sunpeak Mustard Oil 5 L,Sunpeak,Cooking Oils,5 L,cooking oils|mustard oil|oil
+RS-OIL-011,Sunpeak Sunflower Oil 1 L,Sunpeak,Cooking Oils,1 L,cooking oils|oil|sunflower oil
+RS-OIL-012,Sunpeak Sunflower Oil 5 L,Sunpeak,Cooking Oils,5 L,cooking oils|oil|sunflower oil
+RS-TEA-001,Northgate Assam Tea 250 g,Northgate,Tea and Coffee,250 g,assam tea|tea|tea and coffee
+RS-TEA-002,Northgate Assam Tea 500 g,Northgate,Tea and Coffee,500 g,assam tea|tea|tea and coffee
+RS-TEA-003,Northgate Filter Coffee 250 g,Northgate,Tea and Coffee,250 g,coffee|filter coffee|tea and coffee
+RS-TEA-004,Northgate Filter Coffee 500 g,Northgate,Tea and Coffee,500 g,coffee|filter coffee|tea and coffee
+RS-TEA-005,Northgate Masala Chai 250 g,Northgate,Tea and Coffee,250 g,chai|masala chai|tea and coffee
+RS-TEA-006,Northgate Masala Chai 500 g,Northgate,Tea and Coffee,500 g,chai|masala chai|tea and coffee
+RS-TEA-007,Monsoon Assam Tea 250 g,Monsoon,Tea and Coffee,250 g,assam tea|tea|tea and coffee
+RS-TEA-008,Monsoon Assam Tea 500 g,Monsoon,Tea and Coffee,500 g,assam tea|tea|tea and coffee
+RS-TEA-009,Monsoon Filter Coffee 250 g,Monsoon,Tea and Coffee,250 g,coffee|filter coffee|tea and coffee
+RS-TEA-010,Monsoon Filter Coffee 500 g,Monsoon,Tea and Coffee,500 g,coffee|filter coffee|tea and coffee
+RS-TEA-011,Monsoon Masala Chai 250 g,Monsoon,Tea and Coffee,250 g,chai|masala chai|tea and coffee
+RS-TEA-012,Monsoon Masala Chai 500 g,Monsoon,Tea and Coffee,500 g,chai|masala chai|tea and coffee
+RS-BIS-001,Oakhill Butter Cookies 200 g,Oakhill,Biscuits,200 g,biscuits|butter cookies|cookies
+RS-BIS-002,Oakhill Butter Cookies 400 g,Oakhill,Biscuits,400 g,biscuits|butter cookies|cookies
+RS-BIS-003,Oakhill Digestive Biscuits 200 g,Oakhill,Biscuits,200 g,biscuits|digestive biscuits
+RS-BIS-004,Oakhill Digestive Biscuits 400 g,Oakhill,Biscuits,400 g,biscuits|digestive biscuits
+RS-BIS-005,Oakhill Nankhatai 200 g,Oakhill,Biscuits,200 g,biscuits|nankhatai
+RS-BIS-006,Oakhill Nankhatai 400 g,Oakhill,Biscuits,400 g,biscuits|nankhatai
+RS-BIS-007,Northgate Butter Cookies 200 g,Northgate,Biscuits,200 g,biscuits|butter cookies|cookies
+RS-BIS-008,Northgate Butter Cookies 400 g,Northgate,Biscuits,400 g,biscuits|butter cookies|cookies
+RS-BIS-009,Northgate Digestive Biscuits 200 g,Northgate,Biscuits,200 g,biscuits|digestive biscuits
+RS-BIS-010,Northgate Digestive Biscuits 400 g,Northgate,Biscuits,400 g,biscuits|digestive biscuits
+RS-BIS-011,Northgate Nankhatai 200 g,Northgate,Biscuits,200 g,biscuits|nankhatai
+RS-BIS-012,Northgate Nankhatai 400 g,Northgate,Biscuits,400 g,biscuits|nankhatai
+RS-CKW-001,Copperpot Cast Iron Tawa medium,Copperpot,Cookware,medium,cast iron tawa|cookware|tawa
+RS-CKW-002,Copperpot Cast Iron Tawa large,Copperpot,Cookware,large,cast iron tawa|cookware|tawa
+RS-CKW-003,Copperpot Pressure Cooker medium,Copperpot,Cookware,medium,cooker|cookware|pressure cooker
+RS-CKW-004,Copperpot Pressure Cooker large,Copperpot,Cookware,large,cooker|cookware|pressure cooker
+RS-CKW-005,Copperpot Steel Kadai medium,Copperpot,Cookware,medium,cookware|kadai|steel kadai
+RS-CKW-006,Copperpot Steel Kadai large,Copperpot,Cookware,large,cookware|kadai|steel kadai
+RS-CKW-007,Lumen Cast Iron Tawa medium,Lumen,Cookware,medium,cast iron tawa|cookware|tawa
+RS-CKW-008,Lumen Cast Iron Tawa large,Lumen,Cookware,large,cast iron tawa|cookware|tawa
+RS-CKW-009,Lumen Pressure Cooker medium,Lumen,Cookware,medium,cooker|cookware|pressure cooker
+RS-CKW-010,Lumen Pressure Cooker large,Lumen,Cookware,large,cooker|cookware|pressure cooker
+RS-CKW-011,Lumen Steel Kadai medium,Lumen,Cookware,medium,cookware|kadai|steel kadai
+RS-CKW-012,Lumen Steel Kadai large,Lumen,Cookware,large,cookware|kadai|steel kadai
+RS-GDN-001,Greenleaf Co Hand Trowel standard,Greenleaf Co,Garden Tools,standard,garden tools|hand trowel|trowel
+RS-GDN-002,Greenleaf Co Hand Trowel pro,Greenleaf Co,Garden Tools,pro,garden tools|hand trowel|trowel
+RS-GDN-003,Greenleaf Co Watering Can standard,Greenleaf Co,Garden Tools,standard,can|garden tools|watering can
+RS-GDN-004,Greenleaf Co Watering Can pro,Greenleaf Co,Garden Tools,pro,can|garden tools|watering can
+RS-GDN-005,Greenleaf Co Pruning Shears standard,Greenleaf Co,Garden Tools,standard,garden tools|pruning shears|shears
+RS-GDN-006,Greenleaf Co Pruning Shears pro,Greenleaf Co,Garden Tools,pro,garden tools|pruning shears|shears
+RS-GDN-007,Lumen Hand Trowel standard,Lumen,Garden Tools,standard,garden tools|hand trowel|trowel
+RS-GDN-008,Lumen Hand Trowel pro,Lumen,Garden Tools,pro,garden tools|hand trowel|trowel
+RS-GDN-009,Lumen Watering Can standard,Lumen,Garden Tools,standard,can|garden tools|watering can
+RS-GDN-010,Lumen Watering Can pro,Lumen,Garden Tools,pro,can|garden tools|watering can
+RS-GDN-011,Lumen Pruning Shears standard,Lumen,Garden Tools,standard,garden tools|pruning shears|shears
+RS-GDN-012,Lumen Pruning Shears pro,Lumen,Garden Tools,pro,garden tools|pruning shears|shears
+RS-PHN-001,Lumen USB C Cable standard,Lumen,Phone Accessories,standard,cable|phone accessories|usb c cable
+RS-PHN-002,Lumen USB C Cable premium,Lumen,Phone Accessories,premium,cable|phone accessories|usb c cable
+RS-PHN-003,Lumen Power Bank standard,Lumen,Phone Accessories,standard,bank|phone accessories|power bank
+RS-PHN-004,Lumen Power Bank premium,Lumen,Phone Accessories,premium,bank|phone accessories|power bank
+RS-PHN-005,Lumen Wireless Earbuds standard,Lumen,Phone Accessories,standard,earbuds|phone accessories|wireless earbuds
+RS-PHN-006,Lumen Wireless Earbuds premium,Lumen,Phone Accessories,premium,earbuds|phone accessories|wireless earbuds
+RS-PHN-007,Kestrel USB C Cable standard,Kestrel,Phone Accessories,standard,cable|phone accessories|usb c cable
+RS-PHN-008,Kestrel USB C Cable premium,Kestrel,Phone Accessories,premium,cable|phone accessories|usb c cable
+RS-PHN-009,Kestrel Power Bank standard,Kestrel,Phone Accessories,standard,bank|phone accessories|power bank
+RS-PHN-010,Kestrel Power Bank premium,Kestrel,Phone Accessories,premium,bank|phone accessories|power bank
+RS-PHN-011,Kestrel Wireless Earbuds standard,Kestrel,Phone Accessories,standard,earbuds|phone accessories|wireless earbuds
+RS-PHN-012,Kestrel Wireless Earbuds premium,Kestrel,Phone Accessories,premium,earbuds|phone accessories|wireless earbuds
+RS-APL-001,Lumen Electric Kettle standard,Lumen,Small Appliances,standard,electric kettle|kettle|small appliances
+RS-APL-002,Lumen Electric Kettle deluxe,Lumen,Small Appliances,deluxe,electric kettle|kettle|small appliances
+RS-APL-003,Lumen Hand Blender standard,Lumen,Small Appliances,standard,blender|hand blender|small appliances
+RS-APL-004,Lumen Hand Blender deluxe,Lumen,Small Appliances,deluxe,blender|hand blender|small appliances
+RS-APL-005,Lumen Pop Up Toaster standard,Lumen,Small Appliances,standard,pop up toaster|small appliances|toaster
+RS-APL-006,Lumen Pop Up Toaster deluxe,Lumen,Small Appliances,deluxe,pop up toaster|small appliances|toaster
+RS-APL-007,Kestrel Electric Kettle standard,Kestrel,Small Appliances,standard,electric kettle|kettle|small appliances
+RS-APL-008,Kestrel Electric Kettle deluxe,Kestrel,Small Appliances,deluxe,electric kettle|kettle|small appliances
+RS-APL-009,Kestrel Hand Blender standard,Kestrel,Small Appliances,standard,blender|hand blender|small appliances
+RS-APL-010,Kestrel Hand Blender deluxe,Kestrel,Small Appliances,deluxe,blender|hand blender|small appliances
+RS-APL-011,Kestrel Pop Up Toaster standard,Kestrel,Small Appliances,standard,pop up toaster|small appliances|toaster
+RS-APL-012,Kestrel Pop Up Toaster deluxe,Kestrel,Small Appliances,deluxe,pop up toaster|small appliances|toaster
+RS-TOY-001,Tinytoes Wooden Puzzle small,Tinytoes,Toys,small,puzzle|toys|wooden puzzle
+RS-TOY-002,Tinytoes Wooden Puzzle large,Tinytoes,Toys,large,puzzle|toys|wooden puzzle
+RS-TOY-003,Tinytoes Building Blocks small,Tinytoes,Toys,small,blocks|building blocks|toys
+RS-TOY-004,Tinytoes Building Blocks large,Tinytoes,Toys,large,blocks|building blocks|toys
+RS-TOY-005,Tinytoes Toy Train Set small,Tinytoes,Toys,small,set|toy train set|toys
+RS-TOY-006,Tinytoes Toy Train Set large,Tinytoes,Toys,large,set|toy train set|toys
+RS-TOY-007,Kestrel Wooden Puzzle small,Kestrel,Toys,small,puzzle|toys|wooden puzzle
+RS-TOY-008,Kestrel Wooden Puzzle large,Kestrel,Toys,large,puzzle|toys|wooden puzzle
+RS-TOY-009,Kestrel Building Blocks small,Kestrel,Toys,small,blocks|building blocks|toys
+RS-TOY-010,Kestrel Building Blocks large,Kestrel,Toys,large,blocks|building blocks|toys
+RS-TOY-011,Kestrel Toy Train Set small,Kestrel,Toys,small,set|toy train set|toys
+RS-TOY-012,Kestrel Toy Train Set large,Kestrel,Toys,large,set|toy train set|toys
+RS-BAB-001,Tinytoes Baby Wipes small,Tinytoes,Baby Care,small,baby care|baby wipes|wipes
+RS-BAB-002,Tinytoes Baby Wipes large,Tinytoes,Baby Care,large,baby care|baby wipes|wipes
+RS-BAB-003,Tinytoes Diaper Rash Cream small,Tinytoes,Baby Care,small,baby care|cream|diaper rash cream
+RS-BAB-004,Tinytoes Diaper Rash Cream large,Tinytoes,Baby Care,large,baby care|cream|diaper rash cream
+RS-BAB-005,Tinytoes Baby Lotion small,Tinytoes,Baby Care,small,baby care|baby lotion|lotion
+RS-BAB-006,Tinytoes Baby Lotion large,Tinytoes,Baby Care,large,baby care|baby lotion|lotion
+RS-BAB-007,Vanya Baby Wipes small,Vanya,Baby Care,small,baby care|baby wipes|wipes
+RS-BAB-008,Vanya Baby Wipes large,Vanya,Baby Care,large,baby care|baby wipes|wipes
+RS-BAB-009,Vanya Diaper Rash Cream small,Vanya,Baby Care,small,baby care|cream|diaper rash cream
+RS-BAB-010,Vanya Diaper Rash Cream large,Vanya,Baby Care,large,baby care|cream|diaper rash cream
+RS-BAB-011,Vanya Baby Lotion small,Vanya,Baby Care,small,baby care|baby lotion|lotion
+RS-BAB-012,Vanya Baby Lotion large,Vanya,Baby Care,large,baby care|baby lotion|lotion
+RS-PAI-001,Vanya Pain Relief Balm small,Vanya,Pain Relief,small,balm|pain relief|pain relief balm
+RS-PAI-002,Vanya Pain Relief Balm large,Vanya,Pain Relief,large,balm|pain relief|pain relief balm
+RS-PAI-003,Vanya Muscle Spray small,Vanya,Pain Relief,small,muscle spray|pain relief|spray
+RS-PAI-004,Vanya Muscle Spray large,Vanya,Pain Relief,large,muscle spray|pain relief|spray
+RS-PAI-005,Vanya Heat Patch small,Vanya,Pain Relief,small,heat patch|pain relief|patch
+RS-PAI-006,Vanya Heat Patch large,Vanya,Pain Relief,large,heat patch|pain relief|patch
+RS-PAI-007,Northgate Pain Relief Balm small,Northgate,Pain Relief,small,balm|pain relief|pain relief balm
+RS-PAI-008,Northgate Pain Relief Balm large,Northgate,Pain Relief,large,balm|pain relief|pain relief balm
+RS-PAI-009,Northgate Muscle Spray small,Northgate,Pain Relief,small,muscle spray|pain relief|spray
+RS-PAI-010,Northgate Muscle Spray large,Northgate,Pain Relief,large,muscle spray|pain relief|spray
+RS-PAI-011,Northgate Heat Patch small,Northgate,Pain Relief,small,heat patch|pain relief|patch
+RS-PAI-012,Northgate Heat Patch large,Northgate,Pain Relief,large,heat patch|pain relief|patch
+RS-VIT-001,Vanya Vitamin C Tablets 30 pack,Vanya,Vitamins,30 pack,tablets|vitamin c tablets|vitamins
+RS-VIT-002,Vanya Vitamin C Tablets 60 pack,Vanya,Vitamins,60 pack,tablets|vitamin c tablets|vitamins
+RS-VIT-003,Vanya Multivitamin Capsules 30 pack,Vanya,Vitamins,30 pack,capsules|multivitamin capsules|vitamins
+RS-VIT-004,Vanya Multivitamin Capsules 60 pack,Vanya,Vitamins,60 pack,capsules|multivitamin capsules|vitamins
+RS-VIT-005,Vanya Omega 3 Softgels 30 pack,Vanya,Vitamins,30 pack,omega 3 softgels|softgels|vitamins
+RS-VIT-006,Vanya Omega 3 Softgels 60 pack,Vanya,Vitamins,60 pack,omega 3 softgels|softgels|vitamins
+RS-VIT-007,Sunpeak Vitamin C Tablets 30 pack,Sunpeak,Vitamins,30 pack,tablets|vitamin c tablets|vitamins
+RS-VIT-008,Sunpeak Vitamin C Tablets 60 pack,Sunpeak,Vitamins,60 pack,tablets|vitamin c tablets|vitamins
+RS-VIT-009,Sunpeak Multivitamin Capsules 30 pack,Sunpeak,Vitamins,30 pack,capsules|multivitamin capsules|vitamins
+RS-VIT-010,Sunpeak Multivitamin Capsules 60 pack,Sunpeak,Vitamins,60 pack,capsules|multivitamin capsules|vitamins
+RS-VIT-011,Sunpeak Omega 3 Softgels 30 pack,Sunpeak,Vitamins,30 pack,omega 3 softgels|softgels|vitamins
+RS-VIT-012,Sunpeak Omega 3 Softgels 60 pack,Sunpeak,Vitamins,60 pack,omega 3 softgels|softgels|vitamins
+RS-DOG-001,Pebble Pet Puppy Kibble 1 kg,Pebble Pet,Dog Food,1 kg,dog food|kibble|puppy kibble
+RS-DOG-002,Pebble Pet Puppy Kibble 3 kg,Pebble Pet,Dog Food,3 kg,dog food|kibble|puppy kibble
+RS-DOG-003,Pebble Pet Adult Dog Kibble 1 kg,Pebble Pet,Dog Food,1 kg,adult dog kibble|dog food|kibble
+RS-DOG-004,Pebble Pet Adult Dog Kibble 3 kg,Pebble Pet,Dog Food,3 kg,adult dog kibble|dog food|kibble
+RS-DOG-005,Pebble Pet Dog Treat Sticks 1 kg,Pebble Pet,Dog Food,1 kg,dog food|dog treat sticks|sticks
+RS-DOG-006,Pebble Pet Dog Treat Sticks 3 kg,Pebble Pet,Dog Food,3 kg,dog food|dog treat sticks|sticks
+RS-DOG-007,Harbour Line Puppy Kibble 1 kg,Harbour Line,Dog Food,1 kg,dog food|kibble|puppy kibble
+RS-DOG-008,Harbour Line Puppy Kibble 3 kg,Harbour Line,Dog Food,3 kg,dog food|kibble|puppy kibble
+RS-DOG-009,Harbour Line Adult Dog Kibble 1 kg,Harbour Line,Dog Food,1 kg,adult dog kibble|dog food|kibble
+RS-DOG-010,Harbour Line Adult Dog Kibble 3 kg,Harbour Line,Dog Food,3 kg,adult dog kibble|dog food|kibble
+RS-DOG-011,Harbour Line Dog Treat Sticks 1 kg,Harbour Line,Dog Food,1 kg,dog food|dog treat sticks|sticks
+RS-DOG-012,Harbour Line Dog Treat Sticks 3 kg,Harbour Line,Dog Food,3 kg,dog food|dog treat sticks|sticks
+RS-CAT-001,Pebble Pet Kitten Kibble 1 kg,Pebble Pet,Cat Food,1 kg,cat food|kibble|kitten kibble
+RS-CAT-002,Pebble Pet Kitten Kibble 3 kg,Pebble Pet,Cat Food,3 kg,cat food|kibble|kitten kibble
+RS-CAT-003,Pebble Pet Tuna Cat Pouch 1 kg,Pebble Pet,Cat Food,1 kg,cat food|pouch|tuna cat pouch
+RS-CAT-004,Pebble Pet Tuna Cat Pouch 3 kg,Pebble Pet,Cat Food,3 kg,cat food|pouch|tuna cat pouch
+RS-CAT-005,Pebble Pet Cat Litter 1 kg,Pebble Pet,Cat Food,1 kg,cat food|cat litter|litter
+RS-CAT-006,Pebble Pet Cat Litter 3 kg,Pebble Pet,Cat Food,3 kg,cat food|cat litter|litter
+RS-CAT-007,Bluefin Bay Kitten Kibble 1 kg,Bluefin Bay,Cat Food,1 kg,cat food|kibble|kitten kibble
+RS-CAT-008,Bluefin Bay Kitten Kibble 3 kg,Bluefin Bay,Cat Food,3 kg,cat food|kibble|kitten kibble
+RS-CAT-009,Bluefin Bay Tuna Cat Pouch 1 kg,Bluefin Bay,Cat Food,1 kg,cat food|pouch|tuna cat pouch
+RS-CAT-010,Bluefin Bay Tuna Cat Pouch 3 kg,Bluefin Bay,Cat Food,3 kg,cat food|pouch|tuna cat pouch
+RS-CAT-011,Bluefin Bay Cat Litter 1 kg,Bluefin Bay,Cat Food,1 kg,cat food|cat litter|litter
+RS-CAT-012,Bluefin Bay Cat Litter 3 kg,Bluefin Bay,Cat Food,3 kg,cat food|cat litter|litter
+RS-MEN-001,Northgate Linen Shirt M,Northgate,Menswear,M,linen shirt|menswear|shirt
+RS-MEN-002,Northgate Linen Shirt L,Northgate,Menswear,L,linen shirt|menswear|shirt
+RS-MEN-003,Northgate Cotton Kurta M,Northgate,Menswear,M,cotton kurta|kurta|menswear
+RS-MEN-004,Northgate Cotton Kurta L,Northgate,Menswear,L,cotton kurta|kurta|menswear
+RS-MEN-005,Northgate Chino Trousers M,Northgate,Menswear,M,chino trousers|menswear|trousers
+RS-MEN-006,Northgate Chino Trousers L,Northgate,Menswear,L,chino trousers|menswear|trousers
+RS-MEN-007,Kestrel Linen Shirt M,Kestrel,Menswear,M,linen shirt|menswear|shirt
+RS-MEN-008,Kestrel Linen Shirt L,Kestrel,Menswear,L,linen shirt|menswear|shirt
+RS-MEN-009,Kestrel Cotton Kurta M,Kestrel,Menswear,M,cotton kurta|kurta|menswear
+RS-MEN-010,Kestrel Cotton Kurta L,Kestrel,Menswear,L,cotton kurta|kurta|menswear
+RS-MEN-011,Kestrel Chino Trousers M,Kestrel,Menswear,M,chino trousers|menswear|trousers
+RS-MEN-012,Kestrel Chino Trousers L,Kestrel,Menswear,L,chino trousers|menswear|trousers
+RS-WMN-001,Vanya Cotton Saree M,Vanya,Womenswear,M,cotton saree|saree|womenswear
+RS-WMN-002,Vanya Cotton Saree L,Vanya,Womenswear,L,cotton saree|saree|womenswear
+RS-WMN-003,Vanya Printed Kurti M,Vanya,Womenswear,M,kurti|printed kurti|womenswear
+RS-WMN-004,Vanya Printed Kurti L,Vanya,Womenswear,L,kurti|printed kurti|womenswear
+RS-WMN-005,Vanya Palazzo Pants M,Vanya,Womenswear,M,palazzo pants|pants|womenswear
+RS-WMN-006,Vanya Palazzo Pants L,Vanya,Womenswear,L,palazzo pants|pants|womenswear
+RS-WMN-007,Tulsi Grove Cotton Saree M,Tulsi Grove,Womenswear,M,cotton saree|saree|womenswear
+RS-WMN-008,Tulsi Grove Cotton Saree L,Tulsi Grove,Womenswear,L,cotton saree|saree|womenswear
+RS-WMN-009,Tulsi Grove Printed Kurti M,Tulsi Grove,Womenswear,M,kurti|printed kurti|womenswear
+RS-WMN-010,Tulsi Grove Printed Kurti L,Tulsi Grove,Womenswear,L,kurti|printed kurti|womenswear
+RS-WMN-011,Tulsi Grove Palazzo Pants M,Tulsi Grove,Womenswear,M,palazzo pants|pants|womenswear
+RS-WMN-012,Tulsi Grove Palazzo Pants L,Tulsi Grove,Womenswear,L,palazzo pants|pants|womenswear
+RS-NTB-001,Inkwell Ruled Notebook A5,Inkwell,Notebooks,A5,notebook|notebooks|ruled notebook
+RS-NTB-002,Inkwell Ruled Notebook A4,Inkwell,Notebooks,A4,notebook|notebooks|ruled notebook
+RS-NTB-003,Inkwell Spiral Sketchbook A5,Inkwell,Notebooks,A5,notebooks|sketchbook|spiral sketchbook
+RS-NTB-004,Inkwell Spiral Sketchbook A4,Inkwell,Notebooks,A4,notebooks|sketchbook|spiral sketchbook
+RS-NTB-005,Inkwell Graph Notebook A5,Inkwell,Notebooks,A5,graph notebook|notebook|notebooks
+RS-NTB-006,Inkwell Graph Notebook A4,Inkwell,Notebooks,A4,graph notebook|notebook|notebooks
+RS-NTB-007,Oakhill Ruled Notebook A5,Oakhill,Notebooks,A5,notebook|notebooks|ruled notebook
+RS-NTB-008,Oakhill Ruled Notebook A4,Oakhill,Notebooks,A4,notebook|notebooks|ruled notebook
+RS-NTB-009,Oakhill Spiral Sketchbook A5,Oakhill,Notebooks,A5,notebooks|sketchbook|spiral sketchbook
+RS-NTB-010,Oakhill Spiral Sketchbook A4,Oakhill,Notebooks,A4,notebooks|sketchbook|spiral sketchbook
+RS-NTB-011,Oakhill Graph Notebook A5,Oakhill,Notebooks,A5,graph notebook|notebook|notebooks
+RS-NTB-012,Oakhill Graph Notebook A4,Oakhill,Notebooks,A4,graph notebook|notebook|notebooks
+RS-PEN-001,Inkwell Gel Pens 5 pack,Inkwell,Pens and Markers,5 pack,gel pens|pens|pens and markers
+RS-PEN-002,Inkwell Gel Pens 10 pack,Inkwell,Pens and Markers,10 pack,gel pens|pens|pens and markers
+RS-PEN-003,Inkwell Highlighter Markers 5 pack,Inkwell,Pens and Markers,5 pack,highlighter markers|markers|pens and markers
+RS-PEN-004,Inkwell Highlighter Markers 10 pack,Inkwell,Pens and Markers,10 pack,highlighter markers|markers|pens and markers
+RS-PEN-005,Inkwell Fountain Pen 5 pack,Inkwell,Pens and Markers,5 pack,fountain pen|pen|pens and markers
+RS-PEN-006,Inkwell Fountain Pen 10 pack,Inkwell,Pens and Markers,10 pack,fountain pen|pen|pens and markers
+RS-PEN-007,Kestrel Gel Pens 5 pack,Kestrel,Pens and Markers,5 pack,gel pens|pens|pens and markers
+RS-PEN-008,Kestrel Gel Pens 10 pack,Kestrel,Pens and Markers,10 pack,gel pens|pens|pens and markers
+RS-PEN-009,Kestrel Highlighter Markers 5 pack,Kestrel,Pens and Markers,5 pack,highlighter markers|markers|pens and markers
+RS-PEN-010,Kestrel Highlighter Markers 10 pack,Kestrel,Pens and Markers,10 pack,highlighter markers|markers|pens and markers
+RS-PEN-011,Kestrel Fountain Pen 5 pack,Kestrel,Pens and Markers,5 pack,fountain pen|pen|pens and markers
+RS-PEN-012,Kestrel Fountain Pen 10 pack,Kestrel,Pens and Markers,10 pack,fountain pen|pen|pens and markers
+RS-GFT-001,Riverbend Gift Voucher 500 value,Riverbend,Gift Vouchers,500 value,gift voucher|gift vouchers|voucher
+RS-GFT-002,Riverbend Gift Voucher 1000 value,Riverbend,Gift Vouchers,1000 value,gift voucher|gift vouchers|voucher
+RS-GFT-003,Riverbend Festive Gift Card 500 value,Riverbend,Gift Vouchers,500 value,card|festive gift card|gift vouchers
+RS-GFT-004,Riverbend Festive Gift Card 1000 value,Riverbend,Gift Vouchers,1000 value,card|festive gift card|gift vouchers
+RS-GFT-005,Riverbend Birthday Gift Card 500 value,Riverbend,Gift Vouchers,500 value,birthday gift card|card|gift vouchers
+RS-GFT-006,Riverbend Birthday Gift Card 1000 value,Riverbend,Gift Vouchers,1000 value,birthday gift card|card|gift vouchers
+RS-GFT-007,Inkwell Gift Voucher 500 value,Inkwell,Gift Vouchers,500 value,gift voucher|gift vouchers|voucher
+RS-GFT-008,Inkwell Gift Voucher 1000 value,Inkwell,Gift Vouchers,1000 value,gift voucher|gift vouchers|voucher
+RS-GFT-009,Inkwell Festive Gift Card 500 value,Inkwell,Gift Vouchers,500 value,card|festive gift card|gift vouchers
+RS-GFT-010,Inkwell Festive Gift Card 1000 value,Inkwell,Gift Vouchers,1000 value,card|festive gift card|gift vouchers
+RS-GFT-011,Inkwell Birthday Gift Card 500 value,Inkwell,Gift Vouchers,500 value,birthday gift card|card|gift vouchers
+RS-GFT-012,Inkwell Birthday Gift Card 1000 value,Inkwell,Gift Vouchers,1000 value,birthday gift card|card|gift vouchers

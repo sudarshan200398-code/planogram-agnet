@@ -12,6 +12,7 @@ from .runtime.orchestrator import Orchestrator
 from .settings import Settings, load_settings
 
 if TYPE_CHECKING:
+    from .data_loader import Dataset
     from .llm.base import LLMClient
     from .runtime.state import Answer
 
@@ -35,6 +36,21 @@ def create_finder(
         settings = load_settings()
 
     dataset = load_dataset(store_path, validate=True)
+    return create_finder_for_dataset(dataset, settings=settings, client=client)
+
+
+def create_finder_for_dataset(
+    dataset: Dataset,
+    settings: Settings | None = None,
+    client: LLMClient | None = None,
+) -> Orchestrator:
+    """Instantiate an Orchestrator for an already loaded (and validated) dataset.
+
+    Same model selection as create_finder; used when the data comes from a provider, not a folder.
+    """
+    if settings is None:
+        settings = load_settings()
+
     model_note: str | None = None
 
     env_provider = os.environ.get("PLANOGRAM_PROVIDER")

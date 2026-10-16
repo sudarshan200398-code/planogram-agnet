@@ -8,6 +8,7 @@ dependencies = ["pydantic>=2.0", "networkx>=3.0", "matplotlib>=3.7", "rapidfuzz>
 [project.optional-dependencies]
 dev = ["pytest", "hypothesis", "ruff"]
 ui = ["streamlit>=1.30"]
+api = ["fastapi==0.143.3", "uvicorn==0.54.0", "httpx==0.28.1"]
 
 [build-system]
 requires = ["setuptools>=68"]
@@ -17,7 +18,7 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]
 markers = [
     "slow: marks slow full-dataset scan tests (deselect with '-m \"not slow\"')",
