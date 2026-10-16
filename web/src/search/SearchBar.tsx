@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode, type Ref } from "react";
 import { SEARCH_MAX_CHARS } from "../config";
 import { CloseIcon, SearchIcon } from "../components/icons";
 import { Button, IconButton } from "../components/ui";
@@ -18,6 +18,7 @@ export function SearchBar({
   disabled,
   busy,
   trailing,
+  inputRef,
 }: {
   storeId: string | null;
   text: string;
@@ -26,6 +27,7 @@ export function SearchBar({
   disabled?: boolean;
   busy?: boolean;
   trailing?: ReactNode;
+  inputRef?: Ref<HTMLInputElement>;
 }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
@@ -50,9 +52,10 @@ export function SearchBar({
         submit(picked ? picked.name : text);
       }}
     >
-      <div className="sf-search__field">
+      <div className={`sf-search__field ${trailing ? "has-trailing" : ""}`}>
         <SearchIcon className="sf-search__icon" />
         <input
+          ref={inputRef}
           className="sf-search__input"
           type="search"
           name="q"
@@ -89,11 +92,14 @@ export function SearchBar({
             }
           }}
         />
-        {text ? (
-          <IconButton label="Clear search" className="sf-search__clear" onClick={() => (onTextChange(""), setActive(-1))}>
-            <CloseIcon />
-          </IconButton>
-        ) : null}
+        <span className="sf-search__actions">
+          {text ? (
+            <IconButton label="Clear search" className="sf-search__clear" onClick={() => (onTextChange(""), setActive(-1))}>
+              <CloseIcon />
+            </IconButton>
+          ) : null}
+          {trailing}
+        </span>
         <ul id={listId} role="listbox" aria-label="Suggestions" className="sf-suggest" hidden={!showList}>
           {suggestions.map((s, i) => {
             const stock = stockLabel(s.stock_status, null);
@@ -119,7 +125,6 @@ export function SearchBar({
           })}
         </ul>
       </div>
-      {trailing}
       <Button type="submit" disabled={disabled || busy || !text.trim()}>
         Search
       </Button>

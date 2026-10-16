@@ -36,9 +36,15 @@
 .sf-search__input:focus-visible {
   border-color: var(--color-primary);
 }
-.sf-search__clear {
+/* Clear and mic buttons sit inside the field, on the right. */
+.sf-search__actions {
   position: absolute;
   right: 4px;
+  display: flex;
+  align-items: center;
+}
+.sf-search__field.has-trailing .sf-search__input {
+  padding-right: calc(2 * var(--tap) + var(--space-1));
 }
 .sf-search .sf-button {
   min-height: 52px;

@@ -1,0 +1,25 @@
+.sf-voice.is-listening {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+  animation: sf-pulse 1.4s ease-in-out infinite;
+}
+@keyframes sf-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-voice.is-listening {
+    animation: none;
+  }
+}
+.sf-voice-status {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  min-height: 1.25rem;
+}

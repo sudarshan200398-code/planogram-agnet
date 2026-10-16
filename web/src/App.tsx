@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApiError } from "./api/client";
 import { StoreSelector } from "./app/StoreSelector";
 import { ThemeToggle } from "./app/ThemeToggle";
@@ -14,6 +14,8 @@ import { SearchBar } from "./search/SearchBar";
 import { useSearch } from "./search/useSearch";
 import { useStoreSelection } from "./stores/useStoreSelection";
 import { useTheme } from "./theme/theme";
+import { useVoice } from "./voice/useVoice";
+import { VoiceButton } from "./voice/VoiceButton";
 import "./app/app.css";
 
 const isStoreGone = (e: unknown) => e instanceof ApiError && e.code === "STORE_NOT_FOUND";
@@ -26,6 +28,12 @@ export function App() {
   const browse = useBrowse(stores.storeId);
   const [text, setText] = useState("");
   const [notice, setNotice] = useState<string | null>(null);
+  const searchInput = useRef<HTMLInputElement>(null);
+  const voice = useVoice(setText);
+  // When speech ends, hand the words back to the shopper to check before searching.
+  useEffect(() => {
+    if (voice.status === "heard") searchInput.current?.focus();
+  }, [voice.status]);
 
   // 404 STORE_NOT_FOUND from a search or a category: the chosen store is gone, so use the first store.
   const failure = search.status === "error" ? search.error : browse.state.status === "error" ? browse.state.error : null;
@@ -81,7 +89,18 @@ export function App() {
               onSearch={doSearch}
               disabled={!stores.storeId}
               busy={search.status === "loading"}
+              inputRef={searchInput}
+              trailing={
+                voice.supported ? (
+                  <VoiceButton listening={voice.listening} onStart={voice.start} onStop={voice.stop} disabled={!stores.storeId} />
+                ) : null
+              }
             />
+            {voice.supported ? (
+              <p className="sf-voice-status" role="status">
+                {voice.message}
+              </p>
+            ) : null}
             <CategoryChips
               categories={categories}
               selected={selectedCategory}
