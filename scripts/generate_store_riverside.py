@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from generate_store_prices import price_for  # noqa: E402
+from generate_store_prices import write_prices  # noqa: E402
 
 STORE_ID = "riverside"
 SEED = 20261016
@@ -252,7 +252,7 @@ not these files.
 | `products.csv` | Products (sku, name, brand, category, size, keywords) | {products} products |
 | `planogram.csv` | Where each product sits (zone, bay, shelf, position) | {placements} placements |
 | `inventory.csv` | Stock per product (0 means out of stock) | {out_of_stock} out of stock |
-| `prices.csv` | Optional synthetic prices in rupees (sku, price) | {products} prices |
+| `prices.csv` | Optional **synthetic** prices in rupees (sku, price), from the product rules in `config/price_ranges.json` | {products} prices |
 
 **Floor 1:** Main Doors (entrance), Fresh Market, Bakehouse, Butcher Counter, Fishmonger, Chilled Foods,
 Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
@@ -276,8 +276,7 @@ def generate(out_dir: Path) -> dict:
     _write_csv(out_dir / "products.csv", ["sku", "name", "brand", "category", "size", "keywords"], products)
     _write_csv(out_dir / "planogram.csv", ["sku", "floor", "zone", "bay", "shelf_level", "position", "node_id"], planogram)
     _write_csv(out_dir / "inventory.csv", ["sku", "quantity"], inventory)
-    _write_csv(out_dir / "prices.csv", ["sku", "price"],
-               [{"sku": p["sku"], "price": price_for(p["sku"], p["category"])} for p in products])
+    write_prices(out_dir / "products.csv", out_dir / "prices.csv")  # rules in config/price_ranges.json
     counts = {
         "nodes": len(graph["nodes"]), "edges": len(graph["edges"]), "connectors": len(graph["connectors"]),
         "products": len(products), "placements": len(planogram),

@@ -11,7 +11,7 @@ not these files.
 | `products.csv` | Products (sku, name, brand, category, size, keywords) | 444 products |
 | `planogram.csv` | Where each product sits (zone, bay, shelf, position) | 448 placements |
 | `inventory.csv` | Stock per product (0 means out of stock) | 11 out of stock |
-| `prices.csv` | Optional synthetic prices in rupees (sku, price) | 444 prices |
+| `prices.csv` | Optional **synthetic** prices in rupees (sku, price), from the product rules in `config/price_ranges.json` | 444 prices |
 
 **Floor 1:** Main Doors (entrance), Fresh Market, Bakehouse, Butcher Counter, Fishmonger, Chilled Foods,
 Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
