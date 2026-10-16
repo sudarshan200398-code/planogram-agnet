@@ -1,7 +1,6 @@
 import { useId, useState, type ReactElement } from "react";
 import type { Route, RouteStep } from "../api/types";
 import { ElevatorIcon, EscalatorIcon, PinIcon, StairsIcon, WalkIcon } from "../components/icons";
-import { Card } from "../components/ui";
 import "./route.css";
 
 /** The API names its step icons after Material icons; map them to ours, with a readable label. */
@@ -28,7 +27,7 @@ export function RouteSteps({ route, defaultOpen = false }: { route: Route; defau
   const [open, setOpen] = useState(defaultOpen);
   const listId = useId();
   return (
-    <Card className="sf-route" aria-labelledby={`${listId}-title`}>
+    <section className="sf-card sf-route" aria-labelledby={`${listId}-title`}>
       <div className="sf-route__head">
         <div>
           <h2 id={`${listId}-title`} className="sf-route__title">
@@ -67,6 +66,6 @@ export function RouteSteps({ route, defaultOpen = false }: { route: Route; defau
           );
         })}
       </ol>
-    </Card>
+    </section>
   );
 }

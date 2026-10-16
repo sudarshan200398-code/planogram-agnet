@@ -65,6 +65,14 @@ export const defaultHandlers = [
     if (!f) throw new Error(`no recorded products page for ${u.search}`);
     return reply(f.name);
   }),
+  http.post(`${API}/stores/:store/basket/route`, async ({ params, request }) => {
+    const body = JSON.stringify(await request.json());
+    const f = Object.values(fixtures).find(
+      (x) => x.name.startsWith("basket_") && x.request.path === `/stores/${String(params.store)}/basket/route` && JSON.stringify(x.request.body) === body,
+    );
+    if (!f) throw new Error(`no basket fixture for ${String(params.store)} ${body}`);
+    return reply(f.name);
+  }),
   http.post(`${API}/stores/:store/clarify`, async ({ params, request }) => {
     const body = (await request.json()) as { session_id: string; item_index: number; sku: string };
     const f = Object.values(fixtures).find((x) => {

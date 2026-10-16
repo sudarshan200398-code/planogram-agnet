@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ApiError } from "./api/client";
 import { StoreSelector } from "./app/StoreSelector";
 import { ThemeToggle } from "./app/ThemeToggle";
@@ -7,8 +7,15 @@ import { CategoryChips } from "./categories/CategoryChips";
 import { useBrowse } from "./categories/useBrowse";
 import { useCategories } from "./categories/useCategories";
 import { StoreIcon } from "./components/icons";
+import { Sheet } from "./components/Sheet";
 import { EmptyState, ErrorState, Skeleton } from "./components/ui";
 import { friendlyError } from "./lib/errors";
+import { formatLocation } from "./lib/format";
+import type { NewItem } from "./list/list";
+import { AddToListButton, ListButton, ShoppingList } from "./list/ShoppingList";
+import { useBasketRoute } from "./list/useBasketRoute";
+import { useShoppingList } from "./list/useShoppingList";
+import type { ProductLike } from "./results/ProductCard";
 import { Results, ResultsSkeleton } from "./results/Results";
 import { SearchBar } from "./search/SearchBar";
 import { useSearch } from "./search/useSearch";
@@ -29,6 +36,14 @@ export function App() {
   const [text, setText] = useState("");
   const [notice, setNotice] = useState<string | null>(null);
   const searchInput = useRef<HTMLInputElement>(null);
+  const list = useShoppingList(stores.storeId);
+  const basket = useBasketRoute(stores.storeId);
+  const [listOpen, setListOpen] = useState(false);
+  const openList = useCallback(() => setListOpen(true), []);
+  const closeList = useCallback(() => setListOpen(false), []);
+  // A route is only shown for the list it was made from; any change to the list clears it.
+  const { clear: clearRoute } = basket;
+  useEffect(() => clearRoute(), [list.items, clearRoute]);
   const voice = useVoice(setText);
   // When speech ends, hand the words back to the shopper to check before searching.
   useEffect(() => {
@@ -50,6 +65,12 @@ export function App() {
     void runSearch(t);
   };
   const selectedCategory = browse.state.status === "idle" ? null : browse.state.category;
+  const inList = new Set(list.items.map((i) => i.sku));
+  const addAction = (p: ProductLike & { sku: string | null }) => {
+    if (!p.sku) return null;
+    const item: NewItem = { sku: p.sku, name: p.name, image_url: p.image_url, place: formatLocation(p) };
+    return <AddToListButton item={item} inList={inList.has(p.sku)} full={list.full} onAdd={list.add} onOpen={openList} />;
+  };
 
   return (
     <div className="sf-app">
@@ -59,7 +80,10 @@ export function App() {
             <span className="sf-brand__mark" aria-hidden="true">S</span>
             SuperFind <span className="sf-brand__ai">AI</span>
           </p>
-          <ThemeToggle preference={theme.preference} onChange={theme.setPreference} />
+          <div className="sf-header__actions">
+            <ListButton count={list.items.length} onClick={openList} />
+            <ThemeToggle preference={theme.preference} onChange={theme.setPreference} />
+          </div>
         </div>
         {stores.state.status === "ready" ? (
           <StoreSelector
@@ -116,7 +140,12 @@ export function App() {
             ) : null}
             <section className="sf-section" aria-live="polite" aria-label="Results">
               {browse.state.status !== "idle" ? (
-                <BrowseResults state={browse.state} onMore={browse.more} onRetry={() => browse.open(selectedCategory)} />
+                <BrowseResults
+                  state={browse.state}
+                  onMore={browse.more}
+                  onRetry={() => browse.open(selectedCategory)}
+                  action={addAction}
+                />
               ) : (
                 <>
                   {search.status === "loading" ? <ResultsSkeleton /> : null}
@@ -127,6 +156,7 @@ export function App() {
                       answering={search.answering}
                       notice={search.notice}
                       onAnswer={(i, sku) => void answer(i, sku)}
+                      action={(item) => addAction({ ...item, name: item.name ?? item.requested })}
                     />
                   ) : null}
                   {search.status === "error" && !isStoreGone(search.error) ? (
@@ -143,6 +173,16 @@ export function App() {
           </>
         )}
       </main>
+
+      <Sheet open={listOpen} title="Shopping list" onClose={closeList}>
+        <ShoppingList
+          items={list.items}
+          route={basket.state}
+          onQty={list.setQty}
+          onRemove={list.remove}
+          onFindRoute={() => void basket.find(list.items)}
+        />
+      </Sheet>
     </div>
   );
 }

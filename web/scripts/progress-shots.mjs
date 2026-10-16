@@ -28,13 +28,22 @@ const SCENES = {
   step4: {
     "list-and-route": async (page) => {
       await page.goto(`${BASE}/?store=central`);
-      await page.getByRole("combobox", { name: "Search products" }).fill("Daily Bake Plain Bagels 4 pack and Store Brand Shredded Cheddar 400 g");
-      await page.keyboard.press("Enter");
-      for (const add of await page.getByRole("button", { name: /^Add .* to list$/ }).all()) await add.click();
+      await page.evaluate(() => localStorage.removeItem("superfind.list.central"));
+      await page.reload();
+      const nav = page.getByRole("navigation", { name: "Browse by category" });
+      await nav.getByRole("button").first().click();
+      const adds = page.getByRole("button", { name: /^Add .* to list$/ });
+      await adds.first().waitFor();
+      await adds.nth(0).click();
+      await adds.nth(0).click(); // the first one is now "In your list", so this is the next product
       await page.getByRole("button", { name: /^Shopping list/ }).click();
-      await page.getByRole("button", { name: "Find my route" }).click();
-      await page.getByRole("heading", { name: "Your route" }).waitFor();
+      const sheet = page.getByRole("dialog", { name: "Shopping list" });
+      await sheet.getByRole("button", { name: /^One more / }).first().click();
+      await sheet.getByRole("button", { name: "Find my route" }).click();
+      const route = sheet.getByRole("region", { name: "Your route" });
+      await route.waitFor();
       await page.waitForLoadState("networkidle");
+      await route.evaluate((el) => el.scrollIntoView({ block: "start" }));
     },
   },
 };

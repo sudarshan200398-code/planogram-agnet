@@ -119,3 +119,22 @@
     font-size: var(--text-2xl);
   }
 }
+
+.sf-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Phones: the theme toggle and list button show only icons (their names still say what they are), so the header fits at 360px. */
+@media (max-width: 419px) {
+  .sf-theme-toggle {
+    width: var(--tap);
+    padding: 0;
+    justify-content: center;
+  }
+  .sf-theme-toggle span,
+  .sf-list-button__word {
+    display: none;
+  }
+}

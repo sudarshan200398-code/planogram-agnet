@@ -1,4 +1,5 @@
-import type { SearchResponse } from "../api/types";
+import type { ReactNode } from "react";
+import type { SearchItem, SearchResponse } from "../api/types";
 import { SearchIcon } from "../components/icons";
 import { Card, EmptyState, Skeleton } from "../components/ui";
 import { RouteSteps } from "../route/RouteSteps";
@@ -30,12 +31,14 @@ export function Results({
   answering = null,
   notice = null,
   onAnswer,
+  action,
 }: {
   response: SearchResponse;
   text: string;
   answering?: string | null;
   notice?: string | null;
   onAnswer?: (itemIndex: number, sku: string) => void;
+  action?: (item: SearchItem) => ReactNode;
 }) {
   if (!response.items.length) {
     return (
@@ -68,7 +71,7 @@ export function Results({
       ) : null}
       <div className="sf-results">
         {response.items.map((item) => (
-          <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} />
+          <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} action={item.sku ? action?.(item) : undefined} />
         ))}
       </div>
       {response.route ? <RouteSteps route={response.route} /> : null}
