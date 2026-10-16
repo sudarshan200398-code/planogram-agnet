@@ -1,6 +1,8 @@
 import type { SearchResponse } from "../api/types";
 import { SearchIcon } from "../components/icons";
 import { Card, EmptyState, Skeleton } from "../components/ui";
+import { RouteSteps } from "../route/RouteSteps";
+import { ClarifyPanel } from "../search/ClarifyPanel";
 import { ResultCard } from "./ResultCard";
 import "./results.css";
 
@@ -21,8 +23,20 @@ export function ResultsSkeleton({ count = 3 }: { count?: number }) {
   );
 }
 
-/** Messages and result cards for one search response. */
-export function Results({ response, text }: { response: SearchResponse; text: string }) {
+/** Messages, the pending question (if any) and result cards for one search response. */
+export function Results({
+  response,
+  text,
+  answering = null,
+  notice = null,
+  onAnswer,
+}: {
+  response: SearchResponse;
+  text: string;
+  answering?: string | null;
+  notice?: string | null;
+  onAnswer?: (itemIndex: number, sku: string) => void;
+}) {
   if (!response.items.length) {
     return (
       <EmptyState title="No results" icon={<SearchIcon />}>
@@ -35,6 +49,14 @@ export function Results({ response, text }: { response: SearchResponse; text: st
       <h2 className="sf-results__heading">
         Results for “{text}”
       </h2>
+      {notice ? (
+        <p className="sf-message" role="status">
+          {notice}
+        </p>
+      ) : null}
+      {response.question && onAnswer ? (
+        <ClarifyPanel question={response.question} answering={answering} onAnswer={onAnswer} />
+      ) : null}
       {response.messages.length ? (
         <div className="sf-messages">
           {response.messages.map((m) => (
@@ -49,6 +71,7 @@ export function Results({ response, text }: { response: SearchResponse; text: st
           <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} />
         ))}
       </div>
+      {response.route ? <RouteSteps route={response.route} /> : null}
     </div>
   );
 }

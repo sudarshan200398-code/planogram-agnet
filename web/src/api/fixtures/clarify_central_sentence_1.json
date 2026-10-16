@@ -1,0 +1,129 @@
+{
+  "name": "clarify_central_sentence_1",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/clarify",
+    "query": {},
+    "body": {
+      "session_id": "session-003",
+      "item_index": 0,
+      "sku": "DAI-MIL-001"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "needs_clarification",
+    "session_id": "session-003",
+    "verified": false,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "milk",
+        "quantity_requested": 1,
+        "status": "not_placed",
+        "reason": "Product has no shelf location in the planogram",
+        "sku": "DAI-MIL-001",
+        "name": "Meadow Fresh Whole Milk 1 L",
+        "brand": "Meadow Fresh",
+        "category": "Milk & plant-based beverages",
+        "size": "1 L",
+        "price": 67.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 61,
+        "floor": 1,
+        "zone": "Dairy & Frozen",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Dairy & Frozen",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "L1_DAIRY"
+          }
+        ],
+        "image_url": "/stores/central/products/DAI-MIL-001/image"
+      },
+      {
+        "index": 1,
+        "requested": "bread",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      },
+      {
+        "index": 2,
+        "requested": "crayons",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": {
+      "item_index": 1,
+      "item_text": "bread",
+      "options": [
+        {
+          "sku": "BAK-BAG-001",
+          "name": "Daily Bake White Sandwich Bread 400 g",
+          "places": [
+            "Level 1, Bakery"
+          ],
+          "image_url": "/stores/central/products/BAK-BAG-001/image"
+        },
+        {
+          "sku": "BAK-BAG-002",
+          "name": "Golden Crust White Sandwich Bread 800 g",
+          "places": [
+            "Level 1, Bakery"
+          ],
+          "image_url": "/stores/central/products/BAK-BAG-002/image"
+        },
+        {
+          "sku": "BAK-BAG-003",
+          "name": "Golden Crust Whole Wheat Bread 800 g",
+          "places": [
+            "Level 1, Bakery"
+          ],
+          "image_url": "/stores/central/products/BAK-BAG-003/image"
+        }
+      ]
+    },
+    "route": null
+  }
+}

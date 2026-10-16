@@ -21,7 +21,7 @@ const isStoreGone = (e: unknown) => e instanceof ApiError && e.code === "STORE_N
 export function App() {
   const theme = useTheme();
   const stores = useStoreSelection();
-  const { state: search, search: runSearch, reset: resetSearch } = useSearch(stores.storeId);
+  const { state: search, search: runSearch, answer, reset: resetSearch } = useSearch(stores.storeId);
   const categories = useCategories(stores.storeId);
   const browse = useBrowse(stores.storeId);
   const [text, setText] = useState("");
@@ -101,7 +101,15 @@ export function App() {
               ) : (
                 <>
                   {search.status === "loading" ? <ResultsSkeleton /> : null}
-                  {search.status === "done" ? <Results response={search.response} text={search.text} /> : null}
+                  {search.status === "done" ? (
+                    <Results
+                      response={search.response}
+                      text={search.text}
+                      answering={search.answering}
+                      notice={search.notice}
+                      onAnswer={(i, sku) => void answer(i, sku)}
+                    />
+                  ) : null}
                   {search.status === "error" && !isStoreGone(search.error) ? (
                     <ErrorState {...friendlyError(search.error)} onRetry={() => runSearch(search.text)} />
                   ) : null}

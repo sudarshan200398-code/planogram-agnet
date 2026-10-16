@@ -111,7 +111,14 @@ def build_contract() -> dict[str, str]:
         q = milk["question"]
         record("clarify_central_milk", "POST", "/stores/central/clarify",
                {"session_id": milk["session_id"], "item_index": q["item_index"], "sku": q["options"][0]["sku"]})
-        record("search_central_sentence", "POST", "/stores/central/search", {"text": "milk, bread and crayons, I'm at produce"})
+        sentence = record("search_central_sentence", "POST", "/stores/central/search",
+                          {"text": "milk, bread and crayons, I'm at produce"})
+        step = 0
+        while sentence.get("question"):  # answer each question in turn with its first option
+            step += 1
+            q = sentence["question"]
+            sentence = record(f"clarify_central_sentence_{step}", "POST", "/stores/central/clarify",
+                              {"session_id": sentence["session_id"], "item_index": q["item_index"], "sku": q["options"][0]["sku"]})
         record("search_central_out_of_stock", "POST", "/stores/central/search", {"text": "ArtBox Watercolour Paints 12 pack"})
         record("search_central_not_found", "POST", "/stores/central/search", {"text": "zzqx wobble gadget"})
         record("search_riverside_kibble", "POST", "/stores/riverside/search",

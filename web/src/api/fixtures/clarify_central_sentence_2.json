@@ -1,0 +1,129 @@
+{
+  "name": "clarify_central_sentence_2",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/clarify",
+    "query": {},
+    "body": {
+      "session_id": "session-003",
+      "item_index": 1,
+      "sku": "BAK-BAG-001"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "needs_clarification",
+    "session_id": "session-003",
+    "verified": false,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "milk",
+        "quantity_requested": 1,
+        "status": "not_placed",
+        "reason": "Product has no shelf location in the planogram",
+        "sku": "DAI-MIL-001",
+        "name": "Meadow Fresh Whole Milk 1 L",
+        "brand": "Meadow Fresh",
+        "category": "Milk & plant-based beverages",
+        "size": "1 L",
+        "price": 67.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 61,
+        "floor": 1,
+        "zone": "Dairy & Frozen",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Dairy & Frozen",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "L1_DAIRY"
+          }
+        ],
+        "image_url": "/stores/central/products/DAI-MIL-001/image"
+      },
+      {
+        "index": 1,
+        "requested": "bread",
+        "quantity_requested": 1,
+        "status": "not_placed",
+        "reason": "Product has no shelf location in the planogram",
+        "sku": "BAK-BAG-001",
+        "name": "Daily Bake White Sandwich Bread 400 g",
+        "brand": "Daily Bake",
+        "category": "Bagged loaves & sandwich bread",
+        "size": "400 g",
+        "price": 85.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 65,
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 3,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Bakery",
+            "bay": "A",
+            "shelf": 3,
+            "node_id": "L1_BAKERY"
+          }
+        ],
+        "image_url": "/stores/central/products/BAK-BAG-001/image"
+      },
+      {
+        "index": 2,
+        "requested": "crayons",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": {
+      "item_index": 2,
+      "item_text": "crayons",
+      "options": [
+        {
+          "sku": "TOY-ART-001",
+          "name": "PlayTime Wax Crayons 12 pack",
+          "places": [
+            "Level 2, Toys & Stationery"
+          ],
+          "image_url": "/stores/central/products/TOY-ART-001/image"
+        },
+        {
+          "sku": "TOY-ART-002",
+          "name": "Store Brand Wax Crayons 24 pack",
+          "places": [
+            "Level 2, Toys & Stationery"
+          ],
+          "image_url": "/stores/central/products/TOY-ART-002/image"
+        }
+      ]
+    },
+    "route": null
+  }
+}

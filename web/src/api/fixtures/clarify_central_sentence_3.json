@@ -1,0 +1,395 @@
+{
+  "name": "clarify_central_sentence_3",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/clarify",
+    "query": {},
+    "body": {
+      "session_id": "session-003",
+      "item_index": 2,
+      "sku": "TOY-ART-001"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "ok",
+    "session_id": "session-003",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "milk",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "DAI-MIL-001",
+        "name": "Meadow Fresh Whole Milk 1 L",
+        "brand": "Meadow Fresh",
+        "category": "Milk & plant-based beverages",
+        "size": "1 L",
+        "price": 67.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 61,
+        "floor": 1,
+        "zone": "Dairy & Frozen",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Dairy & Frozen",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "L1_DAIRY"
+          }
+        ],
+        "image_url": "/stores/central/products/DAI-MIL-001/image"
+      },
+      {
+        "index": 1,
+        "requested": "bread",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "BAK-BAG-001",
+        "name": "Daily Bake White Sandwich Bread 400 g",
+        "brand": "Daily Bake",
+        "category": "Bagged loaves & sandwich bread",
+        "size": "400 g",
+        "price": 85.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 65,
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 3,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Bakery",
+            "bay": "A",
+            "shelf": 3,
+            "node_id": "L1_BAKERY"
+          }
+        ],
+        "image_url": "/stores/central/products/BAK-BAG-001/image"
+      },
+      {
+        "index": 2,
+        "requested": "crayons",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "TOY-ART-001",
+        "name": "PlayTime Wax Crayons 12 pack",
+        "brand": "PlayTime",
+        "category": "Art supplies, crayons & coloring books",
+        "size": "12 pack",
+        "price": 249.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 16,
+        "floor": 2,
+        "zone": "Toys & Stationery",
+        "bay": "C",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Toys & Stationery",
+            "bay": "C",
+            "shelf": 2,
+            "node_id": "L2_TOYS"
+          }
+        ],
+        "image_url": "/stores/central/products/TOY-ART-001/image"
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "L1_PRODUCE",
+      "start_label": "Produce",
+      "total_distance_m": 112.1,
+      "floor_changes": 1,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 21m from Produce to Bakery.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Bakery for Daily Bake White Sandwich Bread 400 g (Level 1, Bakery, Bay A, Shelf 3).",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 39m from Bakery to Dairy & Frozen.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Dairy & Frozen for Meadow Fresh Whole Milk 1 L (Level 1, Dairy & Frozen, Bay A, Shelf 1).",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 5,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 16m from Dairy & Frozen to Escalators.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 6,
+          "kind": "take_connector",
+          "icon": "escalator",
+          "text": "Take the escalator from Level 1 to Level 2.",
+          "floor": 1,
+          "to_floor": 2
+        },
+        {
+          "number": 7,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 35m from Escalators to Toys & Stationery.",
+          "floor": 2,
+          "to_floor": null
+        },
+        {
+          "number": 8,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Toys & Stationery for PlayTime Wax Crayons 12 pack (Level 2, Toys & Stationery, Bay C, Shelf 2).",
+          "floor": 2,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "BAK-BAG-001",
+          "name": "Daily Bake White Sandwich Bread 400 g",
+          "floor": 1,
+          "zone": "Bakery",
+          "node_id": "L1_BAKERY"
+        },
+        {
+          "order": 2,
+          "sku": "DAI-MIL-001",
+          "name": "Meadow Fresh Whole Milk 1 L",
+          "floor": 1,
+          "zone": "Dairy & Frozen",
+          "node_id": "L1_DAIRY"
+        },
+        {
+          "order": 3,
+          "sku": "TOY-ART-001",
+          "name": "PlayTime Wax Crayons 12 pack",
+          "floor": 2,
+          "zone": "Toys & Stationery",
+          "node_id": "L2_TOYS"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                10.0,
+                18.0
+              ],
+              [
+                6.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                18.0
+              ],
+              [
+                6.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                8.0
+              ],
+              [
+                12.0,
+                4.0
+              ]
+            ],
+            [
+              [
+                12.0,
+                4.0
+              ],
+              [
+                18.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                18.0,
+                8.0
+              ],
+              [
+                28.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                28.0,
+                8.0
+              ],
+              [
+                38.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                38.0,
+                8.0
+              ],
+              [
+                46.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                8.0
+              ],
+              [
+                46.0,
+                4.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                4.0
+              ],
+              [
+                46.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                8.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                57.0,
+                5.0
+              ]
+            ]
+          ]
+        },
+        {
+          "floor": 2,
+          "lines": [
+            [
+              [
+                57.0,
+                5.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                42.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                42.0,
+                8.0
+              ],
+              [
+                30.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                8.0
+              ],
+              [
+                24.0,
+                4.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "L1_PRODUCE",
+        "L1_J_W",
+        "L1_J_NW",
+        "L1_BAKERY",
+        "L1_J_N1",
+        "L1_J_N2",
+        "L1_J_N3",
+        "L1_J_N4",
+        "L1_DAIRY",
+        "L1_J_N4",
+        "L1_J_NE",
+        "L1_ESC",
+        "L2_ESC",
+        "L2_J_NE",
+        "L2_J_N3",
+        "L2_J_N2",
+        "L2_TOYS"
+      ]
+    }
+  }
+}
