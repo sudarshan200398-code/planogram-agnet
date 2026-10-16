@@ -23,12 +23,17 @@ Never overwrite a file you have not read.
 - Always load data through `data_loader.load_dataset`, which runs the validators.
 
 ## Architecture to follow
-Streamlit page -> `interface.run_query()` -> orchestrator -> agents -> tools -> store folder.
+Front end or Streamlit page -> FastAPI app in `api/` -> `StoreDataProvider` (store registry in
+`config/stores.json`) -> `interface.run_query()` -> orchestrator -> agents -> tools -> store data.
+The Streamlit page may still call `interface.run_query()` directly.
 - Orchestrator: fixed steps (parse, match, check stock, locate, route, compose, verify).
 - Agents: Query, Search, Availability, Routing, Verifier. Each returns a validated pydantic model.
 - Tools: `search_products`, `check_inventory`, `get_location`, `resolve_start`, route tools.
 - Every AI-model call has a schema check, one retry, and a non-AI fallback.
-- No FastAPI, no voice input, no machine learning for routing.
+- The API talks to store data only through the `StoreDataProvider` interface, one cached engine per store.
+- No voice input in the Python engine or API: they only receive text. Browser-side voice input on the
+  front end is allowed and sends plain text to the API.
+- No machine learning for routing.
 
 ## How to work
 1. One phase at a time. Do not start a phase until the previous one's tests pass.

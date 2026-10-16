@@ -43,6 +43,10 @@ class Settings(BaseModel):
         ],
         min_length=1,
     )
+    # HTTP API: requests per client per minute, and product page sizes
+    api_rate_limit_per_minute: int = Field(default=120, ge=1)
+    api_page_size_default: int = Field(default=20, ge=1)
+    api_page_size_max: int = Field(default=100, ge=1)
 
 
 def _find_default_settings_file() -> Path | None:
