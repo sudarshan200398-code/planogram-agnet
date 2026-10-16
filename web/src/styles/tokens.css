@@ -1,0 +1,75 @@
+/* SuperFind AI design tokens. Every text/background pair is checked at WCAG AA by src/styles/tokens.test.ts. */
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-primary: #0b7a5e;
+  --color-on-primary: #ffffff;
+  --color-accent: #c77700; /* large text and icons only */
+  --color-accent-text: #8f5600; /* small accent text */
+  --color-bg: #f7faf8;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #eef4f1;
+  --color-text: #10201a;
+  --color-muted: #4a5e55;
+  --color-border: #7c8f87;
+  --color-divider: #dce6e1; /* decorative lines only */
+  --color-ok-fg: #14632f;
+  --color-ok-bg: #e3f4ea;
+  --color-warn-fg: #7a4b00;
+  --color-warn-bg: #fdf1dc;
+  --color-bad-fg: #a3221a;
+  --color-bad-bg: #fde7e5;
+  --color-info-fg: #0b5d48;
+  --color-info-bg: #e2f2ec;
+  --shadow-card: 0 1px 2px rgb(16 32 26 / 8%), 0 2px 8px rgb(16 32 26 / 6%);
+  --shadow-raised: 0 8px 24px rgb(16 32 26 / 18%);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #3dd6a5;
+  --color-on-primary: #0d1512;
+  --color-accent: #f5b544;
+  --color-accent-text: #f5b544;
+  --color-bg: #0d1512;
+  --color-surface: #16211d;
+  --color-surface-sunken: #111a17;
+  --color-text: #e8f1ed;
+  --color-muted: #a9bdb4;
+  --color-border: #5e7268;
+  --color-divider: #24332d;
+  --color-ok-fg: #6ee7a8;
+  --color-ok-bg: #12352a;
+  --color-warn-fg: #f5c26b;
+  --color-warn-bg: #3a2c10;
+  --color-bad-fg: #ff9b91;
+  --color-bad-bg: #3d1a19;
+  --color-info-fg: #8ce9c7;
+  --color-info-bg: #12302a;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-raised: 0 8px 24px rgb(0 0 0 / 55%);
+}
+
+:root {
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Noto Sans", Roboto, Arial, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+  --tap: 44px;
+  --content-max: 960px;
+  --focus-ring: 0 0 0 3px var(--color-primary);
+}
