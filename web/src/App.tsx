@@ -2,31 +2,46 @@ import { useEffect, useState } from "react";
 import { ApiError } from "./api/client";
 import { StoreSelector } from "./app/StoreSelector";
 import { ThemeToggle } from "./app/ThemeToggle";
-import { EmptyState, ErrorState, Skeleton } from "./components/ui";
+import { BrowseResults } from "./categories/BrowseResults";
+import { CategoryChips } from "./categories/CategoryChips";
+import { useBrowse } from "./categories/useBrowse";
+import { useCategories } from "./categories/useCategories";
 import { StoreIcon } from "./components/icons";
+import { EmptyState, ErrorState, Skeleton } from "./components/ui";
 import { friendlyError } from "./lib/errors";
 import { Results, ResultsSkeleton } from "./results/Results";
-import { SearchForm } from "./search/SearchForm";
+import { SearchBar } from "./search/SearchBar";
 import { useSearch } from "./search/useSearch";
 import { useStoreSelection } from "./stores/useStoreSelection";
 import { useTheme } from "./theme/theme";
 import "./app/app.css";
 
+const isStoreGone = (e: unknown) => e instanceof ApiError && e.code === "STORE_NOT_FOUND";
+
 export function App() {
   const theme = useTheme();
   const stores = useStoreSelection();
-  const { state: search, search: runSearch } = useSearch(stores.storeId);
+  const { state: search, search: runSearch, reset: resetSearch } = useSearch(stores.storeId);
+  const categories = useCategories(stores.storeId);
+  const browse = useBrowse(stores.storeId);
+  const [text, setText] = useState("");
   const [notice, setNotice] = useState<string | null>(null);
 
-  // 404 STORE_NOT_FOUND: the chosen store is gone, so fall back to the first store.
-  const searchError = search.status === "error" ? search.error : null;
+  // 404 STORE_NOT_FOUND from a search or a category: the chosen store is gone, so use the first store.
+  const failure = search.status === "error" ? search.error : browse.state.status === "error" ? browse.state.error : null;
   const { resetToFirst } = stores;
   useEffect(() => {
-    if (searchError instanceof ApiError && searchError.code === "STORE_NOT_FOUND") {
+    if (isStoreGone(failure)) {
       resetToFirst();
       setNotice("That store isn't available any more, so we've switched to the first store.");
     }
-  }, [searchError, resetToFirst]);
+  }, [failure, resetToFirst]);
+
+  const doSearch = (t: string) => {
+    browse.open(null);
+    void runSearch(t);
+  };
+  const selectedCategory = browse.state.status === "idle" ? null : browse.state.category;
 
   return (
     <div className="sf-app">
@@ -39,7 +54,15 @@ export function App() {
           <ThemeToggle preference={theme.preference} onChange={theme.setPreference} />
         </div>
         {stores.state.status === "ready" ? (
-          <StoreSelector stores={stores.state.stores} value={stores.storeId} onChange={(id) => (setNotice(null), stores.selectStore(id))} />
+          <StoreSelector
+            stores={stores.state.stores}
+            value={stores.storeId}
+            onChange={(id) => {
+              setNotice(null);
+              setText("");
+              stores.selectStore(id);
+            }}
+          />
         ) : stores.state.status === "loading" ? (
           <Skeleton height="44px" />
         ) : null}
@@ -51,23 +74,44 @@ export function App() {
         ) : (
           <>
             <h1 className="sf-title">{stores.current ? `Find anything in ${stores.current.name}` : "Find anything in the store"}</h1>
-            <SearchForm disabled={!stores.storeId} busy={search.status === "loading"} onSearch={runSearch} />
+            <SearchBar
+              storeId={stores.storeId}
+              text={text}
+              onTextChange={setText}
+              onSearch={doSearch}
+              disabled={!stores.storeId}
+              busy={search.status === "loading"}
+            />
+            <CategoryChips
+              categories={categories}
+              selected={selectedCategory}
+              onSelect={(name) => {
+                resetSearch();
+                browse.open(name);
+              }}
+            />
             {notice ? (
               <p className="sf-notice" role="status">
                 {notice}
               </p>
             ) : null}
-            <section className="sf-section" aria-live="polite" aria-label="Search results">
-              {search.status === "loading" ? <ResultsSkeleton /> : null}
-              {search.status === "done" ? <Results response={search.response} text={search.text} /> : null}
-              {search.status === "error" && !(search.error instanceof ApiError && search.error.code === "STORE_NOT_FOUND") ? (
-                <ErrorState {...friendlyError(search.error)} onRetry={() => runSearch(search.text)} />
-              ) : null}
-              {search.status === "idle" ? (
-                <EmptyState title="What are you looking for?" icon={<StoreIcon />}>
-                  Search for one product or a whole list, like “milk, bread and crayons”.
-                </EmptyState>
-              ) : null}
+            <section className="sf-section" aria-live="polite" aria-label="Results">
+              {browse.state.status !== "idle" ? (
+                <BrowseResults state={browse.state} onMore={browse.more} onRetry={() => browse.open(selectedCategory)} />
+              ) : (
+                <>
+                  {search.status === "loading" ? <ResultsSkeleton /> : null}
+                  {search.status === "done" ? <Results response={search.response} text={search.text} /> : null}
+                  {search.status === "error" && !isStoreGone(search.error) ? (
+                    <ErrorState {...friendlyError(search.error)} onRetry={() => runSearch(search.text)} />
+                  ) : null}
+                  {search.status === "idle" ? (
+                    <EmptyState title="What are you looking for?" icon={<StoreIcon />}>
+                      Search for one product or a whole list, like “milk, bread and crayons”, or pick a category.
+                    </EmptyState>
+                  ) : null}
+                </>
+              )}
             </section>
           </>
         )}

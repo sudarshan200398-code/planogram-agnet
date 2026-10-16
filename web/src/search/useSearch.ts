@@ -42,5 +42,11 @@ export function useSearch(storeId: string | null) {
   /** Show a response obtained elsewhere (e.g. after answering a clarification). */
   const show = useCallback((text: string, response: SearchResponse) => setState({ status: "done", text, response }), []);
 
-  return { state, search, show };
+  /** Clear results (e.g. when browsing a category instead). */
+  const reset = useCallback(() => {
+    controller.current?.abort();
+    setState({ status: "idle" });
+  }, []);
+
+  return { state, search, show, reset };
 }

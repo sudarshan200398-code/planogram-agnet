@@ -15,7 +15,7 @@ async function renderApp(url = "/") {
 }
 
 async function search(user: ReturnType<typeof userEvent.setup>, text: string) {
-  await user.type(screen.getByRole("searchbox", { name: "Search products" }), text);
+  await user.type(screen.getByRole("combobox", { name: "Search products" }), text);
   await user.click(screen.getByRole("button", { name: "Search" }));
 }
 

@@ -45,6 +45,26 @@ export const defaultHandlers = [
   http.get(`${API}/stores/:store/categories`, ({ params }) =>
     params.store === "riverside" ? reply("categories_riverside") : reply("categories_central"),
   ),
+  http.get(`${API}/stores/:store/suggest`, ({ params, request }) => {
+    const q = new URL(request.url).searchParams.get("q") ?? "";
+    const f = Object.values(fixtures).find(
+      (x) => x.name.startsWith("suggest_") && x.request.path === `/stores/${String(params.store)}/suggest` && x.request.query.q === q,
+    );
+    return f ? reply(f.name) : HttpResponse.json({ store_id: params.store, suggestions: [] });
+  }),
+  http.get(`${API}/stores/:store/products`, ({ params, request }) => {
+    const u = new URL(request.url);
+    const page = u.searchParams.get("page") ?? "1";
+    const f = Object.values(fixtures).find(
+      (x) =>
+        x.name.startsWith("products_") &&
+        x.request.path === `/stores/${String(params.store)}/products` &&
+        x.request.query.category === u.searchParams.get("category") &&
+        String(x.request.query.page) === page,
+    );
+    if (!f) throw new Error(`no recorded products page for ${u.search}`);
+    return reply(f.name);
+  }),
   http.post(`${API}/stores/:store/search`, async ({ params, request }) => {
     const { text } = (await request.json()) as { text: string };
     const f = searchFixture(String(params.store), text);

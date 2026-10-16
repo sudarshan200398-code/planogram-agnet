@@ -10,6 +10,10 @@ export const LOW_STOCK_MAX = 5;
 export const SUGGEST_DEBOUNCE_MS = 250;
 export const SUGGEST_MIN_CHARS = 2;
 
+/** Category browsing: quick chips shown on the home screen, and products per page. */
+export const QUICK_CATEGORY_COUNT = 10;
+export const BROWSE_PAGE_SIZE = 20;
+
 /** Shopping list limits, matching the API (max_items 20, quantity 1 to 99). */
 export const LIST_MAX_ITEMS = 20;
 export const QTY_MIN = 1;
