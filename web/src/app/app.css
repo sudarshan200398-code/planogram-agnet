@@ -80,6 +80,7 @@
   margin: 0 auto;
   padding: var(--space-4);
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* lets the chip row scroll instead of widening the page */
   gap: var(--space-4);
 }
 .sf-title {
