@@ -1,0 +1,252 @@
+{
+  "name": "search_riverside_kibble",
+  "request": {
+    "method": "POST",
+    "path": "/stores/riverside/search",
+    "query": {},
+    "body": {
+      "text": "i am near the fresh market, Pebble Pet Puppy Kibble 1 kg"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "status": "ok",
+    "session_id": "session-006",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Pebble Pet Puppy Kibble 1 kg",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "RS-DOG-001",
+        "name": "Pebble Pet Puppy Kibble 1 kg",
+        "brand": "Pebble Pet",
+        "category": "Dog Food",
+        "size": "1 kg",
+        "price": 599.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 69,
+        "floor": 2,
+        "zone": "Pet Supplies",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Pet Supplies",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "RS2_PET_SUPPLIES"
+          }
+        ],
+        "image_url": "/stores/riverside/products/RS-DOG-001/image"
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "RS1_FRESH_MARKET",
+      "start_label": "Fresh Market",
+      "total_distance_m": 141.0,
+      "floor_changes": 1,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 41m from Fresh Market to Escalator Hall.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "take_connector",
+          "icon": "escalator",
+          "text": "Take the escalator from Level 1 to Level 2.",
+          "floor": 1,
+          "to_floor": 2
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 100m from Escalator Hall to Pet Supplies.",
+          "floor": 2,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Pet Supplies for Pebble Pet Puppy Kibble 1 kg (Level 2, Pet Supplies, Bay A, Shelf 1).",
+          "floor": 2,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "RS-DOG-001",
+          "name": "Pebble Pet Puppy Kibble 1 kg",
+          "floor": 2,
+          "zone": "Pet Supplies",
+          "node_id": "RS2_PET_SUPPLIES"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                10.0,
+                4.0
+              ],
+              [
+                10.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                12.0
+              ],
+              [
+                10.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                25.0
+              ],
+              [
+                10.0,
+                38.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                38.0
+              ],
+              [
+                3.0,
+                38.0
+              ]
+            ]
+          ]
+        },
+        {
+          "floor": 2,
+          "lines": [
+            [
+              [
+                3.0,
+                38.0
+              ],
+              [
+                10.0,
+                38.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                38.0
+              ],
+              [
+                10.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                25.0
+              ],
+              [
+                10.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                10.0,
+                12.0
+              ],
+              [
+                25.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                12.0
+              ],
+              [
+                40.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                40.0,
+                12.0
+              ],
+              [
+                55.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                55.0,
+                12.0
+              ],
+              [
+                70.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                70.0,
+                12.0
+              ],
+              [
+                77.0,
+                12.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "RS1_FRESH_MARKET",
+        "RS1_J11",
+        "RS1_J12",
+        "RS1_J13",
+        "RS1_ESCALATOR_HALL",
+        "RS2_ESCALATOR_HALL",
+        "RS2_J13",
+        "RS2_J12",
+        "RS2_J11",
+        "RS2_J21",
+        "RS2_J31",
+        "RS2_J41",
+        "RS2_J51",
+        "RS2_PET_SUPPLIES"
+      ]
+    }
+  }
+}

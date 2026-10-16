@@ -1,0 +1,125 @@
+{
+  "name": "products_central_page",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/products",
+    "query": {
+      "category": "Accessories, scarves & caps",
+      "page": 1,
+      "page_size": 4
+    },
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "category": "Accessories, scarves & caps",
+    "page": 1,
+    "page_size": 4,
+    "total": 8,
+    "pages": 2,
+    "items": [
+      {
+        "sku": "APP-ACC-003",
+        "name": "Basic Co Baseball Cap one size",
+        "brand": "Basic Co",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 789.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 57,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "C",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "C",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-003/image"
+      },
+      {
+        "sku": "APP-ACC-008",
+        "name": "Basic Co Leather Belt one size",
+        "brand": "Basic Co",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 719.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 26,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "D",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "D",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-008/image"
+      },
+      {
+        "sku": "APP-ACC-002",
+        "name": "Basic Co Wool Scarf one size",
+        "brand": "Basic Co",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 659.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 21,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "D",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "D",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-002/image"
+      },
+      {
+        "sku": "APP-ACC-004",
+        "name": "Store Brand Baseball Cap one size",
+        "brand": "Store Brand",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 279.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 9,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "D",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "D",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-004/image"
+      }
+    ]
+  }
+}

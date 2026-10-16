@@ -1,0 +1,54 @@
+{
+  "name": "search_central_out_of_stock",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/search",
+    "query": {},
+    "body": {
+      "text": "ArtBox Watercolour Paints 12 pack"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "partial",
+    "session_id": "session-004",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "ArtBox Watercolour Paints 12 pack",
+        "quantity_requested": 1,
+        "status": "unavailable",
+        "reason": "Out of stock",
+        "sku": "TOY-ART-005",
+        "name": "ArtBox Watercolour Paints 12 pack",
+        "brand": "ArtBox",
+        "category": "Art supplies, crayons & coloring books",
+        "size": "12 pack",
+        "price": 189.0,
+        "currency": "INR",
+        "stock_status": "out_of_stock",
+        "in_stock": 0,
+        "floor": 2,
+        "zone": "Toys & Stationery",
+        "bay": "C",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Toys & Stationery",
+            "bay": "C",
+            "shelf": 2,
+            "node_id": "L2_TOYS"
+          }
+        ],
+        "image_url": "/stores/central/products/TOY-ART-005/image"
+      }
+    ],
+    "question": null,
+    "route": null
+  }
+}

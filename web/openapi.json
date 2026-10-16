@@ -1,0 +1,1968 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Store Product Finder API",
+    "description": "Find products in a store, check stock, and get the shortest walking route across floors.\n\nEvery store endpoint is under `/stores/{store_id}`. Errors always have the body\n`{\"error\": {\"code\", \"message\", \"request_id\"}}`; send `X-Request-ID` to correlate logs.\nClarification sessions are kept in memory: run one worker per instance.\n",
+    "version": "2.0.0-phase1"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores": {
+      "get": {
+        "tags": [
+          "stores"
+        ],
+        "summary": "Stores",
+        "operationId": "stores_stores_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StoreSummary"
+                  },
+                  "type": "array",
+                  "title": "Response Stores Stores Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/map": {
+      "get": {
+        "tags": [
+          "stores"
+        ],
+        "summary": "Store Map",
+        "operationId": "store_map_stores__store_id__map_get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/categories": {
+      "get": {
+        "tags": [
+          "catalogue"
+        ],
+        "summary": "Categories",
+        "operationId": "categories_stores__store_id__categories_get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/products": {
+      "get": {
+        "tags": [
+          "catalogue"
+        ],
+        "summary": "Browse",
+        "operationId": "browse_stores__store_id__products_get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Exact category name (any case)",
+              "title": "Category"
+            },
+            "description": "Exact category name (any case)"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Default api_page_size_default, at most api_page_size_max",
+              "title": "Page Size"
+            },
+            "description": "Default api_page_size_default, at most api_page_size_max"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/suggest": {
+      "get": {
+        "tags": [
+          "catalogue"
+        ],
+        "summary": "Suggestions",
+        "operationId": "suggestions_stores__store_id__suggest_get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuggestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/products/{sku}": {
+      "get": {
+        "tags": [
+          "catalogue"
+        ],
+        "summary": "Product Detail",
+        "operationId": "product_detail_stores__store_id__products__sku__get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/products/{sku}/image": {
+      "get": {
+        "tags": [
+          "catalogue"
+        ],
+        "summary": "Product Picture",
+        "operationId": "product_picture_stores__store_id__products__sku__image_get",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/png": {},
+              "image/svg+xml": {}
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/search": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Search",
+        "description": "The full request pipeline on typed text (start phrases, quantities, lists, typos).",
+        "operationId": "search_stores__store_id__search_post",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/clarify": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Clarify",
+        "description": "Answer the pending question from /search or /basket/route with one of its offered skus.",
+        "operationId": "clarify_stores__store_id__clarify_post",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClarifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/stores/{store_id}/basket/route": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Basket Route",
+        "description": "Route for a basket of skus, through the same pipeline as typed text, without the AI model.",
+        "operationId": "basket_route_stores__store_id__basket_route_post",
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Store Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketRouteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BasketLine": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Sku"
+          },
+          "qty": {
+            "type": "integer",
+            "title": "Qty",
+            "description": "basket_min_quantity to basket_max_quantity (1 to 99)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "qty"
+        ],
+        "title": "BasketLine"
+      },
+      "BasketRouteRequest": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/BasketLine"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Items",
+            "description": "At most max_items (20) distinct skus"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start"
+          },
+          "step_free": {
+            "type": "boolean",
+            "title": "Step Free",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "BasketRouteRequest"
+      },
+      "Bounds": {
+        "properties": {
+          "width": {
+            "type": "number",
+            "title": "Width"
+          },
+          "height": {
+            "type": "number",
+            "title": "Height"
+          }
+        },
+        "type": "object",
+        "required": [
+          "width",
+          "height"
+        ],
+        "title": "Bounds"
+      },
+      "CategoriesResponse": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "title": "Store Id"
+          },
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            },
+            "type": "array",
+            "title": "Categories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "categories"
+        ],
+        "title": "CategoriesResponse"
+      },
+      "Category": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "product_count": {
+            "type": "integer",
+            "title": "Product Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "product_count"
+        ],
+        "title": "Category"
+      },
+      "ClarifyRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Session Id"
+          },
+          "item_index": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Item Index"
+          },
+          "sku": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Sku"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "item_index",
+          "sku"
+        ],
+        "title": "ClarifyRequest"
+      },
+      "ErrorBody": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorDetail": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "examples": [
+              "STORE_NOT_FOUND"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "request_id"
+        ],
+        "title": "ErrorDetail"
+      },
+      "FloorSegments": {
+        "properties": {
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          },
+          "lines": {
+            "items": {
+              "items": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Lines",
+            "description": "[[[x1, y1], [x2, y2]], ...] in map units"
+          }
+        },
+        "type": "object",
+        "required": [
+          "floor",
+          "lines"
+        ],
+        "title": "FloorSegments"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "stores": {
+            "items": {
+              "$ref": "#/components/schemas/StoreHealth"
+            },
+            "type": "array",
+            "title": "Stores"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "stores"
+        ],
+        "title": "HealthResponse"
+      },
+      "Location": {
+        "properties": {
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          },
+          "zone": {
+            "type": "string",
+            "title": "Zone"
+          },
+          "bay": {
+            "type": "string",
+            "title": "Bay"
+          },
+          "shelf": {
+            "type": "integer",
+            "title": "Shelf"
+          },
+          "node_id": {
+            "type": "string",
+            "title": "Node Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "floor",
+          "zone",
+          "bay",
+          "shelf",
+          "node_id"
+        ],
+        "title": "Location"
+      },
+      "MapConnector": {
+        "properties": {
+          "a": {
+            "type": "string",
+            "title": "A"
+          },
+          "b": {
+            "type": "string",
+            "title": "B"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "accessible": {
+            "type": "boolean",
+            "title": "Accessible"
+          },
+          "cost": {
+            "type": "number",
+            "title": "Cost"
+          }
+        },
+        "type": "object",
+        "required": [
+          "a",
+          "b",
+          "type",
+          "accessible",
+          "cost"
+        ],
+        "title": "MapConnector"
+      },
+      "MapEdge": {
+        "properties": {
+          "a": {
+            "type": "string",
+            "title": "A"
+          },
+          "b": {
+            "type": "string",
+            "title": "B"
+          },
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "a",
+          "b",
+          "floor"
+        ],
+        "title": "MapEdge"
+      },
+      "MapNode": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          },
+          "x": {
+            "type": "number",
+            "title": "X"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "floor",
+          "x",
+          "y",
+          "type",
+          "label"
+        ],
+        "title": "MapNode"
+      },
+      "MapResponse": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "title": "Store Id"
+          },
+          "floors": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Floors"
+          },
+          "bounds": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/MapNode"
+            },
+            "type": "array",
+            "title": "Nodes"
+          },
+          "edges": {
+            "items": {
+              "$ref": "#/components/schemas/MapEdge"
+            },
+            "type": "array",
+            "title": "Edges"
+          },
+          "connectors": {
+            "items": {
+              "$ref": "#/components/schemas/MapConnector"
+            },
+            "type": "array",
+            "title": "Connectors"
+          },
+          "zones": {
+            "items": {
+              "$ref": "#/components/schemas/Zone"
+            },
+            "type": "array",
+            "title": "Zones"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "floors",
+          "bounds",
+          "nodes",
+          "edges",
+          "connectors",
+          "zones"
+        ],
+        "title": "MapResponse"
+      },
+      "Option": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "places": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Places"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "name",
+          "places",
+          "image_url"
+        ],
+        "title": "Option"
+      },
+      "Product": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price",
+            "description": "Rupees; null when the store has no price for it"
+          },
+          "currency": {
+            "type": "string",
+            "const": "INR",
+            "title": "Currency",
+            "default": "INR"
+          },
+          "stock_status": {
+            "type": "string",
+            "enum": [
+              "in_stock",
+              "out_of_stock",
+              "unknown"
+            ],
+            "title": "Stock Status"
+          },
+          "in_stock": {
+            "type": "integer",
+            "title": "In Stock",
+            "description": "Units in stock"
+          },
+          "floor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Floor",
+            "description": "Primary shelf location (the route's stop for search items)"
+          },
+          "zone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zone"
+          },
+          "bay": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bay"
+          },
+          "shelf": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shelf"
+          },
+          "locations": {
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "type": "array",
+            "title": "Locations"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "name",
+          "brand",
+          "category",
+          "size",
+          "price",
+          "stock_status",
+          "in_stock",
+          "floor",
+          "zone",
+          "bay",
+          "shelf",
+          "locations",
+          "image_url"
+        ],
+        "title": "Product"
+      },
+      "ProductPage": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "title": "Store Id"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "category",
+          "page",
+          "page_size",
+          "total",
+          "pages",
+          "items"
+        ],
+        "title": "ProductPage"
+      },
+      "QuestionOut": {
+        "properties": {
+          "item_index": {
+            "type": "integer",
+            "title": "Item Index"
+          },
+          "item_text": {
+            "type": "string",
+            "title": "Item Text"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "type": "array",
+            "title": "Options"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_index",
+          "item_text",
+          "options"
+        ],
+        "title": "QuestionOut"
+      },
+      "RouteOut": {
+        "properties": {
+          "start_node": {
+            "type": "string",
+            "title": "Start Node"
+          },
+          "start_label": {
+            "type": "string",
+            "title": "Start Label"
+          },
+          "total_distance_m": {
+            "type": "number",
+            "title": "Total Distance M"
+          },
+          "floor_changes": {
+            "type": "integer",
+            "title": "Floor Changes"
+          },
+          "accessible_only": {
+            "type": "boolean",
+            "title": "Accessible Only"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/RouteStep"
+            },
+            "type": "array",
+            "title": "Steps"
+          },
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/Stop"
+            },
+            "type": "array",
+            "title": "Stops"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/FloorSegments"
+            },
+            "type": "array",
+            "title": "Segments"
+          },
+          "path": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Path"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_node",
+          "start_label",
+          "total_distance_m",
+          "floor_changes",
+          "accessible_only",
+          "steps",
+          "stops",
+          "segments",
+          "path"
+        ],
+        "title": "RouteOut"
+      },
+      "RouteStep": {
+        "properties": {
+          "number": {
+            "type": "integer",
+            "title": "Number"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "walk",
+              "take_connector",
+              "arrive"
+            ],
+            "title": "Kind"
+          },
+          "icon": {
+            "type": "string",
+            "title": "Icon",
+            "description": "Material icon name: directions_walk, stairs, escalator, elevator, location_on"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          },
+          "to_floor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Floor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "number",
+          "kind",
+          "icon",
+          "text",
+          "floor",
+          "to_floor"
+        ],
+        "title": "RouteStep"
+      },
+      "SearchItem": {
+        "properties": {
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
+          "requested": {
+            "type": "string",
+            "title": "Requested"
+          },
+          "quantity_requested": {
+            "type": "integer",
+            "title": "Quantity Requested"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "unavailable",
+              "not_found",
+              "not_placed",
+              "needs_choice",
+              "error"
+            ],
+            "title": "Status"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sku"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "currency": {
+            "type": "string",
+            "const": "INR",
+            "title": "Currency",
+            "default": "INR"
+          },
+          "stock_status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "in_stock",
+                  "out_of_stock",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stock Status"
+          },
+          "in_stock": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "In Stock"
+          },
+          "floor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Floor"
+          },
+          "zone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zone"
+          },
+          "bay": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bay"
+          },
+          "shelf": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shelf"
+          },
+          "locations": {
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "type": "array",
+            "title": "Locations"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "requested",
+          "quantity_requested",
+          "status",
+          "reason",
+          "sku",
+          "name",
+          "brand",
+          "category",
+          "size",
+          "price",
+          "stock_status",
+          "in_stock",
+          "floor",
+          "zone",
+          "bay",
+          "shelf",
+          "locations",
+          "image_url"
+        ],
+        "title": "SearchItem"
+      },
+      "SearchRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text",
+            "description": "What the shopper typed; at most max_query_chars (500)"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start",
+            "description": "Start point label, e.g. 'Produce'"
+          },
+          "step_free": {
+            "type": "boolean",
+            "title": "Step Free",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "SearchRequest"
+      },
+      "SearchResponse": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "title": "Store Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          },
+          "verified": {
+            "type": "boolean",
+            "title": "Verified"
+          },
+          "messages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Messages"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SearchItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QuestionOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "route": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RouteOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "status",
+          "session_id",
+          "verified",
+          "messages",
+          "items",
+          "question",
+          "route"
+        ],
+        "title": "SearchResponse"
+      },
+      "Stop": {
+        "properties": {
+          "order": {
+            "type": "integer",
+            "title": "Order"
+          },
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "floor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Floor"
+          },
+          "zone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zone"
+          },
+          "node_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Node Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order",
+          "sku",
+          "name",
+          "floor",
+          "zone",
+          "node_id"
+        ],
+        "title": "Stop"
+      },
+      "StoreHealth": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "loaded": {
+            "type": "boolean",
+            "title": "Loaded"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "loaded"
+        ],
+        "title": "StoreHealth"
+      },
+      "StoreSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "floors": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Floors"
+          },
+          "product_count": {
+            "type": "integer",
+            "title": "Product Count"
+          },
+          "has_prices": {
+            "type": "boolean",
+            "title": "Has Prices"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "floors",
+          "product_count",
+          "has_prices"
+        ],
+        "title": "StoreSummary"
+      },
+      "SuggestResponse": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "title": "Store Id"
+          },
+          "suggestions": {
+            "items": {
+              "$ref": "#/components/schemas/Suggestion"
+            },
+            "type": "array",
+            "title": "Suggestions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "suggestions"
+        ],
+        "title": "SuggestResponse"
+      },
+      "Suggestion": {
+        "properties": {
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "places": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Places"
+          },
+          "stock_status": {
+            "type": "string",
+            "enum": [
+              "in_stock",
+              "out_of_stock",
+              "unknown"
+            ],
+            "title": "Stock Status"
+          },
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sku",
+          "name",
+          "label",
+          "places",
+          "stock_status",
+          "image_url"
+        ],
+        "title": "Suggestion"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Zone": {
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "title": "Node Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "floor": {
+            "type": "integer",
+            "title": "Floor"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "node_id",
+          "label",
+          "floor",
+          "type"
+        ],
+        "title": "Zone"
+      }
+    }
+  }
+}

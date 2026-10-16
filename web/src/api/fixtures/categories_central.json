@@ -1,0 +1,504 @@
+{
+  "name": "categories_central",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/categories",
+    "query": {},
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "categories": [
+      {
+        "name": "Accessories, scarves & caps",
+        "product_count": 8
+      },
+      {
+        "name": "Action figures, dolls & playsets",
+        "product_count": 8
+      },
+      {
+        "name": "Air fryers, multi-cookers & microwaves",
+        "product_count": 8
+      },
+      {
+        "name": "Apples, pears & stone fruits",
+        "product_count": 8
+      },
+      {
+        "name": "Art supplies, crayons & coloring books",
+        "product_count": 8
+      },
+      {
+        "name": "Artisan breads, baguettes & rolls",
+        "product_count": 8
+      },
+      {
+        "name": "Bacon, sausage & breakfast meats",
+        "product_count": 8
+      },
+      {
+        "name": "Bag chips, pretzels & popcorn",
+        "product_count": 8
+      },
+      {
+        "name": "Bagels, buns & croissants",
+        "product_count": 8
+      },
+      {
+        "name": "Bagged loaves & sandwich bread",
+        "product_count": 8
+      },
+      {
+        "name": "Baking mixes & sugar",
+        "product_count": 8
+      },
+      {
+        "name": "Batteries, chargers & gift cards",
+        "product_count": 8
+      },
+      {
+        "name": "Berries & specialty fruits",
+        "product_count": 8
+      },
+      {
+        "name": "Biscuits & cookies",
+        "product_count": 8
+      },
+      {
+        "name": "Board games & large playsets",
+        "product_count": 8
+      },
+      {
+        "name": "Bottoms & denim",
+        "product_count": 8
+      },
+      {
+        "name": "Brochures, slips & store forms",
+        "product_count": 8
+      },
+      {
+        "name": "Building blocks & creative kits",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk & heavy items",
+        "product_count": 6
+      },
+      {
+        "name": "Bulk & smoked meats",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk beverages & milk products",
+        "product_count": 7
+      },
+      {
+        "name": "Bulk paper, backpacks & desk organizers",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk party & chip packs",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk root vegetables & bags",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk snacks & extra inventory",
+        "product_count": 8
+      },
+      {
+        "name": "Bulk toys, plushies & outdoor gear",
+        "product_count": 8
+      },
+      {
+        "name": "Bulky appliances & storage",
+        "product_count": 8
+      },
+      {
+        "name": "Bunched vegetables & celery",
+        "product_count": 8
+      },
+      {
+        "name": "Butter, spreads & cream cheese",
+        "product_count": 8
+      },
+      {
+        "name": "Canned goods",
+        "product_count": 8
+      },
+      {
+        "name": "Carbonated & sports drinks",
+        "product_count": 8
+      },
+      {
+        "name": "Casual apparel & coats",
+        "product_count": 8
+      },
+      {
+        "name": "Celebration cakes & large pastries",
+        "product_count": 8
+      },
+      {
+        "name": "Cereal & oats",
+        "product_count": 8
+      },
+      {
+        "name": "Chips & crisps",
+        "product_count": 8
+      },
+      {
+        "name": "Chocolate & candy bars",
+        "product_count": 8
+      },
+      {
+        "name": "Citrus, bananas & tropical fruits",
+        "product_count": 8
+      },
+      {
+        "name": "Confectionery & sweet snacks",
+        "product_count": 8
+      },
+      {
+        "name": "Cooking oils & vinegars",
+        "product_count": 8
+      },
+      {
+        "name": "Countertop impulse displays",
+        "product_count": 8
+      },
+      {
+        "name": "Creamers & juices",
+        "product_count": 8
+      },
+      {
+        "name": "Customer wraps, bags & secured stock",
+        "product_count": 8
+      },
+      {
+        "name": "Danishes, granola bars & muffins",
+        "product_count": 7
+      },
+      {
+        "name": "Disinfection & bulk liquids",
+        "product_count": 8
+      },
+      {
+        "name": "Dump bin sweet treats",
+        "product_count": 8
+      },
+      {
+        "name": "Energy, water & kombucha",
+        "product_count": 8
+      },
+      {
+        "name": "Floor displays & bags",
+        "product_count": 8
+      },
+      {
+        "name": "Flour & bulk grains",
+        "product_count": 8
+      },
+      {
+        "name": "Folded merchandise & graphics",
+        "product_count": 8
+      },
+      {
+        "name": "Footwear & folded essentials",
+        "product_count": 8
+      },
+      {
+        "name": "Fresh beef & pork",
+        "product_count": 8
+      },
+      {
+        "name": "Fresh pastries, danishes & croissants",
+        "product_count": 8
+      },
+      {
+        "name": "Fresh poultry",
+        "product_count": 8
+      },
+      {
+        "name": "Frozen breakfast & snacks",
+        "product_count": 8
+      },
+      {
+        "name": "Frozen entrées & meals",
+        "product_count": 8
+      },
+      {
+        "name": "Frozen pizza & bulk bags",
+        "product_count": 8
+      },
+      {
+        "name": "Frozen vegetables & fruits",
+        "product_count": 8
+      },
+      {
+        "name": "Gift cards & ticket center",
+        "product_count": 8
+      },
+      {
+        "name": "Gourmet snacks & dried fruit",
+        "product_count": 8
+      },
+      {
+        "name": "Grab-and-go beverages",
+        "product_count": 8
+      },
+      {
+        "name": "Grab-n-go accessories",
+        "product_count": 7
+      },
+      {
+        "name": "Gum, mints & breath fresheners",
+        "product_count": 8
+      },
+      {
+        "name": "Hand sanitizers, medicines & lip balms",
+        "product_count": 8
+      },
+      {
+        "name": "Hanging toys, cars & novelties",
+        "product_count": 8
+      },
+      {
+        "name": "High-value locked showcase",
+        "product_count": 8
+      },
+      {
+        "name": "High-volume beverages & quick picks",
+        "product_count": 8
+      },
+      {
+        "name": "Hoodies, jackets & activewear",
+        "product_count": 8
+      },
+      {
+        "name": "Household cleaners & sprays",
+        "product_count": 8
+      },
+      {
+        "name": "Ice cream & frozen desserts",
+        "product_count": 8
+      },
+      {
+        "name": "Juices, iced coffee & smoothies",
+        "product_count": 8
+      },
+      {
+        "name": "Laundry detergents & fabric softeners",
+        "product_count": 8
+      },
+      {
+        "name": "Leafy greens, broccoli & cauliflower",
+        "product_count": 8
+      },
+      {
+        "name": "Magazines & reads",
+        "product_count": 8
+      },
+      {
+        "name": "Melons, squash & bulk produce",
+        "product_count": 8
+      },
+      {
+        "name": "Mexican & world foods",
+        "product_count": 8
+      },
+      {
+        "name": "Milk & plant-based beverages",
+        "product_count": 8
+      },
+      {
+        "name": "Mobile, audio & travel tech",
+        "product_count": 8
+      },
+      {
+        "name": "Muffins, donuts & cookies",
+        "product_count": 8
+      },
+      {
+        "name": "Multipack snacks",
+        "product_count": 8
+      },
+      {
+        "name": "Noodles & Asian foods",
+        "product_count": 8
+      },
+      {
+        "name": "Notebooks, paper & pad stacks",
+        "product_count": 8
+      },
+      {
+        "name": "Nuts & dried fruit",
+        "product_count": 8
+      },
+      {
+        "name": "Office organizers & binders",
+        "product_count": 8
+      },
+      {
+        "name": "Packaged cheese & slices",
+        "product_count": 8
+      },
+      {
+        "name": "Packaged salads, herbs & mushrooms",
+        "product_count": 8
+      },
+      {
+        "name": "Paper products & bulk supplies",
+        "product_count": 8
+      },
+      {
+        "name": "Pasta",
+        "product_count": 8
+      },
+      {
+        "name": "Pasta sauces",
+        "product_count": 8
+      },
+      {
+        "name": "Pens, markers & hanging supplies",
+        "product_count": 8
+      },
+      {
+        "name": "Pickles & preserves",
+        "product_count": 8
+      },
+      {
+        "name": "Pies, tarts & sliced cakes",
+        "product_count": 8
+      },
+      {
+        "name": "POS counter essentials",
+        "product_count": 8
+      },
+      {
+        "name": "Pre-packaged deli meats & snack packs",
+        "product_count": 8
+      },
+      {
+        "name": "Prepared salads & sides",
+        "product_count": 8
+      },
+      {
+        "name": "Prepared sandwiches, wraps & salads",
+        "product_count": 8
+      },
+      {
+        "name": "Rice & grains",
+        "product_count": 8
+      },
+      {
+        "name": "Sauces & condiments",
+        "product_count": 8
+      },
+      {
+        "name": "Seasonal drink packs",
+        "product_count": 8
+      },
+      {
+        "name": "Seasonal folded overstock",
+        "product_count": 8
+      },
+      {
+        "name": "Seasonal sweets & treats",
+        "product_count": 8
+      },
+      {
+        "name": "Secured foot and base displays",
+        "product_count": 8
+      },
+      {
+        "name": "Service cheeses & charcuterie",
+        "product_count": 8
+      },
+      {
+        "name": "Service deli meats",
+        "product_count": 8
+      },
+      {
+        "name": "Shopping bags & supplies",
+        "product_count": 8
+      },
+      {
+        "name": "Small appliances",
+        "product_count": 8
+      },
+      {
+        "name": "Snacks, chips & nuts",
+        "product_count": 8
+      },
+      {
+        "name": "Soft drinks & juices",
+        "product_count": 8
+      },
+      {
+        "name": "Specialty & lightweight",
+        "product_count": 8
+      },
+      {
+        "name": "Spices & seasonings",
+        "product_count": 8
+      },
+      {
+        "name": "Stacked pallets bulk promotion",
+        "product_count": 8
+      },
+      {
+        "name": "Store-brand small appliances",
+        "product_count": 8
+      },
+      {
+        "name": "Sweet treats & novelties",
+        "product_count": 8
+      },
+      {
+        "name": "Top-shelf bags",
+        "product_count": 8
+      },
+      {
+        "name": "Tops",
+        "product_count": 8
+      },
+      {
+        "name": "Tortillas, flatbreads & naan",
+        "product_count": 8
+      },
+      {
+        "name": "Trail mix & jerky",
+        "product_count": 8
+      },
+      {
+        "name": "Trash bags & food storage",
+        "product_count": 8
+      },
+      {
+        "name": "Umbrellas & bulk snacks",
+        "product_count": 8
+      },
+      {
+        "name": "Upper sackwall display",
+        "product_count": 8
+      },
+      {
+        "name": "Vacuums & carpet cleaners",
+        "product_count": 8
+      },
+      {
+        "name": "Water & bulk beverages",
+        "product_count": 8
+      },
+      {
+        "name": "Yogurt & desserts",
+        "product_count": 8
+      }
+    ]
+  }
+}

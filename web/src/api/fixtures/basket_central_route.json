@@ -1,0 +1,348 @@
+{
+  "name": "basket_central_route",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/basket/route",
+    "query": {},
+    "body": {
+      "items": [
+        {
+          "sku": "BAK-ART-001",
+          "qty": 2
+        },
+        {
+          "sku": "APP-ACC-001",
+          "qty": 1
+        }
+      ]
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "ok",
+    "session_id": "session-007",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Daily Bake French Baguette 1 piece",
+        "quantity_requested": 2,
+        "status": "available",
+        "reason": null,
+        "sku": "BAK-ART-001",
+        "name": "Daily Bake French Baguette 1 piece",
+        "brand": "Daily Bake",
+        "category": "Artisan breads, baguettes & rolls",
+        "size": "1 piece",
+        "price": 37.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 57,
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Bakery",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "L1_BAKERY"
+          }
+        ],
+        "image_url": "/stores/central/products/BAK-ART-001/image"
+      },
+      {
+        "index": 1,
+        "requested": "Urban Thread Wool Scarf one size",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "APP-ACC-001",
+        "name": "Urban Thread Wool Scarf one size",
+        "brand": "Urban Thread",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 489.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 21,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "C",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "C",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-001/image"
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "L1_ENTRANCE",
+      "start_label": "Entrance",
+      "total_distance_m": 123.7,
+      "floor_changes": 1,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 33m from Entrance to Bakery.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Bakery for Daily Bake French Baguette 1 piece (Level 1, Bakery, Bay A, Shelf 1).",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 47m from Bakery to Escalators.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "take_connector",
+          "icon": "escalator",
+          "text": "Take the escalator from Level 1 to Level 2.",
+          "floor": 1,
+          "to_floor": 2
+        },
+        {
+          "number": 5,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 43m from Escalators to Apparel centre.",
+          "floor": 2,
+          "to_floor": null
+        },
+        {
+          "number": 6,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Apparel centre for Urban Thread Wool Scarf one size (Level 2, Apparel & Clothing, Bay C, Shelf 4).",
+          "floor": 2,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "BAK-ART-001",
+          "name": "Daily Bake French Baguette 1 piece",
+          "floor": 1,
+          "zone": "Bakery",
+          "node_id": "L1_BAKERY"
+        },
+        {
+          "order": 2,
+          "sku": "APP-ACC-001",
+          "name": "Urban Thread Wool Scarf one size",
+          "floor": 2,
+          "zone": "Apparel & Clothing",
+          "node_id": "L2_APPAREL_E"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                3.0,
+                33.0
+              ],
+              [
+                6.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                28.0
+              ],
+              [
+                6.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                18.0
+              ],
+              [
+                6.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                8.0
+              ],
+              [
+                12.0,
+                4.0
+              ]
+            ],
+            [
+              [
+                12.0,
+                4.0
+              ],
+              [
+                18.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                18.0,
+                8.0
+              ],
+              [
+                28.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                28.0,
+                8.0
+              ],
+              [
+                38.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                38.0,
+                8.0
+              ],
+              [
+                46.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                8.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                57.0,
+                5.0
+              ]
+            ]
+          ]
+        },
+        {
+          "floor": 2,
+          "lines": [
+            [
+              [
+                57.0,
+                5.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                54.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                18.0
+              ],
+              [
+                42.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                42.0,
+                18.0
+              ],
+              [
+                30.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                18.0
+              ],
+              [
+                30.0,
+                23.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "L1_ENTRANCE",
+        "L1_J_SW",
+        "L1_J_W",
+        "L1_J_NW",
+        "L1_BAKERY",
+        "L1_J_N1",
+        "L1_J_N2",
+        "L1_J_N3",
+        "L1_J_N4",
+        "L1_J_NE",
+        "L1_ESC",
+        "L2_ESC",
+        "L2_J_NE",
+        "L2_J_E",
+        "L2_J_C3",
+        "L2_J_C2",
+        "L2_APPAREL_E"
+      ]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "name": "suggest_central_mi",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/suggest",
+    "query": {
+      "q": "mi"
+    },
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "suggestions": [
+      {
+        "sku": "DAI-MIL-004",
+        "name": "Arctic Treat Semi Skimmed Milk 1 L",
+        "label": "Arctic Treat Semi Skimmed Milk 1 L | Level 1, Dairy & Frozen | In stock",
+        "places": [
+          "Level 1, Dairy & Frozen"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/DAI-MIL-004/image"
+      },
+      {
+        "sku": "CAF-BUL-005",
+        "name": "Café Corner Chocolate Milk 2 L",
+        "label": "Café Corner Chocolate Milk 2 L | Level 2, Café | In stock",
+        "places": [
+          "Level 2, Café"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/CAF-BUL-005/image"
+      },
+      {
+        "sku": "CAF-BUL-001",
+        "name": "Café Corner Whole Milk 1 L",
+        "label": "Café Corner Whole Milk 1 L | Level 2, Café | In stock",
+        "places": [
+          "Level 2, Café"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/CAF-BUL-001/image"
+      },
+      {
+        "sku": "CAF-BUL-004",
+        "name": "Fresh Press Chocolate Milk 1 L",
+        "label": "Fresh Press Chocolate Milk 1 L | Level 2, Café | In stock",
+        "places": [
+          "Level 2, Café"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/CAF-BUL-004/image"
+      },
+      {
+        "sku": "DAI-MIL-001",
+        "name": "Meadow Fresh Whole Milk 1 L",
+        "label": "Meadow Fresh Whole Milk 1 L | Level 1, Dairy & Frozen | In stock",
+        "places": [
+          "Level 1, Dairy & Frozen"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/DAI-MIL-001/image"
+      },
+      {
+        "sku": "DAI-MIL-003",
+        "name": "Store Brand Semi Skimmed Milk 2 L",
+        "label": "Store Brand Semi Skimmed Milk 2 L | Level 1, Dairy & Frozen | In stock",
+        "places": [
+          "Level 1, Dairy & Frozen"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/DAI-MIL-003/image"
+      },
+      {
+        "sku": "DAI-MIL-002",
+        "name": "Store Brand Whole Milk 2 L",
+        "label": "Store Brand Whole Milk 2 L | Level 1, Dairy & Frozen / Level 2, Café | In stock",
+        "places": [
+          "Level 1, Dairy & Frozen",
+          "Level 2, Café"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/DAI-MIL-002/image"
+      },
+      {
+        "sku": "DAI-MIL-005",
+        "name": "Arctic Treat Oat Milk 1 L",
+        "label": "Arctic Treat Oat Milk 1 L | Level 1, Dairy & Frozen | In stock",
+        "places": [
+          "Level 1, Dairy & Frozen"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/central/products/DAI-MIL-005/image"
+      }
+    ]
+  }
+}

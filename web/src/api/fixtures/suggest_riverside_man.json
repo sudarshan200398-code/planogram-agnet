@@ -1,0 +1,98 @@
+{
+  "name": "suggest_riverside_man",
+  "request": {
+    "method": "GET",
+    "path": "/stores/riverside/suggest",
+    "query": {
+      "q": "man"
+    },
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "suggestions": [
+      {
+        "sku": "RS-FRU-001",
+        "name": "Riverbend Alphonso Mango 1 kg",
+        "label": "Riverbend Alphonso Mango 1 kg | Level 1, Fresh Market | In stock",
+        "places": [
+          "Level 1, Fresh Market"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-FRU-001/image"
+      },
+      {
+        "sku": "RS-FRU-002",
+        "name": "Riverbend Alphonso Mango 500 g",
+        "label": "Riverbend Alphonso Mango 500 g | Level 1, Fresh Market | In stock",
+        "places": [
+          "Level 1, Fresh Market"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-FRU-002/image"
+      },
+      {
+        "sku": "RS-FRU-007",
+        "name": "Tulsi Grove Alphonso Mango 1 kg",
+        "label": "Tulsi Grove Alphonso Mango 1 kg | Level 1, Fresh Market | In stock",
+        "places": [
+          "Level 1, Fresh Market"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-FRU-007/image"
+      },
+      {
+        "sku": "RS-FRU-008",
+        "name": "Tulsi Grove Alphonso Mango 500 g",
+        "label": "Tulsi Grove Alphonso Mango 500 g | Level 1, Fresh Market | In stock",
+        "places": [
+          "Level 1, Fresh Market"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-FRU-008/image"
+      },
+      {
+        "sku": "RS-ICE-012",
+        "name": "Kestrel Mango Sorbet 1 L",
+        "label": "Kestrel Mango Sorbet 1 L | Level 1, Frozen Hall | In stock",
+        "places": [
+          "Level 1, Frozen Hall"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-ICE-012/image"
+      },
+      {
+        "sku": "RS-ICE-011",
+        "name": "Kestrel Mango Sorbet 500 ml",
+        "label": "Kestrel Mango Sorbet 500 ml | Level 1, Frozen Hall | In stock",
+        "places": [
+          "Level 1, Frozen Hall"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-ICE-011/image"
+      },
+      {
+        "sku": "RS-ICE-006",
+        "name": "Monsoon Mango Sorbet 1 L",
+        "label": "Monsoon Mango Sorbet 1 L | Level 1, Frozen Hall | In stock",
+        "places": [
+          "Level 1, Frozen Hall"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-ICE-006/image"
+      },
+      {
+        "sku": "RS-ICE-005",
+        "name": "Monsoon Mango Sorbet 500 ml",
+        "label": "Monsoon Mango Sorbet 500 ml | Level 1, Frozen Hall | In stock",
+        "places": [
+          "Level 1, Frozen Hall"
+        ],
+        "stock_status": "in_stock",
+        "image_url": "/stores/riverside/products/RS-ICE-005/image"
+      }
+    ]
+  }
+}
