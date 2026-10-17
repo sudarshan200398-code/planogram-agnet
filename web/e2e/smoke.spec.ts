@@ -4,7 +4,9 @@ import { fileURLToPath } from "node:url";
 // The one smoke test: home, store switch, search "milk" (cards only, no route), add to the list, "Find my route" with its map.
 // Each project (360/1280 px, light/dark) saves screenshots to web/screenshots/smoke/.
 const UPSTAIRS = "PlayTime Wax Crayons 12 pack"; // a Level 2 product in Central Store
-const SHOTS = fileURLToPath(new URL("../screenshots/smoke/", import.meta.url));
+const SHOTS = process.env.SMOKE_SCREENSHOTS
+  ? `${process.env.SMOKE_SCREENSHOTS.replace(/[\\/]$/, "")}/`
+  : fileURLToPath(new URL("../screenshots/smoke/", import.meta.url));
 
 async function noSidewaysScroll(page: Page) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

@@ -32,15 +32,22 @@ Windows machines `127.0.0.1:5173` does not answer).
 
 | Where | Variable | What it does |
 |---|---|---|
-| web (build time) | `VITE_API_BASE_URL` | API address for a deployed build, e.g. `https://api.example.com`. Unset: `/api` (the dev proxy). |
+| web (build time) | `VITE_API_BASE_URL` | API address for a deployed build, e.g. `https://api.example.com` (no trailing slash). **Required for `npm run build`**: the build stops if it is missing or not an http(s) address. Unset in `npm run dev`: `/api` (the dev proxy). See `.env.example`. |
 | API | `PLANOGRAM_PROVIDER` | `none` runs without an AI model (use it for every local and test run). |
-| API | `PLANOGRAM_CORS_ORIGINS` | Comma-separated web origins allowed to call the API, e.g. `https://superfind.example.com`. Unset = no cross-origin access. **Set it in production** when the web app and API are on different origins. |
+| API | `PLANOGRAM_CORS_ORIGINS` | Comma-separated web origins allowed to call the API, e.g. `https://superfind.example.com`. Exact origins only: no trailing slash, no wildcards. Unset = no cross-origin access. **Set it in production** when the web app and API are on different origins. |
 | API | `PLANOGRAM_TRUST_PROXY` | `1` when the API sits behind a proxy that sets `X-Forwarded-For` (rate limits per real client). |
 | API | `PLANOGRAM_STORES_FILE` | Another store registry instead of `config/stores.json`. |
 
 No keys or secrets belong in this folder; anything starting with `VITE_` ends up in the browser.
 
 Production build: `$env:VITE_API_BASE_URL = 'https://api.example.com'; npm run build` writes `dist/`.
+`npm run preview` serves it with the same security headers as Vercel (read from `vercel.json`).
+
+**Deploying** (Render for the API, Vercel for this app, step by step): see [`../docs/DEPLOY.md`](../docs/DEPLOY.md).
+
+**Slow or sleeping API:** every request gives up after 75 s (`REQUEST_TIMEOUT_MS`), a request still
+pending after 4 s shows "Waking up the store server…" (`SLOW_REQUEST_MS`), and the store list is tried
+once more before an error shows.
 
 ## Tests
 
@@ -52,7 +59,9 @@ npm run e2e           # Playwright smoke test in Chromium (starts or reuses the 
 ```
 
 The first `npm run e2e` needs the browser: `npx playwright install chromium`. It writes screenshots
-to `screenshots/smoke/` (360 and 1280 px, light and dark).
+to `screenshots/smoke/` (360 and 1280 px, light and dark). To run it against a production build
+instead, set `SMOKE_BASE_URL` (and `SMOKE_SCREENSHOTS` for another folder); see "Production-like check"
+in `docs/DEPLOY.md`.
 
 ### API contract fixtures
 
@@ -79,4 +88,4 @@ new fixture files were added.
 | `src/components`, `src/styles` | Shared UI parts, design tokens (contrast-tested in both themes) |
 | `e2e` | The Playwright smoke test |
 
-Limits and timings (low stock, list size, quantities, debounce, toast time) live in `src/config.ts`.
+Limits and timings (low stock, list size, quantities, debounce, toast time, request timeout) live in `src/config.ts`.
