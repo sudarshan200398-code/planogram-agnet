@@ -3,3 +3,8 @@ dist/
 test-results/
 playwright-report/
 *.local
+# Env files stay local (only VITE_ values reach the browser, and none belong in git); the example is the exception.
+.env
+.env.*
+!.env.example
+tsconfig.tsbuildinfo

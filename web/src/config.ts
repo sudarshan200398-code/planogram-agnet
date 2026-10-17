@@ -1,7 +1,22 @@
 /** Every threshold and limit the web app uses, in one place. */
 
-/** Base URL of the SuperFind API. In development Vite proxies /api to the local API. */
-export const API_BASE_URL: string = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") || "/api";
+import { resolveApiBase } from "./lib/apiBase";
+
+export { resolveApiBase };
+
+const apiBase = resolveApiBase(import.meta.env.VITE_API_BASE_URL as string | undefined, import.meta.env.PROD);
+/** Base URL of the SuperFind API; empty when misconfigured (see API_CONFIG_ERROR). */
+export const API_BASE_URL: string = apiBase.url;
+export const API_CONFIG_ERROR: string | null = apiBase.error;
+
+/**
+ * Slow API: the free host sleeps when idle and its first answer can take 30 to 60 seconds. After
+ * SLOW_REQUEST_MS a "waking up" message shows; a request gives up after REQUEST_TIMEOUT_MS; the store
+ * list is tried STORES_RETRIES more time(s) before an error shows.
+ */
+export const SLOW_REQUEST_MS = 4_000;
+export const REQUEST_TIMEOUT_MS = 75_000;
+export const STORES_RETRIES = 1;
 
 /** "Low stock" badge at this many units or fewer (the API reports counts, not a low-stock flag). */
 export const LOW_STOCK_MAX = 5;

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, REQUEST_TIMEOUT_MS } from "../config";
 import type {
   BasketLine,
   StoreMap,
@@ -10,7 +10,7 @@ import type {
   SuggestResponse,
 } from "./types";
 
-/** A failed API call. code is the API's error code, or NETWORK when the API could not be reached. */
+/** A failed API call. code is the API's error code, NETWORK when the API could not be reached, or TIMEOUT. */
 export class ApiError extends Error {
   constructor(
     readonly status: number,
@@ -35,17 +35,38 @@ function url(path: string, query?: Record<string, string | number | undefined>):
   return u.toString();
 }
 
-async function request<T>(
-  path: string,
-  init: { method?: "GET" | "POST"; body?: unknown; signal?: AbortSignal; query?: Record<string, string | number | undefined> } = {},
-): Promise<T> {
+type ApiRequestInit = { method?: "GET" | "POST"; body?: unknown; signal?: AbortSignal; query?: Record<string, string | number | undefined> };
+
+/** Every call gives up after REQUEST_TIMEOUT_MS (long enough for a sleeping server to wake) with a TIMEOUT error. */
+async function request<T>(path: string, init: ApiRequestInit = {}): Promise<T> {
+  const timeout = new AbortController();
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    timeout.abort();
+  }, REQUEST_TIMEOUT_MS);
+  const cancel = () => timeout.abort();
+  if (init.signal?.aborted) cancel();
+  init.signal?.addEventListener("abort", cancel);
+  try {
+    return await send<T>(path, init, timeout.signal);
+  } catch (err) {
+    if (timedOut) throw new ApiError(0, "TIMEOUT", "The store service took too long to answer.", null);
+    throw err;
+  } finally {
+    clearTimeout(timer);
+    init.signal?.removeEventListener("abort", cancel);
+  }
+}
+
+async function send<T>(path: string, init: ApiRequestInit, signal: AbortSignal): Promise<T> {
   let res: Response;
   try {
     res = await fetch(url(path, init.query), {
       method: init.method ?? "GET",
       headers: init.body === undefined ? undefined : { "Content-Type": "application/json" },
       body: init.body === undefined ? undefined : JSON.stringify(init.body),
-      signal: init.signal,
+      signal,
     });
   } catch (err) {
     if (isAbort(err)) throw err;

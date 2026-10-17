@@ -1,4 +1,5 @@
 import { http, HttpResponse } from "msw";
+import { REQUEST_TIMEOUT_MS } from "../config";
 import { server } from "../test/server";
 import { fixture, reply } from "../test/handlers";
 import { api, ApiError, imageSrc } from "./client";
@@ -56,4 +57,29 @@ it("sends the search text as JSON to the chosen store", async () => {
 
 it("builds image URLs against the API base", () => {
   expect(imageSrc("/stores/central/products/BAK-BAG-009/image")).toBe("/api/stores/central/products/BAK-BAG-009/image");
+});
+
+describe(`timeout (${REQUEST_TIMEOUT_MS / 1000} s, long enough for a sleeping server to wake)`, () => {
+  afterEach(() => vi.useRealTimers());
+
+  it("gives up after REQUEST_TIMEOUT_MS with a TIMEOUT error", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    server.use(http.get("*/api/stores", () => new Promise<never>(() => {})));
+    const p = api.stores().catch((e: unknown) => e);
+    await vi.advanceTimersByTimeAsync(REQUEST_TIMEOUT_MS - 1000);
+    let settled = false;
+    void p.then(() => (settled = true));
+    await Promise.resolve();
+    expect(settled).toBe(false); // still waiting just before the limit
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(await p).toMatchObject({ status: 0, code: "TIMEOUT", requestId: null });
+  });
+
+  it("a cancelled request is still an abort, not a timeout", async () => {
+    server.use(http.get("*/api/stores", () => new Promise<never>(() => {})));
+    const c = new AbortController();
+    const p = api.stores(c.signal).catch((e: unknown) => e);
+    c.abort();
+    expect(await p).toMatchObject({ name: "AbortError" });
+  });
 });

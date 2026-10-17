@@ -15,6 +15,8 @@ export function friendlyError(err: unknown): FriendlyError {
   switch (err.code) {
     case "NETWORK":
       return { title: "Can't reach the store", message: "Check your connection and try again.", requestId };
+    case "TIMEOUT":
+      return { title: "The store server is taking too long", message: "It may still be waking up. Please try again.", requestId };
     case "RATE_LIMITED": {
       const wait = err.retryAfterSeconds ?? 30;
       return { title: "Lots of searches right now", message: `Please wait about ${wait} seconds and try again.`, requestId };

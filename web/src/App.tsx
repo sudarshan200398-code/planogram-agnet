@@ -9,6 +9,7 @@ import { useCategories } from "./categories/useCategories";
 import { StoreIcon } from "./components/icons";
 import { Sheet } from "./components/Sheet";
 import { Toast, type ToastMessage } from "./components/Toast";
+import { useSlow, WakingUp } from "./components/WakingUp";
 import { EmptyState, ErrorState, Skeleton } from "./components/ui";
 import { friendlyError } from "./lib/errors";
 import { formatLocation } from "./lib/format";
@@ -45,6 +46,9 @@ export function App() {
   const openList = useCallback(() => setListOpen(true), []);
   const closeList = useCallback(() => setListOpen(false), []);
   const [toast, setToast] = useState<ToastMessage | null>(null);
+  // The free API host sleeps when idle: say so when the store list or a search takes a while.
+  const storesSlow = useSlow(stores.state.status === "loading");
+  const searchSlow = useSlow(search.status === "loading");
   const closeToast = useCallback(() => setToast(null), []);
   // A start point said in a search ("I'm at produce, …") is kept for the list route of this store.
   const startPoint = useStartPoint(stores.storeId);
@@ -157,7 +161,10 @@ export function App() {
             }}
           />
         ) : stores.state.status === "loading" ? (
-          <Skeleton height="44px" />
+          <>
+            <Skeleton height="44px" />
+            {storesSlow ? <WakingUp /> : null}
+          </>
         ) : null}
       </header>
 
@@ -211,6 +218,7 @@ export function App() {
                 />
               ) : (
                 <>
+                  {searchSlow ? <WakingUp /> : null}
                   {search.status === "loading" ? <ResultsSkeleton /> : null}
                   {search.status === "done" ? (
                     <Results

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, isAbort } from "../api/client";
 import type { StoreSummary } from "../api/types";
-import { STORAGE_KEYS } from "../config";
+import { STORAGE_KEYS, STORES_RETRIES } from "../config";
 import { readStorage, writeStorage } from "../lib/storage";
 
 const URL_PARAM = "store";
@@ -29,7 +29,18 @@ export type StoresState =
   | { status: "error"; error: unknown }
   | { status: "ready"; stores: StoreSummary[] };
 
-/** Loads GET /stores, keeps the chosen store in the URL and localStorage, and can fall back to the first store. */
+/** GET /stores, tried STORES_RETRIES more time(s) on failure (the first call may hit a sleeping server). */
+async function loadStores(signal: AbortSignal): Promise<StoreSummary[]> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await api.stores(signal);
+    } catch (error) {
+      if (isAbort(error) || attempt >= STORES_RETRIES) throw error;
+    }
+  }
+}
+
+/** Loads the stores, keeps the chosen store in the URL and localStorage, and can fall back to the first store. */
 export function useStoreSelection() {
   const [state, setState] = useState<StoresState>({ status: "loading" });
   const [storeId, setStoreId] = useState<string | null>(null);
@@ -38,8 +49,7 @@ export function useStoreSelection() {
   useEffect(() => {
     const controller = new AbortController();
     setState({ status: "loading" });
-    api
-      .stores(controller.signal)
+    loadStores(controller.signal)
       .then((stores) => {
         setState({ status: "ready", stores });
         const id = chooseStore(stores, urlStore(), readStorage(STORAGE_KEYS.store));
