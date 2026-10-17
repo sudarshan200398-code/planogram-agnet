@@ -60,13 +60,36 @@ export function App() {
     }
   }, [failure, resetToFirst]);
 
+  // "Check <other store>" on a not-found card: switch store, then run the same search there once.
+  const [crossCheck, setCrossCheck] = useState<{ text: string; to: string; ran: boolean } | null>(null);
+  const otherStore = stores.state.status === "ready" ? (stores.state.stores.find((s) => s.id !== stores.storeId) ?? null) : null;
+  const checkOtherStore = (t: string) => {
+    if (!otherStore) return;
+    setCrossCheck({ text: t, to: otherStore.id, ran: false });
+    setText(t);
+    setNotice(null);
+    browse.open(null);
+    stores.selectStore(otherStore.id); // URL and storage; the old store's search is cancelled
+  };
+  useEffect(() => {
+    if (crossCheck && !crossCheck.ran && stores.storeId === crossCheck.to) {
+      setCrossCheck({ ...crossCheck, ran: true });
+      void runSearch(crossCheck.text);
+    }
+  }, [crossCheck, stores.storeId, runSearch]);
+  const checkedBoth = !!crossCheck?.ran && stores.storeId === crossCheck.to && search.status === "done" && search.text === crossCheck.text;
+
   // An empty box means "no search": cancel it and drop its results and route (the shopping list is separate).
   const changeText = (t: string) => {
     setText(t);
-    if (!t.trim()) resetSearch();
+    if (!t.trim()) {
+      resetSearch();
+      setCrossCheck(null);
+    }
   };
 
   const doSearch = (t: string) => {
+    setCrossCheck(null);
     browse.open(null);
     void runSearch(t);
   };
@@ -98,6 +121,7 @@ export function App() {
             onChange={(id) => {
               setNotice(null);
               setText("");
+              setCrossCheck(null);
               stores.selectStore(id);
             }}
           />
@@ -163,6 +187,12 @@ export function App() {
                       notice={search.notice}
                       onAnswer={(i, sku) => void answer(i, sku)}
                       action={(item) => addAction({ ...item, name: item.name ?? item.requested })}
+                      notFound={{
+                        storeName: stores.current?.name ?? "this store",
+                        otherStoreName: otherStore?.name ?? null,
+                        checkedBoth,
+                        onCheckOther: () => checkOtherStore(search.text),
+                      }}
                     />
                   ) : null}
                   {search.status === "error" && !isStoreGone(search.error) ? (

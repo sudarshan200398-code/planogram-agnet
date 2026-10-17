@@ -23,5 +23,8 @@ export default defineConfig({
     include: ["src/**/*.test.{ts,tsx}"],
     css: false,
     restoreMocks: true,
+    // The fixtures are found with import.meta.glob; the persistent module cache does not notice new
+    // fixture files and would serve the old list, so it stays off.
+    fsModuleCache: false,
   },
 });

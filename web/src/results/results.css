@@ -147,3 +147,21 @@
   color: var(--color-info-fg);
   font-size: var(--text-sm);
 }
+
+.sf-not-found {
+  align-items: flex-start;
+}
+.sf-not-found__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bad-bg);
+  color: var(--color-bad-fg);
+}
+.sf-not-found__where {
+  font-weight: 700;
+  color: var(--color-bad-fg);
+}

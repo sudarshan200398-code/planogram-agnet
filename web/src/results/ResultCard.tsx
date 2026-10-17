@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 import type { SearchItem } from "../api/types";
 import { Card } from "../components/ui";
+import { NotFoundCard, type NotFoundInfo } from "./NotFoundCard";
 import { ProductCard } from "./ProductCard";
 
 /** One searched item: a product card, or a plain message when nothing usable was found. */
-export function ResultCard({ item, action }: { item: SearchItem; action?: ReactNode }) {
+export function ResultCard({ item, action, notFound }: { item: SearchItem; action?: ReactNode; notFound?: NotFoundInfo }) {
+  if (item.status === "not_found" && notFound) return <NotFoundCard text={item.requested} info={notFound} />;
   if (!item.sku || !item.name) {
     return (
       <Card className="sf-result sf-result--message" data-testid="result-card" data-status={item.status}>

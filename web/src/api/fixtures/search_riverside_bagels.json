@@ -1,0 +1,46 @@
+{
+  "name": "search_riverside_bagels",
+  "request": {
+    "method": "POST",
+    "path": "/stores/riverside/search",
+    "query": {},
+    "body": {
+      "text": "Daily Bake Plain Bagels 4 pack"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "status": "partial",
+    "session_id": "session-009",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Daily Bake Plain Bagels 4 pack",
+        "quantity_requested": 1,
+        "status": "not_found",
+        "reason": "Product not found in catalogue",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": null,
+    "route": null
+  }
+}

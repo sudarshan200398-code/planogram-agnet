@@ -123,6 +123,12 @@ def build_contract() -> dict[str, str]:
                               {"session_id": sentence["session_id"], "item_index": q["item_index"], "sku": q["options"][0]["sku"]})
         record("search_central_out_of_stock", "POST", "/stores/central/search", {"text": "ArtBox Watercolour Paints 12 pack"})
         record("search_central_not_found", "POST", "/stores/central/search", {"text": "zzqx wobble gadget"})
+        # Not sold in one store, so the other store can be checked (and the case where neither has it).
+        paneer = {"text": "Marigold Farm Malai Paneer 200 g"}
+        record("search_central_paneer", "POST", "/stores/central/search", paneer)
+        record("search_riverside_paneer", "POST", "/stores/riverside/search", paneer)
+        record("search_riverside_not_found", "POST", "/stores/riverside/search", {"text": "zzqx wobble gadget"})
+        record("search_riverside_bagels", "POST", "/stores/riverside/search", {"text": "Daily Bake Plain Bagels 4 pack"})
         record("search_riverside_kibble", "POST", "/stores/riverside/search",
                {"text": "i am near the fresh market, Pebble Pet Puppy Kibble 1 kg"})
         record("basket_central_route", "POST", "/stores/central/basket/route",

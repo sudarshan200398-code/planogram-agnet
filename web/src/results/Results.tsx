@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import type { SearchItem, SearchResponse } from "../api/types";
-import { SearchIcon } from "../components/icons";
-import { Card, EmptyState, Skeleton } from "../components/ui";
+import { Card, Skeleton } from "../components/ui";
 import { RouteSteps } from "../route/RouteSteps";
 import { ClarifyPanel } from "../search/ClarifyPanel";
+import { NotFoundCard, type NotFoundInfo } from "./NotFoundCard";
 import { ResultCard } from "./ResultCard";
 import "./results.css";
 
@@ -32,6 +32,7 @@ export function Results({
   notice = null,
   onAnswer,
   action,
+  notFound,
 }: {
   response: SearchResponse;
   text: string;
@@ -39,12 +40,14 @@ export function Results({
   notice?: string | null;
   onAnswer?: (itemIndex: number, sku: string) => void;
   action?: (item: SearchItem) => ReactNode;
+  notFound: NotFoundInfo;
 }) {
   if (!response.items.length) {
     return (
-      <EmptyState title="No results" icon={<SearchIcon />}>
-        {response.messages[0] ?? "Try a product name, like milk or bread."}
-      </EmptyState>
+      <div className="sf-results-wrap">
+        <h2 className="sf-results__heading">Results for “{text}”</h2>
+        <NotFoundCard text={text} info={notFound} />
+      </div>
     );
   }
   return (
@@ -71,7 +74,7 @@ export function Results({
       ) : null}
       <div className="sf-results">
         {response.items.map((item) => (
-          <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} action={item.sku ? action?.(item) : undefined} />
+          <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} action={item.sku ? action?.(item) : undefined} notFound={notFound} />
         ))}
       </div>
       {response.route ? <RouteSteps route={response.route} storeId={response.store_id} /> : null}

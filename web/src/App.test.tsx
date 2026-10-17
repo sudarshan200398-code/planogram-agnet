@@ -95,7 +95,7 @@ describe("search and result cards", () => {
   it("explains a product that isn't in the store", async () => {
     const { user } = await renderApp();
     await search(user, "zzqx wobble gadget");
-    expect(await screen.findByText(/couldn't find this in this store/i)).toBeInTheDocument();
+    expect(await screen.findByText("Not sold at Central Store")).toBeInTheDocument(); // 3B wording
   });
 
   it("hides the price cleanly when the store has none", async () => {
