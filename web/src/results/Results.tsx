@@ -74,7 +74,7 @@ export function Results({
           <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} action={item.sku ? action?.(item) : undefined} />
         ))}
       </div>
-      {response.route ? <RouteSteps route={response.route} /> : null}
+      {response.route ? <RouteSteps route={response.route} storeId={response.store_id} /> : null}
     </div>
   );
 }

@@ -65,6 +65,7 @@ export const defaultHandlers = [
     if (!f) throw new Error(`no recorded products page for ${u.search}`);
     return reply(f.name);
   }),
+  http.get(`${API}/stores/:store/map`, ({ params }) => reply(`map_${String(params.store)}`)),
   http.post(`${API}/stores/:store/basket/route`, async ({ params, request }) => {
     const body = JSON.stringify(await request.json());
     const f = Object.values(fixtures).find(

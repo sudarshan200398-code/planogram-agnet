@@ -51,7 +51,7 @@ describe("emptying the search box returns to home", () => {
     await user.keyboard("{Backspace}".repeat(BAGELS.length));
     expect(box()).toHaveValue("");
     expectHome();
-  });
+  }, 15_000); // 30 real key presses
 
   it("the clear button drops the results and their route", async () => {
     const user = await start();

@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../config";
 import type {
   BasketLine,
+  StoreMap,
   CategoriesResponse,
   ClarifyRequest,
   ProductPage,
@@ -80,6 +81,7 @@ export const api = {
     request<SearchResponse>(`${store(storeId)}/search`, { method: "POST", body: { text }, signal }),
   clarify: (storeId: string, body: ClarifyRequest, signal?: AbortSignal) =>
     request<SearchResponse>(`${store(storeId)}/clarify`, { method: "POST", body, signal }),
+  map: (storeId: string, signal?: AbortSignal) => request<StoreMap>(`${store(storeId)}/map`, { signal }),
   basketRoute: (storeId: string, items: BasketLine[], signal?: AbortSignal) =>
     request<SearchResponse>(`${store(storeId)}/basket/route`, { method: "POST", body: { items }, signal }),
 };

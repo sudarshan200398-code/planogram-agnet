@@ -1,0 +1,104 @@
+.sf-map {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.sf-map__floor {
+  margin: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+.sf-map__caption {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+.sf-map__svg {
+  display: block;
+  width: 100%;
+  max-width: 640px; /* MAP_MAX_WIDTH_PX in RouteMap.tsx */
+  height: auto;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.sf-map__outline {
+  fill: var(--color-map-floor);
+  stroke: var(--color-border);
+}
+.sf-map__walks line {
+  stroke: var(--color-map-walk);
+  stroke-linecap: round;
+}
+.sf-map__leaders line {
+  stroke: var(--color-map-zone);
+}
+.sf-map__zone {
+  fill: var(--color-map-zone);
+}
+.sf-map__label {
+  fill: var(--color-text);
+  stroke: var(--color-map-floor); /* halo keeps labels readable over lines */
+  paint-order: stroke;
+  stroke-linejoin: round;
+  font-family: inherit;
+}
+.sf-map__label--strong {
+  font-weight: 700;
+}
+.sf-map__route-casing line {
+  stroke: var(--color-surface);
+  stroke-linecap: round;
+}
+.sf-map__route line {
+  stroke: var(--color-map-route);
+  stroke-linecap: round;
+}
+.sf-map__connector rect {
+  fill: var(--color-surface);
+  stroke: var(--color-text);
+}
+.sf-map__start rect {
+  fill: var(--color-surface);
+  stroke: var(--color-map-route);
+}
+.sf-map__stop circle {
+  fill: var(--color-primary);
+  stroke: var(--color-surface);
+}
+.sf-map__stop text {
+  fill: var(--color-on-primary);
+  font-weight: 800;
+}
+.sf-map__stops {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+.sf-map__stops li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  column-gap: var(--space-2);
+  align-items: center;
+}
+.sf-map__stop-number {
+  grid-row: span 2;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 800;
+  font-size: var(--text-sm);
+}
+.sf-map__stop-place {
+  grid-column: 2;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.sf-map__note {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}

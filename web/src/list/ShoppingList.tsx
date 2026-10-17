@@ -133,7 +133,7 @@ export function ShoppingList({
             </p>
           ))}
           {route.response.route ? (
-            <RouteSteps route={route.response.route} defaultOpen />
+            <RouteSteps route={route.response.route} storeId={route.response.store_id} defaultOpen />
           ) : (
             <p className="sf-message">We couldn't make a route for this list.</p>
           )}

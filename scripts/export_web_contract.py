@@ -99,6 +99,8 @@ def build_contract() -> dict[str, str]:
         record("stores", "GET", "/stores")
         record("categories_central", "GET", "/stores/central/categories")
         record("categories_riverside", "GET", "/stores/riverside/categories")
+        record("map_central", "GET", "/stores/central/map")
+        record("map_riverside", "GET", "/stores/riverside/map")
         record("products_central_page", "GET", "/stores/central/products",
                query={"category": first_category, "page": 1, "page_size": 4})
         record("products_central_page2", "GET", "/stores/central/products",

@@ -1,6 +1,7 @@
 import { useId, useState, type ReactElement } from "react";
 import type { Route, RouteStep } from "../api/types";
 import { ElevatorIcon, EscalatorIcon, PinIcon, StairsIcon, WalkIcon } from "../components/icons";
+import { RouteMapLoader } from "./RouteMapLoader";
 import "./route.css";
 
 /** The API names its step icons after Material icons; map them to ours, with a readable label. */
@@ -22,8 +23,8 @@ export function routeSummary(route: Route): string {
   return `${metres} m · ${floors}`;
 }
 
-/** "Your route": totals, then numbered steps. Collapsed by default under a search, open for the list route. */
-export function RouteSteps({ route, defaultOpen = false }: { route: Route; defaultOpen?: boolean }) {
+/** "Your route": totals, numbered steps, then the map. Collapsed by default under a search, open for the list route. */
+export function RouteSteps({ route, storeId, defaultOpen = false }: { route: Route; storeId: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const listId = useId();
   return (
@@ -66,6 +67,7 @@ export function RouteSteps({ route, defaultOpen = false }: { route: Route; defau
           );
         })}
       </ol>
+      {open ? <RouteMapLoader storeId={storeId} route={route} /> : null}
     </section>
   );
 }

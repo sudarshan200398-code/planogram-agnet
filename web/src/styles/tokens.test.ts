@@ -49,6 +49,11 @@ const PAIRS: [string, string, number, string][] = [
   ["color-info-fg", "color-info-bg", 4.5, "info badge"],
   ["color-border", "color-surface", 3, "input and chip borders (non-text)"],
   ["color-primary", "color-surface", 3, "focus ring (non-text)"],
+  ["color-map-route", "color-map-floor", 3, "route line on the floor map (non-text)"],
+  ["color-map-route", "color-surface", 3, "route line where it crosses a zone marker's halo (non-text)"],
+  ["color-text", "color-map-floor", 4.5, "zone labels on the floor map"],
+  ["color-map-zone", "color-map-floor", 3, "zone markers on the floor map (non-text)"],
+  ["color-on-primary", "color-primary", 4.5, "stop numbers on the map"],
 ];
 
 describe.each(Object.entries(themes))("%s theme", (_name, vars) => {

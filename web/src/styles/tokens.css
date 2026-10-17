@@ -14,6 +14,10 @@
   --color-muted: #4a5e55;
   --color-border: #7c8f87;
   --color-divider: #dce6e1; /* decorative lines only */
+  --color-map-floor: #eef4f1;
+  --color-map-walk: #c9d6d0; /* walkways: decorative context */
+  --color-map-zone: #4a5e55;
+  --color-map-route: #1d4ed8;
   --color-ok-fg: #14632f;
   --color-ok-bg: #e3f4ea;
   --color-warn-fg: #7a4b00;
@@ -39,6 +43,10 @@
   --color-muted: #a9bdb4;
   --color-border: #5e7268;
   --color-divider: #24332d;
+  --color-map-floor: #111a17;
+  --color-map-walk: #2e3f38;
+  --color-map-zone: #a9bdb4;
+  --color-map-route: #7cb6ff;
   --color-ok-fg: #6ee7a8;
   --color-ok-bg: #12352a;
   --color-warn-fg: #f5c26b;

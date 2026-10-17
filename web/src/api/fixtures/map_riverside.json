@@ -1,0 +1,969 @@
+{
+  "name": "map_riverside",
+  "request": {
+    "method": "GET",
+    "path": "/stores/riverside/map",
+    "query": {},
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "floors": [
+      1,
+      2
+    ],
+    "bounds": {
+      "width": 80.0,
+      "height": 50.0
+    },
+    "nodes": [
+      {
+        "id": "RS1_J11",
+        "floor": 1,
+        "x": 10.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 11"
+      },
+      {
+        "id": "RS1_J21",
+        "floor": 1,
+        "x": 25.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 21"
+      },
+      {
+        "id": "RS1_J31",
+        "floor": 1,
+        "x": 40.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 31"
+      },
+      {
+        "id": "RS1_J41",
+        "floor": 1,
+        "x": 55.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 41"
+      },
+      {
+        "id": "RS1_J51",
+        "floor": 1,
+        "x": 70.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 51"
+      },
+      {
+        "id": "RS1_J12",
+        "floor": 1,
+        "x": 10.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 12"
+      },
+      {
+        "id": "RS1_J22",
+        "floor": 1,
+        "x": 25.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 22"
+      },
+      {
+        "id": "RS1_J32",
+        "floor": 1,
+        "x": 40.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 32"
+      },
+      {
+        "id": "RS1_J42",
+        "floor": 1,
+        "x": 55.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 42"
+      },
+      {
+        "id": "RS1_J52",
+        "floor": 1,
+        "x": 70.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 52"
+      },
+      {
+        "id": "RS1_J13",
+        "floor": 1,
+        "x": 10.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 13"
+      },
+      {
+        "id": "RS1_J23",
+        "floor": 1,
+        "x": 25.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 23"
+      },
+      {
+        "id": "RS1_J33",
+        "floor": 1,
+        "x": 40.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 33"
+      },
+      {
+        "id": "RS1_J43",
+        "floor": 1,
+        "x": 55.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 43"
+      },
+      {
+        "id": "RS1_J53",
+        "floor": 1,
+        "x": 70.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 53"
+      },
+      {
+        "id": "RS1_MAIN_DOORS",
+        "floor": 1,
+        "x": 40.0,
+        "y": 47.0,
+        "type": "entrance",
+        "label": "Main Doors"
+      },
+      {
+        "id": "RS1_FRONT_TILLS",
+        "floor": 1,
+        "x": 58.0,
+        "y": 47.0,
+        "type": "checkout",
+        "label": "Front Tills"
+      },
+      {
+        "id": "RS1_FRESH_MARKET",
+        "floor": 1,
+        "x": 10.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Fresh Market"
+      },
+      {
+        "id": "RS1_BAKEHOUSE",
+        "floor": 1,
+        "x": 25.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Bakehouse"
+      },
+      {
+        "id": "RS1_BUTCHER_COUNTER",
+        "floor": 1,
+        "x": 40.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Butcher Counter"
+      },
+      {
+        "id": "RS1_FISHMONGER",
+        "floor": 1,
+        "x": 55.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Fishmonger"
+      },
+      {
+        "id": "RS1_CHILLED_FOODS",
+        "floor": 1,
+        "x": 77.0,
+        "y": 12.0,
+        "type": "zone_front",
+        "label": "Chilled Foods"
+      },
+      {
+        "id": "RS1_FROZEN_HALL",
+        "floor": 1,
+        "x": 77.0,
+        "y": 25.0,
+        "type": "zone_front",
+        "label": "Frozen Hall"
+      },
+      {
+        "id": "RS1_PANTRY_AISLE_A",
+        "floor": 1,
+        "x": 15.0,
+        "y": 31.0,
+        "type": "aisle",
+        "label": "Pantry Aisle A"
+      },
+      {
+        "id": "RS1_PANTRY_AISLE_B",
+        "floor": 1,
+        "x": 30.0,
+        "y": 31.0,
+        "type": "aisle",
+        "label": "Pantry Aisle B"
+      },
+      {
+        "id": "RS1_PANTRY_AISLE_C",
+        "floor": 1,
+        "x": 45.0,
+        "y": 31.0,
+        "type": "aisle",
+        "label": "Pantry Aisle C"
+      },
+      {
+        "id": "RS1_PANTRY_AISLE_D",
+        "floor": 1,
+        "x": 60.0,
+        "y": 31.0,
+        "type": "aisle",
+        "label": "Pantry Aisle D"
+      },
+      {
+        "id": "RS1_ESCALATOR_HALL",
+        "floor": 1,
+        "x": 3.0,
+        "y": 38.0,
+        "type": "escalator",
+        "label": "Escalator Hall"
+      },
+      {
+        "id": "RS1_EAST_STAIRS",
+        "floor": 1,
+        "x": 77.0,
+        "y": 38.0,
+        "type": "stairs",
+        "label": "East Stairs"
+      },
+      {
+        "id": "RS1_LIFT_LOBBY",
+        "floor": 1,
+        "x": 25.0,
+        "y": 46.0,
+        "type": "elevator",
+        "label": "Lift Lobby"
+      },
+      {
+        "id": "RS2_J11",
+        "floor": 2,
+        "x": 10.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 11"
+      },
+      {
+        "id": "RS2_J21",
+        "floor": 2,
+        "x": 25.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 21"
+      },
+      {
+        "id": "RS2_J31",
+        "floor": 2,
+        "x": 40.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 31"
+      },
+      {
+        "id": "RS2_J41",
+        "floor": 2,
+        "x": 55.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 41"
+      },
+      {
+        "id": "RS2_J51",
+        "floor": 2,
+        "x": 70.0,
+        "y": 12.0,
+        "type": "junction",
+        "label": "Walkway 51"
+      },
+      {
+        "id": "RS2_J12",
+        "floor": 2,
+        "x": 10.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 12"
+      },
+      {
+        "id": "RS2_J22",
+        "floor": 2,
+        "x": 25.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 22"
+      },
+      {
+        "id": "RS2_J32",
+        "floor": 2,
+        "x": 40.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 32"
+      },
+      {
+        "id": "RS2_J42",
+        "floor": 2,
+        "x": 55.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 42"
+      },
+      {
+        "id": "RS2_J52",
+        "floor": 2,
+        "x": 70.0,
+        "y": 25.0,
+        "type": "junction",
+        "label": "Walkway 52"
+      },
+      {
+        "id": "RS2_J13",
+        "floor": 2,
+        "x": 10.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 13"
+      },
+      {
+        "id": "RS2_J23",
+        "floor": 2,
+        "x": 25.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 23"
+      },
+      {
+        "id": "RS2_J33",
+        "floor": 2,
+        "x": 40.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 33"
+      },
+      {
+        "id": "RS2_J43",
+        "floor": 2,
+        "x": 55.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 43"
+      },
+      {
+        "id": "RS2_J53",
+        "floor": 2,
+        "x": 70.0,
+        "y": 38.0,
+        "type": "junction",
+        "label": "Walkway 53"
+      },
+      {
+        "id": "RS2_HOME_AND_GARDEN",
+        "floor": 2,
+        "x": 10.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Home and Garden"
+      },
+      {
+        "id": "RS2_ELECTRONICS_CORNER",
+        "floor": 2,
+        "x": 25.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Electronics Corner"
+      },
+      {
+        "id": "RS2_KIDS_ZONE",
+        "floor": 2,
+        "x": 40.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Kids Zone"
+      },
+      {
+        "id": "RS2_PHARMACY",
+        "floor": 2,
+        "x": 55.0,
+        "y": 4.0,
+        "type": "zone_front",
+        "label": "Pharmacy"
+      },
+      {
+        "id": "RS2_PET_SUPPLIES",
+        "floor": 2,
+        "x": 77.0,
+        "y": 12.0,
+        "type": "zone_front",
+        "label": "Pet Supplies"
+      },
+      {
+        "id": "RS2_FASHION_FLOOR",
+        "floor": 2,
+        "x": 77.0,
+        "y": 25.0,
+        "type": "zone_front",
+        "label": "Fashion Floor"
+      },
+      {
+        "id": "RS2_BOOKS_AND_STATIONERY",
+        "floor": 2,
+        "x": 15.0,
+        "y": 31.0,
+        "type": "zone_front",
+        "label": "Books and Stationery"
+      },
+      {
+        "id": "RS2_CUSTOMER_DESK",
+        "floor": 2,
+        "x": 45.0,
+        "y": 31.0,
+        "type": "zone_front",
+        "label": "Customer Desk"
+      },
+      {
+        "id": "RS2_ESCALATOR_HALL",
+        "floor": 2,
+        "x": 3.0,
+        "y": 38.0,
+        "type": "escalator",
+        "label": "Escalator Hall"
+      },
+      {
+        "id": "RS2_EAST_STAIRS",
+        "floor": 2,
+        "x": 77.0,
+        "y": 38.0,
+        "type": "stairs",
+        "label": "East Stairs"
+      },
+      {
+        "id": "RS2_LIFT_LOBBY",
+        "floor": 2,
+        "x": 25.0,
+        "y": 46.0,
+        "type": "elevator",
+        "label": "Lift Lobby"
+      }
+    ],
+    "edges": [
+      {
+        "a": "RS1_J11",
+        "b": "RS1_J21",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J21",
+        "b": "RS1_J31",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J31",
+        "b": "RS1_J41",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J41",
+        "b": "RS1_J51",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J12",
+        "b": "RS1_J22",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J22",
+        "b": "RS1_J32",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J32",
+        "b": "RS1_J42",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J42",
+        "b": "RS1_J52",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J13",
+        "b": "RS1_J23",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J23",
+        "b": "RS1_J33",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J33",
+        "b": "RS1_J43",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J43",
+        "b": "RS1_J53",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J11",
+        "b": "RS1_J12",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J12",
+        "b": "RS1_J13",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J21",
+        "b": "RS1_J22",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J22",
+        "b": "RS1_J23",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J31",
+        "b": "RS1_J32",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J32",
+        "b": "RS1_J33",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J41",
+        "b": "RS1_J42",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J42",
+        "b": "RS1_J43",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J51",
+        "b": "RS1_J52",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J52",
+        "b": "RS1_J53",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J33",
+        "b": "RS1_MAIN_DOORS",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J43",
+        "b": "RS1_FRONT_TILLS",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J11",
+        "b": "RS1_FRESH_MARKET",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J21",
+        "b": "RS1_BAKEHOUSE",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J31",
+        "b": "RS1_BUTCHER_COUNTER",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J41",
+        "b": "RS1_FISHMONGER",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J51",
+        "b": "RS1_CHILLED_FOODS",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J52",
+        "b": "RS1_FROZEN_HALL",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J12",
+        "b": "RS1_PANTRY_AISLE_A",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J22",
+        "b": "RS1_PANTRY_AISLE_B",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J32",
+        "b": "RS1_PANTRY_AISLE_C",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J42",
+        "b": "RS1_PANTRY_AISLE_D",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J13",
+        "b": "RS1_ESCALATOR_HALL",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J53",
+        "b": "RS1_EAST_STAIRS",
+        "floor": 1
+      },
+      {
+        "a": "RS1_J23",
+        "b": "RS1_LIFT_LOBBY",
+        "floor": 1
+      },
+      {
+        "a": "RS2_J11",
+        "b": "RS2_J21",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J21",
+        "b": "RS2_J31",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J31",
+        "b": "RS2_J41",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J41",
+        "b": "RS2_J51",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J12",
+        "b": "RS2_J22",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J22",
+        "b": "RS2_J32",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J32",
+        "b": "RS2_J42",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J42",
+        "b": "RS2_J52",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J13",
+        "b": "RS2_J23",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J23",
+        "b": "RS2_J33",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J33",
+        "b": "RS2_J43",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J43",
+        "b": "RS2_J53",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J11",
+        "b": "RS2_J12",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J12",
+        "b": "RS2_J13",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J21",
+        "b": "RS2_J22",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J22",
+        "b": "RS2_J23",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J31",
+        "b": "RS2_J32",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J32",
+        "b": "RS2_J33",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J41",
+        "b": "RS2_J42",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J42",
+        "b": "RS2_J43",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J51",
+        "b": "RS2_J52",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J52",
+        "b": "RS2_J53",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J11",
+        "b": "RS2_HOME_AND_GARDEN",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J21",
+        "b": "RS2_ELECTRONICS_CORNER",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J31",
+        "b": "RS2_KIDS_ZONE",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J41",
+        "b": "RS2_PHARMACY",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J51",
+        "b": "RS2_PET_SUPPLIES",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J52",
+        "b": "RS2_FASHION_FLOOR",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J12",
+        "b": "RS2_BOOKS_AND_STATIONERY",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J32",
+        "b": "RS2_CUSTOMER_DESK",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J13",
+        "b": "RS2_ESCALATOR_HALL",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J53",
+        "b": "RS2_EAST_STAIRS",
+        "floor": 2
+      },
+      {
+        "a": "RS2_J23",
+        "b": "RS2_LIFT_LOBBY",
+        "floor": 2
+      }
+    ],
+    "connectors": [
+      {
+        "a": "RS1_ESCALATOR_HALL",
+        "b": "RS2_ESCALATOR_HALL",
+        "type": "escalator",
+        "accessible": false,
+        "cost": 15.0
+      },
+      {
+        "a": "RS1_EAST_STAIRS",
+        "b": "RS2_EAST_STAIRS",
+        "type": "stairs",
+        "accessible": false,
+        "cost": 25.0
+      },
+      {
+        "a": "RS1_LIFT_LOBBY",
+        "b": "RS2_LIFT_LOBBY",
+        "type": "elevator",
+        "accessible": true,
+        "cost": 30.0
+      }
+    ],
+    "zones": [
+      {
+        "node_id": "RS1_MAIN_DOORS",
+        "label": "Main Doors",
+        "floor": 1,
+        "type": "entrance"
+      },
+      {
+        "node_id": "RS1_FRONT_TILLS",
+        "label": "Front Tills",
+        "floor": 1,
+        "type": "checkout"
+      },
+      {
+        "node_id": "RS1_FRESH_MARKET",
+        "label": "Fresh Market",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_BAKEHOUSE",
+        "label": "Bakehouse",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_BUTCHER_COUNTER",
+        "label": "Butcher Counter",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_FISHMONGER",
+        "label": "Fishmonger",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_CHILLED_FOODS",
+        "label": "Chilled Foods",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_FROZEN_HALL",
+        "label": "Frozen Hall",
+        "floor": 1,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS1_PANTRY_AISLE_A",
+        "label": "Pantry Aisle A",
+        "floor": 1,
+        "type": "aisle"
+      },
+      {
+        "node_id": "RS1_PANTRY_AISLE_B",
+        "label": "Pantry Aisle B",
+        "floor": 1,
+        "type": "aisle"
+      },
+      {
+        "node_id": "RS1_PANTRY_AISLE_C",
+        "label": "Pantry Aisle C",
+        "floor": 1,
+        "type": "aisle"
+      },
+      {
+        "node_id": "RS1_PANTRY_AISLE_D",
+        "label": "Pantry Aisle D",
+        "floor": 1,
+        "type": "aisle"
+      },
+      {
+        "node_id": "RS2_HOME_AND_GARDEN",
+        "label": "Home and Garden",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_ELECTRONICS_CORNER",
+        "label": "Electronics Corner",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_KIDS_ZONE",
+        "label": "Kids Zone",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_PHARMACY",
+        "label": "Pharmacy",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_PET_SUPPLIES",
+        "label": "Pet Supplies",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_FASHION_FLOOR",
+        "label": "Fashion Floor",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_BOOKS_AND_STATIONERY",
+        "label": "Books and Stationery",
+        "floor": 2,
+        "type": "zone_front"
+      },
+      {
+        "node_id": "RS2_CUSTOMER_DESK",
+        "label": "Customer Desk",
+        "floor": 2,
+        "type": "zone_front"
+      }
+    ]
+  }
+}
