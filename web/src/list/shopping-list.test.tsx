@@ -141,6 +141,27 @@ describe("Find my route", () => {
     expect(within(sheet).queryByRole("region", { name: "Your route" })).not.toBeInTheDocument();
   });
 
+  it("clears the route when an item is removed", async () => {
+    const { user } = await home();
+    const sheet = await openList(user);
+    await user.click(within(sheet).getByRole("button", { name: "Find my route" }));
+    await within(sheet).findByRole("region", { name: "Your route" });
+    await user.click(within(sheet).getByRole("button", { name: `Remove ${routeNames[0]}` }));
+    expect(within(sheet).queryByRole("region", { name: "Your route" })).not.toBeInTheDocument();
+  });
+
+  it("clears the route when a product is added", async () => {
+    const { user } = await home();
+    let sheet = await openList(user);
+    await user.click(within(sheet).getByRole("button", { name: "Find my route" }));
+    await within(sheet).findByRole("region", { name: "Your route" });
+    await user.keyboard("{Escape}");
+    await browseAccessories(user);
+    await user.click(screen.getByRole("button", { name: "Add Basic Co Baseball Cap one size to list" }));
+    sheet = await openList(user);
+    expect(within(sheet).queryByRole("region", { name: "Your route" })).not.toBeInTheDocument();
+  });
+
   it("shows a friendly wait message when rate limited, with the reference", async () => {
     server.use(http.post("*/api/stores/central/basket/route", () => reply("error_rate_limited")));
     const { user } = await home();

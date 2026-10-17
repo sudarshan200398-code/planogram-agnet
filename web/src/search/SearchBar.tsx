@@ -79,6 +79,12 @@ export function SearchBar({
           onFocus={() => setOpen(true)}
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
           onKeyDown={(e) => {
+            // Escape closes the suggestions; with none showing, it empties the box (which returns home).
+            if (e.key === "Escape" && !showList && text) {
+              e.preventDefault();
+              onTextChange("");
+              return;
+            }
             if (!showList) return;
             if (e.key === "ArrowDown") {
               e.preventDefault();
@@ -94,7 +100,11 @@ export function SearchBar({
         />
         <span className="sf-search__actions">
           {text ? (
-            <IconButton label="Clear search" className="sf-search__clear" onClick={() => (onTextChange(""), setActive(-1))}>
+            <IconButton label="Clear search" className="sf-search__clear" onClick={(e) => {
+                onTextChange("");
+                setActive(-1);
+                e.currentTarget.closest(".sf-search__field")?.querySelector("input")?.focus();
+              }}>
               <CloseIcon />
             </IconButton>
           ) : null}

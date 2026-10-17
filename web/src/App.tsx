@@ -60,6 +60,12 @@ export function App() {
     }
   }, [failure, resetToFirst]);
 
+  // An empty box means "no search": cancel it and drop its results and route (the shopping list is separate).
+  const changeText = (t: string) => {
+    setText(t);
+    if (!t.trim()) resetSearch();
+  };
+
   const doSearch = (t: string) => {
     browse.open(null);
     void runSearch(t);
@@ -109,7 +115,7 @@ export function App() {
             <SearchBar
               storeId={stores.storeId}
               text={text}
-              onTextChange={setText}
+              onTextChange={changeText}
               onSearch={doSearch}
               disabled={!stores.storeId}
               busy={search.status === "loading"}

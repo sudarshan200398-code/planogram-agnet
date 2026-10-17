@@ -32,6 +32,7 @@ async function startSearch(text: string) {
 
 const question = () => screen.findByRole("heading", { name: /^Which “.+” did you mean\?$/ });
 const option = (name: string) => screen.getByRole("button", { name: new RegExp(`^${name}`) });
+const SLOW_TEST_MS = 15_000; // these tests deliberately wait for late responses
 const wait = (ms: number) => act(() => new Promise((r) => setTimeout(r, ms)));
 
 describe("the answer stays", () => {
@@ -180,7 +181,7 @@ describe("a choice cannot be overwritten by a stale response", () => {
     const cards = screen.getAllByTestId("result-card");
     expect(cards).toHaveLength(1);
     expect(within(cards[0]!).getByRole("heading")).toHaveTextContent("Daily Bake Plain Bagels 4 pack");
-  });
+  }, SLOW_TEST_MS);
 
   it("a late response from an earlier search does not replace the answered question", async () => {
     let n = 0;
@@ -215,7 +216,7 @@ describe("a choice cannot be overwritten by a stale response", () => {
     const s = result.current.state;
     expect(s.status === "done" && s.response.items[0]!.sku).toBe(MILK.question!.options[0]!.sku);
     expect(n).toBe(2);
-  });
+  }, SLOW_TEST_MS);
 });
 
 it("the question has no accessibility violations", async () => {
