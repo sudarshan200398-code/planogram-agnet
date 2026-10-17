@@ -1,0 +1,96 @@
+{
+  "name": "basket_central_two_bad_start",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/basket/route",
+    "query": {},
+    "body": {
+      "items": [
+        {
+          "sku": "BAK-BAG-009",
+          "qty": 1
+        },
+        {
+          "sku": "TOY-ART-001",
+          "qty": 1
+        }
+      ],
+      "start": "Nowhere land"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "partial",
+    "session_id": "session-017",
+    "verified": true,
+    "messages": [
+      "Unknown start point 'Nowhere land'. Valid names: Apparel centre, Apparel west, Bakery, Café, Checkout zone, Customer Service & Payment Hub, Dairy & Frozen, Deli & Meat, Elevator, Entrance, Escalators, Grocery Aisle 1, Grocery Aisle 2, Grocery Aisle 3, Grocery Aisle 4, Household & Appliances, Produce, Restrooms, Seasonal Promo (escalator landing), Stairs, Toys & Stationery"
+    ],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Daily Bake Plain Bagels 4 pack",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "BAK-BAG-009",
+        "name": "Daily Bake Plain Bagels 4 pack",
+        "brand": "Daily Bake",
+        "category": "Bagels, buns & croissants",
+        "size": "4 pack",
+        "price": 94.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 68,
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Bakery",
+            "bay": "A",
+            "shelf": 2,
+            "node_id": "L1_BAKERY"
+          }
+        ],
+        "image_url": "/stores/central/products/BAK-BAG-009/image"
+      },
+      {
+        "index": 1,
+        "requested": "PlayTime Wax Crayons 12 pack",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "TOY-ART-001",
+        "name": "PlayTime Wax Crayons 12 pack",
+        "brand": "PlayTime",
+        "category": "Art supplies, crayons & coloring books",
+        "size": "12 pack",
+        "price": 249.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 16,
+        "floor": 2,
+        "zone": "Toys & Stationery",
+        "bay": "C",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Toys & Stationery",
+            "bay": "C",
+            "shelf": 2,
+            "node_id": "L2_TOYS"
+          }
+        ],
+        "image_url": "/stores/central/products/TOY-ART-001/image"
+      }
+    ],
+    "question": null,
+    "route": null
+  }
+}

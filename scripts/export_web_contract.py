@@ -135,6 +135,17 @@ def build_contract() -> dict[str, str]:
                {"items": [{"sku": _first_single_place(central, 1), "qty": 2}, {"sku": _first_single_place(central, 2), "qty": 1}]})
         record("basket_riverside_route", "POST", "/stores/riverside/basket/route",
                {"items": [{"sku": _first_single_place(riverside, 1), "qty": 1}, {"sku": _first_single_place(riverside, 2), "qty": 3}]})
+        # A list search with in-stock, out-of-stock and not-found items (and a quantity), for "Add all to list".
+        record("search_central_mixed", "POST", "/stores/central/search",
+               {"text": "2 Daily Bake Plain Bagels 4 pack, PlayTime Wax Crayons 12 pack, "
+                        "ArtBox Watercolour Paints 12 pack and zzqx wobble gadget"})
+        # A start point in the sentence, then the list route from it, from the entrance, and from a bad start.
+        record("search_central_bakery_start", "POST", "/stores/central/search",
+               {"text": "I'm at the bakery, Daily Bake Plain Bagels 4 pack and PlayTime Wax Crayons 12 pack"})
+        two = [{"sku": "BAK-BAG-009", "qty": 1}, {"sku": "TOY-ART-001", "qty": 1}]
+        record("basket_central_two", "POST", "/stores/central/basket/route", {"items": two})
+        record("basket_central_two_from_bakery", "POST", "/stores/central/basket/route", {"items": two, "start": "Bakery"})
+        record("basket_central_two_bad_start", "POST", "/stores/central/basket/route", {"items": two, "start": "Nowhere land"})
         record("error_store_not_found", "GET", "/stores/nope/categories")
         record("error_product_not_found", "GET", "/stores/central/products/NOPE-000")
         record("error_session_not_found", "POST", "/stores/central/clarify",
