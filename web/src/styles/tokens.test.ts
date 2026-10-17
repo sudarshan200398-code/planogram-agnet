@@ -54,6 +54,7 @@ const PAIRS: [string, string, number, string][] = [
   ["color-text", "color-map-floor", 4.5, "zone labels on the floor map"],
   ["color-map-zone", "color-map-floor", 3, "zone markers on the floor map (non-text)"],
   ["color-on-primary", "color-primary", 4.5, "stop numbers on the map"],
+  ["color-bg", "color-text", 4.5, "toast text (inverted colours)"],
 ];
 
 describe.each(Object.entries(themes))("%s theme", (_name, vars) => {

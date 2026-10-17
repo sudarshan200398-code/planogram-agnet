@@ -16,6 +16,7 @@ export const BROWSE_PAGE_SIZE = 20;
 
 /** Shopping list limits, matching the API (max_items 20, quantity 1 to 99). */
 export const LIST_MAX_ITEMS = 20;
+export const TOAST_MS = 4000; // how long a confirmation stays on screen
 export const QTY_MIN = 1;
 export const QTY_MAX = 99;
 

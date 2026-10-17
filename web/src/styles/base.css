@@ -37,9 +37,10 @@ select {
   color: inherit;
 }
 
+/* A real outline (not a box-shadow): it survives forced-colors mode and no component shadow can hide it. */
 :focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .visually-hidden {

@@ -21,5 +21,4 @@
 .sf-voice-status {
   font-size: var(--text-sm);
   color: var(--color-muted);
-  min-height: 1.25rem;
 }

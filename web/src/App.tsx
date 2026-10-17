@@ -8,6 +8,7 @@ import { useBrowse } from "./categories/useBrowse";
 import { useCategories } from "./categories/useCategories";
 import { StoreIcon } from "./components/icons";
 import { Sheet } from "./components/Sheet";
+import { Toast, type ToastMessage } from "./components/Toast";
 import { EmptyState, ErrorState, Skeleton } from "./components/ui";
 import { friendlyError } from "./lib/errors";
 import { formatLocation } from "./lib/format";
@@ -20,6 +21,7 @@ import { Results, ResultsSkeleton } from "./results/Results";
 import { SearchBar } from "./search/SearchBar";
 import { useSearch } from "./search/useSearch";
 import { useStoreSelection } from "./stores/useStoreSelection";
+import { LIST_MAX_ITEMS } from "./config";
 import { useTheme } from "./theme/theme";
 import { useVoice } from "./voice/useVoice";
 import { VoiceButton } from "./voice/VoiceButton";
@@ -41,6 +43,8 @@ export function App() {
   const [listOpen, setListOpen] = useState(false);
   const openList = useCallback(() => setListOpen(true), []);
   const closeList = useCallback(() => setListOpen(false), []);
+  const [toast, setToast] = useState<ToastMessage | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
   // A route is only shown for the list it was made from; any change to the list clears it.
   const { clear: clearRoute } = basket;
   useEffect(() => clearRoute(), [list.items, clearRoute]);
@@ -98,7 +102,16 @@ export function App() {
   const addAction = (p: ProductLike & { sku: string | null }) => {
     if (!p.sku) return null;
     const item: NewItem = { sku: p.sku, name: p.name, image_url: p.image_url, place: formatLocation(p) };
-    return <AddToListButton item={item} inList={inList.has(p.sku)} full={list.full} onAdd={list.add} onOpen={openList} />;
+    const add = (n: NewItem) => {
+      list.add(n);
+      const nowFull = list.items.length + 1 >= LIST_MAX_ITEMS;
+      setToast({
+        id: Date.now(),
+        text: nowFull ? `Added ${n.name}. Your list is now full (${LIST_MAX_ITEMS} products).` : `Added ${n.name} to your list`,
+        action: { label: "Open list", run: openList },
+      });
+    };
+    return <AddToListButton item={item} inList={inList.has(p.sku)} full={list.full} onAdd={add} onOpen={openList} />;
   };
 
   return (
@@ -136,25 +149,27 @@ export function App() {
         ) : (
           <>
             <h1 className="sf-title">{stores.current ? `Find anything in ${stores.current.name}` : "Find anything in the store"}</h1>
-            <SearchBar
-              storeId={stores.storeId}
-              text={text}
-              onTextChange={changeText}
-              onSearch={doSearch}
-              disabled={!stores.storeId}
-              busy={search.status === "loading"}
-              inputRef={searchInput}
-              trailing={
-                voice.supported ? (
-                  <VoiceButton listening={voice.listening} onStart={voice.start} onStop={voice.stop} disabled={!stores.storeId} />
-                ) : null
-              }
-            />
-            {voice.supported ? (
-              <p className="sf-voice-status" role="status">
-                {voice.message}
-              </p>
-            ) : null}
+            <div className="sf-search-block">
+              <SearchBar
+                storeId={stores.storeId}
+                text={text}
+                onTextChange={changeText}
+                onSearch={doSearch}
+                disabled={!stores.storeId}
+                busy={search.status === "loading"}
+                inputRef={searchInput}
+                trailing={
+                  voice.supported ? (
+                    <VoiceButton listening={voice.listening} onStart={voice.start} onStop={voice.stop} disabled={!stores.storeId} />
+                  ) : null
+                }
+              />
+              {voice.supported ? (
+                <p className="sf-voice-status" role="status">
+                  {voice.message}
+                </p>
+              ) : null}
+            </div>
             <CategoryChips
               categories={categories}
               selected={selectedCategory}
@@ -209,6 +224,8 @@ export function App() {
           </>
         )}
       </main>
+
+      <Toast message={toast} onClose={closeToast} />
 
       <Sheet open={listOpen} title="Shopping list" onClose={closeList}>
         <ShoppingList

@@ -138,3 +138,10 @@
     display: none;
   }
 }
+
+/* The search bar and its voice status line: one block, so a silent status line adds no visible gap. */
+.sf-search-block {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
