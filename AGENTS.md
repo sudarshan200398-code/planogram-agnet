@@ -33,6 +33,8 @@ The Streamlit page may still call `interface.run_query()` directly.
 - The API talks to store data only through the `StoreDataProvider` interface, one cached engine per store.
 - No voice input in the Python engine or API: they only receive text. Browser-side voice input on the
   front end is allowed and sends plain text to the API.
+- The web front end (`web/`) follows the same chain: front end -> API -> provider -> engine. It never
+  reads store files or calls the engine directly. The voice rule above applies to the Python engine only.
 - No machine learning for routing.
 
 ## How to work
