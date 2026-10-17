@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
-// The one smoke test: home, store switch, search "milk", add to the list, "Find my route" with its map.
+// The one smoke test: home, store switch, search "milk" (cards only, no route), add to the list, "Find my route" with its map.
 // Each project (360/1280 px, light/dark) saves screenshots to web/screenshots/smoke/.
 const UPSTAIRS = "PlayTime Wax Crayons 12 pack"; // a Level 2 product in Central Store
 const SHOTS = fileURLToPath(new URL("../screenshots/smoke/", import.meta.url));
@@ -30,7 +30,7 @@ test("home, store switch, search, list and route with map", async ({ page }, inf
   await store.selectOption("central");
   await expect(page.getByRole("heading", { level: 1, name: "Find anything in Central Store" })).toBeVisible();
 
-  // Search "milk": the store asks which milk; choosing one shows its card and a collapsed route.
+  // Search "milk": the store asks which milk; choosing one shows only its card: no route, steps or map.
   const box = page.getByRole("combobox", { name: "Search products" });
   await box.fill("milk");
   await box.press("Enter");
@@ -38,7 +38,10 @@ test("home, store switch, search, list and route with map", async ({ page }, inf
   await page.locator(".sf-option").first().click();
   const card = page.getByTestId("result-card").first();
   await expect(card).toHaveAttribute("data-status", "available");
-  await expect(page.getByRole("region", { name: "Your route" })).toBeVisible();
+  const results = page.getByRole("region", { name: "Results" });
+  await expect(results.getByRole("region", { name: "Your route" })).toHaveCount(0);
+  await expect(results.getByRole("button", { name: /^(Show \d+ steps|Hide steps)$/ })).toHaveCount(0);
+  await expect(results.getByRole("img", { name: /^Map of / })).toHaveCount(0);
   await noSidewaysScroll(page);
   await shot("02-results");
 
