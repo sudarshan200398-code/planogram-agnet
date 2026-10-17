@@ -8,15 +8,20 @@ not these files.
 | File | What it is | Size |
 |---|---|---|
 | `graph.json` | Walkways, zones and the floor links | 56 points, 70 paths, 3 floor links |
-| `products.csv` | Products (sku, name, brand, category, size, keywords) | 444 products |
-| `planogram.csv` | Where each product sits (zone, bay, shelf, position) | 448 placements |
-| `inventory.csv` | Stock per product (0 means out of stock) | 11 out of stock |
-| `prices.csv` | Optional **synthetic** prices in rupees (sku, price), from the product rules in `config/price_ranges.json` | 444 prices |
+| `products.csv` | Products (sku, name, brand, category, size, keywords) | 506 products |
+| `planogram.csv` | Where each product sits (zone, bay, shelf, position) | 511 placements |
+| `inventory.csv` | Stock per product (0 means out of stock) | 17 out of stock |
+| `prices.csv` | Optional **synthetic** prices in rupees (sku, price), from the product rules in `config/price_ranges.json` | 506 prices |
 
 **Floor 1:** Main Doors (entrance), Fresh Market, Bakehouse, Butcher Counter, Fishmonger, Chilled Foods,
 Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
 **Floor 2:** Home and Garden, Electronics Corner, Kids Zone, Pharmacy, Pet Supplies, Fashion Floor,
 Books and Stationery, Customer Desk.
 **Between floors:** Escalator Hall (escalator), East Stairs (stairs), Lift Lobby (step-free lift).
+
+**Everyday staples** (62 products: milk, eggs, bread, cheese, sugar, salt, cooking oil, noodles,
+chips, water, soft drinks, cleaning, personal care, batteries and more) are in the generator's `STAPLES`
+list. They come after the original catalogue, so the earlier products keep their skus, shelves, stock
+and prices. `tests/test_staples.py` checks every staple can be found by name.
 
 Node ids start with `RS1_` / `RS2_` and skus with `RS-`, so they never collide with the Central Store.

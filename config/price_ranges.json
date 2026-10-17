@@ -82,6 +82,7 @@
     {"type": "frozen vegetables", "group": "grocery", "match": ["frozen peas", "frozen berries", "mixed vegetables", "sweetcorn"], "bands": [{"ref": "1 kg", "min": 149, "max": 399}]},
     {"type": "yogurt and desserts", "group": "grocery", "match": ["yogurt", "yoghurt", "curd", "pudding"], "bands": [{"ref": "500 g", "min": 70, "max": 220}]},
     {"type": "cheese", "group": "grocery", "match": ["cheese", "cheddar", "mozzarella", "parmesan", "gouda"], "bands": [{"ref": "200 g", "min": 120, "max": 349}]},
+    {"type": "full cream milk", "group": "grocery", "match": ["full cream milk"], "bands": [{"ref": "1 L", "min": 64, "max": 80}]},
     {"type": "cream", "group": "grocery", "match": ["coffee creamer", "single cream", "cream"], "bands": [{"ref": "500 ml", "min": 90, "max": 199}]},
     {"type": "paneer", "group": "grocery", "match": ["paneer"], "bands": [{"ref": "200 g", "min": 80, "max": 140}]},
     {"type": "rice and grains", "group": "grocery", "match": ["rice", "basmati", "quinoa"], "bands": [{"ref": "1 kg", "min": 60, "max": 180}]},
@@ -96,7 +97,15 @@
     {"type": "everyday fruit", "group": "grocery", "match": ["banana", "lemon", "lime", "orange", "watermelon"], "bands": [{"ref": "1 kg", "min": 40, "max": 120}, {"ref": "1 pack", "min": 30, "max": 90}]},
     {"type": "fruit", "group": "grocery", "match": ["apple", "mango", "grape", "peach", "pear", "cantaloupe"], "bands": [{"ref": "1 kg", "min": 100, "max": 300}, {"ref": "1 pack", "min": 40, "max": 120}]},
     {"type": "staple vegetables", "group": "grocery", "match": ["onion", "potato", "tomato", "carrot", "pumpkin", "squash"], "bands": [{"ref": "1 kg", "min": 25, "max": 70}, {"ref": "1 pack", "min": 20, "max": 60}]},
-    {"type": "vegetables", "group": "grocery", "match": ["spinach", "broccoli", "cauliflower", "kale", "lettuce", "salad leaves", "celery", "radish", "garlic", "mushroom"], "bands": [{"ref": "1 kg", "min": 60, "max": 200}, {"ref": "1 pack", "min": 20, "max": 80}]}
+    {"type": "vegetables", "group": "grocery", "match": ["spinach", "broccoli", "cauliflower", "kale", "lettuce", "salad leaves", "celery", "radish", "garlic", "mushroom"], "bands": [{"ref": "1 kg", "min": 60, "max": 200}, {"ref": "1 pack", "min": 20, "max": 80}]},
+    {"type": "eggs", "group": "grocery", "match": ["eggs", "egg"], "bands": [{"ref": "6 pack", "min": 42, "max": 66}]},
+    {"type": "salt", "group": "grocery", "match": ["salt"], "bands": [{"ref": "1 kg", "min": 20, "max": 32}]},
+    {"type": "detergent", "group": "household", "match": ["detergent"], "bands": [{"ref": "1 kg", "min": 99, "max": 249}]},
+    {"type": "dish wash", "group": "household", "match": ["dish wash"], "bands": [{"ref": "500 ml", "min": 89, "max": 179}]},
+    {"type": "garbage bags", "group": "household", "match": ["garbage bag"], "bands": [{"ref": "30 pack", "min": 79, "max": 179}]},
+    {"type": "bath soap", "group": "health", "match": ["bath soap", "soap"], "bands": [{"ref": "4 pack", "min": 99, "max": 229}]},
+    {"type": "shampoo", "group": "health", "match": ["shampoo"], "bands": [{"ref": "180 ml", "min": 119, "max": 249}]},
+    {"type": "toothpaste", "group": "health", "match": ["toothpaste"], "bands": [{"ref": "150 g", "min": 79, "max": 149}]}
   ],
   "zone_fallbacks": {
     "Apparel & Clothing": {"group": "apparel", "min": 299, "max": 1999},
