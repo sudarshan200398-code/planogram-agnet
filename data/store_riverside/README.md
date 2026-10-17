@@ -19,6 +19,11 @@ Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
 Books and Stationery, Customer Desk.
 **Between floors:** Escalator Hall (escalator), East Stairs (stairs), Lift Lobby (step-free lift).
 
+**Other names for places** (14 in all, e.g. "produce" for Fresh Market, "dairy" for Chilled Foods)
+are the optional `aliases` on places in `graph.json`, from the generator's `PLACE_ALIASES`. Shoppers can
+use them as a start point ("milk and eggs, I'm at produce"). Each must name exactly one place and share no
+word with a product, which the data validator checks when the store loads.
+
 **Everyday staples** (62 products: milk, eggs, bread, cheese, sugar, salt, cooking oil, noodles,
 chips, water, soft drinks, cleaning, personal care, batteries and more) are in the generator's `STAPLES`
 list. They come after the original catalogue, so the earlier products keep their skus, shelves, stock

@@ -436,14 +436,22 @@ def get_dataset_query_patterns(dataset: Dataset) -> DatasetQueryPatterns:
             return patterns
 
     phrases = _get_composed_phrases()
-    label_map: dict[str, str] = {}
+    label_map: dict[str, str] = {}  # place name or alias (normalised) -> the place's label
+    place_names: set[str] = set()  # what a start clause may say: labels and their aliases
     if hasattr(dataset, "graph") and dataset.graph.nodes:
         for n in dataset.graph.nodes:
             if n.label and n.type != "junction":
                 norm_lbl = _norm_landmark(n.label)
                 label_map[norm_lbl] = n.label
+                place_names.add(n.label)
+        for n in dataset.graph.nodes:  # aliases never override a place's own name
+            if n.label and n.type != "junction":
+                for alias in n.aliases:
+                    if alias.strip() and _norm_landmark(alias) not in label_map:
+                        label_map[_norm_landmark(alias)] = n.label
+                        place_names.add(alias.strip())
 
-    sorted_labels = sorted(label_map.values(), key=len, reverse=True)
+    sorted_labels = sorted(place_names, key=len, reverse=True)
 
     terms: set[str] = set()
     known_sizes: set[str] = set()

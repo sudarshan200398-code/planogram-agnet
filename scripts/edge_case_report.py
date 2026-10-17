@@ -26,6 +26,8 @@ from planogram_agent.settings import Settings
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STORE_DIR = REPO_ROOT / "data" / "store_demo"
+# Cases run in Central (store_demo) unless they name another store folder in "store".
+STORE_DIRS = {"central": STORE_DIR, "riverside": REPO_ROOT / "data" / "store_riverside"}
 EDGE_CASES_PATH = REPO_ROOT / "tests" / "edge_cases.json"
 APP_FILE = str(REPO_ROOT / "src" / "planogram_agent" / "ui" / "streamlit_app.py")
 DOCS_REPORT_PATH = REPO_ROOT / "docs" / "edge_case_report.md"
@@ -150,6 +152,9 @@ def run_single_case(case: dict, finder: Orchestrator, dataset: object, settings:
                 return exp_summary, "unknown", "FAIL"
 
         else:
+            if case.get("store", "central") != "central":
+                store_dir = STORE_DIRS[case["store"]]
+                finder = create_finder(store_dir, settings=settings, client=NoModelClient())
             ans = run_query(
                 finder,
                 case["input_text"],
@@ -159,10 +164,15 @@ def run_single_case(case: dict, finder: Orchestrator, dataset: object, settings:
             )
 
         act_summary = f"{ans.status} (route={ans.route is not None})"
+        if "start_label" in exp:
+            exp_summary += f", from {exp['start_label']}"
+            act_summary += f", from {ans.route.start_label if ans.route else None}"
 
         # Check status & route match
         status_ok = (ans.status == exp["response_status"])
         route_ok = ("route_exists" not in exp) or ((ans.route is not None) == exp["route_exists"])
+        if "start_label" in exp:
+            route_ok = route_ok and ans.route is not None and ans.route.start_label == exp["start_label"]
         items_ok = True
         if "item_statuses" in exp:
             act_item_statuses = [it.status for it in ans.items]
@@ -226,7 +236,8 @@ def main() -> None:
     lines: list[str] = [
         "# Edge Case Matrix Report",
         "",
-        "Evaluation run offline with `NoModelClient` across 58 test edge cases.",
+        f"Evaluation run offline with `NoModelClient` across {len(cases)} test edge cases "
+        "(Central Store unless a case names another store).",
         "",
         "## Results Table",
         "",
@@ -272,7 +283,7 @@ def main() -> None:
             "",
             "## Known Issues in Earlier-Phase Modules",
             "",
-            "None. All 58 edge cases pass cleanly.",
+            f"None. All {len(cases)} edge cases pass cleanly.",
             "",
         ])
 

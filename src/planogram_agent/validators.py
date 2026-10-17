@@ -1,6 +1,9 @@
 """Data validators. They return a list of human-readable issues (empty = valid)."""
 from __future__ import annotations
 
+import re
+from collections import Counter
+
 import networkx as nx
 
 from .schemas import (ConnectorType, GraphData, NodeType, PlanogramEntry,
@@ -139,4 +142,57 @@ def validate_inventory(stock: list[StockItem], products: list[Product]) -> list[
     issues = [f"inventory: unknown sku {s.sku}" for s in stock if s.sku not in skus]
     ids = [s.sku for s in stock]
     issues += [f"inventory: duplicate sku {s}" for s in sorted({i for i in ids if ids.count(i) > 1})]
+    return issues
+
+
+# Small words that may appear in an alias without counting as a product word.
+_ALIAS_FILLER_WORDS = {"the", "and", "of"}
+
+
+def _place_name(text: str) -> str:
+    """A place name or alias as compared: lower case, single spaces, no leading 'the'."""
+    t = " ".join(text.lower().split())
+    return t[4:] if t.startswith("the ") else t
+
+
+def _words(text: str) -> set[str]:
+    return set(re.findall(r"[a-z0-9]+", text.lower()))
+
+
+def validate_place_aliases(graph: GraphData, products: list[Product]) -> list[str]:
+    """Optional place aliases ("produce" for "Fresh Market") must each name exactly one place.
+
+    An alias may not be empty, be the name of a place, sit on a walkway junction or on a place whose name
+    is on more than one floor, be used twice, or contain a word from the store's product names,
+    categories or keywords (that would turn a product search like "vegetables" into a start point).
+    """
+    issues: list[str] = []
+    places = [n for n in graph.nodes if n.type != NodeType.JUNCTION]
+    place_names = {_place_name(n.label) for n in places}
+    label_counts = Counter(_place_name(n.label) for n in places)
+    product_words: set[str] = set()
+    for p in products:
+        product_words |= _words(" ".join([p.name, p.category, *p.keywords]))
+    owners: dict[str, list[str]] = {}
+    for n in graph.nodes:
+        for alias in n.aliases:
+            name = _place_name(alias)
+            if not name:
+                issues.append(f"{n.label} ({n.id}): empty alias")
+                continue
+            if n.type == NodeType.JUNCTION:
+                issues.append(f"{n.label} ({n.id}): alias '{alias}' is on a walkway junction, which is not a start point")
+                continue
+            owners.setdefault(name, []).append(n.label)
+            if name in place_names:
+                issues.append(f"alias '{alias}' on {n.label} is the name of a place")
+            if label_counts[_place_name(n.label)] > 1:
+                issues.append(f"alias '{alias}' on {n.label}: that place is on more than one floor, "
+                              "so the alias would not name exactly one place")
+            clash = sorted((_words(name) - _ALIAS_FILLER_WORDS) & product_words)
+            if clash:
+                issues.append(f"alias '{alias}' on {n.label} contains the product word(s) {', '.join(clash)}")
+    for name, labels in sorted(owners.items()):
+        if len(labels) > 1:
+            issues.append(f"alias '{name}' is used by more than one place: {', '.join(labels)}")
     return issues

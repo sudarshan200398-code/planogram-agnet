@@ -19,6 +19,11 @@ from planogram_agent.runtime.state import Answer, ItemResult, RunState
 from planogram_agent.settings import Settings
 
 STORE_DIR = Path(__file__).resolve().parent.parent / "data" / "store_demo"
+# Cases run in Central (store_demo) unless they name another store folder in "store".
+STORE_DIRS = {
+    "central": STORE_DIR,
+    "riverside": Path(__file__).resolve().parent.parent / "data" / "store_riverside",
+}
 EDGE_CASES_PATH = Path(__file__).resolve().parent / "edge_cases.json"
 APP_FILE = str(Path(__file__).resolve().parent.parent / "src" / "planogram_agent" / "ui" / "streamlit_app.py")
 
@@ -76,9 +81,20 @@ def get_parametrized_cases():
     ]
 
 
+@pytest.fixture(scope="module")
+def other_stores(settings):
+    """Dataset and finder for each non-Central store a case names."""
+    return {
+        name: (load_dataset(d, validate=True), create_finder(d, settings=settings, client=NoModelClient()))
+        for name, d in STORE_DIRS.items() if name != "central"
+    }
+
+
 @pytest.mark.parametrize("case", get_parametrized_cases())
-def test_standard_edge_cases(finder, dataset, settings, case):
+def test_standard_edge_cases(finder, dataset, settings, other_stores, case):
     """Run standard input, hostile, quantities, matching, availability, location edge cases."""
+    if case.get("store", "central") != "central":
+        dataset, finder = other_stores[case["store"]]
     cid = case["id"]
     query = case["input_text"]
     start = case.get("start")
@@ -116,6 +132,13 @@ def test_standard_edge_cases(finder, dataset, settings, case):
         has_route = ans.route is not None
         assert has_route == exp["route_exists"], (
             f"[{cid}] Expected route_exists={exp['route_exists']}, got {has_route}"
+        )
+
+    # Start point check (where the route begins), when a case names one
+    if "start_label" in exp:
+        assert ans.route is not None and ans.route.start_label == exp["start_label"], (
+            f"[{cid}] Expected the route to start at {exp['start_label']!r}, got "
+            f"{ans.route.start_label if ans.route else None!r}"
         )
 
     # Truncation message check for QTY-01

@@ -193,6 +193,24 @@ def _slug(label: str) -> str:
     return "".join(ch for ch in label.upper().replace(" ", "_") if ch.isalnum() or ch == "_")
 
 
+# Other names shoppers use for a place, accepted as start points ("I'm at produce"). Only clear synonyms
+# that name exactly one place and share no word with a product name, category or keyword
+# (validators.validate_place_aliases checks this when the store loads). Places on both floors get none.
+PLACE_ALIASES = {
+    "Fresh Market": ["produce"],
+    "Chilled Foods": ["dairy"],
+    "Bakehouse": ["bakery"],
+    "Front Tills": ["checkout", "tills"],
+    "Main Doors": ["entrance"],
+    "Customer Desk": ["customer service", "help desk"],
+    "Butcher Counter": ["butcher"],
+    "Pharmacy": ["chemist"],
+    "Electronics Corner": ["electronics"],
+    "Books and Stationery": ["stationery"],
+    "Fashion Floor": ["clothing", "clothes"],
+}
+
+
 def _junction_id(floor: int, x: int, y: int) -> str:
     return f"RS{floor}_J{GRID_X.index(x) + 1}{GRID_Y.index(y) + 1}"
 
@@ -213,7 +231,10 @@ def build_graph() -> dict:
                 edges.append({"a": _junction_id(floor, x, a), "b": _junction_id(floor, x, b)})
         for label, ntype, x, y, jx, jy in SPURS[floor]:
             node_id = f"RS{floor}_{_slug(label)}"
-            nodes.append({"id": node_id, "floor": floor, "x": x, "y": y, "type": ntype, "label": label})
+            node = {"id": node_id, "floor": floor, "x": x, "y": y, "type": ntype, "label": label}
+            if label in PLACE_ALIASES:
+                node["aliases"] = PLACE_ALIASES[label]
+            nodes.append(node)
             edges.append({"a": _junction_id(floor, jx, jy), "b": node_id})
     connectors = []
     for ctype, label in (("escalator", "Escalator Hall"), ("stairs", "East Stairs"), ("elevator", "Lift Lobby")):
@@ -307,6 +328,11 @@ Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
 Books and Stationery, Customer Desk.
 **Between floors:** Escalator Hall (escalator), East Stairs (stairs), Lift Lobby (step-free lift).
 
+**Other names for places** ({aliases} in all, e.g. "produce" for Fresh Market, "dairy" for Chilled Foods)
+are the optional `aliases` on places in `graph.json`, from the generator's `PLACE_ALIASES`. Shoppers can
+use them as a start point ("milk and eggs, I'm at produce"). Each must name exactly one place and share no
+word with a product, which the data validator checks when the store loads.
+
 **Everyday staples** ({staples} products: milk, eggs, bread, cheese, sugar, salt, cooking oil, noodles,
 chips, water, soft drinks, cleaning, personal care, batteries and more) are in the generator's `STAPLES`
 list. They come after the original catalogue, so the earlier products keep their skus, shelves, stock
@@ -334,6 +360,7 @@ def generate(out_dir: Path) -> dict:
         "products": len(products), "placements": len(planogram),
         "out_of_stock": sum(r["quantity"] == 0 for r in inventory),
         "staples": sum(p["sku"].split("-")[1] in STAPLE_CODES for p in products),
+        "aliases": sum(len(n.get("aliases", [])) for n in graph["nodes"]),
     }
     (out_dir / "README.md").write_text(README.format(**counts), encoding="utf-8", newline="\n")
     return counts
