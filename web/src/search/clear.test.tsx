@@ -32,7 +32,7 @@ async function start() {
 
 async function searchBagels(user: ReturnType<typeof userEvent.setup>) {
   await user.type(box(), `${BAGELS}{Enter}`);
-  await screen.findByRole("region", { name: "Your route" });
+  await screen.findByTestId("result-card");
 }
 
 function expectHome() {

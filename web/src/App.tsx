@@ -12,12 +12,13 @@ import { Toast, type ToastMessage } from "./components/Toast";
 import { EmptyState, ErrorState, Skeleton } from "./components/ui";
 import { friendlyError } from "./lib/errors";
 import { formatLocation } from "./lib/format";
-import type { NewItem } from "./list/list";
-import { AddToListButton, ListButton, ShoppingList } from "./list/ShoppingList";
+import { addAllMessage, type NewItem } from "./list/list";
+import { AddAllButton, AddToListButton, ListButton, ShoppingList } from "./list/ShoppingList";
 import { useBasketRoute } from "./list/useBasketRoute";
 import { useShoppingList } from "./list/useShoppingList";
 import type { ProductLike } from "./results/ProductCard";
 import { Results, ResultsSkeleton } from "./results/Results";
+import { useStartPoint } from "./route/useStartPoint";
 import { SearchBar } from "./search/SearchBar";
 import { useSearch } from "./search/useSearch";
 import { useStoreSelection } from "./stores/useStoreSelection";
@@ -45,9 +46,17 @@ export function App() {
   const closeList = useCallback(() => setListOpen(false), []);
   const [toast, setToast] = useState<ToastMessage | null>(null);
   const closeToast = useCallback(() => setToast(null), []);
-  // A route is only shown for the list it was made from; any change to the list clears it.
+  // A start point said in a search ("I'm at produce, …") is kept for the list route of this store.
+  const startPoint = useStartPoint(stores.storeId);
+  const searchResponse = search.status === "done" ? search.response : null;
+  const { detect: detectStart } = startPoint;
+  useEffect(() => {
+    if (searchResponse) void detectStart(searchResponse);
+  }, [searchResponse, detectStart]);
+  const startLabel = startPoint.start?.label ?? null;
+  // A route is only shown for the list and start it was made from; changing either clears it.
   const { clear: clearRoute } = basket;
-  useEffect(() => clearRoute(), [list.items, clearRoute]);
+  useEffect(() => clearRoute(), [list.items, startLabel, clearRoute]);
   const voice = useVoice(setText);
   // When speech ends, hand the words back to the shopper to check before searching.
   useEffect(() => {
@@ -112,6 +121,15 @@ export function App() {
       });
     };
     return <AddToListButton item={item} inList={inList.has(p.sku)} full={list.full} onAdd={add} onOpen={openList} />;
+  };
+  // "Add all to list" when a list search found 2 or more products in stock; the rest are skipped.
+  const searchItems = searchResponse?.items ?? [];
+  const inStock = searchItems.filter((i) => i.status === "available" && i.sku && i.name);
+  const addAll = () => {
+    const result = list.addMany(
+      inStock.map((i) => ({ sku: i.sku!, name: i.name!, image_url: i.image_url, place: formatLocation(i), qty: i.quantity_requested })),
+    );
+    setToast({ id: Date.now(), text: addAllMessage(result, searchItems.length - inStock.length), action: { label: "Open list", run: openList } });
   };
 
   return (
@@ -202,6 +220,7 @@ export function App() {
                       notice={search.notice}
                       onAnswer={(i, sku) => void answer(i, sku)}
                       action={(item) => addAction({ ...item, name: item.name ?? item.requested })}
+                      addAll={inStock.length >= 2 ? <AddAllButton full={list.full} onAdd={addAll} /> : null}
                       notFound={{
                         storeName: stores.current?.name ?? "this store",
                         otherStoreName: otherStore?.name ?? null,
@@ -231,9 +250,11 @@ export function App() {
         <ShoppingList
           items={list.items}
           route={basket.state}
+          start={startPoint.start}
           onQty={list.setQty}
           onRemove={list.remove}
-          onFindRoute={() => void basket.find(list.items)}
+          onFindRoute={() => void basket.find(list.items, startLabel)}
+          onResetStart={startPoint.reset}
         />
       </Sheet>
     </div>

@@ -20,6 +20,40 @@ export function addItem(list: ListItem[], item: NewItem): { list: ListItem[]; fu
   return { list: [...list, { ...item, qty: QTY_MIN }], full: false };
 }
 
+export interface AddAllResult {
+  list: ListItem[];
+  added: number;
+  already: number; // in the list before (left unchanged), or asked for twice
+  noRoom: number; // did not fit because the list reached LIST_MAX_ITEMS
+}
+
+/** "Add all to list": add each new product with its quantity (kept in range); listed ones stay unchanged. */
+export function addItems(list: ListItem[], items: (NewItem & { qty: number })[]): AddAllResult {
+  const next = [...list];
+  let added = 0;
+  let already = 0;
+  let noRoom = 0;
+  for (const { qty, ...item } of items) {
+    if (next.some((i) => i.sku === item.sku)) already++;
+    else if (next.length >= LIST_MAX_ITEMS) noRoom++;
+    else {
+      next.push({ ...item, qty: Number.isFinite(qty) ? clampQty(qty) : QTY_MIN });
+      added++;
+    }
+  }
+  return { list: added ? next : list, added, already, noRoom };
+}
+
+/** The toast after "Add all to list". skipped = items that were out of stock or not found. */
+export function addAllMessage({ added, already, noRoom }: Omit<AddAllResult, "list">, skipped: number): string {
+  const parts: string[] = [];
+  if (added) parts.push(`Added ${added} to your list.`);
+  if (already) parts.push(added ? `${already} ${already === 1 ? "was" : "were"} already in it.` : "These are already in your list.");
+  if (noRoom) parts.push(`Your list is full (${LIST_MAX_ITEMS} products), so ${noRoom} didn't fit.`);
+  if (skipped) parts.push(`Skipped ${skipped} that ${skipped === 1 ? "is" : "are"} out of stock or not found.`);
+  return parts.join(" ");
+}
+
 export function setQuantity(list: ListItem[], sku: string, qty: number): ListItem[] {
   if (!Number.isFinite(qty)) return list;
   return list.map((i) => (i.sku === sku ? { ...i, qty: clampQty(qty) } : i));

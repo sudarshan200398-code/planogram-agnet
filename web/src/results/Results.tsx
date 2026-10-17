@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { SearchItem, SearchResponse } from "../api/types";
 import { Card, Skeleton } from "../components/ui";
-import { RouteSteps } from "../route/RouteSteps";
 import { ClarifyPanel } from "../search/ClarifyPanel";
 import { NotFoundCard, type NotFoundInfo } from "./NotFoundCard";
 import { ResultCard } from "./ResultCard";
@@ -24,7 +23,10 @@ export function ResultsSkeleton({ count = 3 }: { count?: number }) {
   );
 }
 
-/** Messages, the pending question (if any) and result cards for one search response. */
+/**
+ * Messages, the pending question (if any) and result cards for one search response. Only cards: the
+ * response's route is not shown here; the route and map come from the shopping list ("Find my route").
+ */
 export function Results({
   response,
   text,
@@ -32,6 +34,7 @@ export function Results({
   notice = null,
   onAnswer,
   action,
+  addAll = null,
   notFound,
 }: {
   response: SearchResponse;
@@ -40,6 +43,7 @@ export function Results({
   notice?: string | null;
   onAnswer?: (itemIndex: number, sku: string) => void;
   action?: (item: SearchItem) => ReactNode;
+  addAll?: ReactNode; // "Add all to list", above the cards
   notFound: NotFoundInfo;
 }) {
   if (!response.items.length) {
@@ -72,12 +76,12 @@ export function Results({
           ))}
         </div>
       ) : null}
+      {addAll}
       <div className="sf-results">
         {response.items.map((item) => (
           <ResultCard key={`${item.index}-${item.sku ?? item.requested}`} item={item} action={item.sku ? action?.(item) : undefined} notFound={notFound} />
         ))}
       </div>
-      {response.route ? <RouteSteps route={response.route} storeId={response.store_id} /> : null}
     </div>
   );
 }

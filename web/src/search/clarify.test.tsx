@@ -5,6 +5,7 @@ import { delay, http, HttpResponse } from "msw";
 import { App } from "../App";
 import type { SearchResponse } from "../api/types";
 import { fixture, reply } from "../test/handlers";
+import { expectNoRouteUnderSearch } from "../test/noRoute";
 import { server } from "../test/server";
 import { useSearch } from "./useSearch";
 
@@ -46,7 +47,7 @@ describe("the answer stays", () => {
     const card = await screen.findByTestId("result-card");
     expect(within(card).getByRole("heading")).toHaveTextContent(chosen.name);
     expect(screen.queryByRole("heading", { name: /did you mean/ })).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your route" })).toBeInTheDocument();
+    expectNoRouteUnderSearch();
     const before = { ...calls };
 
     // Many later renders: typing, theme changes, opening and closing a sheet, time passing.
@@ -64,7 +65,7 @@ describe("the answer stays", () => {
 });
 
 describe("several items needing a choice", () => {
-  it("asks them one after another, each answer sent to the right item, ending with a route", async () => {
+  it("asks them one after another, each answer sent to the right item, ending with cards only", async () => {
     const asked: string[] = [];
     const sent: unknown[] = [];
     server.events.on("request:start", async ({ request }) => {
@@ -82,9 +83,11 @@ describe("several items needing a choice", () => {
     }
     expect(asked).toEqual(["Which “milk” did you mean?", "Which “bread” did you mean?", "Which “crayons” did you mean?"]);
     expect(sent.map((b) => (b as { item_index: number }).item_index)).toEqual([0, 1, 2]);
-    expect(await screen.findByRole("heading", { name: "Your route" })).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getAllByTestId("result-card").map((c) => c.dataset.status)).toEqual(["available", "available", "available"]),
+    );
     expect(screen.queryByRole("heading", { name: /did you mean/ })).not.toBeInTheDocument();
-    expect(screen.getAllByTestId("result-card").map((c) => c.dataset.status)).toEqual(["available", "available", "available"]);
+    expectNoRouteUnderSearch(); // the final answer carries a route; it is only shown from the list
   });
 });
 

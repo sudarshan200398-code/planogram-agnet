@@ -6,6 +6,7 @@ import { App } from "../App";
 import type { SearchResponse } from "../api/types";
 import { LIST_MAX_ITEMS, QTY_MAX, STORAGE_KEYS } from "../config";
 import { fixture, reply } from "../test/handlers";
+import { expectNoRouteUnderSearch } from "../test/noRoute";
 import { server } from "../test/server";
 import type { ListItem } from "./list";
 
@@ -173,15 +174,12 @@ describe("Find my route", () => {
   });
 });
 
-describe("collapsed route under a typed search", () => {
-  it("starts collapsed and opens on tap", async () => {
+describe("no route under a typed search", () => {
+  it("shows only the product card, though the search response carries a route", async () => {
+    expect((fixture("search_central_bagels").body as SearchResponse).route).not.toBeNull();
     const { user } = await home();
     await user.type(screen.getByRole("combobox", { name: "Search products" }), "Daily Bake Plain Bagels 4 pack{Enter}");
-    const route = await screen.findByRole("region", { name: "Your route" });
-    const toggle = within(route).getByRole("button", { name: /^Show \d+ steps$/ });
-    expect(toggle).toHaveAttribute("aria-expanded", "false");
-    expect(within(route).queryAllByRole("listitem")).toHaveLength(0);
-    await user.click(toggle);
-    expect(within(route).getAllByRole("listitem").length).toBeGreaterThan(0);
+    await screen.findByTestId("result-card");
+    expectNoRouteUnderSearch();
   });
 });

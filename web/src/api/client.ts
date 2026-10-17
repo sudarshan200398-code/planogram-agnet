@@ -82,8 +82,8 @@ export const api = {
   clarify: (storeId: string, body: ClarifyRequest, signal?: AbortSignal) =>
     request<SearchResponse>(`${store(storeId)}/clarify`, { method: "POST", body, signal }),
   map: (storeId: string, signal?: AbortSignal) => request<StoreMap>(`${store(storeId)}/map`, { signal }),
-  basketRoute: (storeId: string, items: BasketLine[], signal?: AbortSignal) =>
-    request<SearchResponse>(`${store(storeId)}/basket/route`, { method: "POST", body: { items }, signal }),
+  basketRoute: (storeId: string, items: BasketLine[], start: string | null, signal?: AbortSignal) =>
+    request<SearchResponse>(`${store(storeId)}/basket/route`, { method: "POST", body: start ? { items, start } : { items }, signal }),
 };
 
 /** image_url from the API is a path; make it absolute against the API base. */

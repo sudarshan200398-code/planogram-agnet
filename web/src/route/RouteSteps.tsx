@@ -23,7 +23,7 @@ export function routeSummary(route: Route): string {
   return `${metres} m · ${floors}`;
 }
 
-/** "Your route": totals, numbered steps, then the map. Collapsed by default under a search, open for the list route. */
+/** "Your route" for the shopping list: totals, numbered steps, then the map. Opens expanded; the shopper can hide the steps. */
 export function RouteSteps({ route, storeId, defaultOpen = false }: { route: Route; storeId: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const listId = useId();

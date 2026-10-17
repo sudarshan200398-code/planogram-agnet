@@ -6,6 +6,7 @@ import { App } from "../App";
 import type { Route, SearchResponse, StoreMap } from "../api/types";
 import { STORAGE_KEYS } from "../config";
 import { fixture, reply } from "../test/handlers";
+import { expectNoRouteUnderSearch } from "../test/noRoute";
 import { server } from "../test/server";
 import { RouteMap } from "./RouteMap";
 
@@ -104,17 +105,8 @@ describe("the map in the app", () => {
     await screen.findByRole("combobox", { name: "Store" });
     return user;
   }
-
-  it("under a typed search it appears only when the steps are opened", async () => {
-    const user = await start();
-    await user.type(screen.getByRole("combobox", { name: "Search products" }), "Daily Bake Plain Bagels 4 pack{Enter}");
-    const route = await screen.findByRole("region", { name: "Your route" });
-    expect(maps()).toHaveLength(0);
-    await user.click(within(route).getByRole("button", { name: /^Show \d+ steps$/ }));
-    expect(await within(route).findAllByRole("img", { name: /^Map of Level/ })).toHaveLength(1);
-  });
-
-  it("is shown under the shopping list route", async () => {
+  /** The recorded two-floor list, opened in its sheet. */
+  async function openRecordedList() {
     const BASKET = fixture("basket_central_route");
     const names = (BASKET.body as SearchResponse).items.map((i) => i.name!);
     const lines = (BASKET.request.body as { items: { sku: string; qty: number }[] }).items;
@@ -124,7 +116,20 @@ describe("the map in the app", () => {
     );
     const user = await start();
     await user.click(screen.getByRole("button", { name: /^Shopping list/ }));
-    const sheet = screen.getByRole("dialog", { name: "Shopping list" });
+    return { user, sheet: screen.getByRole("dialog", { name: "Shopping list" }) };
+  }
+
+  it("is not shown under a typed search, though the response carries a route", async () => {
+    expect(ONE_FLOOR).not.toBeNull();
+    const user = await start();
+    await user.type(screen.getByRole("combobox", { name: "Search products" }), "Daily Bake Plain Bagels 4 pack{Enter}");
+    await screen.findByTestId("result-card");
+    expect(maps()).toHaveLength(0);
+    expectNoRouteUnderSearch();
+  });
+
+  it("is shown under the shopping list route", async () => {
+    const { user, sheet } = await openRecordedList();
     await user.click(within(sheet).getByRole("button", { name: "Find my route" }));
     expect(await within(sheet).findAllByRole("img", { name: /^Map of Level/ })).toHaveLength(2);
     expect(await axe(sheet)).toHaveNoViolations();
@@ -138,12 +143,11 @@ describe("the map in the app", () => {
     expect(maps()).toHaveLength(0);
   });
 
-  it("if the map can't load, the step list still works and says so", async () => {
+  it("if the map can't load, the list's step list still works and says so", async () => {
     server.use(http.get("*/api/stores/central/map", () => reply("error_rate_limited")));
-    const user = await start();
-    await user.type(screen.getByRole("combobox", { name: "Search products" }), "Daily Bake Plain Bagels 4 pack{Enter}");
-    const route = await screen.findByRole("region", { name: "Your route" });
-    await user.click(within(route).getByRole("button", { name: /^Show \d+ steps$/ }));
+    const { user, sheet } = await openRecordedList();
+    await user.click(within(sheet).getByRole("button", { name: "Find my route" }));
+    const route = await within(sheet).findByRole("region", { name: "Your route" });
     expect(await within(route).findByText("The map isn't available right now. The steps above show the way.")).toBeInTheDocument();
     expect(within(route).getAllByRole("listitem").length).toBeGreaterThan(0);
   });
