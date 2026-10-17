@@ -56,6 +56,7 @@ def test_render_runs_one_worker_without_a_model_and_without_secrets():
     assert _render_value("plan") == "free"
     assert _env("PLANOGRAM_PROVIDER") == "value=none"
     assert _env("PLANOGRAM_TRUST_PROXY") == "value=1"
+    assert _env("PLANOGRAM_TRUSTED_PROXY_HOPS") == "value=1"  # count X-Forwarded-For from the right
     assert _env("PLANOGRAM_CORS_ORIGINS") == "sync=false"  # set by hand after Vercel gives the URL
     assert _env("PYTHONPATH") == "value=src"
     assert (_env("PYTHON_VERSION") or "").startswith("value=3.12")

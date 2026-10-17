@@ -41,7 +41,13 @@ What the Blueprint sets up:
 - **Build:** `pip install -r requirements-api.txt`.
 - **Start:** `uvicorn api.main:app --host 0.0.0.0 --port $PORT --workers 1 --no-access-log`.
 - **Health check:** `/health`.
-- **Environment:** `PLANOGRAM_PROVIDER=none`, `PLANOGRAM_TRUST_PROXY=1`, and `PLANOGRAM_CORS_ORIGINS`, which you set yourself.
+- **Environment:** `PLANOGRAM_PROVIDER=none`, `PLANOGRAM_TRUST_PROXY=1`, `PLANOGRAM_TRUSTED_PROXY_HOPS=1`, and `PLANOGRAM_CORS_ORIGINS`, which you set yourself.
+
+**Rate limiting behind Render's proxy.** The API limits each shopper by address. With
+`PLANOGRAM_TRUST_PROXY=1` it reads the address from `X-Forwarded-For`, counting `PLANOGRAM_TRUSTED_PROXY_HOPS`
+entries from the right (1 = the entry the nearest proxy added); entries further left come from the
+client and are ignored. A missing or unusable header falls back to the connection address.
+If rate limiting looks wrong on the live site (everyone throttled together, or never throttled), this is the setting to check; Render's proxy layout is not something I could verify locally.
 
 ## (c) Vercel: deploy the web app
 
@@ -172,6 +178,7 @@ These are as I know them. Prices and limits change, so items marked **(check the
 | App shows "Can't reach the store" | CORS: `PLANOGRAM_CORS_ORIGINS` doesn't match the exact Vercel URL; or the API is down | Fix the value (step d), redeploy the API, then open `/health` |
 | "Waking up the store server…" for a long time | Render is starting the service | Wait up to a minute; check the Render logs if it keeps failing |
 | Images missing, everything else works | `VITE_API_BASE_URL` points at the wrong host | Fix it on Vercel and redeploy |
+| Everyone gets "Lots of searches right now" together, or nobody ever does | `PLANOGRAM_TRUSTED_PROXY_HOPS` doesn't match Render's proxy layout | Try `2` (or back to `1`) on Render, redeploy, and test from two networks (e.g. Wi-Fi and phone data) |
 | "That question has expired" often | More than one worker or instance, or frequent restarts | Keep one worker and one instance |
 
 The browser can't tell a CORS block apart from an unreachable server, so both show "Can't reach the store". The browser console names CORS when that is the cause.
@@ -202,9 +209,3 @@ npx vite preview --port 4173 --strictPort
 cd web
 $env:SMOKE_BASE_URL = 'http://localhost:4173'; $env:SMOKE_SCREENSHOTS = "$PWD\test-results\prod-smoke"; npm run e2e
 ```
-
-## Known limitation
-
-With `PLANOGRAM_TRUST_PROXY=1`, the API takes the client address from the **first** `X-Forwarded-For` entry (`api/middleware.py`). A client can put any value there, so the per-client rate limit can be dodged by faking that header.
-
-Fixing it means changing the API: trust the entry the proxy adds rather than the first one. That change was **not** made, because `api/` stays unchanged without approval.

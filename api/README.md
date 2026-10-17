@@ -37,7 +37,8 @@ python -m pytest -q tests\test_api.py tests\test_api_isolation.py
 | `PLANOGRAM_PROVIDER` | `none` (default for tests), `gemini`, or `fake` |
 | `GEMINI_API_KEY` | Only when the provider is `gemini`; never logged |
 | `PLANOGRAM_CORS_ORIGINS` | Allowed browser origins, comma-separated |
-| `PLANOGRAM_TRUST_PROXY` | `1` = rate-limit by the first `X-Forwarded-For` address (only behind your own proxy) |
+| `PLANOGRAM_TRUST_PROXY` | `1` = rate-limit by the `X-Forwarded-For` address the trusted proxy added, counted from the right (only behind your own proxy); a missing or non-IP entry falls back to the connection address |
+| `PLANOGRAM_TRUSTED_PROXY_HOPS` | how many proxies in front of the API append to `X-Forwarded-For` (default `1`); only used with `PLANOGRAM_TRUST_PROXY=1` |
 | `PLANOGRAM_STORES_FILE` | Another store registry instead of `config/stores.json` |
 
 Limits live in `config/settings.json`: `max_query_chars` (500), `max_items` (20), basket quantity

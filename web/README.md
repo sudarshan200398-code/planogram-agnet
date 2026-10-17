@@ -36,6 +36,7 @@ Windows machines `127.0.0.1:5173` does not answer).
 | API | `PLANOGRAM_PROVIDER` | `none` runs without an AI model (use it for every local and test run). |
 | API | `PLANOGRAM_CORS_ORIGINS` | Comma-separated web origins allowed to call the API, e.g. `https://superfind.example.com`. Exact origins only: no trailing slash, no wildcards. Unset = no cross-origin access. **Set it in production** when the web app and API are on different origins. |
 | API | `PLANOGRAM_TRUST_PROXY` | `1` when the API sits behind a proxy that sets `X-Forwarded-For` (rate limits per real client). |
+| API | `PLANOGRAM_TRUSTED_PROXY_HOPS` | Proxies in front of the API (default `1`); the client address is read that many entries from the right of `X-Forwarded-For`. |
 | API | `PLANOGRAM_STORES_FILE` | Another store registry instead of `config/stores.json`. |
 
 No keys or secrets belong in this folder; anything starting with `VITE_` ends up in the browser.

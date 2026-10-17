@@ -24,6 +24,10 @@ services:
       # Behind Render's proxy: take the client address from X-Forwarded-For (per-client rate limits).
       - key: PLANOGRAM_TRUST_PROXY
         value: "1"
+      # Proxies in front of the API that append to X-Forwarded-For; the client address is read that many
+      # entries from the right (entries further left are written by the client and can be forged).
+      - key: PLANOGRAM_TRUSTED_PROXY_HOPS
+        value: "1"
       # Set manually after Vercel gives the web app's URL, e.g. https://superfind.vercel.app
       # (comma-separated for more than one; exact origins, no trailing slash, no wildcards).
       - key: PLANOGRAM_CORS_ORIGINS
