@@ -8,7 +8,7 @@ from pathlib import Path
 
 from .schemas import GraphData, PlanogramEntry, Product, StockItem
 from .validators import (assert_valid, validate_graph_data, validate_inventory,
-                         validate_planogram, validate_products)
+                         validate_place_aliases, validate_planogram, validate_products)
 
 
 @dataclass
@@ -62,7 +62,8 @@ def load_dataset(data_dir: Path | str = "data", validate: bool = True) -> Datase
             validate_graph_data(ds.graph)
             + validate_products(ds.products)
             + validate_planogram(ds.planogram, ds.products, ds.graph)
-            + validate_inventory(ds.inventory, ds.products))
+            + validate_inventory(ds.inventory, ds.products)
+            + validate_place_aliases(ds.graph, ds.products))
     return ds
 
 

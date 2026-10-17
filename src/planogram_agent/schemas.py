@@ -31,6 +31,9 @@ class Node(BaseModel):
     y: float
     type: NodeType
     label: str
+    # Optional other names a shopper may use for this place as a start point (e.g. "produce").
+    # Checked by validators.validate_place_aliases; stores without them need nothing.
+    aliases: list[str] = Field(default_factory=list)
 
 
 class Edge(BaseModel):

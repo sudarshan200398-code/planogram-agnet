@@ -135,7 +135,10 @@
       "x": 40,
       "y": 47,
       "type": "entrance",
-      "label": "Main Doors"
+      "label": "Main Doors",
+      "aliases": [
+        "entrance"
+      ]
     },
     {
       "id": "RS1_FRONT_TILLS",
@@ -143,7 +146,11 @@
       "x": 58,
       "y": 47,
       "type": "checkout",
-      "label": "Front Tills"
+      "label": "Front Tills",
+      "aliases": [
+        "checkout",
+        "tills"
+      ]
     },
     {
       "id": "RS1_FRESH_MARKET",
@@ -151,7 +158,10 @@
       "x": 10,
       "y": 4,
       "type": "zone_front",
-      "label": "Fresh Market"
+      "label": "Fresh Market",
+      "aliases": [
+        "produce"
+      ]
     },
     {
       "id": "RS1_BAKEHOUSE",
@@ -159,7 +169,10 @@
       "x": 25,
       "y": 4,
       "type": "zone_front",
-      "label": "Bakehouse"
+      "label": "Bakehouse",
+      "aliases": [
+        "bakery"
+      ]
     },
     {
       "id": "RS1_BUTCHER_COUNTER",
@@ -167,7 +180,10 @@
       "x": 40,
       "y": 4,
       "type": "zone_front",
-      "label": "Butcher Counter"
+      "label": "Butcher Counter",
+      "aliases": [
+        "butcher"
+      ]
     },
     {
       "id": "RS1_FISHMONGER",
@@ -183,7 +199,10 @@
       "x": 77,
       "y": 12,
       "type": "zone_front",
-      "label": "Chilled Foods"
+      "label": "Chilled Foods",
+      "aliases": [
+        "dairy"
+      ]
     },
     {
       "id": "RS1_FROZEN_HALL",
@@ -383,7 +402,10 @@
       "x": 25,
       "y": 4,
       "type": "zone_front",
-      "label": "Electronics Corner"
+      "label": "Electronics Corner",
+      "aliases": [
+        "electronics"
+      ]
     },
     {
       "id": "RS2_KIDS_ZONE",
@@ -399,7 +421,10 @@
       "x": 55,
       "y": 4,
       "type": "zone_front",
-      "label": "Pharmacy"
+      "label": "Pharmacy",
+      "aliases": [
+        "chemist"
+      ]
     },
     {
       "id": "RS2_PET_SUPPLIES",
@@ -415,7 +440,11 @@
       "x": 77,
       "y": 25,
       "type": "zone_front",
-      "label": "Fashion Floor"
+      "label": "Fashion Floor",
+      "aliases": [
+        "clothing",
+        "clothes"
+      ]
     },
     {
       "id": "RS2_BOOKS_AND_STATIONERY",
@@ -423,7 +452,10 @@
       "x": 15,
       "y": 31,
       "type": "zone_front",
-      "label": "Books and Stationery"
+      "label": "Books and Stationery",
+      "aliases": [
+        "stationery"
+      ]
     },
     {
       "id": "RS2_CUSTOMER_DESK",
@@ -431,7 +463,11 @@
       "x": 45,
       "y": 31,
       "type": "zone_front",
-      "label": "Customer Desk"
+      "label": "Customer Desk",
+      "aliases": [
+        "customer service",
+        "help desk"
+      ]
     },
     {
       "id": "RS2_ESCALATOR_HALL",

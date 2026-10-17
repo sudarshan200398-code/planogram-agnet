@@ -68,6 +68,9 @@ def _normalize_label(text: str) -> str:
 def resolve_start(text: str | None, dataset: Dataset, floor: int | None = None) -> str:
     """Map a landmark name like 'bakery' or 'the Bakery' to a map point node ID.
 
+    A place's optional aliases (e.g. 'produce' for 'Fresh Market') are used when no place name matches;
+    validators.validate_place_aliases makes sure each alias names exactly one place.
+
     If text is empty or None, returns the entrance node id.
     Labels that exist on both floors (Escalators, Elevator, Stairs) require a floor argument;
     if not provided, raises a ValueError listing the options.
@@ -84,6 +87,11 @@ def resolve_start(text: str | None, dataset: Dataset, floor: int | None = None) 
         node for node in dataset.graph.nodes
         if _normalize_label(node.label) == norm_target
     ]
+    if not matching_nodes:
+        matching_nodes = [
+            node for node in dataset.graph.nodes
+            if node.type != NodeType.JUNCTION and any(_normalize_label(a) == norm_target for a in node.aliases)
+        ]
 
     if not matching_nodes:
         valid_labels = sorted({

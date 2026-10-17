@@ -1,6 +1,6 @@
 # Edge Case Matrix Report
 
-Evaluation run offline with `NoModelClient` across 58 test edge cases.
+Evaluation run offline with `NoModelClient` across 67 test edge cases (Central Store unless a case names another store).
 
 ## Results Table
 
@@ -64,6 +64,15 @@ Evaluation run offline with `NoModelClient` across 58 test edge cases.
 | UI-04 | UI | `Bella Pasta Instant Soup Mix 100 g` | ok (route=True) | ok | **PASS** |
 | UI-05 | UI | `Bella Pasta Instant Soup Mix 100 g` | ok (route=True) | ok (start=Produce) | **PASS** |
 | UI-06 | UI | `Bella Pasta Instant Soup Mix 100 g` | ok (route=True) | ok (accessible=True) | **PASS** |
+| STA-01 | start phrases | `Daily Bake Plain Bagels 4 pack a...` | ok (route=True), from Produce | ok (route=True), from Produce | **PASS** |
+| STA-02 | start phrases | `Daily Bake Plain Bagels 4 pack t...` | ok (route=True), from Bakery | ok (route=True), from Bakery | **PASS** |
+| STA-03 | start phrases | `Daily Bake Plain Bagels 4 pack a...` | partial (route=True), from Entrance | partial (route=True), from Entrance | **PASS** |
+| STA-04 | start phrases | `Daily Bake Plain Bagels 4 pack a...` | partial (route=True), from Entrance | partial (route=True), from Entrance | **PASS** |
+| STA-05 | start phrases | `Pebble Pet Puppy Kibble 1 kg and...` | ok (route=True), from Fresh Market | ok (route=True), from Fresh Market | **PASS** |
+| STA-06 | start phrases | `Pebble Pet Puppy Kibble 1 kg and...` | ok (route=True), from Chilled Foods | ok (route=True), from Chilled Foods | **PASS** |
+| STA-07 | start phrases | `Pebble Pet Puppy Kibble 1 kg the...` | ok (route=True), from Bakehouse | ok (route=True), from Bakehouse | **PASS** |
+| STA-08 | start phrases | `Pebble Pet Puppy Kibble 1 kg and...` | partial (route=True), from Main Doors | partial (route=True), from Main Doors | **PASS** |
+| STA-09 | start phrases | `milk, eggs, brd and im at produce` | needs_clarification (route=False) | needs_clarification (route=False) | **PASS** |
 
 ## Summary Totals by Group
 
@@ -78,8 +87,9 @@ Evaluation run offline with `NoModelClient` across 58 test edge cases.
 | session | 4 | 4 | 0 | 0 | 100.0% |
 | failure injection | 4 | 4 | 0 | 0 | 100.0% |
 | UI | 6 | 6 | 0 | 0 | 100.0% |
-| **OVERALL** | **58** | **58** | **0** | **0** | **100.0%** |
+| start phrases | 9 | 9 | 0 | 0 | 100.0% |
+| **OVERALL** | **67** | **67** | **0** | **0** | **100.0%** |
 
 ## Known Issues in Earlier-Phase Modules
 
-None. All 58 edge cases pass cleanly.
+None. All 67 edge cases pass cleanly.

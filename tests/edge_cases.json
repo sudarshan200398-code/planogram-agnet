@@ -937,6 +937,170 @@
         "route_exists": true,
         "key_facts": "Step-free toggle on Level 1-only request produces accessible route"
       }
+    },
+    {
+      "id": "STA-01",
+      "group": "start phrases",
+      "input_text": "Daily Bake Plain Bagels 4 pack and PlayTime Wax Crayons 12 pack, im at produce",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "ok",
+        "item_statuses": [
+          "available",
+          "available"
+        ],
+        "route_exists": true,
+        "key_facts": "Trailing start after a comma, filler typo 'im'",
+        "start_label": "Produce"
+      }
+    },
+    {
+      "id": "STA-02",
+      "group": "start phrases",
+      "input_text": "Daily Bake Plain Bagels 4 pack then i'm near the bakery",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "ok",
+        "item_statuses": [
+          "available"
+        ],
+        "route_exists": true,
+        "key_facts": "'then' joins a trailing start clause and does not leak into the item",
+        "start_label": "Bakery"
+      }
+    },
+    {
+      "id": "STA-03",
+      "group": "start phrases",
+      "input_text": "Daily Bake Plain Bagels 4 pack and im at narnia",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "partial",
+        "item_statuses": [
+          "available",
+          "not_found"
+        ],
+        "route_exists": true,
+        "key_facts": "Unknown place stays an item; route starts at the entrance",
+        "start_label": "Entrance"
+      }
+    },
+    {
+      "id": "STA-04",
+      "group": "start phrases",
+      "input_text": "Daily Bake Plain Bagels 4 pack and I'm in the dairy section",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "partial",
+        "item_statuses": [
+          "available",
+          "not_found"
+        ],
+        "route_exists": true,
+        "key_facts": "Store 1 has no aliases: 'dairy' is not a place name there, so it stays an item",
+        "start_label": "Entrance"
+      }
+    },
+    {
+      "id": "STA-05",
+      "group": "start phrases",
+      "input_text": "Pebble Pet Puppy Kibble 1 kg and Riverbend Robusta Banana 1 kg and im at produce",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "ok",
+        "item_statuses": [
+          "available",
+          "available"
+        ],
+        "route_exists": true,
+        "key_facts": "Alias 'produce' names Fresh Market",
+        "start_label": "Fresh Market"
+      },
+      "store": "riverside"
+    },
+    {
+      "id": "STA-06",
+      "group": "start phrases",
+      "input_text": "Pebble Pet Puppy Kibble 1 kg and I'm in the dairy section",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "ok",
+        "item_statuses": [
+          "available"
+        ],
+        "route_exists": true,
+        "key_facts": "Alias with a trailing 'section'",
+        "start_label": "Chilled Foods"
+      },
+      "store": "riverside"
+    },
+    {
+      "id": "STA-07",
+      "group": "start phrases",
+      "input_text": "Pebble Pet Puppy Kibble 1 kg then im near bakery",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "ok",
+        "item_statuses": [
+          "available"
+        ],
+        "route_exists": true,
+        "key_facts": "'then' plus alias 'bakery'",
+        "start_label": "Bakehouse"
+      },
+      "store": "riverside"
+    },
+    {
+      "id": "STA-08",
+      "group": "start phrases",
+      "input_text": "Pebble Pet Puppy Kibble 1 kg and im at narnia",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "partial",
+        "item_statuses": [
+          "available",
+          "not_found"
+        ],
+        "route_exists": true,
+        "key_facts": "Unknown place stays an item; route starts at the entrance",
+        "start_label": "Main Doors"
+      },
+      "store": "riverside"
+    },
+    {
+      "id": "STA-09",
+      "group": "start phrases",
+      "input_text": "milk, eggs, brd and im at produce",
+      "start": null,
+      "floor": null,
+      "accessible_only": false,
+      "expected": {
+        "response_status": "needs_clarification",
+        "item_statuses": [
+          "needs_choice",
+          "needs_choice",
+          "not_found"
+        ],
+        "route_exists": false,
+        "key_facts": "The live-site example: three items (not four); 'brd' stays not found"
+      },
+      "store": "riverside"
     }
   ]
 }
