@@ -139,6 +139,53 @@ CATALOGUE = {
     ],
 }
 
+# Everyday staples, added after the catalogue above was first generated. They come after it in every
+# list, so the existing products keep their skus, placements, stock and prices. Each category has its
+# own code; a category may share its name with an existing one (they browse together).
+STAPLES = {
+    "Chilled Foods": [
+        ("Milk", "MLK", ["Marigold Farm", "Vanya"], ["Full Cream Milk", "Toned Milk", "Skimmed Milk"], ["500 ml", "1 L"]),
+        ("Eggs", "EGG", ["Riverbend", "Tulsi Grove"], ["Farm Eggs"], ["6 pack", "12 pack"]),
+        ("Cheese", "CHS", ["Marigold Farm"], ["Cheddar Cheese", "Processed Cheese"], ["200 g"]),
+        ("Water and Soft Drinks", "DRK", ["Riverbend", "Sunpeak"], ["Still Water"], ["1 L"]),
+        ("Water and Soft Drinks", "SFT", ["Sunpeak", "Kestrel"], ["Cola Soft Drink", "Lime Soda"], ["750 ml"]),
+    ],
+    "Bakehouse": [
+        ("Breads", "LOF", ["Oakhill", "Copperpot"], ["White Sandwich Bread", "Brown Bread"], ["400 g"]),
+    ],
+    "Fresh Market": [
+        ("Vegetables", "POT", ["Riverbend"], ["Potatoes"], ["1 kg", "2 kg"]),
+    ],
+    "Pantry Aisle B": [
+        ("Sugar and Salt", "SUG", ["Saffron Lane"], ["Fine Sugar"], ["1 kg", "5 kg"]),
+        ("Sugar and Salt", "SLT", ["Northgate"], ["Iodised Salt"], ["1 kg"]),
+        ("Atta and Flours", "WFL", ["Saffron Lane"], ["Chakki Wheat Flour"], ["5 kg", "10 kg"]),
+    ],
+    "Pantry Aisle C": [
+        ("Cooking Oils", "COK", ["Kaveri", "Sunpeak"], ["Refined Cooking Oil"], ["1 L"]),
+        ("Instant Noodles", "NDL", ["Monsoon", "Kestrel"], ["Instant Noodles"], ["70 g", "280 g"]),
+    ],
+    "Pantry Aisle D": [
+        ("Chips and Snacks", "CHP", ["Monsoon", "Sunpeak"], ["Salted Potato Chips", "Masala Potato Chips"], ["50 g"]),
+    ],
+    "Home and Garden": [
+        ("Laundry and Dishes", "DET", ["Lumen", "Greenleaf Co"], ["Detergent Powder"], ["1 kg"]),
+        ("Laundry and Dishes", "DSH", ["Lumen", "Greenleaf Co"], ["Dish Wash Liquid"], ["500 ml"]),
+        ("Paper and Bags", "GRB", ["Lumen"], ["Garbage Bags"], ["30 pack"]),
+        ("Paper and Bags", "TIS", ["Greenleaf Co"], ["Facial Tissue Box", "Toilet Paper Rolls"], ["4 pack"]),
+    ],
+    "Pharmacy": [
+        ("Personal Care", "SOP", ["Vanya", "Tulsi Grove"], ["Sandalwood Bath Soap"], ["4 pack"]),
+        ("Personal Care", "SHM", ["Vanya", "Tulsi Grove"], ["Herbal Shampoo"], ["180 ml"]),
+        ("Personal Care", "TTP", ["Vanya", "Tulsi Grove"], ["Herbal Toothpaste"], ["150 g"]),
+    ],
+    "Electronics Corner": [
+        ("Batteries", "BAT", ["Lumen", "Kestrel"], ["AA Batteries", "AAA Batteries"], ["4 pack"]),
+    ],
+}
+STAPLE_CODES = {code for categories in STAPLES.values() for _, code, *_ in categories}
+STAPLES_OUT_OF_STOCK = {"RS-MLK-010", "RS-BAT-004"}  # a couple of staples sold out, on purpose
+
 EXTRA_PLACEMENT_EVERY = 97  # every 97th product is also sold at the Front Tills
 
 
@@ -178,7 +225,7 @@ def build_graph() -> dict:
 
 def build_products() -> list[dict]:
     products = []
-    for zone, categories in CATALOGUE.items():
+    for zone, categories in [*CATALOGUE.items(), *STAPLES.items()]:
         for category, code, brands, nouns, sizes in categories:
             n = 0
             for brand in brands:
@@ -226,7 +273,7 @@ def build_inventory(products: list[dict]) -> list[dict]:
     rows = []
     for p in products:
         qty = rng.randint(4, 90)
-        if rng.random() < 0.03:
+        if rng.random() < 0.03 or p["sku"] in STAPLES_OUT_OF_STOCK:
             qty = 0
         rows.append({"sku": p["sku"], "quantity": qty})
     return rows
@@ -260,6 +307,11 @@ Frozen Hall, Pantry Aisles A to D, Front Tills (checkout).
 Books and Stationery, Customer Desk.
 **Between floors:** Escalator Hall (escalator), East Stairs (stairs), Lift Lobby (step-free lift).
 
+**Everyday staples** ({staples} products: milk, eggs, bread, cheese, sugar, salt, cooking oil, noodles,
+chips, water, soft drinks, cleaning, personal care, batteries and more) are in the generator's `STAPLES`
+list. They come after the original catalogue, so the earlier products keep their skus, shelves, stock
+and prices. `tests/test_staples.py` checks every staple can be found by name.
+
 Node ids start with `RS1_` / `RS2_` and skus with `RS-`, so they never collide with the Central Store.
 """
 
@@ -281,6 +333,7 @@ def generate(out_dir: Path) -> dict:
         "nodes": len(graph["nodes"]), "edges": len(graph["edges"]), "connectors": len(graph["connectors"]),
         "products": len(products), "placements": len(planogram),
         "out_of_stock": sum(r["quantity"] == 0 for r in inventory),
+        "staples": sum(p["sku"].split("-")[1] in STAPLE_CODES for p in products),
     }
     (out_dir / "README.md").write_text(README.format(**counts), encoding="utf-8", newline="\n")
     return counts

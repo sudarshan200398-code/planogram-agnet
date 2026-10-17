@@ -1,0 +1,208 @@
+{
+  "name": "categories_riverside",
+  "request": {
+    "method": "GET",
+    "path": "/stores/riverside/categories",
+    "query": {},
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "categories": [
+      {
+        "name": "Atta and Flours",
+        "product_count": 14
+      },
+      {
+        "name": "Baby Care",
+        "product_count": 12
+      },
+      {
+        "name": "Batteries",
+        "product_count": 4
+      },
+      {
+        "name": "Biscuits",
+        "product_count": 12
+      },
+      {
+        "name": "Breads",
+        "product_count": 16
+      },
+      {
+        "name": "Breakfast Cereals",
+        "product_count": 12
+      },
+      {
+        "name": "Butter and Ghee",
+        "product_count": 12
+      },
+      {
+        "name": "Cat Food",
+        "product_count": 12
+      },
+      {
+        "name": "Cheese",
+        "product_count": 2
+      },
+      {
+        "name": "Chips and Snacks",
+        "product_count": 4
+      },
+      {
+        "name": "Cooking Oils",
+        "product_count": 14
+      },
+      {
+        "name": "Cookware",
+        "product_count": 12
+      },
+      {
+        "name": "Dog Food",
+        "product_count": 12
+      },
+      {
+        "name": "Eggs",
+        "product_count": 4
+      },
+      {
+        "name": "Fish",
+        "product_count": 12
+      },
+      {
+        "name": "Frozen Snacks",
+        "product_count": 12
+      },
+      {
+        "name": "Fruit",
+        "product_count": 12
+      },
+      {
+        "name": "Garden Tools",
+        "product_count": 12
+      },
+      {
+        "name": "Gift Vouchers",
+        "product_count": 12
+      },
+      {
+        "name": "Herbs",
+        "product_count": 12
+      },
+      {
+        "name": "Ice Cream",
+        "product_count": 12
+      },
+      {
+        "name": "Instant Noodles",
+        "product_count": 4
+      },
+      {
+        "name": "Juices",
+        "product_count": 12
+      },
+      {
+        "name": "Lamb and Mutton",
+        "product_count": 12
+      },
+      {
+        "name": "Laundry and Dishes",
+        "product_count": 4
+      },
+      {
+        "name": "Menswear",
+        "product_count": 12
+      },
+      {
+        "name": "Milk",
+        "product_count": 12
+      },
+      {
+        "name": "Notebooks",
+        "product_count": 12
+      },
+      {
+        "name": "Pain Relief",
+        "product_count": 12
+      },
+      {
+        "name": "Paneer and Curd",
+        "product_count": 12
+      },
+      {
+        "name": "Paper and Bags",
+        "product_count": 3
+      },
+      {
+        "name": "Pastries",
+        "product_count": 12
+      },
+      {
+        "name": "Pens and Markers",
+        "product_count": 12
+      },
+      {
+        "name": "Personal Care",
+        "product_count": 6
+      },
+      {
+        "name": "Phone Accessories",
+        "product_count": 12
+      },
+      {
+        "name": "Poultry",
+        "product_count": 12
+      },
+      {
+        "name": "Prawns and Shellfish",
+        "product_count": 12
+      },
+      {
+        "name": "Pulses and Dals",
+        "product_count": 12
+      },
+      {
+        "name": "Rice and Grains",
+        "product_count": 12
+      },
+      {
+        "name": "Small Appliances",
+        "product_count": 12
+      },
+      {
+        "name": "Spices and Masalas",
+        "product_count": 12
+      },
+      {
+        "name": "Sugar and Salt",
+        "product_count": 3
+      },
+      {
+        "name": "Tea and Coffee",
+        "product_count": 12
+      },
+      {
+        "name": "Toys",
+        "product_count": 12
+      },
+      {
+        "name": "Vegetables",
+        "product_count": 14
+      },
+      {
+        "name": "Vitamins",
+        "product_count": 12
+      },
+      {
+        "name": "Water and Soft Drinks",
+        "product_count": 6
+      },
+      {
+        "name": "Womenswear",
+        "product_count": 12
+      }
+    ]
+  }
+}

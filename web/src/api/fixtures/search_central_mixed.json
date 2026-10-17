@@ -1,0 +1,380 @@
+{
+  "name": "search_central_mixed",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/search",
+    "query": {},
+    "body": {
+      "text": "2 Daily Bake Plain Bagels 4 pack, PlayTime Wax Crayons 12 pack, ArtBox Watercolour Paints 12 pack and zzqx wobble gadget"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "partial",
+    "session_id": "session-013",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Daily Bake Plain Bagels 4 pack",
+        "quantity_requested": 2,
+        "status": "available",
+        "reason": null,
+        "sku": "BAK-BAG-009",
+        "name": "Daily Bake Plain Bagels 4 pack",
+        "brand": "Daily Bake",
+        "category": "Bagels, buns & croissants",
+        "size": "4 pack",
+        "price": 94.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 68,
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Bakery",
+            "bay": "A",
+            "shelf": 2,
+            "node_id": "L1_BAKERY"
+          }
+        ],
+        "image_url": "/stores/central/products/BAK-BAG-009/image"
+      },
+      {
+        "index": 1,
+        "requested": "PlayTime Wax Crayons 12 pack",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "TOY-ART-001",
+        "name": "PlayTime Wax Crayons 12 pack",
+        "brand": "PlayTime",
+        "category": "Art supplies, crayons & coloring books",
+        "size": "12 pack",
+        "price": 249.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 16,
+        "floor": 2,
+        "zone": "Toys & Stationery",
+        "bay": "C",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Toys & Stationery",
+            "bay": "C",
+            "shelf": 2,
+            "node_id": "L2_TOYS"
+          }
+        ],
+        "image_url": "/stores/central/products/TOY-ART-001/image"
+      },
+      {
+        "index": 2,
+        "requested": "ArtBox Watercolour Paints 12 pack",
+        "quantity_requested": 1,
+        "status": "unavailable",
+        "reason": "Out of stock",
+        "sku": "TOY-ART-005",
+        "name": "ArtBox Watercolour Paints 12 pack",
+        "brand": "ArtBox",
+        "category": "Art supplies, crayons & coloring books",
+        "size": "12 pack",
+        "price": 189.0,
+        "currency": "INR",
+        "stock_status": "out_of_stock",
+        "in_stock": 0,
+        "floor": 2,
+        "zone": "Toys & Stationery",
+        "bay": "C",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Toys & Stationery",
+            "bay": "C",
+            "shelf": 2,
+            "node_id": "L2_TOYS"
+          }
+        ],
+        "image_url": "/stores/central/products/TOY-ART-005/image"
+      },
+      {
+        "index": 3,
+        "requested": "zzqx wobble gadget",
+        "quantity_requested": 1,
+        "status": "not_found",
+        "reason": "Product not found in catalogue",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "L1_ENTRANCE",
+      "start_label": "Entrance",
+      "total_distance_m": 116.0,
+      "floor_changes": 1,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 33m from Entrance to Bakery.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Bakery for Daily Bake Plain Bagels 4 pack (Level 1, Bakery, Bay A, Shelf 2).",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 47m from Bakery to Escalators.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "take_connector",
+          "icon": "escalator",
+          "text": "Take the escalator from Level 1 to Level 2.",
+          "floor": 1,
+          "to_floor": 2
+        },
+        {
+          "number": 5,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 35m from Escalators to Toys & Stationery.",
+          "floor": 2,
+          "to_floor": null
+        },
+        {
+          "number": 6,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Toys & Stationery for PlayTime Wax Crayons 12 pack (Level 2, Toys & Stationery, Bay C, Shelf 2).",
+          "floor": 2,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "BAK-BAG-009",
+          "name": "Daily Bake Plain Bagels 4 pack",
+          "floor": 1,
+          "zone": "Bakery",
+          "node_id": "L1_BAKERY"
+        },
+        {
+          "order": 2,
+          "sku": "TOY-ART-001",
+          "name": "PlayTime Wax Crayons 12 pack",
+          "floor": 2,
+          "zone": "Toys & Stationery",
+          "node_id": "L2_TOYS"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                3.0,
+                33.0
+              ],
+              [
+                6.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                28.0
+              ],
+              [
+                6.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                18.0
+              ],
+              [
+                6.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                6.0,
+                8.0
+              ],
+              [
+                12.0,
+                4.0
+              ]
+            ],
+            [
+              [
+                12.0,
+                4.0
+              ],
+              [
+                18.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                18.0,
+                8.0
+              ],
+              [
+                28.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                28.0,
+                8.0
+              ],
+              [
+                38.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                38.0,
+                8.0
+              ],
+              [
+                46.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                8.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                57.0,
+                5.0
+              ]
+            ]
+          ]
+        },
+        {
+          "floor": 2,
+          "lines": [
+            [
+              [
+                57.0,
+                5.0
+              ],
+              [
+                54.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                54.0,
+                8.0
+              ],
+              [
+                42.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                42.0,
+                8.0
+              ],
+              [
+                30.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                8.0
+              ],
+              [
+                24.0,
+                4.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "L1_ENTRANCE",
+        "L1_J_SW",
+        "L1_J_W",
+        "L1_J_NW",
+        "L1_BAKERY",
+        "L1_J_N1",
+        "L1_J_N2",
+        "L1_J_N3",
+        "L1_J_N4",
+        "L1_J_NE",
+        "L1_ESC",
+        "L2_ESC",
+        "L2_J_NE",
+        "L2_J_N3",
+        "L2_J_N2",
+        "L2_TOYS"
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+# Render Blueprint for the SuperFind API (FastAPI). Render: New > Blueprint > pick this repo.
+# The web app is deployed separately on Vercel (web/vercel.json). See docs/DEPLOY.md.
+services:
+  - type: web
+    name: superfind-api
+    runtime: python
+    plan: free
+    branch: main
+    autoDeploy: true
+    # Pinned API-only dependencies (the versions the tests pass with); Streamlit's requirements.txt is not used here.
+    buildCommand: pip install -r requirements-api.txt
+    # ONE worker: clarification sessions and the rate limiter live in this process's memory.
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT --workers 1 --no-access-log
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      # The engine is imported from src/ (it finds config/ and the store data relative to the repo).
+      - key: PYTHONPATH
+        value: src
+      # Rule-based answers only: no AI model, so no API keys anywhere.
+      - key: PLANOGRAM_PROVIDER
+        value: none
+      # Behind Render's proxy: take the client address from X-Forwarded-For (per-client rate limits).
+      - key: PLANOGRAM_TRUST_PROXY
+        value: "1"
+      # Proxies in front of the API that append to X-Forwarded-For; the client address is read that many
+      # entries from the right (entries further left are written by the client and can be forged).
+      - key: PLANOGRAM_TRUSTED_PROXY_HOPS
+        value: "1"
+      # Set manually after Vercel gives the web app's URL, e.g. https://superfind.vercel.app
+      # (comma-separated for more than one; exact origins, no trailing slash, no wildcards).
+      - key: PLANOGRAM_CORS_ORIGINS
+        sync: false

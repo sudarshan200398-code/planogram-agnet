@@ -443,3 +443,65 @@ RS-GFT-009,Inkwell Festive Gift Card 500 value,Inkwell,Gift Vouchers,500 value,c
 RS-GFT-010,Inkwell Festive Gift Card 1000 value,Inkwell,Gift Vouchers,1000 value,card|festive gift card|gift vouchers
 RS-GFT-011,Inkwell Birthday Gift Card 500 value,Inkwell,Gift Vouchers,500 value,birthday gift card|card|gift vouchers
 RS-GFT-012,Inkwell Birthday Gift Card 1000 value,Inkwell,Gift Vouchers,1000 value,birthday gift card|card|gift vouchers
+RS-MLK-001,Marigold Farm Full Cream Milk 500 ml,Marigold Farm,Milk,500 ml,full cream milk|milk
+RS-MLK-002,Marigold Farm Full Cream Milk 1 L,Marigold Farm,Milk,1 L,full cream milk|milk
+RS-MLK-003,Marigold Farm Toned Milk 500 ml,Marigold Farm,Milk,500 ml,milk|toned milk
+RS-MLK-004,Marigold Farm Toned Milk 1 L,Marigold Farm,Milk,1 L,milk|toned milk
+RS-MLK-005,Marigold Farm Skimmed Milk 500 ml,Marigold Farm,Milk,500 ml,milk|skimmed milk
+RS-MLK-006,Marigold Farm Skimmed Milk 1 L,Marigold Farm,Milk,1 L,milk|skimmed milk
+RS-MLK-007,Vanya Full Cream Milk 500 ml,Vanya,Milk,500 ml,full cream milk|milk
+RS-MLK-008,Vanya Full Cream Milk 1 L,Vanya,Milk,1 L,full cream milk|milk
+RS-MLK-009,Vanya Toned Milk 500 ml,Vanya,Milk,500 ml,milk|toned milk
+RS-MLK-010,Vanya Toned Milk 1 L,Vanya,Milk,1 L,milk|toned milk
+RS-MLK-011,Vanya Skimmed Milk 500 ml,Vanya,Milk,500 ml,milk|skimmed milk
+RS-MLK-012,Vanya Skimmed Milk 1 L,Vanya,Milk,1 L,milk|skimmed milk
+RS-EGG-001,Riverbend Farm Eggs 6 pack,Riverbend,Eggs,6 pack,eggs|farm eggs
+RS-EGG-002,Riverbend Farm Eggs 12 pack,Riverbend,Eggs,12 pack,eggs|farm eggs
+RS-EGG-003,Tulsi Grove Farm Eggs 6 pack,Tulsi Grove,Eggs,6 pack,eggs|farm eggs
+RS-EGG-004,Tulsi Grove Farm Eggs 12 pack,Tulsi Grove,Eggs,12 pack,eggs|farm eggs
+RS-CHS-001,Marigold Farm Cheddar Cheese 200 g,Marigold Farm,Cheese,200 g,cheddar cheese|cheese
+RS-CHS-002,Marigold Farm Processed Cheese 200 g,Marigold Farm,Cheese,200 g,cheese|processed cheese
+RS-DRK-001,Riverbend Still Water 1 L,Riverbend,Water and Soft Drinks,1 L,still water|water|water and soft drinks
+RS-DRK-002,Sunpeak Still Water 1 L,Sunpeak,Water and Soft Drinks,1 L,still water|water|water and soft drinks
+RS-SFT-001,Sunpeak Cola Soft Drink 750 ml,Sunpeak,Water and Soft Drinks,750 ml,cola soft drink|drink|water and soft drinks
+RS-SFT-002,Sunpeak Lime Soda 750 ml,Sunpeak,Water and Soft Drinks,750 ml,lime soda|soda|water and soft drinks
+RS-SFT-003,Kestrel Cola Soft Drink 750 ml,Kestrel,Water and Soft Drinks,750 ml,cola soft drink|drink|water and soft drinks
+RS-SFT-004,Kestrel Lime Soda 750 ml,Kestrel,Water and Soft Drinks,750 ml,lime soda|soda|water and soft drinks
+RS-LOF-001,Oakhill White Sandwich Bread 400 g,Oakhill,Breads,400 g,bread|breads|white sandwich bread
+RS-LOF-002,Oakhill Brown Bread 400 g,Oakhill,Breads,400 g,bread|breads|brown bread
+RS-LOF-003,Copperpot White Sandwich Bread 400 g,Copperpot,Breads,400 g,bread|breads|white sandwich bread
+RS-LOF-004,Copperpot Brown Bread 400 g,Copperpot,Breads,400 g,bread|breads|brown bread
+RS-POT-001,Riverbend Potatoes 1 kg,Riverbend,Vegetables,1 kg,potatoes|vegetables
+RS-POT-002,Riverbend Potatoes 2 kg,Riverbend,Vegetables,2 kg,potatoes|vegetables
+RS-SUG-001,Saffron Lane Fine Sugar 1 kg,Saffron Lane,Sugar and Salt,1 kg,fine sugar|sugar|sugar and salt
+RS-SUG-002,Saffron Lane Fine Sugar 5 kg,Saffron Lane,Sugar and Salt,5 kg,fine sugar|sugar|sugar and salt
+RS-SLT-001,Northgate Iodised Salt 1 kg,Northgate,Sugar and Salt,1 kg,iodised salt|salt|sugar and salt
+RS-WFL-001,Saffron Lane Chakki Wheat Flour 5 kg,Saffron Lane,Atta and Flours,5 kg,atta and flours|chakki wheat flour|flour
+RS-WFL-002,Saffron Lane Chakki Wheat Flour 10 kg,Saffron Lane,Atta and Flours,10 kg,atta and flours|chakki wheat flour|flour
+RS-COK-001,Kaveri Refined Cooking Oil 1 L,Kaveri,Cooking Oils,1 L,cooking oils|oil|refined cooking oil
+RS-COK-002,Sunpeak Refined Cooking Oil 1 L,Sunpeak,Cooking Oils,1 L,cooking oils|oil|refined cooking oil
+RS-NDL-001,Monsoon Instant Noodles 70 g,Monsoon,Instant Noodles,70 g,instant noodles|noodles
+RS-NDL-002,Monsoon Instant Noodles 280 g,Monsoon,Instant Noodles,280 g,instant noodles|noodles
+RS-NDL-003,Kestrel Instant Noodles 70 g,Kestrel,Instant Noodles,70 g,instant noodles|noodles
+RS-NDL-004,Kestrel Instant Noodles 280 g,Kestrel,Instant Noodles,280 g,instant noodles|noodles
+RS-CHP-001,Monsoon Salted Potato Chips 50 g,Monsoon,Chips and Snacks,50 g,chips|chips and snacks|salted potato chips
+RS-CHP-002,Monsoon Masala Potato Chips 50 g,Monsoon,Chips and Snacks,50 g,chips|chips and snacks|masala potato chips
+RS-CHP-003,Sunpeak Salted Potato Chips 50 g,Sunpeak,Chips and Snacks,50 g,chips|chips and snacks|salted potato chips
+RS-CHP-004,Sunpeak Masala Potato Chips 50 g,Sunpeak,Chips and Snacks,50 g,chips|chips and snacks|masala potato chips
+RS-DET-001,Lumen Detergent Powder 1 kg,Lumen,Laundry and Dishes,1 kg,detergent powder|laundry and dishes|powder
+RS-DET-002,Greenleaf Co Detergent Powder 1 kg,Greenleaf Co,Laundry and Dishes,1 kg,detergent powder|laundry and dishes|powder
+RS-DSH-001,Lumen Dish Wash Liquid 500 ml,Lumen,Laundry and Dishes,500 ml,dish wash liquid|laundry and dishes|liquid
+RS-DSH-002,Greenleaf Co Dish Wash Liquid 500 ml,Greenleaf Co,Laundry and Dishes,500 ml,dish wash liquid|laundry and dishes|liquid
+RS-GRB-001,Lumen Garbage Bags 30 pack,Lumen,Paper and Bags,30 pack,bags|garbage bags|paper and bags
+RS-TIS-001,Greenleaf Co Facial Tissue Box 4 pack,Greenleaf Co,Paper and Bags,4 pack,box|facial tissue box|paper and bags
+RS-TIS-002,Greenleaf Co Toilet Paper Rolls 4 pack,Greenleaf Co,Paper and Bags,4 pack,paper and bags|rolls|toilet paper rolls
+RS-SOP-001,Vanya Sandalwood Bath Soap 4 pack,Vanya,Personal Care,4 pack,personal care|sandalwood bath soap|soap
+RS-SOP-002,Tulsi Grove Sandalwood Bath Soap 4 pack,Tulsi Grove,Personal Care,4 pack,personal care|sandalwood bath soap|soap
+RS-SHM-001,Vanya Herbal Shampoo 180 ml,Vanya,Personal Care,180 ml,herbal shampoo|personal care|shampoo
+RS-SHM-002,Tulsi Grove Herbal Shampoo 180 ml,Tulsi Grove,Personal Care,180 ml,herbal shampoo|personal care|shampoo
+RS-TTP-001,Vanya Herbal Toothpaste 150 g,Vanya,Personal Care,150 g,herbal toothpaste|personal care|toothpaste
+RS-TTP-002,Tulsi Grove Herbal Toothpaste 150 g,Tulsi Grove,Personal Care,150 g,herbal toothpaste|personal care|toothpaste
+RS-BAT-001,Lumen AA Batteries 4 pack,Lumen,Batteries,4 pack,aa batteries|batteries
+RS-BAT-002,Lumen AAA Batteries 4 pack,Lumen,Batteries,4 pack,aaa batteries|batteries
+RS-BAT-003,Kestrel AA Batteries 4 pack,Kestrel,Batteries,4 pack,aa batteries|batteries
+RS-BAT-004,Kestrel AAA Batteries 4 pack,Kestrel,Batteries,4 pack,aaa batteries|batteries

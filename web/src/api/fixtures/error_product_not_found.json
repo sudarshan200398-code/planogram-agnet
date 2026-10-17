@@ -1,0 +1,18 @@
+{
+  "name": "error_product_not_found",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/products/NOPE-000",
+    "query": {},
+    "body": null
+  },
+  "status": 404,
+  "headers": {},
+  "body": {
+    "error": {
+      "code": "PRODUCT_NOT_FOUND",
+      "message": "No product 'NOPE-000' in store 'central'",
+      "request_id": "fixture-error_product_not_found"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="SuperFind AI: find any product in the store, see if it is in stock, and get the shortest walk to it." />
+    <meta name="color-scheme" content="light dark" />
+    <title>SuperFind AI</title>
+    <script>
+      // Set the theme before first paint so there is no flash of the wrong theme.
+      (function () {
+        var pref = null;
+        try { pref = window.localStorage.getItem("superfind.theme"); } catch (e) { /* storage blocked */ }
+        var dark = pref === "dark" || (pref !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

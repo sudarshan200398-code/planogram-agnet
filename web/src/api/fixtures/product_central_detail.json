@@ -1,0 +1,36 @@
+{
+  "name": "product_central_detail",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/products/BAK-BAG-009",
+    "query": {},
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "sku": "BAK-BAG-009",
+    "name": "Daily Bake Plain Bagels 4 pack",
+    "brand": "Daily Bake",
+    "category": "Bagels, buns & croissants",
+    "size": "4 pack",
+    "price": 94.0,
+    "currency": "INR",
+    "stock_status": "in_stock",
+    "in_stock": 68,
+    "floor": 1,
+    "zone": "Bakery",
+    "bay": "A",
+    "shelf": 2,
+    "locations": [
+      {
+        "floor": 1,
+        "zone": "Bakery",
+        "bay": "A",
+        "shelf": 2,
+        "node_id": "L1_BAKERY"
+      }
+    ],
+    "image_url": "/stores/central/products/BAK-BAG-009/image"
+  }
+}

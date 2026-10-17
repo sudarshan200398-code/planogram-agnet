@@ -1,0 +1,120 @@
+{
+  "name": "search_central_sentence",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/search",
+    "query": {},
+    "body": {
+      "text": "milk, bread and crayons, I'm at produce"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "needs_clarification",
+    "session_id": "session-003",
+    "verified": false,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "milk",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      },
+      {
+        "index": 1,
+        "requested": "bread",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      },
+      {
+        "index": 2,
+        "requested": "crayons",
+        "quantity_requested": 1,
+        "status": "needs_choice",
+        "reason": "Item is ambiguous, needs choice",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": {
+      "item_index": 0,
+      "item_text": "milk",
+      "options": [
+        {
+          "sku": "DAI-MIL-001",
+          "name": "Meadow Fresh Whole Milk 1 L",
+          "places": [
+            "Level 1, Dairy & Frozen"
+          ],
+          "image_url": "/stores/central/products/DAI-MIL-001/image"
+        },
+        {
+          "sku": "DAI-MIL-002",
+          "name": "Store Brand Whole Milk 2 L",
+          "places": [
+            "Level 1, Dairy & Frozen",
+            "Level 2, Café"
+          ],
+          "image_url": "/stores/central/products/DAI-MIL-002/image"
+        },
+        {
+          "sku": "DAI-MIL-003",
+          "name": "Store Brand Semi Skimmed Milk 2 L",
+          "places": [
+            "Level 1, Dairy & Frozen"
+          ],
+          "image_url": "/stores/central/products/DAI-MIL-003/image"
+        }
+      ]
+    },
+    "route": null
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "name": "products_central_page2",
+  "request": {
+    "method": "GET",
+    "path": "/stores/central/products",
+    "query": {
+      "category": "Accessories, scarves & caps",
+      "page": 2,
+      "page_size": 4
+    },
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "category": "Accessories, scarves & caps",
+    "page": 2,
+    "page_size": 4,
+    "total": 8,
+    "pages": 2,
+    "items": [
+      {
+        "sku": "APP-ACC-005",
+        "name": "Store Brand Knit Beanie one size",
+        "brand": "Store Brand",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 319.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 63,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "C",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "C",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-005/image"
+      },
+      {
+        "sku": "APP-ACC-006",
+        "name": "Urban Thread Knit Beanie one size",
+        "brand": "Urban Thread",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 199.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 72,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "D",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "D",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-006/image"
+      },
+      {
+        "sku": "APP-ACC-007",
+        "name": "Urban Thread Leather Belt one size",
+        "brand": "Urban Thread",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 519.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 45,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "C",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "C",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-007/image"
+      },
+      {
+        "sku": "APP-ACC-001",
+        "name": "Urban Thread Wool Scarf one size",
+        "brand": "Urban Thread",
+        "category": "Accessories, scarves & caps",
+        "size": "one size",
+        "price": 489.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 21,
+        "floor": 2,
+        "zone": "Apparel & Clothing",
+        "bay": "C",
+        "shelf": 4,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Apparel & Clothing",
+            "bay": "C",
+            "shelf": 4,
+            "node_id": "L2_APPAREL_E"
+          }
+        ],
+        "image_url": "/stores/central/products/APP-ACC-001/image"
+      }
+    ]
+  }
+}

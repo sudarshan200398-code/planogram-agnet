@@ -1,0 +1,20 @@
+{
+  "name": "error_rate_limited",
+  "request": {
+    "method": "GET",
+    "path": "/stores",
+    "query": {},
+    "body": null
+  },
+  "status": 429,
+  "headers": {
+    "retry-after": "60"
+  },
+  "body": {
+    "error": {
+      "code": "RATE_LIMITED",
+      "message": "Too many requests: at most 1 per minute. Try again shortly.",
+      "request_id": "fixture-error_rate_limited"
+    }
+  }
+}

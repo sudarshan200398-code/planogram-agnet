@@ -1,0 +1,22 @@
+{
+  "name": "error_session_not_found",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/clarify",
+    "query": {},
+    "body": {
+      "session_id": "expired-session",
+      "item_index": 0,
+      "sku": "DAI-MIL-001"
+    }
+  },
+  "status": 409,
+  "headers": {},
+  "body": {
+    "error": {
+      "code": "SESSION_NOT_FOUND",
+      "message": "This question has expired or belongs to another store or worker; search again",
+      "request_id": "fixture-error_session_not_found"
+    }
+  }
+}

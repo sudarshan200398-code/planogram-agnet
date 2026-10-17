@@ -1,0 +1,18 @@
+{
+  "name": "error_store_not_found",
+  "request": {
+    "method": "GET",
+    "path": "/stores/nope/categories",
+    "query": {},
+    "body": null
+  },
+  "status": 404,
+  "headers": {},
+  "body": {
+    "error": {
+      "code": "STORE_NOT_FOUND",
+      "message": "No store with id 'nope'",
+      "request_id": "fixture-error_store_not_found"
+    }
+  }
+}

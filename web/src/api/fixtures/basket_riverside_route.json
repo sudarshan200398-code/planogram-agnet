@@ -1,0 +1,304 @@
+{
+  "name": "basket_riverside_route",
+  "request": {
+    "method": "POST",
+    "path": "/stores/riverside/basket/route",
+    "query": {},
+    "body": {
+      "items": [
+        {
+          "sku": "RS-ATT-001",
+          "qty": 1
+        },
+        {
+          "sku": "RS-APL-002",
+          "qty": 3
+        }
+      ]
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "riverside",
+    "status": "ok",
+    "session_id": "session-012",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "Saffron Lane Whole Wheat Atta 1 kg",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "RS-ATT-001",
+        "name": "Saffron Lane Whole Wheat Atta 1 kg",
+        "brand": "Saffron Lane",
+        "category": "Atta and Flours",
+        "size": "1 kg",
+        "price": 95.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 71,
+        "floor": 1,
+        "zone": "Pantry Aisle B",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Pantry Aisle B",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "RS1_PANTRY_AISLE_B"
+          }
+        ],
+        "image_url": "/stores/riverside/products/RS-ATT-001/image"
+      },
+      {
+        "index": 1,
+        "requested": "Lumen Electric Kettle deluxe",
+        "quantity_requested": 3,
+        "status": "available",
+        "reason": null,
+        "sku": "RS-APL-002",
+        "name": "Lumen Electric Kettle deluxe",
+        "brand": "Lumen",
+        "category": "Small Appliances",
+        "size": "deluxe",
+        "price": 4499.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 26,
+        "floor": 2,
+        "zone": "Electronics Corner",
+        "bay": "A",
+        "shelf": 2,
+        "locations": [
+          {
+            "floor": 2,
+            "zone": "Electronics Corner",
+            "bay": "A",
+            "shelf": 2,
+            "node_id": "RS2_ELECTRONICS_CORNER"
+          }
+        ],
+        "image_url": "/stores/riverside/products/RS-APL-002/image"
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "RS1_MAIN_DOORS",
+      "start_label": "Main Doors",
+      "total_distance_m": 115.6,
+      "floor_changes": 1,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 45m from Main Doors to Pantry Aisle B.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Pantry Aisle B for Saffron Lane Whole Wheat Atta 1 kg (Level 1, Pantry Aisle B, Bay A, Shelf 1).",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 29m from Pantry Aisle B to Lift Lobby.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "take_connector",
+          "icon": "elevator",
+          "text": "Take the elevator from Level 1 to Level 2.",
+          "floor": 1,
+          "to_floor": 2
+        },
+        {
+          "number": 5,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 42m from Lift Lobby to Electronics Corner.",
+          "floor": 2,
+          "to_floor": null
+        },
+        {
+          "number": 6,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Electronics Corner for Lumen Electric Kettle deluxe (Level 2, Electronics Corner, Bay A, Shelf 2).",
+          "floor": 2,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "RS-ATT-001",
+          "name": "Saffron Lane Whole Wheat Atta 1 kg",
+          "floor": 1,
+          "zone": "Pantry Aisle B",
+          "node_id": "RS1_PANTRY_AISLE_B"
+        },
+        {
+          "order": 2,
+          "sku": "RS-APL-002",
+          "name": "Lumen Electric Kettle deluxe",
+          "floor": 2,
+          "zone": "Electronics Corner",
+          "node_id": "RS2_ELECTRONICS_CORNER"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                40.0,
+                47.0
+              ],
+              [
+                40.0,
+                38.0
+              ]
+            ],
+            [
+              [
+                40.0,
+                38.0
+              ],
+              [
+                40.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                40.0,
+                25.0
+              ],
+              [
+                25.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                25.0
+              ],
+              [
+                30.0,
+                31.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                31.0
+              ],
+              [
+                25.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                25.0
+              ],
+              [
+                25.0,
+                38.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                38.0
+              ],
+              [
+                25.0,
+                46.0
+              ]
+            ]
+          ]
+        },
+        {
+          "floor": 2,
+          "lines": [
+            [
+              [
+                25.0,
+                46.0
+              ],
+              [
+                25.0,
+                38.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                38.0
+              ],
+              [
+                25.0,
+                25.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                25.0
+              ],
+              [
+                25.0,
+                12.0
+              ]
+            ],
+            [
+              [
+                25.0,
+                12.0
+              ],
+              [
+                25.0,
+                4.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "RS1_MAIN_DOORS",
+        "RS1_J33",
+        "RS1_J32",
+        "RS1_J22",
+        "RS1_PANTRY_AISLE_B",
+        "RS1_J22",
+        "RS1_J23",
+        "RS1_LIFT_LOBBY",
+        "RS2_LIFT_LOBBY",
+        "RS2_J23",
+        "RS2_J22",
+        "RS2_J21",
+        "RS2_ELECTRONICS_CORNER"
+      ]
+    }
+  }
+}

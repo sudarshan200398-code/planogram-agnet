@@ -1,0 +1,204 @@
+{
+  "name": "clarify_central_milk",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/clarify",
+    "query": {},
+    "body": {
+      "session_id": "session-002",
+      "item_index": 0,
+      "sku": "DAI-MIL-001"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "ok",
+    "session_id": "session-002",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "milk",
+        "quantity_requested": 1,
+        "status": "available",
+        "reason": null,
+        "sku": "DAI-MIL-001",
+        "name": "Meadow Fresh Whole Milk 1 L",
+        "brand": "Meadow Fresh",
+        "category": "Milk & plant-based beverages",
+        "size": "1 L",
+        "price": 67.0,
+        "currency": "INR",
+        "stock_status": "in_stock",
+        "in_stock": 61,
+        "floor": 1,
+        "zone": "Dairy & Frozen",
+        "bay": "A",
+        "shelf": 1,
+        "locations": [
+          {
+            "floor": 1,
+            "zone": "Dairy & Frozen",
+            "bay": "A",
+            "shelf": 1,
+            "node_id": "L1_DAIRY"
+          }
+        ],
+        "image_url": "/stores/central/products/DAI-MIL-001/image"
+      }
+    ],
+    "question": null,
+    "route": {
+      "start_node": "L1_ENTRANCE",
+      "start_label": "Entrance",
+      "total_distance_m": 68.8,
+      "floor_changes": 0,
+      "accessible_only": false,
+      "steps": [
+        {
+          "number": 1,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 9m from Entrance to Checkout zone.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 2,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 46m from Checkout zone to Grocery Aisle 4.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 3,
+          "kind": "walk",
+          "icon": "directions_walk",
+          "text": "Walk 14m from Grocery Aisle 4 to Dairy & Frozen.",
+          "floor": 1,
+          "to_floor": null
+        },
+        {
+          "number": 4,
+          "kind": "arrive",
+          "icon": "location_on",
+          "text": "Arrive at Dairy & Frozen for Meadow Fresh Whole Milk 1 L (Level 1, Dairy & Frozen, Bay A, Shelf 1).",
+          "floor": 1,
+          "to_floor": null
+        }
+      ],
+      "stops": [
+        {
+          "order": 1,
+          "sku": "DAI-MIL-001",
+          "name": "Meadow Fresh Whole Milk 1 L",
+          "floor": 1,
+          "zone": "Dairy & Frozen",
+          "node_id": "L1_DAIRY"
+        }
+      ],
+      "segments": [
+        {
+          "floor": 1,
+          "lines": [
+            [
+              [
+                3.0,
+                33.0
+              ],
+              [
+                12.0,
+                33.0
+              ]
+            ],
+            [
+              [
+                12.0,
+                33.0
+              ],
+              [
+                18.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                18.0,
+                28.0
+              ],
+              [
+                28.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                28.0,
+                28.0
+              ],
+              [
+                38.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                38.0,
+                28.0
+              ],
+              [
+                46.0,
+                28.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                28.0
+              ],
+              [
+                46.0,
+                18.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                18.0
+              ],
+              [
+                46.0,
+                8.0
+              ]
+            ],
+            [
+              [
+                46.0,
+                8.0
+              ],
+              [
+                46.0,
+                4.0
+              ]
+            ]
+          ]
+        }
+      ],
+      "path": [
+        "L1_ENTRANCE",
+        "L1_CHECKOUT",
+        "L1_J_S1",
+        "L1_J_S2",
+        "L1_J_S3",
+        "L1_J_S4",
+        "L1_A4",
+        "L1_J_N4",
+        "L1_DAIRY"
+      ]
+    }
+  }
+}

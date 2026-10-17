@@ -5,6 +5,7 @@ It never logs bodies, headers, query strings or path values, so shopper text and
 """
 from __future__ import annotations
 
+import ipaddress
 import logging
 import math
 import re
@@ -17,7 +18,7 @@ from collections.abc import Callable
 from fastapi import FastAPI, Request
 
 from .errors import error_response
-from .settings import trust_proxy
+from .settings import trust_proxy, trusted_proxy_hops
 
 logger = logging.getLogger("planogram_api")
 
@@ -52,11 +53,21 @@ class SlidingWindowLimiter:
 
 
 def _client_address(request: Request) -> str:
-    if trust_proxy():
-        forwarded = request.headers.get("x-forwarded-for", "")
-        if forwarded.strip():
-            return forwarded.split(",")[0].strip()
-    return request.client.host if request.client else "unknown"
+    """The rate-limit key. Behind trusted proxies: the X-Forwarded-For entry `hops` places from the
+    right (1 = the one the nearest proxy appended); entries further left are written by the client and
+    can be forged. A missing, too-short or non-IP header falls back to the connection address."""
+    direct = request.client.host if request.client else "unknown"
+    if not trust_proxy():
+        return direct
+    entries = [e.strip() for e in request.headers.get("x-forwarded-for", "").split(",")]
+    hops = trusted_proxy_hops()
+    if len(entries) < hops:
+        return direct
+    candidate = entries[-hops]
+    try:
+        return str(ipaddress.ip_address(candidate))
+    except ValueError:
+        return direct
 
 
 def _route_template(request: Request) -> str:

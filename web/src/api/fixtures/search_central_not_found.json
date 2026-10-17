@@ -1,0 +1,46 @@
+{
+  "name": "search_central_not_found",
+  "request": {
+    "method": "POST",
+    "path": "/stores/central/search",
+    "query": {},
+    "body": {
+      "text": "zzqx wobble gadget"
+    }
+  },
+  "status": 200,
+  "headers": {},
+  "body": {
+    "store_id": "central",
+    "status": "partial",
+    "session_id": "session-005",
+    "verified": true,
+    "messages": [],
+    "items": [
+      {
+        "index": 0,
+        "requested": "zzqx wobble gadget",
+        "quantity_requested": 1,
+        "status": "not_found",
+        "reason": "Product not found in catalogue",
+        "sku": null,
+        "name": null,
+        "brand": null,
+        "category": null,
+        "size": null,
+        "price": null,
+        "currency": "INR",
+        "stock_status": null,
+        "in_stock": null,
+        "floor": null,
+        "zone": null,
+        "bay": null,
+        "shelf": null,
+        "locations": [],
+        "image_url": null
+      }
+    ],
+    "question": null,
+    "route": null
+  }
+}

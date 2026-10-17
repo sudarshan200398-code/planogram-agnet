@@ -1,0 +1,33 @@
+{
+  "name": "stores",
+  "request": {
+    "method": "GET",
+    "path": "/stores",
+    "query": {},
+    "body": null
+  },
+  "status": 200,
+  "headers": {},
+  "body": [
+    {
+      "id": "central",
+      "name": "Central Store",
+      "floors": [
+        1,
+        2
+      ],
+      "product_count": 971,
+      "has_prices": true
+    },
+    {
+      "id": "riverside",
+      "name": "Riverside Market",
+      "floors": [
+        1,
+        2
+      ],
+      "product_count": 506,
+      "has_prices": true
+    }
+  ]
+}
